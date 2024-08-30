@@ -569,7 +569,7 @@ def from_polar():
 def from_rectangular():
     global ans
     print()
-    print("Please enter the first term in the form a + bi and the second term (if needed) in the form c + di")               
+    print("Please enter the first term in the form a + bi and the second term (if needed) in the form c + di, where a, b, c, and d are real numbers")               
     while True:
         clear_variables()
         print()
