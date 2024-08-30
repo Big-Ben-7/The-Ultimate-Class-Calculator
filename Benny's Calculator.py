@@ -12,7 +12,7 @@ def clear_variables():
         if not var.startswith('_') and var not in keeps and not isinstance(globals()[var], (types.ModuleType, types.FunctionType, types.BuiltinFunctionType, type)):
             del globals()[var]
 
-def print_binomial(a, b, c, d, n, k, unterm):
+def print_binomial(a, b, c, d, n, k, unterm, x, y):
     co = round(comb(abs(n), k) * a ** (abs(n) - k) * c ** k, 12)
     xpow = round(b * (abs(n) - k), 12)
     ypow = round(d * k, 12)
@@ -23,17 +23,17 @@ def print_binomial(a, b, c, d, n, k, unterm):
     else:
         cost = f"{co} "
     if xpow == 1:
-        xpowst = "x "
+        xpowst = x + " "
     elif xpow == 0:
         xpowst = ""
     else:
-        xpowst = f"x^{xpow} "
+        xpowst = x + f"^{xpow} "
     if ypow == 1:
-        ypowst = "y"
+        ypowst = y
     elif ypow == 0:
         ypowst = ""
     else:
-        ypowst = f"y^{ypow}"
+        ypowst = y + f"^{ypow}"
     combined = cost + xpowst + ypowst
     if n >= 0:
         print(f"Term {unterm}: " + combined)
@@ -1097,13 +1097,29 @@ while True:
             continue
         elif sumtype == "b" or sumtype == "binomial" or sumtype == "bin":
             print()
-            print("Please enter binomial in the form (ax^b + cy^d) ^ n, where a, b, and c are not equal to 0 and n is an integer")
+            print("Please enter binomial in the form (ax^b + cy^d) ^ n, where x and y are variables; a, b, and c are not equal to 0; and n is an integer")
             while True:
                 clear_variables()
                 print()
-                a = input("a (< to exit): ")
-                if a == "<" or a == "exit" or a == "exi":
+                while True:
+                    x = input("Variable 1 name (i for info, > to skip, and < to exit): ")
+                    if x == "info" or x == "inf" or x == "i":
+                        print()
+                        print("Please enter a variable name")
+                        print("The variable will not store any value, it is just the name that will be printed in the result")
+                        print('Skipping will set the variable name to its default "x"')
+                        print()
+                        continue
+                    elif x == "skip" or x == ">" or x == "ski":
+                        x = "x"
+                        break
+                    else:
+                        break
+                if x == "exit" or x == "exi" or x == "<":
                     break
+                a = input(x + " coefficient (< to exit): ")
+                if a == "<" or a == "exit" or a == "exi":
+                    continue
                 try:
                     a = eval(a)
                 except:
@@ -1112,7 +1128,7 @@ while True:
                 if a == 0:
                     print('Please enter a nonzero real number or expression, or "<" to exit')
                     continue
-                b = input("b (< to exit): ")
+                b = input(x + " exponent (< to exit): ")
                 if b == "<" or b == "exit" or b == "exi":
                     continue
                 try:
@@ -1123,7 +1139,25 @@ while True:
                 if b == 0:
                     print('Please enter a nonzero real number or expression, or "<" to exit')
                     continue
-                c = input("c (< to exit): ")
+                print()
+                while True:
+                    y = input("Variable 2 name (i for info, > to skip, and < to exit): ")
+                    if y == "info" or y == "inf" or y == "i":
+                        print()
+                        print("Please enter a second variable name")
+                        print("The variable will not store any value, it is just the name that will be printed in the result")
+                        print('Skipping will set the variable name to its default "y"')
+                        print("To remove the second variable, set its exponent to 0")
+                        print()
+                        continue
+                    elif y == "skip" or y == ">" or y == "ski":
+                        y = "y"
+                        break
+                    else:
+                        break
+                if y == "exit" or y == "exi" or y == "<":
+                    continue
+                c = input(y + " coefficient (< to exit): ")
                 if c == "<" or c == "exit" or c == "exi":
                     continue
                 try:
@@ -1134,7 +1168,7 @@ while True:
                 if c == 0:
                     print('Please enter a nonzero real number or expression, or "<" to exit')
                     continue
-                d = input("d (< to exit): ")
+                d = input(y + " exponent (< to exit): ")
                 if d == "<" or d == "exit" or d == "exi":
                     continue
                 try:
@@ -1142,7 +1176,8 @@ while True:
                 except:
                     print('Please enter a real number or expression, or "<" to exit')
                     continue
-                n = input("n (< to exit): ")
+                print()
+                n = input("Binomial exponent (< to exit): ")
                 if n == "<" or n == "exit" or n == "exi":
                     continue
                 try:
@@ -1178,7 +1213,7 @@ while True:
                             unterm = int(unterm)
                             if 0 < unterm <= abs(n) + 1:
                                 k = unterm - 1
-                                print_binomial(a, b, c, d, n, k, unterm)
+                                print_binomial(a, b, c, d, n, k, unterm, x, y)
                             else:
                                 print(f'Term Error: indexes must be positive integers between 1 and |n| + 1 ({abs(n) + 1}), inclusive (enter "all" for all, "i" for info and "<" to exit)')
                         except:
@@ -1197,7 +1232,7 @@ while True:
                                 while rangeindex < len(rangelist):
                                     unterm = rangelist[rangeindex]
                                     k = unterm - 1
-                                    print_binomial(a, b, c, d, n, k, unterm)
+                                    print_binomial(a, b, c, d, n, k, unterm, x, y)
                                     rangeindex += 1
                             elif rangelist[1] <= rangelist[0]:
                                 print('Term Error: the second index of a range must be greater than the first index of the range (enter "all" for all, "i" for info and "<" to exit)')
