@@ -1097,7 +1097,7 @@ while True:
             continue
         elif sumtype == "b" or sumtype == "binomial" or sumtype == "bin":
             print()
-            print("Please enter binomial in the form (ax^b + cy^d) ^ n, where x and y are variable names; a, b, and c are not equal to 0; and n is an integer")
+            print("Please enter binomial in the form (ax^b + cy^d) ^ n, where x and y are variable names; a, b, and c are real numbers not equal to 0; and n is an integer")
             while True:
                 clear_variables()
                 print()
@@ -1539,11 +1539,11 @@ while True:
         
     elif cat == "equation" or cat == "equ" or cat == "e":
         print()
-        print("Please enter the equation in the form ax^2 + bx + c = 0, where x is a variable name")
+        print("Please enter the equation in the form ax^2 + bx + c = 0, where x is a variable name and a, b, and c are real numbers")
         while True:
             clear_variables()
             print()
-            x = input("Variable 1 name (i for info, > to skip, and < to exit): ")
+            x = input("x (i for info, > to skip, and < to exit): ")
             if x == "info" or x == "inf" or x == "i":
                 print()
                 print("Please enter a variable name")
@@ -1555,7 +1555,7 @@ while True:
                 x = "x"
             elif x == "exit" or x == "exi" or x == "<":
                 break
-            a = (input(x + '^2 coefficient (< to exit): '))
+            a = (input('a (< to exit): '))
             if a == "<" or a == "exit" or a == "exi":
                 break
             try:
@@ -1563,7 +1563,7 @@ while True:
             except:
                 print('Please enter a real number or expression, or "<" to exit')
                 continue
-            b = (input(x + ' coefficient (< to exit): '))
+            b = (input('b (< to exit): '))
             if b == "<" or b == "exit" or b == "exi":
                 continue
             try:
@@ -1571,7 +1571,7 @@ while True:
             except:
                 print('Please enter a real number or expression, or "<" to exit')
                 continue            
-            c = (input('Constant (< to exit): '))   
+            c = (input('c (< to exit): '))   
             if c == "<" or c == "exit" or c == "exi":
                 continue
             try:
