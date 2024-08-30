@@ -1097,25 +1097,21 @@ while True:
             continue
         elif sumtype == "b" or sumtype == "binomial" or sumtype == "bin":
             print()
-            print("Please enter binomial in the form (ax^b + cy^d) ^ n, where x and y are variables; a, b, and c are not equal to 0; and n is an integer")
+            print("Please enter binomial in the form (ax^b + cy^d) ^ n, where x and y are variable names; a, b, and c are not equal to 0; and n is an integer")
             while True:
                 clear_variables()
                 print()
-                while True:
-                    x = input("Variable 1 name (i for info, > to skip, and < to exit): ")
-                    if x == "info" or x == "inf" or x == "i":
-                        print()
-                        print("Please enter a variable name")
-                        print("The variable will not store any value, it is just the name that will be printed in the result")
-                        print('Skipping will set the variable name to its default "x"')
-                        print()
-                        continue
-                    elif x == "skip" or x == ">" or x == "ski":
-                        x = "x"
-                        break
-                    else:
-                        break
-                if x == "exit" or x == "exi" or x == "<":
+                x = input("Variable 1 name (i for info, > to skip, and < to exit): ")
+                if x == "info" or x == "inf" or x == "i":
+                    print()
+                    print("Please enter a variable name")
+                    print("The variable will not store any value, it is just the name that will be printed in the result")
+                    print('Skipping will set the variable name to its default "x"')
+                    print()
+                    continue
+                elif x == "skip" or x == ">" or x == "ski":
+                    x = "x"
+                elif x == "exit" or x == "exi" or x == "<":
                     break
                 a = input(x + " coefficient (< to exit): ")
                 if a == "<" or a == "exit" or a == "exi":
@@ -1543,11 +1539,23 @@ while True:
         
     elif cat == "equation" or cat == "equ" or cat == "e":
         print()
-        print("Please enter the equation in the form ax^2 + bx + c = 0")
+        print("Please enter the equation in the form ax^2 + bx + c = 0, where x is a variable name")
         while True:
             clear_variables()
             print()
-            a = (input('a (< to exit): '))
+            x = input("Variable 1 name (i for info, > to skip, and < to exit): ")
+            if x == "info" or x == "inf" or x == "i":
+                print()
+                print("Please enter a variable name")
+                print("The variable will not store any value, it is just the name that will be printed in the result")
+                print('Skipping will set the variable name to its default "x"')
+                print()
+                continue
+            elif x == "skip" or x == ">" or x == "ski":
+                x = "x"
+            elif x == "exit" or x == "exi" or x == "<":
+                break
+            a = (input(x + '^2 coefficient (< to exit): '))
             if a == "<" or a == "exit" or a == "exi":
                 break
             try:
@@ -1555,7 +1563,7 @@ while True:
             except:
                 print('Please enter a real number or expression, or "<" to exit')
                 continue
-            b = (input('b (< to exit): '))
+            b = (input(x + ' coefficient (< to exit): '))
             if b == "<" or b == "exit" or b == "exi":
                 continue
             try:
@@ -1563,7 +1571,7 @@ while True:
             except:
                 print('Please enter a real number or expression, or "<" to exit')
                 continue            
-            c = (input('c (< to exit): '))   
+            c = (input('Constant (< to exit): '))   
             if c == "<" or c == "exit" or c == "exi":
                 continue
             try:
@@ -1578,7 +1586,7 @@ while True:
                 print("No solution")
             elif round(a, 12) == 0:
                 res = (-c / b)
-                print(f"Solution: x = {round(res, 12)}")
+                print("Solution: " + x + f" = {round(res, 12)}")
                 ans = res
                 print(f"ans = {round(ans, 12)}")
             else:
@@ -1586,7 +1594,7 @@ while True:
                 if round(det, 12) > 0:
                     rt1 = (-b - sqrt(det)) / (2 * a)
                     rt2 = (-b + sqrt(det)) / (2 * a)
-                    print(f"Solution: x = {round(rt1, 12)} or x = {round(rt2, 12)}")
+                    print("Solution: " + x + f" = {round(rt1, 12)} or " + x + f" = {round(rt2, 12)}")
                     while True:
                         print()
                         rt = (input('Root to store as ans (root 1 (1), root 2 (2), or > to skip): '))
@@ -1604,7 +1612,7 @@ while True:
                             print('Please enter either "root 1" (1), "root 2" (2), or ">" to skip')
                 elif round(det, 12) == 0:
                     rt1 = -b / (2 * a)
-                    print(f"Solution: x = {round(rt1, 12)}")
+                    print("Solution: " + x + f" = {round(rt1, 12)}")
                     ans = rt1
                     print(f"ans = {round(ans, 12)}")
                 else:
@@ -1612,21 +1620,21 @@ while True:
                     im = sqrt(-det) / (2 * a)
                     if round(rl, 12) != 0 and round(im, 12) > 0:
                         if round(im, 12) != 1:
-                            print(f"Solution: x = {round(rl, 12)} - {round(im, 12)}i or x = {round(rl, 12)} + {round(im, 12)}i")
+                            print("Solution: " + x + f" = {round(rl, 12)} - {round(im, 12)}i or " + x + f" = {round(rl, 12)} + {round(im, 12)}i")
                         else:
-                            print(f"Solution: x = {round(rl, 12)} - i or x = {round(rl, 12)} + i")
+                            print("Solution: " + x + f" = {round(rl, 12)} - i or " + x + f" = {round(rl, 12)} + i")
                     elif round(rl, 12) == 0:
                         if round(im, 12) != 1 and round(im, 12) != -1:
-                            print(f"Solution: x = {round(im * -1, 12)}i or x = {round(im, 12)}i")
+                            print("Solution: " + x + f" = {round(im * -1, 12)}i or " + x + f" = {round(im, 12)}i")
                         elif round(im, 12) == 1:
-                            print(f"Solution: x = -i or x = i")
+                            print("Solution: " + x + f" = -i or " + x + f" = i")
                         else:
-                            print(f"Solution: x = i or x = -i")
+                            print("Solution: " + x + f" = i or " + x + f" = -i")
                     elif round(im, 12) < 0:
                         if round(im, 12) != -1:
-                            print(f"Solution: x = {round(rl, 12)} + {round(im * -1, 12)}i or x = {round(rl, 12)} - {round(im * -1, 12)}i")
+                            print("Solution: " + x + f" = {round(rl, 12)} + {round(im * -1, 12)}i or " + x + f" = {round(rl, 12)} - {round(im * -1, 12)}i")
                         else:
-                            print(f"Solution: x = {round(rl, 12)} + i or x = {round(rl, 12)} - i")
+                            print("Solution: " + x + f" = {round(rl, 12)} + i or " + x + f" = {round(rl, 12)} - i")
                     if round(rl, 12) != 0:
                         while True:
                             print()
