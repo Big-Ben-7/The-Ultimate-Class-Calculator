@@ -6,9 +6,15 @@ import types
 global ans
 ans = 0.0
 global real
+real = 0.0
 global imag
+imag = 0.0
+global abs
+abs = 0.0
+global ang
+ang = 0.0
 global keeps
-keeps = ["ans", "pi", "e", "tau", "inf", "nan", "infj", "nanj", "keeps", "real", "imag"]
+keeps = ["ans", "pi", "e", "tau", "inf", "nan", "infj", "nanj", "keeps", "real", "imag", "abs", "ang"]
 
 def clear_variables():
     for var in list(globals()):
@@ -51,6 +57,8 @@ def from_polar():
     global ans
     global real
     global imag
+    global ang
+    global abs
     print()
     print("Please enter the absolute value/modulus and angle/argument of the terms")
     while True:
@@ -197,26 +205,13 @@ def from_polar():
                 print(f"{term1} =")
                 print(f"{round(res[0], 12)} cos({round(ares, 12)}) + {round(res[0], 12)} sin({round(ares, 12)})i")
                 print()
-                print(f"Absolute value/modulus: {round(res[0], 12)}")
+                abs = res[0]
+                print(f"abs (absolute value/modulus) = {round(abs, 12)}")
+                ang = ares
                 if unit == "r" or unit == "radians" or unit == "rad":
-                    print(f"Angle/argument: {round(ares, 12)} radians")
+                    print(f"ang (angle/argument) = {round(ang, 12)} (radians)")
                 else:
-                    print(f"Angle/argument: {round(ares, 12)} degrees")
-                while True:
-                        print()
-                        stoans = input("Value to store as ans (absolute value (v), angle (a), or > to skip): ")
-                        if stoans == "absolute value" or stoans == "v" or stoans == "abs":
-                            ans = res[0]
-                            print(f"ans = {round(ans, 12)}")
-                            break
-                        elif stoans == "angle" or stoans == "a" or stoans == "ang":
-                            ans = ares   
-                            print(f"ans = {round(ans, 12)}")
-                            break
-                        elif stoans == ">" or stoans == "skip" or stoans == "ski":
-                            break
-                        else:
-                            print('Please enter either "absolute value" (v), "angle" (a), or ">" to skip')
+                    print(f"ang (angle/argument) = {round(ang, 12)} (degrees)")
             elif op == "+" or op == "add":
                 res = cmath.polar(complex(a, b) + complex(c, d))
                 ares = res[1]
@@ -249,29 +244,16 @@ def from_polar():
                                 ares -= 360
                         break
                 print()
-                print(f"({term1}) + ({term2}) =")
+                print(f"{term1} + {term2} =")
                 print(f"{round(res[0], 12)} cos({round(ares, 12)}) + {round(res[0], 12)} sin({round(ares, 12)})i")
                 print()
-                print(f"Absolute value/modulus: {round(res[0], 12)}")
+                abs = res[0]
+                print(f"abs (absolute value/modulus) = {round(abs, 12)}")
+                ang = ares
                 if unit == "r" or unit == "radians" or unit == "rad":
-                    print(f"Angle/argument: {round(ares, 12)} radians")
+                    print(f"ang (angle/argument) = {round(ang, 12)} (radians)")
                 else:
-                    print(f"Angle/argument: {round(ares, 12)} degrees")
-                while True:
-                        print()
-                        stoans = input("Value to store as ans (absolute value (v), angle (a), or > to skip): ")
-                        if stoans == "absolute value" or stoans == "v" or stoans == "abs":
-                            ans = res[0]
-                            print(f"ans = {round(ans, 12)}")
-                            break
-                        elif stoans == "angle" or stoans == "a" or stoans == "ang":
-                            ans = ares   
-                            print(f"ans = {round(ans, 12)}")
-                            break
-                        elif stoans == ">" or stoans == "skip" or stoans == "ski":
-                            break
-                        else:
-                            print('Please enter either "absolute value" (v), "angle" (a), or ">" to skip')
+                    print(f"ang (angle/argument) = {round(ang, 12)} (degrees)")
             elif op == "-" or op == "subtract" or op == "sub":
                 res = cmath.polar(complex(a, b) - complex(c, d))
                 ares = res[1]
@@ -304,29 +286,16 @@ def from_polar():
                                 ares -= 360
                         break
                 print()
-                print(f"({term1}) - ({term2}) =")
+                print(f"{term1} - ({term2}) =")
                 print(f"{round(res[0], 12)} cos({round(ares, 12)}) + {round(res[0], 12)} sin({round(ares, 12)})i")
                 print()
-                print(f"Absolute value/modulus: {round(res[0], 12)}")
+                abs = res[0]
+                print(f"abs (absolute value/modulus) = {round(abs, 12)}")
+                ang = ares
                 if unit == "r" or unit == "radians" or unit == "rad":
-                    print(f"Angle/argument: {round(ares, 12)} radians")
+                    print(f"ang (angle/argument) = {round(ang, 12)} (radians)")
                 else:
-                    print(f"Angle/argument: {round(ares, 12)} degrees")
-                while True:
-                        print()
-                        stoans = input("Value to store as ans (absolute value (v), angle (a), or > to skip): ")
-                        if stoans == "absolute value" or stoans == "v" or stoans == "abs":
-                            ans = res[0]
-                            print(f"ans = {round(ans, 12)}")
-                            break
-                        elif stoans == "angle" or stoans == "a" or stoans == "ang":
-                            ans = ares   
-                            print(f"ans = {round(ans, 12)}")
-                            break
-                        elif stoans == ">" or stoans == "skip" or stoans == "ski":
-                            break
-                        else:
-                            print('Please enter either "absolute value" (v), "angle" (a), or ">" to skip')
+                    print(f"ang (angle/argument) = {round(ang, 12)} (degrees)")
             elif op == "*" or op == "multiply" or op == "mul":
                 res = cmath.polar(complex(a, b) * complex(c, d))
                 ares = res[1]
@@ -362,26 +331,13 @@ def from_polar():
                 print(f"({term1}) ({term2}) =")
                 print(f"{round(res[0], 12)} cos({round(ares, 12)}) + {round(res[0], 12)} sin({round(ares, 12)})i")
                 print()
-                print(f"Absolute value/modulus: {round(res[0], 12)}")
+                abs = res[0]
+                print(f"abs (absolute value/modulus) = {round(abs, 12)}")
+                ang = ares
                 if unit == "r" or unit == "radians" or unit == "rad":
-                    print(f"Angle/argument: {round(ares, 12)} radians")
+                    print(f"ang (angle/argument) = {round(ang, 12)} (radians)")
                 else:
-                    print(f"Angle/argument: {round(ares, 12)} degrees")
-                while True:
-                        print()
-                        stoans = input("Value to store as ans (absolute value (v), angle (a), or > to skip): ")
-                        if stoans == "absolute value" or stoans == "v" or stoans == "abs":
-                            ans = res[0]
-                            print(f"ans = {round(ans, 12)}")
-                            break
-                        elif stoans == "angle" or stoans == "a" or stoans == "ang":
-                            ans = ares   
-                            print(f"ans = {round(ans, 12)}")
-                            break
-                        elif stoans == ">" or stoans == "skip" or stoans == "ski":
-                            break
-                        else:
-                            print('Please enter either "absolute value" (v), "angle" (a), or ">" to skip')
+                    print(f"ang (angle/argument) = {round(ang, 12)} (degrees)")
             elif op == "/" or op == "divide" or op == "div":
                 res = cmath.polar(complex(a, b) / complex(c, d))
                 ares = res[1]
@@ -417,26 +373,13 @@ def from_polar():
                 print(f"({term1}) / ({term2}) =")
                 print(f"{round(res[0], 12)} cos({round(ares, 12)}) + {round(res[0], 12)} sin({round(ares, 12)})i")
                 print()
-                print(f"Absolute value/modulus: {round(res[0], 12)}")
+                abs = res[0]
+                print(f"abs (absolute value/modulus) = {round(abs, 12)}")
+                ang = ares
                 if unit == "r" or unit == "radians" or unit == "rad":
-                    print(f"Angle/argument: {round(ares, 12)} radians")
+                    print(f"ang (angle/argument) = {round(ang, 12)} (radians)")
                 else:
-                    print(f"Angle/argument: {round(ares, 12)} degrees")
-                while True:
-                        print()
-                        stoans = input("Value to store as ans (absolute value (v), angle (a), or > to skip): ")
-                        if stoans == "absolute value" or stoans == "v" or stoans == "abs":
-                            ans = res[0]
-                            print(f"ans = {round(ans, 12)}")
-                            break
-                        elif stoans == "angle" or stoans == "a" or stoans == "ang":
-                            ans = ares 
-                            print(f"ans = {round(ans, 12)}")
-                            break
-                        elif stoans == ">" or stoans == "skip" or stoans == "ski":
-                            break
-                        else:
-                            print('Please enter either "absolute value" (v), "angle" (a), or ">" to skip')
+                    print(f"ang (angle/argument) = {round(ang, 12)} (degrees)")
             elif op == "^" or op == "exponent" or op == "exp" or op == "**":
                 res = cmath.polar(complex(a, b) ** complex(c, d))
                 ares = res[1]
@@ -472,26 +415,13 @@ def from_polar():
                 print(f"({term1}) ^ ({term2}) =")
                 print(f"{round(res[0], 12)} cos({round(ares, 12)}) + {round(res[0], 12)} sin({round(ares, 12)})i")
                 print()
-                print(f"Absolute value/modulus: {round(res[0], 12)}")
+                abs = res[0]
+                print(f"abs (absolute value/modulus) = {round(abs, 12)}")
+                ang = ares
                 if unit == "r" or unit == "radians" or unit == "rad":
-                    print(f"Angle/argument: {round(ares, 12)} radians")
+                    print(f"ang (angle/argument) = {round(ang, 12)} (radians)")
                 else:
-                    print(f"Angle/argument: {round(ares, 12)} degrees")
-                while True:
-                        print()
-                        stoans = input("Value to store as ans (absolute value (v), angle (a), or > to skip): ")
-                        if stoans == "absolute value" or stoans == "v" or stoans == "abs":
-                            ans = res[0]
-                            print(f"ans = {round(ans, 12)}")
-                            break
-                        elif stoans == "angle" or stoans == "a" or stoans == "ang":
-                            ans = ares   
-                            print(f"ans = {round(ans, 12)}")
-                            break
-                        elif stoans == ">" or stoans == "skip" or stoans == "ski":
-                            break
-                        else:
-                            print('Please enter either "absolute value" (v), "angle" (a), or ">" to skip')
+                    print(f"ang (angle/argument) = {round(ang, 12)} (degrees)")
             elif op == "rectangular" or op == "rec" or op == "rectangular form":
                 res = cmath.rect(av, ang)
                 print(f"Rectangular form of {term1}")
@@ -514,6 +444,7 @@ def from_polar():
                         print(f"Result: {round(res.real, 12)} - {round(-1 * res.imag, 12)}i")
                     else:
                         print(f"Result: {round(res.real, 12)} - i")
+                print()
                 real = res.real
                 print(f"real = {round(real, 12)}")
                 imag = res.imag
@@ -532,6 +463,8 @@ def from_rectangular():
     global ans
     global real
     global imag
+    global ang
+    global abs
     print()
     print("Please enter the first term in the form a + bi and the second term (if needed) in the form c + di, where a, b, c, and d are real numbers")               
     while True:
@@ -653,6 +586,7 @@ def from_rectangular():
                 print()
                 print(f"{term1} =")
                 print(f"{term1}")
+                print()
                 real = res.real
                 print(f"real = {round(real, 12)}")
                 imag = res.imag
@@ -680,6 +614,7 @@ def from_rectangular():
                         print(f"{round(res.real, 12)} - {round(-1 * res.imag, 12)}i")
                     else:
                         print(f"{round(res.real, 12)} - i")
+                print()
                 real = res.real
                 print(f"real = {round(real, 12)}")
                 imag = res.imag
@@ -707,6 +642,7 @@ def from_rectangular():
                         print(f"{round(res.real, 12)} - {round(-1 * res.imag, 12)}i")
                     else:
                         print(f"{round(res.real, 12)} - i")
+                print()
                 real = res.real
                 print(f"real = {round(real, 12)}")
                 imag = res.imag
@@ -734,6 +670,7 @@ def from_rectangular():
                         print(f"{round(res.real, 12)} - {round(-1 * res.imag, 12)}i")
                     else:
                         print(f"{round(res.real, 12)} - i")
+                print()
                 real = res.real
                 print(f"real = {round(real, 12)}")
                 imag = res.imag
@@ -761,6 +698,7 @@ def from_rectangular():
                         print(f"{round(res.real, 12)} - {round(-1 * res.imag, 12)}i")
                     else:
                         print(f"{round(res.real, 12)} - i")
+                print()
                 real = res.real
                 print(f"real = {round(real, 12)}")
                 imag = res.imag
@@ -788,6 +726,7 @@ def from_rectangular():
                         print(f"{round(res.real, 12)} - {round(-1 * res.imag, 12)}i")
                     else:
                         print(f"{round(res.real, 12)} - i")
+                print()
                 real = res.real
                 print(f"real = {round(real, 12)}")
                 imag = res.imag
@@ -830,7 +769,10 @@ def from_rectangular():
                 print()
                 print(f"Angle of {term1}")                  
                 ans = res
-                print(f"ans = {round(ans, 12)}")
+                if unit == "r" or unit == "radians" or unit == "rad":
+                    print(f"ans = {round(ans, 12)} (radians)")
+                else:
+                    print(f"ans = {round(ans, 12)} (degrees)") 
             elif op == "polar" or op == "pol" or op == "polar form":
                 res = cmath.polar(complex(a, b))
                 ares = res[1]
@@ -868,26 +810,13 @@ def from_rectangular():
                 print(f"Polar form of {term1}")
                 print(f"Result: {round(res[0], 12)} cos({round(ares, 12)}) + {round(res[0], 12)} sin({round(ares, 12)})i")
                 print()
-                print(f"Absolute value/modulus: {round(res[0], 12)}")
+                abs = res[0]
+                print(f"abs (absolute value/modulus) = {round(abs, 12)}")
+                ang = ares
                 if unit == "r" or unit == "radians" or unit == "rad":
-                    print(f"Angle/argument: {round(ares, 12)} radians")
+                    print(f"ang (angle/argument) = {round(ang, 12)} (radians)")
                 else:
-                    print(f"Angle/argument: {round(ares, 12)} degrees")
-                while True:
-                    print()
-                    stoans = input("Result to store as ans (absolute value (v), angle (a), or > to skip): ")
-                    if stoans == "absolute value" or stoans == "abs" or stoans == "v":
-                        ans = res[0]
-                        print(f"ans = {round(ans, 12)}")
-                        break
-                    elif stoans == "angle" or stoans == "ang" or stoans == "a":
-                        ans = ares   
-                        print(f"ans = {round(ans, 12)}")
-                        break
-                    elif stoans == ">" or stoans == "skip" or stoans == "ski":
-                        break
-                    else:
-                        print('Please enter either "absolute value" (v), "angle" (a), or ">" to skip')                    
+                    print(f"ang (angle/argument) = {round(ang, 12)} (degrees)")                    
             else:
                 print('Please enter a valid operation ("i" for info and "<" to exit)')
         except:
@@ -1635,6 +1564,7 @@ while True:
                                 continue
                 try:
                     if op == "equals" or op == "=" or op == "equ" or op == "==":
+                        print()
                         print(f"ans = {round(n, 12)}")
                     elif op == "add" or op == "+":
                         n += n2
@@ -1668,7 +1598,7 @@ while True:
                             if vname == "<" or vname == "exit" or vname == "exi":
                                 break
                             try:
-                                if vname.isalpha() == False or vname[0].islower():
+                                if vname[0].isalpha() == False or vname[0].islower():
                                     print("Please enter a variable name beginning with a capital letter")
                                     print()
                                 else:
