@@ -5,9 +5,10 @@ import types
 
 global ans
 ans = 0.0
-
+global real
+global imag
 global keeps
-keeps = ["ans", "pi", "e", "tau", "inf", "nan", "infj", "nanj","keeps"]
+keeps = ["ans", "pi", "e", "tau", "inf", "nan", "infj", "nanj", "keeps", "real", "imag"]
 
 def clear_variables():
     for var in list(globals()):
@@ -48,6 +49,8 @@ def print_binomial(a, b, c, d, n, k, unterm, x, y):
 
 def from_polar():
     global ans
+    global real
+    global imag
     print()
     print("Please enter the absolute value/modulus and angle/argument of the terms")
     while True:
@@ -511,28 +514,10 @@ def from_polar():
                         print(f"Result: {round(res.real, 12)} - {round(-1 * res.imag, 12)}i")
                     else:
                         print(f"Result: {round(res.real, 12)} - i")
-                if round(res.imag, 12) != 0 and round(res.real, 12) != 0:
-                    while True:
-                        print()
-                        stoans = input("Part to store as ans (real (r), imaginary (i), or > to skip): ")
-                        if stoans == "real" or stoans == "rea" or stoans == "r":
-                            ans = res.real
-                            print(f"ans = {round(ans, 12)}")
-                            break
-                        elif stoans == "imaginary" or stoans == "ima" or stoans == "i":
-                            ans = res.imag   
-                            print(f"ans = {round(ans, 12)}")
-                            break
-                        elif stoans == ">" or stoans == "skip" or stoans == "ski":
-                            break
-                        else:
-                            print('Please enter either "real" (r), "imaginary" (i), or ">" to skip')
-                elif round(res.real, 12) == 0 and round(res.imag, 12) != 0:
-                    ans = res.imag
-                    print(f"ans = {round(ans, 12)}")
-                elif round(res.imag, 12) == 0:
-                    ans = res.real
-                    print(f"ans = {round(ans, 12)}")                    
+                real = res.real
+                print(f"real = {round(real, 12)}")
+                imag = res.imag
+                print(f"imag = {round(imag, 12)}")                
             else:
                 print('Please enter a valid operation ("i" for info and "<" to exit)')
         except:
@@ -545,6 +530,8 @@ def from_polar():
 
 def from_rectangular():
     global ans
+    global real
+    global imag
     print()
     print("Please enter the first term in the form a + bi and the second term (if needed) in the form c + di, where a, b, c, and d are real numbers")               
     while True:
@@ -666,21 +653,10 @@ def from_rectangular():
                 print()
                 print(f"{term1} =")
                 print(f"{term1}")
-                while True:
-                        print()
-                        stoans = input("Part to store as ans (real (r), imaginary (i), or > to skip): ")
-                        if stoans == "real" or stoans == "rea" or stoans == "r":
-                            ans = res.real
-                            print(f"ans = {round(ans, 12)}")
-                            break
-                        elif stoans == "imaginary" or stoans == "ima" or stoans == "i":
-                            ans = res.imag   
-                            print(f"ans = {round(ans, 12)}")
-                            break
-                        elif stoans == ">" or stoans == "skip" or stoans == "ski":
-                            break
-                        else:
-                            print('Please enter either "real" (r), "imaginary" (i), or ">" to skip')
+                real = res.real
+                print(f"real = {round(real, 12)}")
+                imag = res.imag
+                print(f"imag = {round(imag, 12)}")
             elif op == "+" or op == "add":
                 res = complex(a, b) + complex(c, d)
                 print()
@@ -704,28 +680,10 @@ def from_rectangular():
                         print(f"{round(res.real, 12)} - {round(-1 * res.imag, 12)}i")
                     else:
                         print(f"{round(res.real, 12)} - i")
-                if round(res.imag, 12) != 0 and round(res.real, 12) != 0:
-                    while True:
-                        print()
-                        stoans = input("Part to store as ans (real (r), imaginary (i), or > to skip): ")
-                        if stoans == "real" or stoans == "rea" or stoans == "r":
-                            ans = res.real
-                            print(f"ans = {round(ans, 12)}")
-                            break
-                        elif stoans == "imaginary" or stoans == "ima" or stoans == "i":
-                            ans = res.imag   
-                            print(f"ans = {round(ans, 12)}")
-                            break
-                        elif stoans == ">" or stoans == "skip" or stoans == "ski":
-                            break
-                        else:
-                            print('Please enter either "real" (r), "imaginary" (i), or ">" to skip')
-                elif round(res.real, 12) == 0 and round(res.imag, 12) != 0:
-                    ans = res.imag
-                    print(f"ans = {round(ans, 12)}")
-                elif round(res.imag, 12) == 0:
-                    ans = res.real
-                    print(f"ans = {round(ans, 12)}")
+                real = res.real
+                print(f"real = {round(real, 12)}")
+                imag = res.imag
+                print(f"imag = {round(imag, 12)}")
             elif op == "-" or op == "subtract" or op == "sub":
                 res = complex(a, b) - complex(c, d)
                 print()
@@ -749,28 +707,10 @@ def from_rectangular():
                         print(f"{round(res.real, 12)} - {round(-1 * res.imag, 12)}i")
                     else:
                         print(f"{round(res.real, 12)} - i")
-                if round(res.imag, 12) != 0 and round(res.real, 12) != 0:
-                    while True:
-                        print()
-                        stoans = input("Part to store as ans (real (r), imaginary (i), or > to skip): ")
-                        if stoans == "real" or stoans == "rea" or stoans == "r":
-                            ans = res.real
-                            print(f"ans = {round(ans, 12)}")
-                            break
-                        elif stoans == "imaginary" or stoans == "ima" or stoans == "i":
-                            ans = res.imag   
-                            print(f"ans = {round(ans, 12)}")
-                            break
-                        elif stoans == ">" or stoans == "skip" or stoans == "ski":
-                            break
-                        else:
-                            print('Please enter either "real" (r), "imaginary" (i), or ">" to skip')
-                elif round(res.real, 12) == 0 and round(res.imag, 12) != 0:
-                    ans = res.imag
-                    print(f"ans = {round(ans, 12)}")
-                elif round(res.imag, 12) == 0:
-                    ans = res.real
-                    print(f"ans = {round(ans, 12)}")
+                real = res.real
+                print(f"real = {round(real, 12)}")
+                imag = res.imag
+                print(f"imag = {round(imag, 12)}")
             elif op == "*" or op == "multiply" or op == "mul":
                 res = complex(a, b) * complex(c, d)
                 print()
@@ -794,28 +734,10 @@ def from_rectangular():
                         print(f"{round(res.real, 12)} - {round(-1 * res.imag, 12)}i")
                     else:
                         print(f"{round(res.real, 12)} - i")
-                if round(res.imag, 12) != 0 and round(res.real, 12) != 0:
-                    while True:
-                        print()
-                        stoans = input("Part to store as ans (real (r), imaginary (i), or > to skip): ")
-                        if stoans == "real" or stoans == "rea" or stoans == "r":
-                            ans = res.real
-                            print(f"ans = {round(ans, 12)}")
-                            break
-                        elif stoans == "imaginary" or stoans == "ima" or stoans == "i":
-                            ans = res.imag   
-                            print(f"ans = {round(ans, 12)}")
-                            break
-                        elif stoans == ">" or stoans == "skip" or stoans == "ski":
-                            break
-                        else:
-                            print('Please enter either "real" (r), "imaginary" (i), or ">" to skip')
-                elif round(res.real, 12) == 0 and round(res.imag, 12) != 0:
-                    ans = res.imag
-                    print(f"ans = {round(ans, 12)}")
-                elif round(res.imag, 12) == 0:
-                    ans = res.real
-                    print(f"ans = {round(ans, 12)}")
+                real = res.real
+                print(f"real = {round(real, 12)}")
+                imag = res.imag
+                print(f"imag = {round(imag, 12)}")
             elif op == "/" or op == "divide" or op == "div":
                 res = complex(a, b) / complex(c, d)
                 print()
@@ -839,28 +761,10 @@ def from_rectangular():
                         print(f"{round(res.real, 12)} - {round(-1 * res.imag, 12)}i")
                     else:
                         print(f"{round(res.real, 12)} - i")
-                if round(res.imag, 12) != 0 and round(res.real, 12) != 0:
-                    while True:
-                        print()
-                        stoans = input("Part to store as ans (real (r), imaginary (i), or > to skip): ")
-                        if stoans == "real" or stoans == "rea" or stoans == "r":
-                            ans = res.real
-                            print(f"ans = {round(ans, 12)}")
-                            break
-                        elif stoans == "imaginary" or stoans == "ima" or stoans == "i":
-                            ans = res.imag   
-                            print(f"ans = {round(ans, 12)}")
-                            break
-                        elif stoans == ">" or stoans == "skip" or stoans == "ski":
-                            break
-                        else:
-                            print('Please enter either "real" (r), "imaginary" (i), or ">" to skip')
-                elif round(res.real, 12) == 0 and round(res.imag, 12) != 0:
-                    ans = res.imag
-                    print(f"ans = {round(ans, 12)}")
-                elif round(res.imag, 12) == 0:
-                    ans = res.real
-                    print(f"ans = {round(ans, 12)}")
+                real = res.real
+                print(f"real = {round(real, 12)}")
+                imag = res.imag
+                print(f"imag = {round(imag, 12)}")
             elif op == "^" or op == "exponent" or op == "exp" or op == "**":
                 res = complex(a, b) ** complex(c, d)
                 print()
@@ -884,28 +788,10 @@ def from_rectangular():
                         print(f"{round(res.real, 12)} - {round(-1 * res.imag, 12)}i")
                     else:
                         print(f"{round(res.real, 12)} - i")
-                if round(res.imag, 12) != 0 and round(res.real, 12) != 0:
-                    while True:
-                        print()
-                        stoans = input("Part to store as ans (real (r), imaginary (i), or > to skip): ")
-                        if stoans == "real" or stoans == "rea" or stoans == "r":
-                            ans = res.real
-                            print(f"ans = {round(ans, 12)}")
-                            break
-                        elif stoans == "imaginary" or stoans == "ima" or stoans == "i":
-                            ans = res.imag   
-                            print(f"ans = {round(ans, 12)}")
-                            break
-                        elif stoans == ">" or stoans == "skip" or stoans == "ski":
-                            break
-                        else:
-                            print('Please enter either "real" (r), "imaginary" (i), or ">" to skip')
-                elif round(res.real, 12) == 0 and round(res.imag, 12) != 0:
-                    ans = res.imag
-                    print(f"ans = {round(ans, 12)}")
-                elif round(res.imag, 12) == 0:
-                    ans = res.real
-                    print(f"ans = {round(ans, 12)}")
+                real = res.real
+                print(f"real = {round(real, 12)}")
+                imag = res.imag
+                print(f"imag = {round(imag, 12)}")
             elif op == "abs" or op == "absolute value" or op == "magnitude" or op == "mag" or op == "||" or op == "modulus" or op == "mod":
                 ans = abs(complex(a, b))
                 print()
