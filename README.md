@@ -6,4 +6,4 @@ It can:
 * Solve equations such as quadratic and linear equations
 * Perform summations such as geometric series and binomial expansion (can also find specific terms and other characteristics)
 
-This calculator is especially suited for algebra and precalculus courses (the creator is currently taking advanced honors precalculus as a 9th grader)
+This calculator is especially suited for high school and above courses, such as algebra 2 and precalculus (the creator is currently taking advanced honors precalculus as a 9th grader)
