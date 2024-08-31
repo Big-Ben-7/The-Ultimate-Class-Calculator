@@ -6,8 +6,10 @@ import types
 global ans
 ans = 0.0
 
+global keeps
+keeps = ["ans", "pi", "e", "tau", "inf", "nan", "infj", "nanj","keeps"]
+
 def clear_variables():
-    keeps = ["ans", "pi", "e", "tau", "inf", "nan", "infj", "nanj"]
     for var in list(globals()):
         if not var.startswith('_') and var not in keeps and not isinstance(globals()[var], (types.ModuleType, types.FunctionType, types.BuiltinFunctionType, type)):
             del globals()[var]
@@ -72,15 +74,6 @@ def from_polar():
             print("* For more information, visit the python math and operators websites.")
             print('* Expressions can be operated on or evaluated with the "equals" (=) operation.')
             print("* The above operators and functions can only be entered as part of an expression, not as an operation.")
-            print('* Enter "oi" for operation info.')
-            continue
-        elif av == "oi" or av == "operation info" or av == "ope inf":
-            print()
-            print('The following operations can be entered: equals (=), add (+), subtract (-), multiply (*), divide (/), exponent (^), rectangular (rec)')
-            print()
-            print("Notes:")
-            print('* The name, sign, or first 3 letters of any operation can be entered: eg. "exponent", "exp", and "^" all work.')
-            print("* The above operations can only be entered as an operation, not as part of an expression.")
             continue
         elif av == "r" or av == "rec" or av == "rectangular" or av == "rectangular form":
             from_rectangular()
@@ -126,22 +119,6 @@ def from_polar():
                 print("* Fractional exponents can be used to root: eg. (-1 + 0i) ^ (1/2 + 0i) = i.")
                 print('* Expressions entered as terms can be operated on or evaluated with the "equals" (=) operation.')
                 print("* The above operations can only be entered as an operation, not as part of an expression.")
-                print('* Enter "ei" for expression info.')
-            elif op == "ei" or op == "expression info" or op == "exp inf":
-                print()
-                print('In addition to individual numbers, expressions such as "3 * sin(pi / 3)" can be entered as values.')
-                print("The following non-parenthesized operators and functions can be entered as part of an expression:")
-                print("* Operators: + (add), - (subtract), * (multiply), / (divide), // (integer divide), % (remainder), ** (exponent)")
-                print("* Functions: eg. abs(x), sqrt(x), cbrt(x), pow(x, y), log(x, base), factorial(x), comb(x, y), perm(x, y), sin(x), cos(x), tan(x), asin(x), acos(x), atan(x), degrees(x), radians(x), sum([x, y, z,...]), int(x), round(x), etc.")
-                print()
-                print("Notes:")
-                print("* Only real numbers and expressions can be entered.")
-                print('* Real constants such as "pi", "e", and "tau" can be entered.')
-                print('* To use the previous answer, enter "ans".')
-                print('* Trigonometric functions accept and output angles in radians. The degrees and radians functions or operations can be used to convert.')
-                print("* The result of trigonometric inverse functions (eg. asin, acos, atan, etc.) will lie in their restricted domains.")
-                print("* For more information, visit the python math and operators websites.")
-                print("* The above operators and functions can only be entered as part of an expression, not as an operation.")
             else:
                 break
         if op == "<" or op == "exit" or op == "exi":
@@ -594,15 +571,6 @@ def from_rectangular():
             print("* For more information, visit the python math and operators websites.")
             print('* Expressions can be operated on or evaluated with the "equals" (=) operation.')
             print("* The above operators and functions can only be entered as part of an expression, not as an operation.")
-            print('* Enter "oi" for operation info.')
-            continue
-        elif a == "oi" or a == "operation info" or a == "ope inf":
-            print()
-            print('The following operations can be entered: equals (=), add (+), subtract (-), multiply (*), divide (/), exponent (^), absolute value or modulus (||), angle or argument (ang), polar (pol)')
-            print()
-            print("Notes:")
-            print('* The name, sign, or first 3 letters of any operation can be entered: eg. "absolute value", "abs", and "||" all work.')
-            print("* The above operations can only be entered as an operation, not as part of an expression.")
             continue
         elif a == "p" or a == "polar" or a == "pol" or a == "polar form":
             from_polar()
@@ -651,22 +619,6 @@ def from_rectangular():
                 print("* Fractional exponents can be used to root: eg. (-1 + 0i) ^ (1/2 + 0i) = i.")
                 print('* Expressions entered as terms can be operated on or evaluated with the "equals" (=) operation.')
                 print("* The above operations can only be entered as an operation, not as part of an expression.")
-                print('* Enter "ei" for expression info.')
-            elif op == "ei" or op == "expression info" or op == "exp inf":
-                print()
-                print('In addition to individual numbers, expressions such as "3 * sin(pi / 3)" can be entered as values.')
-                print("The following non-parenthesized operators and functions can be entered as part of an expression:")
-                print("* Operators: + (add), - (subtract), * (multiply), / (divide), // (integer divide), % (remainder), ** (exponent)")
-                print("* Functions: eg. abs(x), sqrt(x), cbrt(x), pow(x, y), log(x, base), factorial(x), comb(x, y), perm(x, y), sin(x), cos(x), tan(x), asin(x), acos(x), atan(x), degrees(x), radians(x), sum([x, y, z,...]), int(x), round(x), etc.")
-                print()
-                print("Notes:")
-                print("* Only real numbers and expressions can be entered.")
-                print('* Real constants such as "pi", "e", and "tau" can be entered.')
-                print('* To use the previous answer, enter "ans".')
-                print('* Trigonometric functions accept and output angles in radians. The degrees and radians functions or operations can be used to convert.')
-                print("* The result of trigonometric inverse functions (eg. asin, acos, atan, etc.) will lie in their restricted domains.")
-                print("* For more information, visit the python math and operators websites.")
-                print("* The above operators and functions can only be entered as part of an expression, not as an operation.")
             else:
                 break
         if op == "<" or op == "exit" or op == "exi":
@@ -1715,20 +1667,6 @@ while True:
                     print("* For more information, visit the python math and operators websites.")
                     print('* Expressions can be operated on or evaluated with the "equals" (=) operation.')
                     print("* The above operators and functions can only be entered as part of an expression, not as an operation.")
-                    print('* Enter "oi" for operation info.')
-                    continue
-                elif n == "oi" or n == "operation info" or n == "ope inf":
-                    print()
-                    print("The following operations can be entered:")
-                    print('* Basic: add (+), subtract (-), multiply (*), divide (/), integer divide or floor divide (//), remainder or modulo (r or %), absolute value or magnitude (||)')
-                    print('* Power: exponent (^), logarithm (log), square root (sqrt), cube root (cbrt)')
-                    print('* Trigonometry: sine (sin), cosine (cos), tangent (tan), arcsine (asin), arccosine (acos), arctangent (atan), degrees (deg), radians (rad)')
-                    print("* Combinatorics: factorial (!), choose (com), permute (per)")
-                    print("* Other: round (~), integer (int), equals (=)")
-                    print()
-                    print("Notes:")
-                    print('* The name, sign, or first 3 letters of any operation can be entered: eg. "factorial", "fac", and "!" all work.')
-                    print("* The above operations can only be entered as an operation, not as part of an expression.")
                     continue
                 else:
                     try:
@@ -1744,38 +1682,22 @@ while True:
                             print('* Basic: add (+), subtract (-), multiply (*), divide (/), integer divide or floor divide (//), remainder or modulo (r or %), absolute value or magnitude (||)')
                             print('* Power: exponent (^), logarithm (log), square root (sqrt), cube root (cbrt)')
                             print('* Trigonometry: sine (sin), cosine (cos), tangent (tan), arcsine (asin), arccosine (acos), arctangent (atan), degrees (deg), radians (rad)')
-                            print("* Combinatorics: factorial (!), choose (com), permute (per)")
-                            print("* Other: round (~), integer (int), equals (=)")
+                            print("* Combinatorics: factorial (!), choose (cho), permute (per)")
+                            print("* Other: equals (=), store (sto), round (~), integer (int)")
                             print()
                             print("Notes:")
                             print('* The name, sign, or first 3 letters of any operation can be entered: eg. "factorial", "fac", and "!" all work.')
                             print("* Fractional exponents can be used to root: eg. 8 ^ (1/3) = 2.")
-                            print("* Integer divide (//) and int() will remove the decimal part from the output, wheras round() will follow the standard rounding rules: eg. 3 // 2 = int(3 / 2) = 1, but round(3 / 2) = 2.")
+                            print('* The "integer divide" (//) and "integer" (int) operations will remove the decimal part from the output, wheras the "round" (~) operation will follow the standard rounding rules: eg. 3 // 2 = int(3 / 2) = 1, but round(3 / 2) = 2.')
+                            print('* The variable name for the "store" (sto) operation must begin with a capital letter')
                             print('* Expressions entered as terms can be operated on or evaluated with the "equals" (=) operation.')
                             print("* The above operations can only be entered as an operation, not as part of an expression.")
-                            print('* Enter "ei" for expression info.')
-                            print()
-                        elif op == "ei" or op == "expression info" or op == "exp inf":
-                            print()
-                            print('In addition to individual numbers, expressions such as "3 * sin(pi / 3)" can be entered as terms.')
-                            print("The following non-parenthesized operators and functions can be entered as part of an expression:")
-                            print("* Operators: + (add), - (subtract), * (multiply), / (divide), // (integer divide), % (remainder), ** (exponent)")
-                            print("* Functions: eg. abs(x), sqrt(x), cbrt(x), pow(x, y), log(x, base), factorial(x), comb(x, y), perm(x, y), sin(x), cos(x), tan(x), asin(x), acos(x), atan(x), degrees(x), radians(x), sum([x, y, z,...]), int(x), round(x), etc.")
-                            print()
-                            print("Notes:")
-                            print("* Only real numbers and expressions can be entered.")
-                            print('* Real constants such as "pi", "e", and "tau" can be entered.')
-                            print('* To use the previous answer, enter "ans".')
-                            print('* Trigonometric functions accept and output angles in radians. The degrees and radians functions or operations can be used to convert.')
-                            print("* The result of trigonometric inverse functions (eg. asin, acos, atan, etc.) will lie in their restricted domains.")
-                            print("* For more information, visit the python math and operators websites.")
-                            print("* The above operators and functions can only be entered as part of an expression, not as an operation.")
                             print()
                         else:
                             break
                     if op == "exit" or op == "<":
                         continue
-                    elif not(op == "equals" or op == "=" or op == "equ" or op == "==" or op == "factorial" or op == "fac" or op == "!" or op == "sqrt" or op == "square root" or op == "squ" or op == "cbrt" or op == "cube root" or op == "cub" or op == "absolute value" or op == "||" or op == "abs" or op == "magnitude" or op == "mag" or op == "asin" or op == "arcsine" or op == "inverse sine" or op == "inv sin" or op == "acos" or op == "arccosine" or op == "inverse cosine" or op == "inv cos" or op == "atan" or op == "arctangent" or op == "inverse tangent" or op == "inv tan" or op == "asi" or op == "aco" or op == "ata" or op == "sin" or op == "sine" or op == "cos" or op == "cosine" or op == "tangent" or op == "tan" or op == "int" or op == "integer" or op == "radians" or op == "rad" or op == "degrees" or op == "deg"):
+                    elif not(op == "store" or op == "sto" or op == "equals" or op == "=" or op == "equ" or op == "==" or op == "factorial" or op == "fac" or op == "!" or op == "sqrt" or op == "square root" or op == "squ" or op == "cbrt" or op == "cube root" or op == "cub" or op == "absolute value" or op == "||" or op == "abs" or op == "magnitude" or op == "mag" or op == "asin" or op == "arcsine" or op == "inverse sine" or op == "inv sin" or op == "acos" or op == "arccosine" or op == "inverse cosine" or op == "inv cos" or op == "atan" or op == "arctangent" or op == "inverse tangent" or op == "inv tan" or op == "asi" or op == "aco" or op == "ata" or op == "sin" or op == "sine" or op == "cos" or op == "cosine" or op == "tangent" or op == "tan" or op == "int" or op == "integer" or op == "radians" or op == "rad" or op == "degrees" or op == "deg"):
                         if op == "exponent" or op == "^" or op == "exp" or op == "**":
                             n2 = input('Exponent (< to exit): ')
                             try:
@@ -1854,6 +1776,26 @@ while True:
                         n **= n2
                         print()
                         print(f"ans = {round(n, 12)}")
+                    elif op == "store" or op == "sto":
+                        while True:
+                            vname = input("Variable name (i for info and < to exit): ")
+                            if vname == "<" or vname == "exit" or vname == "exi":
+                                break
+                            try:
+                                if vname.isalpha() == False or vname[0].islower():
+                                    print("Please enter a variable name beginning with a capital letter")
+                                    print()
+                                else:
+                                    break
+                            except:
+                                print("Please enter a variable name beginning with a capital letter")
+                                print()
+                        if vname == "<" or vname == "exit" or vname == "exi":
+                            continue
+                        globals()[vname] = n
+                        print()
+                        print(vname + f" = {n}")
+                        keeps.append(vname)
                     elif op == "round" or op == "~" or op == "rou":
                         if n2 > 12:
                             n2 = 12
