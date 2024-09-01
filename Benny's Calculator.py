@@ -6,15 +6,27 @@ import types
 global ans
 ans = 0.0
 global real
-real = 0.0
+#real = 0.0
 global imag
-imag = 0.0
-global abs
-abs = 0.0
+#imag = 0.0
+global imag2
+#imag2 = 0.0
+global mod
+#mod = 0.0
 global ang
-ang = 0.0
+#ang = 0.0
+global sum
+#sum = 0.0
+global rat
+#rat = 0.0
+global sol
+#sol = 0.0
+global sol2
+#sol2 = 0.0
+global binsum
+#binsum = ""
 global keeps
-keeps = ["ans", "pi", "e", "tau", "inf", "nan", "infj", "nanj", "keeps", "real", "imag", "abs", "ang"]
+keeps = ["ans", "pi", "e", "tau", "inf", "nan", "infj", "nanj", "keeps", "real", "imag", "imag2", "mod", "ang", "sum", "rat", "sol", "sol2", "binsum"]
 
 def clear_variables():
     for var in list(globals()):
@@ -22,15 +34,16 @@ def clear_variables():
             del globals()[var]
 
 def print_binomial(a, b, c, d, n, k, unterm, x, y):
-    co = round(comb(abs(n), k) * a ** (abs(n) - k) * c ** k, 12)
+    global binsum
+    co = comb(abs(n), k) * a ** (abs(n) - k) * c ** k
     xpow = round(b * (abs(n) - k), 12)
     ypow = round(d * k, 12)
-    if co == 1 and (xpow != 0 or ypow != 0):
+    if round(co, 12) == 1 and (xpow != 0 or ypow != 0):
         cost = ""
-    elif co == -1 and (xpow != 0 or ypow != 0):
+    elif round(co, 12) == -1 and (xpow != 0 or ypow != 0):
         cost = "-"
     else:
-        cost = f"{co} "
+        cost = f"{round(co, 12)} "
     if xpow == 1:
         xpowst = x + " "
     elif xpow == 0:
@@ -44,14 +57,19 @@ def print_binomial(a, b, c, d, n, k, unterm, x, y):
     else:
         ypowst = y + f"^{ypow}"
     combined = cost + xpowst + ypowst
-    if n >= 0:
-        print(f"Term {unterm}: " + combined)
-    elif combined != cost and combined != xpowst and combined != ypowst:
-        if combined[len(combined) - 1] == " ":
-            combined = combined[:len(combined) - 1]
-        print(f"Term {unterm}: 1 / (" + combined + ")")
-    else:
-        print(f"Term {unterm}: 1 / " + combined)
+    if combined[len(combined) - 1] == " ":
+        combined = combined[:len(combined) - 1]
+    if n < 0 and combined != cost and combined != xpowst and combined != ypowst:
+        combined = f"1 / (" + combined + ")"
+    elif n < 0:
+        combined = f"1 / " + combined
+    print(f"Term {unterm}: " + combined)
+    binsum += combined + " + "
+    covar = f"coef{unterm}"
+    globals()[covar] = co
+    keeps.append(covar)
+    print(covar+ f" = {round(co, 12)}")
+    print()
 
 def from_polar():
     global ans
@@ -205,8 +223,8 @@ def from_polar():
                 print(f"{term1} =")
                 print(f"{round(res[0], 12)} cos({round(ares, 12)}) + {round(res[0], 12)} sin({round(ares, 12)})i")
                 print()
-                abs = res[0]
-                print(f"abs (absolute value/modulus) = {round(abs, 12)}")
+                mod = res[0]
+                print(f"mod (absolute value/modulus) = {round(mod, 12)}")
                 ang = ares
                 if unit == "r" or unit == "radians" or unit == "rad":
                     print(f"ang (angle/argument) = {round(ang, 12)} (radians)")
@@ -247,8 +265,8 @@ def from_polar():
                 print(f"{term1} + {term2} =")
                 print(f"{round(res[0], 12)} cos({round(ares, 12)}) + {round(res[0], 12)} sin({round(ares, 12)})i")
                 print()
-                abs = res[0]
-                print(f"abs (absolute value/modulus) = {round(abs, 12)}")
+                mod = res[0]
+                print(f"mod (absolute value/modulus) = {round(mod, 12)}")
                 ang = ares
                 if unit == "r" or unit == "radians" or unit == "rad":
                     print(f"ang (angle/argument) = {round(ang, 12)} (radians)")
@@ -289,8 +307,8 @@ def from_polar():
                 print(f"{term1} - ({term2}) =")
                 print(f"{round(res[0], 12)} cos({round(ares, 12)}) + {round(res[0], 12)} sin({round(ares, 12)})i")
                 print()
-                abs = res[0]
-                print(f"abs (absolute value/modulus) = {round(abs, 12)}")
+                mod = res[0]
+                print(f"mod (absolute value/modulus) = {round(mod, 12)}")
                 ang = ares
                 if unit == "r" or unit == "radians" or unit == "rad":
                     print(f"ang (angle/argument) = {round(ang, 12)} (radians)")
@@ -331,8 +349,8 @@ def from_polar():
                 print(f"({term1}) ({term2}) =")
                 print(f"{round(res[0], 12)} cos({round(ares, 12)}) + {round(res[0], 12)} sin({round(ares, 12)})i")
                 print()
-                abs = res[0]
-                print(f"abs (absolute value/modulus) = {round(abs, 12)}")
+                mod = res[0]
+                print(f"mod (absolute value/modulus) = {round(mod, 12)}")
                 ang = ares
                 if unit == "r" or unit == "radians" or unit == "rad":
                     print(f"ang (angle/argument) = {round(ang, 12)} (radians)")
@@ -373,8 +391,8 @@ def from_polar():
                 print(f"({term1}) / ({term2}) =")
                 print(f"{round(res[0], 12)} cos({round(ares, 12)}) + {round(res[0], 12)} sin({round(ares, 12)})i")
                 print()
-                abs = res[0]
-                print(f"abs (absolute value/modulus) = {round(abs, 12)}")
+                mod = res[0]
+                print(f"mod (absolute value/modulus) = {round(mod, 12)}")
                 ang = ares
                 if unit == "r" or unit == "radians" or unit == "rad":
                     print(f"ang (angle/argument) = {round(ang, 12)} (radians)")
@@ -415,8 +433,8 @@ def from_polar():
                 print(f"({term1}) ^ ({term2}) =")
                 print(f"{round(res[0], 12)} cos({round(ares, 12)}) + {round(res[0], 12)} sin({round(ares, 12)})i")
                 print()
-                abs = res[0]
-                print(f"abs (absolute value/modulus) = {round(abs, 12)}")
+                mod = res[0]
+                print(f"mod (absolute value/modulus) = {round(mod, 12)}")
                 ang = ares
                 if unit == "r" or unit == "radians" or unit == "rad":
                     print(f"ang (angle/argument) = {round(ang, 12)} (radians)")
@@ -466,7 +484,7 @@ def from_rectangular():
     global ang
     global abs
     print()
-    print("Please enter the first term in the form a + bi and the second term (if needed) in the form c + di, where a, b, c, and d are real numbers")               
+    print("Please enter the first term in the form a + bi and the second term (if needed) in the form c + di")               
     while True:
         clear_variables()
         print()
@@ -732,10 +750,10 @@ def from_rectangular():
                 imag = res.imag
                 print(f"imag = {round(imag, 12)}")
             elif op == "abs" or op == "absolute value" or op == "magnitude" or op == "mag" or op == "||" or op == "modulus" or op == "mod":
-                ans = abs(complex(a, b))
+                mod = abs(complex(a, b))
                 print()
                 print(f"|{term1}|")
-                print(f"ans = {round(ans, 12)}")
+                print(f"mod = {round(mod, 12)}")
             elif op == "angle" or op == "ang" or op == "phase" or op == "pha" or op == "argument" or op == "arg":
                 res = cmath.phase(a, b)
                 while True:
@@ -768,11 +786,11 @@ def from_rectangular():
                         break
                 print()
                 print(f"Angle of {term1}")                  
-                ans = res
+                ang = res
                 if unit == "r" or unit == "radians" or unit == "rad":
-                    print(f"ans = {round(ans, 12)} (radians)")
+                    print(f"ang = {round(ang, 12)} (radians)")
                 else:
-                    print(f"ans = {round(ans, 12)} (degrees)") 
+                    print(f"ang = {round(ang, 12)} (degrees)") 
             elif op == "polar" or op == "pol" or op == "polar form":
                 res = cmath.polar(complex(a, b))
                 ares = res[1]
@@ -810,8 +828,8 @@ def from_rectangular():
                 print(f"Polar form of {term1}")
                 print(f"Result: {round(res[0], 12)} cos({round(ares, 12)}) + {round(res[0], 12)} sin({round(ares, 12)})i")
                 print()
-                abs = res[0]
-                print(f"abs (absolute value/modulus) = {round(abs, 12)}")
+                mod = res[0]
+                print(f"mod (absolute value/modulus) = {round(abs, 12)}")
                 ang = ares
                 if unit == "r" or unit == "radians" or unit == "rad":
                     print(f"ang (angle/argument) = {round(ang, 12)} (radians)")
@@ -864,25 +882,14 @@ while True:
             continue
         elif sumtype == "b" or sumtype == "binomial" or sumtype == "bin":
             print()
-            print("Please enter binomial in the form (ax^b + cy^d) ^ n, where x and y are variable names; a, b, and c are real numbers not equal to 0; and n is an integer")
+            print("Please enter binomial in the form (ax^b + cy^d) ^ n, where x and y are non-numeric variable names without spaces, a, b, and c are not equal to 0, and n is an integer")
             while True:
                 clear_variables()
+                binsum = ""
                 print()
-                x = input("Variable 1 name (i for info, > to skip, and < to exit): ")
-                if x == "info" or x == "inf" or x == "i":
-                    print()
-                    print("Please enter a variable name")
-                    print("The variable will not store any value, it is just the name that will be printed in the result")
-                    print('Skipping will set the variable name to its default "x"')
-                    print()
-                    continue
-                elif x == "skip" or x == ">" or x == "ski":
-                    x = "x"
-                elif x == "exit" or x == "exi" or x == "<":
-                    break
-                a = input(x + " coefficient (< to exit): ")
+                a = input("a (< to exit): ")
                 if a == "<" or a == "exit" or a == "exi":
-                    continue
+                    break
                 try:
                     a = eval(a)
                 except:
@@ -891,7 +898,26 @@ while True:
                 if a == 0:
                     print('Please enter a nonzero real number or expression, or "<" to exit')
                     continue
-                b = input(x + " exponent (< to exit): ")
+                while True:
+                    x = input("x (i for info and < to exit): ")
+                    if x == "exit" or x == "exi" or x == "<":
+                        break
+                    try:
+                        if x == "info" or x == "inf" or x == "i":
+                            print()
+                            print("Please enter a non-numeric variable name without spaces")
+                            print("The variable will not store any value, it is just the name that will be printed in the result")
+                            print()
+                        elif x.find(" ") != -1 or x[0].isalpha() == False:
+                            print("For clarity, please enter a non-numeric variable name without spaces")
+                            print()
+                        else:
+                            break
+                    except:
+                        print("Please enter a non-numeric variable name without spaces")
+                if x == "exit" or x == "exi" or x == "<":
+                    continue
+                b = input("b (< to exit): ")
                 if b == "<" or b == "exit" or b == "exi":
                     continue
                 try:
@@ -902,25 +928,7 @@ while True:
                 if b == 0:
                     print('Please enter a nonzero real number or expression, or "<" to exit')
                     continue
-                print()
-                while True:
-                    y = input("Variable 2 name (i for info, > to skip, and < to exit): ")
-                    if y == "info" or y == "inf" or y == "i":
-                        print()
-                        print("Please enter a second variable name")
-                        print("The variable will not store any value, it is just the name that will be printed in the result")
-                        print('Skipping will set the variable name to its default "y"')
-                        print("To remove the second variable, set its exponent to 0")
-                        print()
-                        continue
-                    elif y == "skip" or y == ">" or y == "ski":
-                        y = "y"
-                        break
-                    else:
-                        break
-                if y == "exit" or y == "exi" or y == "<":
-                    continue
-                c = input(y + " coefficient (< to exit): ")
+                c = input("c (< to exit): ")
                 if c == "<" or c == "exit" or c == "exi":
                     continue
                 try:
@@ -931,16 +939,41 @@ while True:
                 if c == 0:
                     print('Please enter a nonzero real number or expression, or "<" to exit')
                     continue
-                d = input(y + " exponent (< to exit): ")
-                if d == "<" or d == "exit" or d == "exi":
+                while True:
+                    y = input("y (i for info, > to skip, and < to exit): ")
+                    if y == "exit" or y == "exi" or y == "<":
+                        break
+                    try:
+                        if y == "info" or y == "inf" or y == "i":
+                            print()
+                            print("Please enter a non-numeric variable name without spaces")
+                            print("The variable will not store any value, it is just the name that will be printed in the result")
+                            print("Skipping will is equivalent to setting the variable's exponent to 0")
+                            print()
+                        elif y == "skip" or y == ">" or y == "ski":
+                            break
+                        elif y.find(" ") != -1 or y[0].isalpha() == False:
+                            print("For clarity, please enter a non-numeric variable name without spaces")
+                            print()
+                        else:
+                            break
+                    except:
+                        print("Please enter a non-numeric variable name without spaces")
+                        print()
+                if y == "exit" or y == "exi" or y == "<":
                     continue
-                try:
-                    d = eval(d)
-                except:
-                    print('Please enter a real number or expression, or "<" to exit')
-                    continue
-                print()
-                n = input("Binomial exponent (< to exit): ")
+                if y != "skip" and y != "ski" and y != ">":
+                    d = input("d (< to exit): ")
+                    if d == "<" or d == "exit" or d == "exi":
+                        continue
+                    try:
+                        d = eval(d)
+                    except:
+                        print('Please enter a real number or expression, or "<" to exit')
+                        continue
+                else:
+                    d = 0
+                n = input("n (< to exit): ")
                 if n == "<" or n == "exit" or n == "exi":
                     continue
                 try:
@@ -950,7 +983,7 @@ while True:
                     continue
                 while True:
                     print()
-                    un = input(f"Index of terms to find (1-{abs(n)+1} for all, i for info, and < to exit): ")
+                    un = input(f"Index of terms to find/sum (1-{abs(n)+1} for all, i for info, and < to exit): ")
                     if un == "i" or un == "info" or un == "inf":
                         print()
                         print("Please enter a list of exponents seperated by commas and using dashes to indicate ranges:")
@@ -977,6 +1010,8 @@ while True:
                             if 0 < unterm <= abs(n) + 1:
                                 k = unterm - 1
                                 print_binomial(a, b, c, d, n, k, unterm, x, y)
+                                binsum = binsum[:len(binsum) - 3]
+                                print("Sum: " + binsum)
                             else:
                                 print(f'Term Error: indexes must be positive integers between 1 and |n| + 1 ({abs(n) + 1}), inclusive (enter "all" for all, "i" for info and "<" to exit)')
                         except:
@@ -997,6 +1032,8 @@ while True:
                                     k = unterm - 1
                                     print_binomial(a, b, c, d, n, k, unterm, x, y)
                                     rangeindex += 1
+                                binsum = binsum[:len(binsum) - 3]
+                                print("Sum: " + binsum)
                             elif rangelist[1] <= rangelist[0]:
                                 print('Term Error: the second index of a range must be greater than the first index of the range (enter "all" for all, "i" for info and "<" to exit)')
                             else:    
@@ -1059,26 +1096,26 @@ while True:
                         print('Please enter a positive integer or "<" to exit')
                         continue
                     if bn < cn:
-                        rat = (c / b) ** (1/(cn - bn))
+                        comrat = (c / b) ** (1/(cn - bn))
                     else:
                         print("The index of term 2 must be greater than the index of term 1")
                         continue
-                    a = b / rat ** (bn - 1)
-                elif gtype == "common ratio" or gtype == "rat" or gtype == "r" or gtype == "ratio" or gtype == "com rat":
-                    rat = input("Common ratio (< to exit): ")
-                    if rat == "<" or rat == "exit" or rat == "exi":
+                    a = b / comrat ** (bn - 1)
+                elif gtype == "common ratio" or gtype == "comrat" or gtype == "r" or gtype == "ratio" or gtype == "com comrat":
+                    comrat = input("Common ratio (< to exit): ")
+                    if comrat == "<" or comrat == "exit" or comrat == "exi":
                         continue
                     try:
-                        rat = eval(rat)
+                        comrat = eval(comrat)
                     except:
                         print('Please enter a nonzero real number or expression, or "<" to exit')
                         continue
-                    if round(rat, 12) == 0:
+                    if round(comrat, 12) == 0:
                         print('Please enter a nonzero real number or expression, or "<" to exit')
                         continue
                     cn = bn + 1
-                    c = b * rat
-                    a = b / rat ** (bn - 1)
+                    c = b * comrat
+                    a = b / comrat ** (bn - 1)
                 elif gtype == "<" or gtype == "exit" or gtype == "exi":
                     continue
                 else:
@@ -1099,7 +1136,7 @@ while True:
                     if n <= 0:
                         print('Please enter a positive integer, "inf" for "infinity" ">" to skip, or "<" to exit')
                         continue
-                if (n == "inf" or n == "infinity") and (rat >= 1 or rat <= -1):
+                if (n == "inf" or n == "infinity") and (comrat >= 1 or comrat <= -1):
                     print("Infinity is only accepted for common ratios between -1 and 0 and between 0 and -1")
                     continue
                 while True:
@@ -1127,7 +1164,7 @@ while True:
                                     unterm = ans
                                 unterm = int(unterm)
                                 if unterm > 0:
-                                    print(f"Term {unterm}: {round(a * rat ** (unterm - 1), 12)}")
+                                    print(f"Term {unterm}: {round(a * comrat ** (unterm - 1), 12)}")
                                 else:
                                     print('Term Error: indexes must be positive integers (enter "i" for info, ">" to skip, and "<" to exit)')
                             except:
@@ -1145,7 +1182,7 @@ while True:
                                     rangeindex = 0
                                     while rangeindex < len(rangelist):
                                         unterm = rangelist[rangeindex]
-                                        print(f"Term {unterm}: {round(a * rat ** (unterm - 1), 12)}")
+                                        print(f"Term {unterm}: {round(a * comrat ** (unterm - 1), 12)}")
                                         rangeindex += 1
                                 elif rangelist[1] <= rangelist[0]:
                                     print('Term Error: the second index of a range must be greater than the first index of the range (enter "i" for info, ">" to skip, and "<" to exit)')
@@ -1159,169 +1196,48 @@ while True:
                 if round(b, 12) != round(c, 12):
                     if un == ">" or un == "skip" or un == "ski":
                         print()
-                    print(f"Common ratio: {round(rat, 12)}")
+                    rat = comrat
+                    print(f"rat (common ratio) = {round(rat, 12)}")
                     if n != ">" and n != "skip" and n != "ski":
                         if n != "infinity" and n != "inf":
-                            res = a * (1 - rat ** n) / (1 - rat)
+                            sum = a * (1 - comrat ** n) / (1 - comrat)
                         else:
-                            res = a / (1 - rat)
-                        if round(res, 12) == 0:
-                            res = 0.0
-                        print(f"Sum: {round(res, 12)}")
-                        while True:
-                            print()
-                            stoans = input('Result to store as ans (term (t), ratio (r), sum (s), or > to skip): ')
-                            if stoans == "term" or stoans == "t" or stoans == "ter":
-                                while True:
-                                    termindex = input("Index of term to store (> to skip): ")
-                                    if termindex == ">" or termindex == "skip" or termindex == "ski":
-                                        break
-                                    elif termindex == "ans":
-                                        termindex = ans
-                                    try:
-                                        termindex = int(termindex)
-                                        if termindex > 0:
-                                            ans = a * rat ** (termindex - 1)
-                                            print(f"ans = {round(ans, 12)}")
-                                            break
-                                        else:
-                                            print('Please enter a positive integer index or ">" to skip')
-                                    except:
-                                        print('Please enter a positive integer index or ">" to skip')
-                                break
-                            elif stoans == "ratio" or stoans == "r" or stoans == "rat":
-                                ans = rat
-                                print(f"ans = {round(ans, 12)}")
-                                break                                
-                            elif stoans == "sum" or stoans == "s":
-                                ans = res
-                                print(f"ans = {round(ans, 12)}")
-                                break
-                            elif stoans == ">" or stoans == "skip" or stoans == "ski":
-                                break
-                            else:
-                                print('Please enter either "term" (t), "ratio" (r), "sum" (s), or ">" to skip')
-                    else:
-                        while True:
-                            print()
-                            stoans = input('Result to store as ans (term (t), ratio (r), or > to skip): ')
-                            if stoans == "term" or stoans == "t" or stoans == "ter":
-                                while True:
-                                    termindex = input("Index of term to store (> to skip): ")
-                                    if termindex == ">" or termindex == "skip" or termindex == "ski":
-                                        break
-                                    elif termindex == "ans":
-                                        termindex = ans
-                                    try:
-                                        termindex = int(termindex)
-                                        if termindex > 0:
-                                            ans = a * rat ** (termindex - 1)
-                                            print(f"ans = {round(ans, 12)}")
-                                            break
-                                        else:
-                                            print('Please enter a positive integer index or ">" to skip')
-                                    except:
-                                        print('Please enter a positive integer index or ">" to skip')
-                                break
-                            elif stoans == "ratio" or stoans == "r" or stoans == "rat":
-                                ans = rat
-                                print(f"ans = {round(ans, 12)}")
-                                break                                
-                            elif stoans == ">" or stoans == "skip" or stoans == "ski":
-                                break
-                            else:
-                                print('Please enter either "term" (t), "ratio" (r), or ">" to skip')
+                            sum = a / (1 - comrat)
+                        if round(sum, 12) == 0:
+                            sum = 0.0
+                        print(f"sum = {round(sum, 12)}")
                 elif round(b, 12) == round(c, 12):
                     if un == ">" or un == "skip" or un == "ski":
                         print()
-                    print(f"Common ratio: 1.0")
+                    rat = 1.0
+                    print(f"rat (common ratio) = 1.0")
                     if n != ">" and n != "skip" and n != "ski":
-                        res = b * n
-                        print(f"Sum: {round(res, 12)}")
-                        while True:
-                            print()
-                            stoans = input('Result to store as ans (term (t), ratio (r), sum (s), or > to skip): ')
-                            if stoans == "term" or stoans == "t" or stoans == "ter":
-                                while True:
-                                    termindex = input("Index of term to store (> to skip): ")
-                                    if termindex == ">" or termindex == "skip" or termindex == "ski":
-                                        break
-                                    elif termindex == "ans":
-                                        termindex = ans
-                                    try:
-                                        termindex = int(termindex)
-                                        if termindex > 0:
-                                            ans = b
-                                            print(f"ans = {round(ans, 12)}")
-                                            break
-                                        else:
-                                            print('Please enter a positive integer index or ">" to skip')
-                                    except:
-                                        print('Please enter a positive integer index or ">" to skip')
-                                break
-                            elif stoans == "ratio" or stoans == "r" or stoans == "rat":
-                                ans = 1.0
-                                print(f"ans = {round(ans, 12)}")
-                                break                                
-                            elif stoans == "sum" or stoans == "s":
-                                ans = res
-                                print(f"ans = {round(ans, 12)}")
-                                break
-                            elif stoans == ">" or stoans == "skip" or stoans == "ski":
-                                break
-                            else:
-                                print('Please enter either "term" (t), "ratio" (r), "sum" (s), or ">" to skip')
-                    else:
-                        while True:
-                            print()
-                            stoans = input('Result to store as ans (term (t), ratio (r), or > to skip): ')
-                            if stoans == "term" or stoans == "t" or stoans == "ter":
-                                while True:
-                                    termindex = input("Index of term to store (> to skip): ")
-                                    if termindex == ">" or termindex == "skip" or termindex == "ski":
-                                        break
-                                    elif termindex == "ans":
-                                        termindex = ans
-                                    try:
-                                        termindex = int(termindex)
-                                        if termindex > 0:
-                                            ans = b
-                                            print(f"ans = {round(ans, 12)}")
-                                            break
-                                        else:
-                                            print('Please enter a positive integer index or ">" to skip')
-                                    except:
-                                        print('Please enter a positive integer index or ">" to skip')
-                                break
-                            elif stoans == "ratio" or stoans == "r" or stoans == "rat":
-                                ans = 1.0
-                                print(f"ans = {round(ans, 12)}")
-                                break                                
-                            elif stoans == ">" or stoans == "skip" or stoans == "ski":
-                                break
-                            else:
-                                print('Please enter either "term" (t), "ratio" (r), or ">" to skip')
+                        sum = b * n
+                        print(f"sum = {round(sum, 12)}")
         else:
             print('Please enter either "binomial" (b), "arithmetic" (a), "geometric" (g), or "<" to exit')
         
     elif cat == "equation" or cat == "equ" or cat == "e":
         print()
-        print("Please enter the equation in the form ax^2 + bx + c = 0, where x is a variable name and a, b, and c are real numbers")
+        print("Please enter the equation in the form ax^2 + bx + c = 0, where x is a non-numeric variable name")
         while True:
             clear_variables()
             print()
-            x = input("x (i for info, > to skip, and < to exit): ")
-            if x == "info" or x == "inf" or x == "i":
-                print()
-                print("Please enter a variable name")
-                print("The variable will not store any value, it is just the name that will be printed in the result")
-                print('Skipping will set the variable name to its default "x"')
-                print()
+            x = input("x (i for info and < to exit): ")
+            try:
+                if x == "info" or x == "inf" or x == "i":
+                    print()
+                    print("Please enter a non-numeric variable name")
+                    print("The variable will not store any value, it is just the name that will be printed in the result")
+                    continue
+                elif x[0].isalpha() == False:
+                    print("For clarity, please enter a non-numeric variable name")
+                    continue
+                elif x == "exit" or x == "exi" or x == "<":
+                    break
+            except:
+                print("Please enter a non-numeric variable name")
                 continue
-            elif x == "skip" or x == ">" or x == "ski":
-                x = "x"
-            elif x == "exit" or x == "exi" or x == "<":
-                break
             a = (input('a (< to exit): '))
             if a == "<" or a == "exit" or a == "exi":
                 break
@@ -1352,36 +1268,21 @@ while True:
             elif round(a, 12) == 0 and round(b, 12) == 0:
                 print("No solution")
             elif round(a, 12) == 0:
-                res = (-c / b)
-                print("Solution: " + x + f" = {round(res, 12)}")
-                ans = res
-                print(f"ans = {round(ans, 12)}")
+                sol = (-c / b)
+                print("Solution: " + x + f" = {round(sol, 12)}")
+                print(f"sol = {round(sol, 12)}")
             else:
                 det = b ** 2 - 4 * a * c
                 if round(det, 12) > 0:
-                    rt1 = (-b - sqrt(det)) / (2 * a)
-                    rt2 = (-b + sqrt(det)) / (2 * a)
-                    print("Solution: " + x + f" = {round(rt1, 12)} or " + x + f" = {round(rt2, 12)}")
-                    while True:
-                        print()
-                        rt = (input('Root to store as ans (root 1 (1), root 2 (2), or > to skip): '))
-                        if rt == "1" or rt == "root 1" :
-                            ans = rt1
-                            print(f"ans = {round(ans, 12)}")
-                            break
-                        elif rt == "2" or rt == "root 2":
-                            ans = rt2
-                            print(f"ans = {round(ans, 12)}")
-                            break
-                        elif rt == ">":
-                            break
-                        else:
-                            print('Please enter either "root 1" (1), "root 2" (2), or ">" to skip')
+                    sol = (-b - sqrt(det)) / (2 * a)
+                    sol2 = (-b + sqrt(det)) / (2 * a)
+                    print("Solution: " + x + f" = {round(sol, 12)} or " + x + f" = {round(sol2, 12)}")
+                    print(f"sol = {round(sol, 12)}")
+                    print(f"sol2 = {round(sol2, 12)}")
                 elif round(det, 12) == 0:
-                    rt1 = -b / (2 * a)
-                    print("Solution: " + x + f" = {round(rt1, 12)}")
-                    ans = rt1
-                    print(f"ans = {round(ans, 12)}")
+                    sol = -b / (2 * a)
+                    print("Solution: " + x + f" = {round(sol, 12)}")
+                    print(f"sol = {round(sol, 12)}")
                 else:
                     rl = -b / (2 * a)
                     im = sqrt(-det) / (2 * a)
@@ -1402,56 +1303,12 @@ while True:
                             print("Solution: " + x + f" = {round(rl, 12)} + {round(im * -1, 12)}i or " + x + f" = {round(rl, 12)} - {round(im * -1, 12)}i")
                         else:
                             print("Solution: " + x + f" = {round(rl, 12)} + i or " + x + f" = {round(rl, 12)} - i")
-                    if round(rl, 12) != 0:
-                        while True:
-                            print()
-                            rt = (input('Root to store as ans (root 1 (1), root 2 (2), or > to skip): '))
-                            if rt == "1" or rt == "root 1":
-                                stoans = input("Part to store as ans (real (r) or imaginary (i)): ")
-                                if stoans == "real" or stoans == "rea" or stoans == "r":
-                                    ans = rl
-                                    print(f"ans = {round(ans, 12)}")
-                                    break
-                                elif stoans == "imaginary" or stoans == "ima" or stoans == "i":
-                                    ans = im * -1   
-                                    print(f"ans = {round(ans, 12)}")
-                                    break
-                                else:
-                                    print('Please enter "real" (r) or "imaginary" (i)')
-                                    continue
-                            elif rt == "2" or rt == "root 2":
-                                stoans = input("Part to store as ans (real (r) or imaginary (i)): ")
-                                if stoans == "real" or stoans == "rea" or stoans == "r":
-                                    ans = rl
-                                    print(f"ans = {round(ans, 12)}")
-                                    break
-                                elif stoans == "imaginary" or stoans == "ima" or stoans == "i":
-                                    ans = im   
-                                    print(f"ans = {round(ans, 12)}")
-                                    break
-                                else:
-                                    print('Please enter "real" (r) or "imaginary" (i)')
-                                    continue                                
-                            elif rt == ">" or rt == "skip" or rt == "ski":
-                                break
-                            else:
-                                print('Please enter "root 1" (1), "root 2" (2), or ">" to skip')
-                    elif round(rl, 12) == 0:
-                        while True:
-                            print()
-                            rt = (input('Root to store as ans (root 1 (1), root 2 (2), or > to skip): '))
-                            if rt == "1" or rt == "root 1":
-                                ans = im * -1   
-                                print(f"ans = {round(ans, 12)}")
-                                break
-                            elif rt == "2" or rt == "root 2":
-                                ans = im   
-                                print(f"ans = {round(ans, 12)}")
-                                break
-                            elif rt == ">" or rt == "skip" or rt == "ski":
-                                break
-                            else:
-                                print('Please enter "root 1" (1), "root 2" (2), or ">" to skip')
+                    real = rl
+                    print(f"real = {round(real, 12)}")
+                    imag = im * -1
+                    print(f"imag = {round(imag, 12)}")
+                    imag2 = im
+                    print(f"imag2 = {round(imag2, 12)}")
 
     elif cat == "operation" or cat == "ope" or cat == "o":
         opetype = input('Operation type (real (r), complex (c), matrix (m), or < to exit): ')
@@ -1610,7 +1467,7 @@ while True:
                             continue
                         globals()[vname] = n
                         print()
-                        print(vname + f" = {n}")
+                        print(vname + f" = {round(n, 12)}")
                         keeps.append(vname)
                     elif op == "round" or op == "~" or op == "rou":
                         if n2 > 12:
