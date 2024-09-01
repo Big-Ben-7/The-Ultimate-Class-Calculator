@@ -1225,7 +1225,9 @@ while True:
             print()
             x = input("x (i for info and < to exit): ")
             try:
-                if x == "info" or x == "inf" or x == "i":
+                if x == "exit" or x == "exi" or x == "<":
+                    break
+                elif x == "info" or x == "inf" or x == "i":
                     print()
                     print("Please enter a non-numeric variable name")
                     print("The variable will not store any value, it is just the name that will be printed in the result")
@@ -1233,8 +1235,6 @@ while True:
                 elif x[0].isalpha() == False:
                     print("For clarity, please enter a non-numeric variable name")
                     continue
-                elif x == "exit" or x == "exi" or x == "<":
-                    break
             except:
                 print("Please enter a non-numeric variable name")
                 continue
@@ -1372,6 +1372,8 @@ while True:
                     elif not(op == "store" or op == "sto" or op == "equals" or op == "=" or op == "equ" or op == "==" or op == "factorial" or op == "fac" or op == "!" or op == "sqrt" or op == "square root" or op == "squ" or op == "cbrt" or op == "cube root" or op == "cub" or op == "absolute value" or op == "||" or op == "abs" or op == "magnitude" or op == "mag" or op == "asin" or op == "arcsine" or op == "inverse sine" or op == "inv sin" or op == "acos" or op == "arccosine" or op == "inverse cosine" or op == "inv cos" or op == "atan" or op == "arctangent" or op == "inverse tangent" or op == "inv tan" or op == "asi" or op == "aco" or op == "ata" or op == "sin" or op == "sine" or op == "cos" or op == "cosine" or op == "tangent" or op == "tan" or op == "int" or op == "integer" or op == "radians" or op == "rad" or op == "degrees" or op == "deg"):
                         if op == "exponent" or op == "^" or op == "exp" or op == "**":
                             n2 = input('Exponent (< to exit): ')
+                            if n2 == "<" or n2 == "exit" or n2 == "exi":
+                                continue
                             try:
                                 n2 = eval(n2)
                             except:
@@ -1381,6 +1383,8 @@ while True:
                             n2 = input('Decimals to round (0-12, < to exit): ')
                             if n2 == "ans":
                                 n2 = ans
+                            elif n2 == "<" or n2 == "exit" or n2 == "exi":
+                                continue
                             try:
                                 n2 = int(n2)
                             except:
@@ -1389,6 +1393,8 @@ while True:
                         elif op == "log" or op == "logarithm":
                             if n > 0:
                                 n2 = input('Base (< to exit): ')
+                                if n2 == "<" or n2 == "exit" or n2 == "exi":
+                                    continue
                                 try:
                                     n2 = eval(n2)
                                 except:
@@ -1397,6 +1403,8 @@ while True:
                         elif op == "choose" or op == "cho" or op == "comb":
                             if round(n, 12) == round(n) and n >= 0:
                                 n2 = input(f'From {round(n)} choose (< to exit): ')
+                                if n2 == "<" or n2 == "exit" or n2 == "exi":
+                                    continue
                                 try:
                                     n2 = eval(n2)
                                 except:
@@ -1405,6 +1413,8 @@ while True:
                         elif op == "perm" or op == "permute" or op == "per":
                             if round(n, 12) == round(n) and n >= 0:
                                 n2 = input(f'From {round(n)} permute (< to exit): ')
+                                if n2 == "<" or n2 == "exit" or n2 == "exi":
+                                    continue
                                 try:
                                     n2 = eval(n2)
                                 except:
