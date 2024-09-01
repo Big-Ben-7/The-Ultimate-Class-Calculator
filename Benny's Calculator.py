@@ -59,11 +59,13 @@ def print_binomial(a, b, c, d, n, k, unterm, x, y):
     combined = cost + xpowst + ypowst
     if combined[len(combined) - 1] == " ":
         combined = combined[:len(combined) - 1]
-    if n < 0 and combined != cost and combined != xpowst and combined != ypowst:
-        combined = f"1 / (" + combined + ")"
-    elif n < 0:
-        combined = f"1 / " + combined
-    print(f"Term {unterm}: " + combined)
+    if n >= 0:
+        print(f"Term {unterm}: " + combined)
+    else:
+        print(f"Term {unterm} denominator: " + combined)
+    if combined[0] == "-":
+        combined = combined[1:]
+        binsum = binsum[:len(binsum) - 3] + " - "
     binsum += combined + " + "
     covar = f"coef{unterm}"
     globals()[covar] = co
@@ -978,6 +980,8 @@ while True:
                     continue
                 try:
                     n = int(n)
+                    if n < 0:
+                        binsum += "1 / ("
                 except:
                     print('Please enter an integer or "<" to exit')
                     continue
@@ -988,6 +992,10 @@ while True:
                         print()
                         print("Please enter a list of exponents seperated by commas and using dashes to indicate ranges:")
                         print('eg. "1, 3, 6-8, 10" will output the 1st, 3rd, 6th, 7th, 8th, and 10th terms, given that n >= 9.')
+                        if n >= 0:
+                            print("If n is negative (it's not!), only the denominator of each term will be outputted (the sum will still be complete)")
+                        else:
+                            print("If n is negative (it is!), only the denominator of each term will be outputted (the sum will still be complete)")
                         print(f"All indexes must be positive integers between 1 and |n| + 1 ({abs(n) + 1}), inclusive, and the second index of a range must be greater than the first index of the range.")
                         print()
                     else:
@@ -1011,6 +1019,8 @@ while True:
                                 k = unterm - 1
                                 print_binomial(a, b, c, d, n, k, unterm, x, y)
                                 binsum = binsum[:len(binsum) - 3]
+                                if n < 0:
+                                    binsum += ")"
                                 print("Sum: " + binsum)
                             else:
                                 print(f'Term Error: indexes must be positive integers between 1 and |n| + 1 ({abs(n) + 1}), inclusive (enter "all" for all, "i" for info and "<" to exit)')
@@ -1033,6 +1043,8 @@ while True:
                                     print_binomial(a, b, c, d, n, k, unterm, x, y)
                                     rangeindex += 1
                                 binsum = binsum[:len(binsum) - 3]
+                                if n < 0:
+                                    binsum += ")"
                                 print("Sum: " + binsum)
                             elif rangelist[1] <= rangelist[0]:
                                 print('Term Error: the second index of a range must be greater than the first index of the range (enter "all" for all, "i" for info and "<" to exit)')
