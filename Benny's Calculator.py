@@ -72,7 +72,7 @@ def print_binomial(a, b, c, d, n, k, unterm, x, y):
     covar = f"coef{unterm}"
     globals()[covar] = co
     keeps.append(covar)
-    print(covar+ f" = {round(co, 12)}")
+    print(covar+ f" (term {unterm} coefficient) = {round(co, 12)}")
     print()
 
 def from_polar():
@@ -130,7 +130,7 @@ def from_polar():
             print('Please enter a real number or expression, or "<" to exit')
             continue
         while True:
-            angmode = input("Inputted in radians (r) or degrees (d): ")
+            angmode = input("Inputted in radians (r) or degrees (d)? ")
             if angmode == "radians" or angmode == "rad" or angmode == "r":
                 ang = inang
                 break
@@ -181,7 +181,7 @@ def from_polar():
                 print('Please enter a real number or expression, or "<" to exit')
                 continue
             while True:
-                angmode2 = input("Inputted in radians (r) or degrees (d): ")
+                angmode2 = input("Inputted in radians (r) or degrees (d)? ")
                 if angmode2 == "radians" or angmode2 == "rad" or angmode2 == "r":
                     ang2 = inang2
                     break
@@ -200,12 +200,12 @@ def from_polar():
                 res = cmath.polar(complex(a, b))
                 ares = res[1]
                 while True:
-                    unit = input("Output in radians (r) or degrees (d): ")
+                    unit = input("Output in radians (r) or degrees (d)? ")
                     if not(unit == "r" or unit == "radians" or unit == "rad" or unit == "d" or unit == "degrees" or unit == "deg"):
                         print('Please enter either "radians" (r) or "degrees" (d)')
                         continue
                     while True:
-                        angle = input("Output positive (p) or negative (n) angle: ")
+                        angle = input("Output positive (p) or negative (n) angle? ")
                         if not(angle == "positive" or angle == "p" or angle == "+" or angle == "pos" or angle == "-" or angle == "negative" or angle == "n" or angle == "neg"):
                             print('Please enter either "positive" (p) or "negative" (n)')
                         else:
@@ -240,12 +240,12 @@ def from_polar():
                 res = cmath.polar(complex(a, b) + complex(c, d))
                 ares = res[1]
                 while True:
-                    unit = input("Output in radians (r) or degrees (d): ")
+                    unit = input("Output in radians (r) or degrees (d)? ")
                     if not(unit == "r" or unit == "radians" or unit == "rad" or unit == "d" or unit == "degrees" or unit == "deg"):
                         print('Please enter either "radians" (r) or "degrees" (d)')
                         continue
                     while True:
-                        angle = input("Output positive (p) or negative (n) angle: ")
+                        angle = input("Output positive (p) or negative (n) angle? ")
                         if not(angle == "positive" or angle == "p" or angle == "+" or angle == "pos" or angle == "-" or angle == "negative" or angle == "n" or angle == "neg"):
                             print('Please enter either "positive" (p) or "negative" (n)')
                         else:
@@ -280,12 +280,12 @@ def from_polar():
                 res = cmath.polar(complex(a, b) - complex(c, d))
                 ares = res[1]
                 while True:
-                    unit = input("Output in radians (r) or degrees (d): ")
+                    unit = input("Output in radians (r) or degrees (d)? ")
                     if not(unit == "r" or unit == "radians" or unit == "rad" or unit == "d" or unit == "degrees" or unit == "deg"):
                         print('Please enter either "radians" (r) or "degrees" (d)')
                         continue
                     while True:
-                        angle = input("Output positive (p) or negative (n) angle: ")
+                        angle = input("Output positive (p) or negative (n) angle? ")
                         if not(angle == "positive" or angle == "p" or angle == "+" or angle == "pos" or angle == "-" or angle == "negative" or angle == "n" or angle == "neg"):
                             print('Please enter either "positive" (p) or "negative" (n)')
                         else:
@@ -320,12 +320,12 @@ def from_polar():
                 res = cmath.polar(complex(a, b) * complex(c, d))
                 ares = res[1]
                 while True:
-                    unit = input("Output in radians (r) or degrees (d): ")
+                    unit = input("Output in radians (r) or degrees (d)? ")
                     if not(unit == "r" or unit == "radians" or unit == "rad" or unit == "d" or unit == "degrees" or unit == "deg"):
                         print('Please enter either "radians" (r) or "degrees" (d)')
                         continue
                     while True:
-                        angle = input("Output positive (p) or negative (n) angle: ")
+                        angle = input("Output positive (p) or negative (n) angle? ")
                         if not(angle == "positive" or angle == "p" or angle == "+" or angle == "pos" or angle == "-" or angle == "negative" or angle == "n" or angle == "neg"):
                             print('Please enter either "positive" (p) or "negative" (n)')
                         else:
@@ -360,12 +360,12 @@ def from_polar():
                 res = cmath.polar(complex(a, b) / complex(c, d))
                 ares = res[1]
                 while True:
-                    unit = input("Output in radians (r) or degrees (d): ")
+                    unit = input("Output in radians (r) or degrees (d)? ")
                     if not(unit == "r" or unit == "radians" or unit == "rad" or unit == "d" or unit == "degrees" or unit == "deg"):
                         print('Please enter either "radians" (r) or "degrees" (d)')
                         continue
                     while True:
-                        angle = input("Output positive (p) or negative (n) angle: ")
+                        angle = input("Output positive (p) or negative (n) angle? ")
                         if not(angle == "positive" or angle == "p" or angle == "+" or angle == "pos" or angle == "-" or angle == "negative" or angle == "n" or angle == "neg"):
                             print('Please enter either "positive" (p) or "negative" (n)')
                         else:
@@ -400,12 +400,12 @@ def from_polar():
                 res = cmath.polar(complex(a, b) ** complex(c, d))
                 ares = res[1]
                 while True:
-                    unit = input("Output in radians (r) or degrees (d): ")
+                    unit = input("Output in radians (r) or degrees (d)? ")
                     if not(unit == "r" or unit == "radians" or unit == "rad" or unit == "d" or unit == "degrees" or unit == "deg"):
                         print('Please enter either "radians" (r) or "degrees" (d)')
                         continue
                     while True:
-                        angle = input("Output positive (p) or negative (n) angle: ")
+                        angle = input("Output positive (p) or negative (n) angle? ")
                         if not(angle == "positive" or angle == "p" or angle == "+" or angle == "pos" or angle == "-" or angle == "negative" or angle == "n" or angle == "neg"):
                             print('Please enter either "positive" (p) or "negative" (n)')
                         else:
@@ -458,9 +458,9 @@ def from_polar():
                     else:
                         print(f"Result: {round(res.real, 12)} - i")
                 real = res.real
-                print(f"real = {round(real, 12)}")
+                print(f"real (real part) = {round(real, 12)}")
                 imag = res.imag
-                print(f"imag = {round(imag, 12)}")                
+                print(f"imag (imaginary part) = {round(imag, 12)}")                
             else:
                 print('Please enter a valid operation ("i" for info and "<" to exit)')
         except:
@@ -602,9 +602,9 @@ def from_rectangular():
                 print()
                 print(f"Result: {cterm1}")
                 real = res.real
-                print(f"real = {round(real, 12)}")
+                print(f"real (real part) = {round(real, 12)}")
                 imag = res.imag
-                print(f"imag = {round(imag, 12)}")
+                print(f"imag (imaginary part) = {round(imag, 12)}")
             elif op == "+" or op == "add":
                 res = complex(a, b) + complex(c, d)
                 print()
@@ -628,9 +628,9 @@ def from_rectangular():
                     else:
                         print(f"Result: {round(res.real, 12)} - i")
                 real = res.real
-                print(f"real = {round(real, 12)}")
+                print(f"real (real part) = {round(real, 12)}")
                 imag = res.imag
-                print(f"imag = {round(imag, 12)}")
+                print(f"imag (imaginary part) = {round(imag, 12)}")
             elif op == "-" or op == "subtract" or op == "sub":
                 res = complex(a, b) - complex(c, d)
                 print()
@@ -654,9 +654,9 @@ def from_rectangular():
                     else:
                         print(f"Result: {round(res.real, 12)} - i")
                 real = res.real
-                print(f"real = {round(real, 12)}")
+                print(f"real (real part) = {round(real, 12)}")
                 imag = res.imag
-                print(f"imag = {round(imag, 12)}")
+                print(f"imag (imaginary part) = {round(imag, 12)}")
             elif op == "*" or op == "multiply" or op == "mul":
                 res = complex(a, b) * complex(c, d)
                 print()
@@ -680,9 +680,9 @@ def from_rectangular():
                     else:
                         print(f"Result: {round(res.real, 12)} - i")
                 real = res.real
-                print(f"real = {round(real, 12)}")
+                print(f"real (real part) = {round(real, 12)}")
                 imag = res.imag
-                print(f"imag = {round(imag, 12)}")
+                print(f"imag (imaginary part) = {round(imag, 12)}")
             elif op == "/" or op == "divide" or op == "div":
                 res = complex(a, b) / complex(c, d)
                 print()
@@ -706,9 +706,9 @@ def from_rectangular():
                     else:
                         print(f"Result: {round(res.real, 12)} - i")
                 real = res.real
-                print(f"real = {round(real, 12)}")
+                print(f"real (real part) = {round(real, 12)}")
                 imag = res.imag
-                print(f"imag = {round(imag, 12)}")
+                print(f"imag (imaginary part) = {round(imag, 12)}")
             elif op == "^" or op == "exponent" or op == "exp" or op == "**":
                 res = complex(a, b) ** complex(c, d)
                 print()
@@ -732,9 +732,9 @@ def from_rectangular():
                     else:
                         print(f"Result: {round(res.real, 12)} - i")
                 real = res.real
-                print(f"real = {round(real, 12)}")
+                print(f"real (real part) = {round(real, 12)}")
                 imag = res.imag
-                print(f"imag = {round(imag, 12)}")
+                print(f"imag (imaginary part) = {round(imag, 12)}")
             elif op == "abs" or op == "absolute value" or op == "magnitude" or op == "mag" or op == "||" or op == "modulus" or op == "mod":
                 mod = abs(complex(a, b))
                 print()
@@ -742,12 +742,12 @@ def from_rectangular():
             elif op == "angle" or op == "ang" or op == "phase" or op == "pha" or op == "argument" or op == "arg":
                 res = cmath.phase(a, b)
                 while True:
-                    unit = input("Output in radians (r) or degrees (d): ")
+                    unit = input("Output in radians (r) or degrees (d)? ")
                     if not(unit == "r" or unit == "radians" or unit == "rad" or unit == "d" or unit == "degrees" or unit == "deg"):
                         print('Please enter either "radians" (r) or "degrees" (d)')
                         continue
                     while True:
-                        angle = input("Output positive (p) or negative (n) angle: ")
+                        angle = input("Output positive (p) or negative (n) angle? ")
                         if not(angle == "positive" or angle == "p" or angle == "pos" or angle == "+" or angle == "-" or angle == "negative" or angle == "n" or angle == "neg"):
                             print('Please enter either "positive" (p) or "negative" (n)')
                         else:
@@ -780,12 +780,12 @@ def from_rectangular():
                 ares = res[1]
                 while True:
                     print()
-                    unit = input("Output in radians (r) or degrees (d): ")
+                    unit = input("Output in radians (r) or degrees (d)? ")
                     if not(unit == "r" or unit == "radians" or unit == "rad" or unit == "d" or unit == "degrees" or unit == "deg"):
                         print('Please enter either "radians" (r) or "degrees" (d)')
                         continue
                     while True:
-                        angle = input("Output positive (p) or negative (n) angle: ")
+                        angle = input("Output positive (p) or negative (n) angle? ")
                         if not(angle == "positive" or angle == "p" or angle == "+" or angle == "pos" or angle == "-" or angle == "negative" or angle == "n" or angle == "neg"):
                             print('Please enter either "positive" (p) or "negative" (n)')
                             print()
@@ -833,7 +833,7 @@ def real_operation():
     while True:
         clear_variables()
         print()
-        n = (input('First term (i for info): '))
+        n = input('First term (i for info): ')
         if n == "exit" or n == "<" or n == "exi":
             break
         elif n == "i" or n == "inf" or n == "info":
@@ -1049,7 +1049,7 @@ def real_operation():
                 print()
                 print(f"ans = {round(n, 12)}")             
             elif op == "sin" or op == "sine" or op == "cos" or op == "cosine" or op == "tangent" or op == "tan":
-                angle = input("Inputted in radians (r) or degrees (d): ")
+                angle = input("Inputted in radians (r) or degrees (d)? ")
                 if angle == "radians" or angle == "rad" or angle == "r":
                     n = n
                     go = True
@@ -1073,8 +1073,8 @@ def real_operation():
                         print()
                         print(f"ans = {round(n, 12)}")
             elif op == "asin" or op == "arcsine" or op == "inverse sine" or op == "inv sin" or op == "acos" or op == "arccosine" or op == "inverse cosine" or op == "inv cos" or op == "atan" or op == "arctangent" or op == "inverse tangent" or op == "inv tan" or op == "asi" or op == "aco" or op == "ata":
-                unit = input("Output in radians (r) or degrees (d): ")
-                quad = input("Output in default quadrant (yes/no): ")
+                unit = input("Output in radians (r) or degrees (d)? ")
+                quad = input("Output in default quadrant (yes/no)? ")
                 go = True
                 if op == "asin" or op == "asi" or op == "arcsine" or op == "inverse sine" or op == "inv sin":
                     if quad == "yes" or quad == "y":
@@ -1109,7 +1109,7 @@ def real_operation():
                             n = pi - atan(n)
                         elif unit == "degrees" or unit == "deg" or unit == "d":                            
                             n = 180 - degrees(atan(n))
-                angle = input("Output positive (p) or negative (n) angle: ")
+                angle = input("Output positive (p) or negative (n) angle? ")
                 if angle == "positive" or angle == "pos" or angle == "+" or angle == "p":
                     if unit == "radians" or unit == "rad" or unit == "r":
                         if round(n, 12) < 0:
@@ -1387,7 +1387,7 @@ while True:
                 except:
                     print('Please enter a real number or expression, "r" for real operation, or "<" to exit')
                     continue
-                bn = (input("Term index: "))
+                bn = input("Term index: ")
                 if bn == "<" or bn == "exit" or bn == "exi":
                     continue     
                 elif bn == "ans":
@@ -1401,9 +1401,9 @@ while True:
                     print('Please enter a positive integer or "<" to exit')
                     continue
                 print()
-                atype = input("Enter common difference (d) or another term (t): ")
+                atype = input("Enter common difference (d) or another term (t)? ")
                 if atype == "t" or atype == "term" or atype == "ter" or atype == "another term" or atype == "ano ter":
-                    c = (input("Term 2: "))
+                    c = input("Term 2: ")
                     if c == "<" or c == "exit" or c == "exi":
                         continue
                     try:
@@ -1411,7 +1411,7 @@ while True:
                     except:
                         print('Please enter a real number or expression, or "<" to exit')
                         continue
-                    cn = (input("Term 2 index: "))
+                    cn = input("Term 2 index: ")
                     if cn == "<" or cn == "exit" or cn == "exi":
                         continue     
                     elif cn == "ans":
@@ -1445,19 +1445,48 @@ while True:
                     print('Please enter either "difference" (d), "term" (t), or "<" to exit')
                     continue
                 print()
-                n = (input("Number of terms to sum (> to skip): "))
-                if n == "<" or n == "exit" or n == "exi":
-                    continue     
-                elif n == "ans":
-                    n = ans
-                elif n != ">" and n != "skip" and n != "ski":
-                    try:
-                        n = int(n)
-                    except:
-                        print('Please enter a positive integer, ">" to skip, or "<" to exit')
+                if comdif != 0:
+                    asumtype = input("Enter number of terms to sum (n) or last term (l) (> to skip)? ")
+                else:
+                    asumtype = "n"
+                if asumtype == "n" or asumtype == "number of terms to sum" or asumtype == "num" or asumtype == "number":
+                    if comdif != 0:
+                        n = input("Number of terms: ")
+                    else:
+                        n = input("Number of terms to sum (> to skip): ")
+                    if comdif != 0 or (n != ">" and n != "skip" and n != "ski"):
+                        if n == "<" or n == "exit" or n == "exi":
+                            continue     
+                        elif n == "ans":
+                            n = ans
+                        try:
+                            n = int(n)
+                        except:
+                            print('Please enter a positive integer or "<" to exit')
+                            continue
+                        if n <= 0:
+                            print('Please enter a positive integer or "<" to exit')
+                            continue
+                elif asumtype == "l" or asumtype == "las" or asumtype == "last" or asumtype == "last term" or asumtype == "las ter":
+                    l = input("Last term: ")
+                    if l == "<" or l == "exit" or l == "exi":
                         continue
-                    if n <= 0:
-                        print('Please enter a positive integer, ">" to skip, or "<" to exit')
+                    try:
+                        l = eval(l)
+                    except:
+                        print('Please enter a real number or expression, or "<" to exit')
+                        print()
+                        continue
+                    if l == a:
+                        print("The last term cannot equal the first term")
+                        print("If the common difference is 0, enter a number of terms to sum instead")
+                        print()
+                        continue
+                    n = (l - a) / comdif + 1
+                    if round(n) != round (n, 12) or n <= 0:
+                        print("The entered term is not a term of the series")
+                        print("Please enter a different first term, common difference, or last term")
+                        print()
                         continue
                 while True:
                     un = input('Index of terms to find (i for info, > to skip): ')
@@ -1523,7 +1552,7 @@ while True:
                     print()
                 dif = comdif
                 print(f"dif (common difference) = {round(dif, 12)}")
-                if n != ">" and n != "skip" and n != "ski":
+                if n != ">" and n != "skip" and n != "ski" and asumtype != "skip" and asumtype != ">" and asumtype != "ski":
                     sum = (2 * a + comdif * (n - 1)) * n / 2
                     if round(sum, 12) == 0:
                         sum = 0.0
@@ -1546,7 +1575,7 @@ while True:
                 if round(b, 12) == 0:
                     print('Please enter a nonzero real number or expression, "r" for real operation, or "<" to exit')
                     continue
-                bn = (input("Term index: "))
+                bn = input("Term index: ")
                 if bn == "<" or bn == "exit" or bn == "exi":
                     continue     
                 elif bn == "ans":
@@ -1560,9 +1589,9 @@ while True:
                     print('Please enter a positive integer or "<" to exit')
                     continue
                 print()
-                gtype = input("Enter common ratio (r) or another term (t): ")
+                gtype = input("Enter common ratio (r) or another term (t)? ")
                 if gtype == "t" or gtype == "term" or gtype == "ter" or gtype == "another term" or gtype == "ano ter":
-                    c = (input("Term 2: "))
+                    c = input("Term 2: ")
                     if c == "<" or c == "exit" or c == "exi":
                         continue
                     try:
@@ -1573,7 +1602,7 @@ while True:
                     if round(c, 12) == 0:
                         print('Please enter a nonzero real number or expression, or "<" to exit')
                         continue
-                    cn = (input("Term 2 index: "))
+                    cn = input("Term 2 index: ")
                     if cn == "<" or cn == "exit" or cn == "exi":
                         continue     
                     elif cn == "ans":
@@ -1610,7 +1639,7 @@ while True:
                     print('Please enter either "ratio" (r), "term" (t), or "<" to exit')
                     continue
                 print()
-                n = (input("Number of terms to sum (inf for infinity, > to skip): "))
+                n = input("Number of terms to sum (inf for infinity, > to skip): ")
                 if n == "<" or n == "exit" or n == "exi":
                     continue     
                 elif n == "ans":
@@ -1736,7 +1765,7 @@ while True:
             except:
                 print('Please enter a non-numeric variable name or "<" to exit')
                 continue
-            a = (input('a: '))
+            a = input('a: ')
             if a == "<" or a == "exit" or a == "exi":
                 break
             try:
@@ -1744,7 +1773,7 @@ while True:
             except:
                 print('Please enter a real number or expression, or "<" to exit')
                 continue
-            b = (input('b: '))
+            b = input('b: ')
             if b == "<" or b == "exit" or b == "exi":
                 continue
             try:
@@ -1752,7 +1781,7 @@ while True:
             except:
                 print('Please enter a real number or expression, or "<" to exit')
                 continue            
-            c = (input('c: '))   
+            c = input('c: ')   
             if c == "<" or c == "exit" or c == "exi":
                 continue
             try:
@@ -1766,7 +1795,7 @@ while True:
             elif round(a, 12) == 0 and round(b, 12) == 0:
                 print("No solution")
             elif round(a, 12) == 0:
-                sol = (-c / b)
+                sol = -c / b
                 print("Solution: " + x + f" = {round(sol, 12)}")
                 print(f"sol = {round(sol, 12)}")
             else:
@@ -1802,11 +1831,11 @@ while True:
                         else:
                             print("Solution: " + x + f" = {round(rl, 12)} + i or " + x + f" = {round(rl, 12)} - i")
                     real = rl
-                    print(f"real = {round(real, 12)}")
+                    print(f"real (real part) = {round(real, 12)}")
                     imag = im * -1
-                    print(f"imag = {round(imag, 12)}")
+                    print(f"imag (imaginary part) = {round(imag, 12)}")
                     imag2 = im
-                    print(f"imag2 = {round(imag2, 12)}")
+                    print(f"imag2 (2nd imaginary part) = {round(imag2, 12)}")
 
     elif cat == "operation" or cat == "ope" or cat == "o":
         opetype = input('Operation type (real (r), complex (c), matrix (m)): ')
