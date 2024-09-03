@@ -27,8 +27,10 @@ global root2
 root2 = 0.0
 global binsum
 binsum = ""
+global index
+index = 0.0
 global keeps
-keeps = ["ans", "pi", "e", "tau", "inf", "nan", "infj", "nanj", "keeps", "real", "imag", "imag2", "mod", "ang", "sum", "rat", "root", "root2", "binsum", "dif"]
+keeps = ["ans", "pi", "e", "tau", "inf", "nan", "infj", "nanj", "keeps", "real", "imag", "imag2", "mod", "ang", "sum", "rat", "root", "root2", "binsum", "dif", "index"]
 
 def clear_variables():
     for var in list(globals()):
@@ -1385,6 +1387,7 @@ def binomial_expansion():
 def arithmetic():
     global dif
     global sum
+    global index
     print()
     print("Please enter one of the arithmetic series terms and its index")
     while True:
@@ -1574,6 +1577,9 @@ def arithmetic():
                 unindex += 1
         else:
             print()
+        if asumtype == "l" or asumtype == "las" or asumtype == "last" or asumtype == "last term" or asumtype == "las ter":
+            index = n
+            print(f"index (of last term) = {round(index, 12)}")
         dif = comdif
         print(f"dif (common difference) = {round(dif, 12)}")
         if n != ">" and n != "skip" and n != "ski" and asumtype != "skip" and asumtype != ">" and asumtype != "ski":
@@ -1585,6 +1591,7 @@ def arithmetic():
 def geometric():
     global rat
     global sum
+    global index
     print()
     print("Please enter one of the geometric series terms and its index")
     while True:
@@ -1789,12 +1796,15 @@ def geometric():
                 else:
                     print('Term Error: please enter ranges in the form "x-y", where x and y are both positive integers and y is greater than x (enter "i" for info, ">" to skip, and "<" to exit)')
                 unindex += 1
+        else:
+            print()
+        if gsumtype == "l" or gsumtype == "las" or gsumtype == "last" or gsumtype == "last term" or gsumtype == "las ter":
+            index = n
+            print(f"index (of last term) = {round(index, 12)}")
         if round(b, 12) != round(c, 12):
-            if un == ">" or un == "skip" or un == "ski":
-                print()
             rat = comrat
             print(f"rat (common ratio) = {round(rat, 12)}")
-            if n != ">" and n != "skip" and n != "ski":
+            if n != ">" and n != "skip" and n != "ski" and gsumtype != "skip" and gsumtype != ">" and gsumtype != "ski":
                 if n != "infinity" and n != "inf":
                     sum = a * (1 - comrat ** n) / (1 - comrat)
                 else:
@@ -1802,9 +1812,7 @@ def geometric():
                 if round(sum, 12) == 0:
                     sum = 0.0
                 print(f"sum = {round(sum, 12)}")
-        elif round(b, 12) == round(c, 12):
-            if un == ">" or un == "skip" or un == "ski" and gsumtype != "skip" and gsumtype != ">" and gsumtype != "ski":
-                print()
+        else:
             rat = 1.0
             print(f"rat (common ratio) = 1.0")
             if n != ">" and n != "skip" and n != "ski" and gsumtype != "skip" and gsumtype != ">" and gsumtype != "ski":
