@@ -1433,7 +1433,7 @@ def arithmetic():
         print()
         atype = input("Enter common difference (d) or another term (t)? ")
         if atype == "t" or atype == "term" or atype == "ter" or atype == "another term" or atype == "ano ter":
-            c = input("Term 2: ")
+            c = input("Next term: ")
             if c == "<" or c == "exit" or c == "exi":
                 continue
             try:
@@ -1441,7 +1441,7 @@ def arithmetic():
             except:
                 print('Please enter a real number or expression, or "<" to exit')
                 continue
-            cn = input("Term 2 index: ")
+            cn = input("Term index: ")
             if cn == "<" or cn == "exit" or cn == "exi":
                 continue     
             elif cn == "ans":
@@ -1515,6 +1515,7 @@ def arithmetic():
                 continue
         else:
             print('Please enter "n" for number of terms to sum, "l" for last term, or ">" to skip')
+            continue
         while True:
             un = input('Index of terms to find (i for info, > to skip): ')
             if un == "i" or un == "info" or un == "inf":
@@ -1640,7 +1641,7 @@ def geometric():
         print()
         gtype = input("Enter common ratio (r) or another term (t)? ")
         if gtype == "t" or gtype == "term" or gtype == "ter" or gtype == "another term" or gtype == "ano ter":
-            c = input("Term 2: ")
+            c = input("Next term: ")
             if c == "<" or c == "exit" or c == "exi":
                 continue
             try:
@@ -1651,7 +1652,7 @@ def geometric():
             if round(c, 12) == 0:
                 print('Please enter a nonzero real number or expression, or "<" to exit')
                 continue
-            cn = input("Term 2 index: ")
+            cn = input("Term index: ")
             if cn == "<" or cn == "exit" or cn == "exi":
                 continue     
             elif cn == "ans":
@@ -1741,6 +1742,7 @@ def geometric():
                 continue
         else:
             print('Please enter "n" for number of terms to sum, "l" for last term, or ">" to skip')
+            continue
         while True:
             un = input('Index of terms to find (i for info, > to skip): ')
             if un == "i" or un == "info" or un == "inf":
