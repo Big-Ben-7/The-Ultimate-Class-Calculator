@@ -1619,10 +1619,10 @@ def geometric():
         try:
             b = eval(b)
         except:
-            print('Please enter a nonzero real number or expression, "b" for binomial expansion, "a" for arithmetic series, "o" for operation, "f" for function, or "<" to exit')
+            print('Please enter a nonzero real number or expression, "b" for binomial expansion, "a" for arithmetic series, "o" for operation, "f" for function, "i" for info, or "<" to exit')
             continue
         if round(b, 12) == 0:
-            print('Please enter a nonzero real number or expression, "b" for binomial expansion, "a" for arithmetic series, "o" for operation, "f" for function, or "<" to exit')
+            print('Please enter a nonzero real number or expression, "b" for binomial expansion, "a" for arithmetic series, "o" for operation, "f" for function, "i" for info, or "<" to exit')
             continue
         bn = input("Term index: ")
         if bn == "<" or bn == "exit" or bn == "exi":
@@ -1663,6 +1663,12 @@ def geometric():
                 continue
             if bn < cn:
                 comrat = (c / b) ** (1/(cn - bn))
+                if (cn - bn) % 2 == 0:
+                    ratsign = input("Use positive (p) or negative (n) common ratio? ")
+                    if ratsign == "negative" or ratsign == "neg" or ratsign == "n" or ratsign == "-":
+                        comrat *= -1
+                    elif ratsign != "positive" and ratsign != "pos" and ratsign != "p" and ratsign != "+":
+                        print('Please enter either "p" for positive or "n" for negative')
             else:
                 print("The index of term 2 must be greater than the index of term 1")
                 continue
@@ -1694,11 +1700,10 @@ def geometric():
             gsumtype = "n"
         if gsumtype == "n" or gsumtype == "number of terms to sum" or gsumtype == "num" or gsumtype == "number":
             if comrat != 1:
-                n = input("Number of terms: ")
-            else:
-                n = input("Number of terms to sum (> to skip): ")
-            if comrat != 1 or (n != ">" and n != "skip" and n != "ski"):
                 n = input("Number of terms (inf for infinity): ")
+            else:
+                n = input("Number of terms to sum (inf for infinity, > to skip): ")
+            if comrat != 1 or (n != ">" and n != "skip" and n != "ski"):
                 if n == "<" or n == "exit" or n == "exi":
                     continue     
                 elif n == "ans":
