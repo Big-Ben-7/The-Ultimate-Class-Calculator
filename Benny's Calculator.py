@@ -1513,7 +1513,7 @@ def arithmetic():
             if round(n) != round (n, 12) or n <= 0:
                 print("The entered term is not a term of the series: please enter different terms")
                 continue
-        else:
+        elif not(asumtype == ">" or asumtype == "skip" or asumtype == "ski"):
             print('Please enter "n" for number of terms to sum, "l" for last term, or ">" to skip')
             continue
         while True:
@@ -1740,7 +1740,7 @@ def geometric():
             if round(n) != round (n, 12) or n <= 0:
                 print("The entered term is not a term of the series: please enter different terms")
                 continue
-        else:
+        elif not(gsumtype == ">" or gsumtype == "skip" or gsumtype == "ski"):
             print('Please enter "n" for number of terms to sum, "l" for last term, or ">" to skip')
             continue
         while True:
