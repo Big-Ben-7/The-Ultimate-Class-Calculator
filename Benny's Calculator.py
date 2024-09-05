@@ -2,7 +2,6 @@
 from math import *
 import cmath
 import types
-
 global ans
 ans = 0.0
 global real
@@ -84,11 +83,12 @@ def from_polar():
     global ang
     global mod
     print()
+    print("Welcome to complex operations in polar form!")
     print("Please enter the modulus/absolute value and angle/argument of the terms")
     while True:
         clear_variables()
         print()
-        av = input("Term 1 modulus/absolute value (i for info): ")
+        av = input("Term 1 modulus/absolute value (i): ")
         if av == "<" or av == "exit" or av == "exi":
             break
         elif av == "i" or av == "info" or av == "inf":
@@ -156,7 +156,7 @@ def from_polar():
         print("First term: " + cterm1)
         while True:
             print()
-            op = input("Operation (i for info): ")
+            op = input("Operation (i): ")
             if op == "info" or op == "i" or op == "inf":
                 print()
                 print('The following operations can be entered: equals (=), add (+), subtract (-), multiply (*), divide (/), exponent (^), rectangular (rec)')
@@ -489,11 +489,12 @@ def from_rectangular():
     global ang
     global mod
     print()
+    print("Welcome to complex operations in rectangular form!")
     print("Please enter the first term in the form a + bi and the second term (if needed) in the form c + di")               
     while True:
         clear_variables()
         print()
-        a = input("a (i for info): ")
+        a = input("a (i): ")
         if a == "<" or a == "exit" or a == "exi":
             break
         elif a == "i" or a == "info" or a == "inf":
@@ -564,7 +565,7 @@ def from_rectangular():
         print("First term: " + cterm1)
         while True:
             print()
-            op = input("Operation (i for info): ")
+            op = input("Operation (i): ")
             if op == "info" or op == "i" or op == "inf":
                 print()
                 print('The following operations can be entered: equals (=), add (+), subtract (-), multiply (*), divide (/), exponent (^), absolute value or modulus (||), angle or argument (ang), polar (pol)')
@@ -851,11 +852,11 @@ def from_rectangular():
 def real_operation():
     global ans
     print()
-    print("Please enter the first real operation term")
+    print("Welcome to real operations!")
     while True:
         clear_variables()
         print()
-        n = input('First term (i for info): ')
+        n = input('First term (i): ')
         if n == "exit" or n == "<" or n == "exi":
             break
         elif n == "i" or n == "inf" or n == "info":
@@ -895,7 +896,7 @@ def real_operation():
                 print('Please enter a real number or expression, "c" for complex operation, "m" for matrix operation, "f" for function, "s" for summation, "i" for info, or "<" to exit')
                 continue
             while True:
-                op = input('Operation (i for info): ')
+                op = input('Operation (i): ')
                 if op == "info" or op == "i" or op == "inf":
                     print()
                     print("The following operations can be entered:")
@@ -1009,7 +1010,7 @@ def real_operation():
                 print(f"ans = {round(n, 12)}")
             elif op == "store" or op == "sto":
                 while True:
-                    vname = input("Variable name (i for info): ")
+                    vname = input("Variable name (i): ")
                     if vname == "<" or vname == "exit" or vname == "exi":
                         break
                     try:
@@ -1196,12 +1197,13 @@ def real_operation():
 def binomial_expansion():
     global binsum
     print()
+    print("Welcome to binomial expansion!")
     print("Please enter the binomial in the form (ax^b + cy^d) ^ n, where x and y are non-numeric variable names without spaces, a, b, and c are not equal to 0, and n is an integer")
     while True:
         clear_variables()
         binsum = ""
         print()
-        a = input("a (i for info): ")
+        a = input("a (i): ")
         if a == "<" or a == "exit" or a == "exi":
             break
         elif a == "o" or a == "ope" or a == "operation":
@@ -1229,7 +1231,7 @@ def binomial_expansion():
             print('Please enter a nonzero real number or expression, "a" for arithmetic series, "g" for geometric series, "o" for operation, "f" for function, "i" for info, or "<" to exit')
             continue
         while True:
-            x = input("x (i for info): ")
+            x = input("x (i): ")
             if x == "exit" or x == "exi" or x == "<":
                 break
             try:
@@ -1270,7 +1272,7 @@ def binomial_expansion():
             print('Please enter a nonzero real number or expression, or "<" to exit')
             continue
         while True:
-            y = input("y (i for info, > to skip): ")
+            y = input("y (i, >): ")
             if y == "exit" or y == "exi" or y == "<":
                 break
             try:
@@ -1315,7 +1317,7 @@ def binomial_expansion():
             continue
         while True:
             print()
-            un = input(f"Index of terms to find/sum (1-{abs(n)+1} for all, i for info): ")
+            un = input(f"Index of terms to find/sum (1-{abs(n)+1} for all, i): ")
             if un == "i" or un == "info" or un == "inf":
                 print()
                 print("Please enter a list of exponents seperated by commas and using dashes to indicate ranges:")
@@ -1389,11 +1391,11 @@ def arithmetic():
     global sum
     global index
     print()
-    print("Please enter one of the arithmetic series terms and its index")
+    print("Welcome to arithmetic series!")
     while True:
         clear_variables()
         print()
-        b = input("Term (i for info): ")
+        b = input("Term (i): ")
         if b == "<" or b == "exit" or b == "exi":
             break
         elif b == "o" or b == "ope" or b == "operation":
@@ -1476,14 +1478,14 @@ def arithmetic():
             continue
         print()
         if comdif != 0:
-            asumtype = input("Enter number of terms to sum (n) or last term (l) (> to skip)? ")
+            asumtype = input("Enter number of terms to sum (n) or last term (l) (>)? ")
         else:
             asumtype = "n"
         if asumtype == "n" or asumtype == "number of terms to sum" or asumtype == "num" or asumtype == "number":
             if comdif != 0:
                 n = input("Number of terms: ")
             else:
-                n = input("Number of terms to sum (> to skip): ")
+                n = input("Number of terms to sum (>): ")
             if comdif != 0 or (n != ">" and n != "skip" and n != "ski"):
                 if n == "<" or n == "exit" or n == "exi":
                     continue     
@@ -1517,7 +1519,7 @@ def arithmetic():
             print('Please enter "n" for number of terms to sum, "l" for last term, or ">" to skip')
             continue
         while True:
-            un = input('Index of terms to find (i for info, > to skip): ')
+            un = input('Index of terms to find (i, >): ')
             if un == "i" or un == "info" or un == "inf":
                 print()
                 print("Please enter a list of indexes seperated by commas and using dashes to indicate ranges:")
@@ -1594,11 +1596,11 @@ def geometric():
     global sum
     global index
     print()
-    print("Please enter one of the geometric series terms and its index")
+    print("Welcome to geometric series!")
     while True:
         clear_variables()
         print()
-        b = input("Term (i for info): ")
+        b = input("Term (i): ")
         if b == "<" or b == "exit" or b == "exi":
             break
         elif b == "o" or b == "ope" or b == "operation":
@@ -1696,14 +1698,14 @@ def geometric():
             continue
         print()
         if comrat != 1:
-            gsumtype = input("Enter number of terms to sum (n) or last term (l) (> to skip)? ")
+            gsumtype = input("Enter number of terms to sum (n) or last term (l) (>)? ")
         else:
             gsumtype = "n"
         if gsumtype == "n" or gsumtype == "number of terms to sum" or gsumtype == "num" or gsumtype == "number":
             if comrat != 1:
                 n = input("Number of terms (inf for infinity): ")
             else:
-                n = input("Number of terms to sum (inf for infinity, > to skip): ")
+                n = input("Number of terms to sum (inf for infinity, >): ")
             if comrat != 1 or (n != ">" and n != "skip" and n != "ski"):
                 if n == "<" or n == "exit" or n == "exi":
                     continue     
@@ -1744,7 +1746,7 @@ def geometric():
             print('Please enter "n" for number of terms to sum, "l" for last term, or ">" to skip')
             continue
         while True:
-            un = input('Index of terms to find (i for info, > to skip): ')
+            un = input('Index of terms to find (i, >): ')
             if un == "i" or un == "info" or un == "inf":
                 print()
                 print("Please enter a list of indexes seperated by commas and using dashes to indicate ranges:")
@@ -1833,11 +1835,12 @@ def polynomial():
     global imag2
     global real
     print()
+    print("Welcome to polymial function!")
     print("Please enter the equation in the form ax^2 + bx + c = 0, where x is a non-numeric variable name")
     while True:
         clear_variables()
         print()
-        a = input('a (i for info): ')
+        a = input('a (i): ')
         if a == "<" or a == "exit" or a == "exi":
             break
         elif a == "o" or a == "ope" or a == "operation":
@@ -1849,18 +1852,18 @@ def polynomial():
         elif a == "c" or a == "con" or a == "conic" or a == "conic section":
             conic_section()
             break
-        elif a == "sys" or a == "sy" or a == "system" or a == "system of equations":
+        elif a == "sys" or a == "s" or a == "system" or a == "system of equations":
             system()
             break
         elif a == "info" or a == "inf" or a == "i":
             print()
             print("Please enter a real number or expression as the x^2 coefficient")
-            print('Enter "sy" for system of equations, "c" for conic section, "o" for operation (this will direct to real operation) and "s" for summation (this will direct to binomial expansion)')
+            print('Enter "s" for system of equations, "c" for conic section, and "o" for operation (this will direct to real operation)')
             continue
         try:
             a = eval(a)
         except:
-            print('Please enter a real number or expression, "sy" for system, "c" for conic, "o" for operation, "s" for summation, "i" for info, or "<" to exit')
+            print('Please enter a real number or expression, "sy" for system, "c" for conic, "o" for operation, "i" for info, or "<" to exit')
             continue
         b = input('b: ')
         if b == "<" or b == "exit" or b == "exi":
@@ -1927,55 +1930,37 @@ def polynomial():
                 print(f"imag2 (2nd imaginary part) = {round(imag2, 12)}")
 
 def conic_section():
-    print("In development!")
+    print()
+    print("Welcome to conic sections!")
 
 def matrix_operation():
-    print("In development!")
+    print("Welcome to matrix operation!")
 
 def system():
-    print("In development!")
+    print("Welcome to system of equations!")
 
 print("Welcome to Benny's Calculator!")
 
 while True:
     clear_variables()
     print()
-    cat = input('Calculation category (i for info): ')
+    cat = input('Calculation category (operation (o) or function (f)): ')
     
     if cat == "exit" or cat == "<" or cat == "exi":
         break
-        
-    elif cat == "info" or cat == "i" or cat == "inf":
-        print()
-        print('Categories: operation (o), function (f), summation (s)')
-        print()
-        
-    elif cat == "summation" or cat == "sum" or cat == "s":
-        sumtype = input('Summation type (binomial (b), arithmetic (a), geometric (g)): ')
-        if sumtype == "<" or sumtype == "exit" or sumtype == "exi":
-            continue
-        elif sumtype == "b" or sumtype == "binomial" or sumtype == "bin" or sumtype == "binomial expansion":
-            binomial_expansion()
-        elif sumtype == "a" or sumtype == "arithmetic" or sumtype == "ari" or sumtype == "arithmetic series":
-            arithmetic()
-        elif sumtype == "geometric" or sumtype == "geo" or sumtype == "g" or sumtype == "geometric series":
-            geometric()
-        else:
-            print('Please enter either "binomial" (b), "arithmetic" (a), "geometric" (g), or "<" to exit')
-        
+
     elif cat == "f" or cat == "fun" or cat == "function":
         funtype = input("Function type (polynomial (p), system (s), conic (c))")
         if funtype == "polynomial" or funtype == "p" or funtype == "pol":
             polynomial()
 
     elif cat == "operation" or cat == "ope" or cat == "o":
-        opetype = input('Operation type (real (r), complex (c), matrix (m)): ')
+        opetype = input('Operation type (real (r), complex (c), matrix (m), summation (s)): ')
         if opetype == "<" or opetype == "exit" or opetype == "exi":
             continue
         elif opetype == "real" or opetype == "rea" or opetype == "r":
             real_operation()
         elif opetype == "c" or opetype == "complex" or opetype == "com":
-            print()
             ctype = input("From rectangular (r) or polar (p) form: ")
             if ctype == "rectangular" or ctype == "r" or ctype == "rect":
                 from_rectangular()
@@ -1987,11 +1972,23 @@ while True:
                 print('Please enter either "r" for rectangular, "p" for polar, or "<" to exit')
         elif opetype == "m" or opetype == "mat" or opetype == "matrix":
             matrix_operation()
+        elif opetype == "summation" or opetype == "sum" or opetype == "s":
+            sumtype = input('Summation type (binomial (b), arithmetic (a), geometric (g)): ')
+            if sumtype == "<" or sumtype == "exit" or sumtype == "exi":
+                continue
+            elif sumtype == "b" or sumtype == "binomial" or sumtype == "bin" or sumtype == "binomial expansion":
+                binomial_expansion()
+            elif sumtype == "a" or sumtype == "arithmetic" or sumtype == "ari" or sumtype == "arithmetic series":
+                arithmetic()
+            elif sumtype == "geometric" or sumtype == "geo" or sumtype == "g" or sumtype == "geometric series":
+                geometric()
+            else:
+                print('Please enter either "binomial" (b), "arithmetic" (a), "geometric" (g), or "<" to exit')
         else:
-            print('Please enter either "r" for real, "c" for complex, "m" for matrix, or "<" to exit')
+            print('Please enter either "r" for real, "c" for complex, "m" for matrix, "s" for summation, or "<" to exit')
     
     else:
-        print('Please enter either "o" for operation, "f" for function, "s" for summation, "i" for info, or "<" to exit)')
+        print('Please enter either "o" for operation, "f" for function, or "<" to exit)')
 
 # %% [markdown]
 # 
