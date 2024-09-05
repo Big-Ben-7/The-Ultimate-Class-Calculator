@@ -1432,9 +1432,10 @@ def arithmetic():
         if bn < 1:
             print('Please enter a positive integer or "<" to exit')
             continue
-        print()
-        atype = input("Enter common difference (d) or another term (t)? ")
-        if atype == "t" or atype == "term" or atype == "ter" or atype == "another term" or atype == "ano ter":
+        comdif = input("Common difference (t to enter term): ")
+        if comdif == "<" or comdif == "exit" or comdif == "exi":
+            continue
+        elif comdif == "t" or comdif == "ter" or comdif == "term":
             c = input("Next term: ")
             if c == "<" or c == "exit" or c == "exi":
                 continue
@@ -1459,65 +1460,46 @@ def arithmetic():
                 print("The index of term 2 must be greater than the index of term 1")
                 continue
             a = b - comdif * (bn - 1)
-        elif atype == "common difference" or atype == "dif" or atype == "d" or atype == "difference" or atype == "com dif":
-            comdif = input("Common difference: ")
-            if comdif == "<" or comdif == "exit" or comdif == "exi":
-                continue
+        else:
             try:
                 comdif = eval(comdif)
             except:
                 print('Please enter a real number or expression, or "<" to exit')
                 continue
-            cn = bn + 1
-            c = b + comdif
-            a = b - comdif * (bn - 1)
-        elif atype == "<" or atype == "exit" or atype == "exi":
-            continue
-        else:
-            print('Please enter either "d" for difference, "t" for term, or "<" to exit')
-            continue
+        cn = bn + 1
+        c = b + comdif
+        a = b - comdif * (bn - 1)
         print()
-        if comdif != 0:
-            asumtype = input("Enter number of terms to sum (n) or last term (l) (>)? ")
-        else:
-            asumtype = "n"
-        if asumtype == "n" or asumtype == "number of terms to sum" or asumtype == "num" or asumtype == "number":
-            if comdif != 0:
-                n = input("Number of terms: ")
-            else:
-                n = input("Number of terms to sum (>): ")
-            if comdif != 0 or (n != ">" and n != "skip" and n != "ski"):
-                if n == "<" or n == "exit" or n == "exi":
-                    continue     
-                elif n == "ans":
-                    n = ans
-                try:
-                    n = int(n)
-                except:
-                    print('Please enter a positive integer or "<" to exit')
+        n = input("Number of terms (l to enter last term, >): ")
+        if n != ">" and n != "skip" and n != "ski":
+            if n == "<" or n == "exit" or n == "exi":
+                continue     
+            elif n == "ans":
+                n = ans
+            elif n == "l" or n == "las" or n == "las ter" or n == "last term" or n == "last":
+                 l = input("Last term: ")
+                 if l == "<" or l == "exit" or l == "exi":
                     continue
-                if n <= 0:
-                    print('Please enter a positive integer or "<" to exit')
+                 try:
+                    l = eval(l)
+                 except:
+                    print('Please enter a real number or expression, or "<" to exit')
                     continue
-        elif asumtype == "l" or asumtype == "las" or asumtype == "last" or asumtype == "last term" or asumtype == "las ter":
-            l = input("Last term: ")
-            if l == "<" or l == "exit" or l == "exi":
-                continue
+                 if l == a or comdif == 0:
+                    print("If the common difference is 0, enter a number of terms to sum instead")
+                    continue
+                 n = (l - a) / comdif + 1
+                 if round(n) != round (n, 12) or n <= 0:
+                    print("The entered term is not a term of the series. Please enter different terms")
+                    continue
             try:
-                l = eval(l)
+                n = int(n)
             except:
-                print('Please enter a real number or expression, or "<" to exit')
+                print('Please enter a positive integer or "<" to exit')
                 continue
-            if l == a:
-                print("If the common difference is 0, enter a number of terms to sum instead")
+            if n <= 0:
+                print('Please enter a positive integer or "<" to exit')
                 continue
-            n = (l - a) / comdif + 1
-            if round(n) != round (n, 12) or n <= 0:
-                print("The entered term is not a term of the series: please enter different terms")
-                continue
-        elif not(asumtype == ">" or asumtype == "skip" or asumtype == "ski"):
-            print('Please enter "n" for number of terms to sum, "l" for last term, or ">" to skip')
-            continue
         while True:
             un = input('Index of terms to find (i, >): ')
             if un == "i" or un == "info" or un == "inf":
@@ -1580,12 +1562,9 @@ def arithmetic():
                 unindex += 1
         else:
             print()
-        if asumtype == "l" or asumtype == "las" or asumtype == "last" or asumtype == "last term" or asumtype == "las ter":
-            index = n
-            print(f"index (of last term) = {round(index, 12)}")
         dif = comdif
         print(f"dif (common difference) = {round(dif, 12)}")
-        if n != ">" and n != "skip" and n != "ski" and asumtype != "skip" and asumtype != ">" and asumtype != "ski":
+        if n != ">" and n != "skip" and n != "ski":
             sum = (2 * a + comdif * (n - 1)) * n / 2
             if round(sum, 12) == 0:
                 sum = 0.0
@@ -1640,9 +1619,10 @@ def geometric():
         if bn < 1:
             print('Please enter a positive integer or "<" to exit')
             continue
-        print()
-        gtype = input("Enter common ratio (r) or another term (t)? ")
-        if gtype == "t" or gtype == "term" or gtype == "ter" or gtype == "another term" or gtype == "ano ter":
+        comrat = input("Common ratio (t to enter term): ")
+        if comrat == "<" or comrat == "exit" or comrat == "exi":
+            continue
+        elif comrat == "t" or comrat == "term" or comrat == "ter":
             c = input("Next term: ")
             if c == "<" or c == "exit" or c == "exi":
                 continue
@@ -1675,11 +1655,7 @@ def geometric():
             else:
                 print("The index of term 2 must be greater than the index of term 1")
                 continue
-            a = b / comrat ** (bn - 1)
-        elif gtype == "common ratio" or gtype == "rat" or gtype == "r" or gtype == "ratio" or gtype == "com rat":
-            comrat = input("Common ratio: ")
-            if comrat == "<" or comrat == "exit" or comrat == "exi":
-                continue
+        else:
             try:
                 comrat = eval(comrat)
             except:
@@ -1688,63 +1664,49 @@ def geometric():
             if round(comrat, 12) == 0:
                 print('Please enter a nonzero real number or expression, or "<" to exit')
                 continue
-            cn = bn + 1
-            c = b * comrat
-            a = b / comrat ** (bn - 1)
-        elif gtype == "<" or gtype == "exit" or gtype == "exi":
-            continue
-        else:
-            print('Please enter either "r" for ratio, "t" for term, or "<" to exit')
-            continue
+        cn = bn + 1
+        c = b * comrat
+        a = b / comrat ** (bn - 1)
+        a = b / comrat ** (bn - 1)
         print()
-        if comrat != 1:
-            gsumtype = input("Enter number of terms to sum (n) or last term (l) (>)? ")
-        else:
-            gsumtype = "n"
-        if gsumtype == "n" or gsumtype == "number of terms to sum" or gsumtype == "num" or gsumtype == "number":
-            if comrat != 1:
-                n = input("Number of terms (inf for infinity): ")
-            else:
-                n = input("Number of terms to sum (inf for infinity, >): ")
-            if comrat != 1 or (n != ">" and n != "skip" and n != "ski"):
-                if n == "<" or n == "exit" or n == "exi":
-                    continue     
-                elif n == "ans":
-                    n = ans
-                elif n != "infinity" and n != "inf":
-                    try:
-                        n = int(n)
-                    except:
-                        print('Please enter a positive integer, "inf" for infinity, ">" to skip, or "<" to exit')
-                        continue
-                    if n <= 0:
-                        print('Please enter a positive integer, "inf" for infinity, ">" to skip, or "<" to exit')
-                        continue
-                elif (n == "inf" or n == "infinity") and (comrat >= 1 or comrat <= -1):
-                    print("Infinity is only accepted for common ratios between -1 and 0 and between 0 and -1")
+        n = input("Number of terms to sum (inf for infinity, l to enter last term, >): ")
+        if n != ">" and n != "skip" and n != "ski":
+            if n == "<" or n == "exit" or n == "exi":
+                continue
+            elif n == "l" or n == "last term" or n == "las" or n == "las ter" or n == "last":
+                l = input("Last term: ")
+                if l == "<" or l == "exit" or l == "exi":
                     continue
-        elif gsumtype == "l" or gsumtype == "las" or gsumtype == "last" or gsumtype == "last term" or gsumtype == "las ter":
-            l = input("Last term: ")
-            if l == "<" or l == "exit" or l == "exi":
+                try:
+                    l = eval(l)
+                except:
+                    print('Please enter a nonzero real number or expression, or "<" to exit')
+                    continue
+                if l == 0:
+                    print("The last term cannot be 0")
+                    continue
+                if l == a or comrat == 1:
+                    print("If the common ratio is 1, enter a number of terms to sum instead")
+                    continue
+                n = log(abs(l / a), abs(comrat)) + 1
+                if round(n) != round (n, 12) or n <= 0:
+                    print("The entered term is not a term of the series. Please enter different terms")
+                    continue
+            elif n == "ans":
+                n = ans
+            elif n != "infinity" and n != "inf":
+                try:
+                    n = int(n)
+                except:
+                    print('Please enter a positive integer, "inf" for infinity, ">" to skip, or "<" to exit')
+                    continue
+                if n <= 0:
+                    print('Please enter a positive integer, "inf" for infinity, ">" to skip, or "<" to exit')
+                    continue
+            elif (n == "inf" or n == "infinity") and (comrat >= 1 or comrat <= -1):
+                print("Infinity is only accepted for common ratios between -1 and 0 and between 0 and -1")
                 continue
-            try:
-                l = eval(l)
-            except:
-                print('Please enter a nonzero real number or expression, or "<" to exit')
-                continue
-            if l == 0:
-                print("The last term cannot be 0")
-                continue
-            if l == a:
-                print("If the common ratio is 1, enter a number of terms to sum instead")
-                continue
-            n = log(abs(l / a), abs(comrat)) + 1
-            if round(n) != round (n, 12) or n <= 0:
-                print("The entered term is not a term of the series: please enter different terms")
-                continue
-        elif not(gsumtype == ">" or gsumtype == "skip" or gsumtype == "ski"):
-            print('Please enter "n" for number of terms to sum, "l" for last term, or ">" to skip')
-            continue
+            
         while True:
             un = input('Index of terms to find (i, >): ')
             if un == "i" or un == "info" or un == "inf":
@@ -1807,13 +1769,10 @@ def geometric():
                 unindex += 1
         else:
             print()
-        if gsumtype == "l" or gsumtype == "las" or gsumtype == "last" or gsumtype == "last term" or gsumtype == "las ter":
-            index = n
-            print(f"index (of last term) = {round(index, 12)}")
         if round(b, 12) != round(c, 12):
             rat = comrat
             print(f"rat (common ratio) = {round(rat, 12)}")
-            if n != ">" and n != "skip" and n != "ski" and gsumtype != "skip" and gsumtype != ">" and gsumtype != "ski":
+            if n != ">" and n != "skip" and n != "ski":
                 if n != "infinity" and n != "inf":
                     sum = a * (1 - comrat ** n) / (1 - comrat)
                 else:
@@ -1824,7 +1783,7 @@ def geometric():
         else:
             rat = 1.0
             print(f"rat (common ratio) = 1.0")
-            if n != ">" and n != "skip" and n != "ski" and gsumtype != "skip" and gsumtype != ">" and gsumtype != "ski":
+            if n != ">" and n != "skip" and n != "ski":
                 sum = b * n
                 print(f"sum = {round(sum, 12)}")
 
