@@ -72,7 +72,6 @@ def print_binomial(a, b, c, d, n, k, unterm, x, y):
     globals()[covar] = co
     keeps.append(covar)
     print(covar+ f" (term {unterm} coefficient) = {round(co, 12)}")
-    print()
 
 def from_polar():
     global ans
@@ -1285,6 +1284,17 @@ def binomial_expansion():
         if b == 0:
             print('Please enter a nonzero real number or expression, or "[" to exit')
             continue
+        if a == 1:
+            aprint = ""
+        else:
+            aprint = f"{a}"
+        if b == 1:
+            bprint = ""
+        else:
+            bprint = f"^{b}"
+        term1 = aprint + x + bprint
+        print("Term 1: " + term1)
+        print()
         c = input("c: ")
         if c == "[" or c == "exit" or c == "exi":
             continue
@@ -1330,6 +1340,21 @@ def binomial_expansion():
                 continue
         else:
             d = 0
+        if c == 1:
+            cprint = ""
+        else:
+            cprint = f"{c}"
+        if d == 1 or d == 0:
+            dprint = ""
+        else:
+            dprint = f"^{d}"
+        if d == 0:
+            yprint = ""
+        else:
+            yprint = f"{y}"
+        term2 = cprint + yprint + dprint
+        print("Term 2: " + term2)
+        print()
         n = input("n: ")
         if n == "[" or n == "exit" or n == "exi":
             continue
@@ -1340,9 +1365,14 @@ def binomial_expansion():
         except:
             print('Please enter an integer or "[" to exit')
             continue
+        if term2[0] != "-":
+            print("(" + term1 + " + " + term2 + ")" + " ^ " + f"{n}")
+        else:
+            term2 = term2[1:]
+            print("(" + term1 + " - " + term2 + ")" + " ^ " + f"{n}")
         while True:
             print()
-            un = input(f"Indexes to find terms (1-{abs(n)+1}, i): ")
+            un = input(f"Indexes of terms to find (1-{abs(n)+1}, i): ")
             if un == "i" or un == "info" or un == "inf":
                 print()
                 print("Please enter a list of exponents seperated by commas and using dashes to indicate ranges:")
@@ -1374,10 +1404,6 @@ def binomial_expansion():
                     if 0 < unterm <= abs(n) + 1:
                         k = unterm - 1
                         print_binomial(a, b, c, d, n, k, unterm, x, y)
-                        binsum = binsum[:len(binsum) - 3]
-                        if n < 0:
-                            binsum += ")"
-                        print("Sum: " + binsum)
                     else:
                         print(f'Term Error: indexes must be positive integers between 1 and |n| + 1 ({abs(n) + 1}), inclusive (enter "all" for all, "i" for info and "[" to exit)')
                 except:
@@ -1398,10 +1424,6 @@ def binomial_expansion():
                             k = unterm - 1
                             print_binomial(a, b, c, d, n, k, unterm, x, y)
                             rangeindex += 1
-                        binsum = binsum[:len(binsum) - 3]
-                        if n < 0:
-                            binsum += ")"
-                        print("Sum: " + binsum)
                     elif rangelist[1] <= rangelist[0]:
                         print('Term Error: the second index of a range must be greater than the first index of the range (enter "all" for all, "i" for info and "[" to exit)')
                     else:    
@@ -1411,6 +1433,10 @@ def binomial_expansion():
             else:
                 print(f'Term Error: please enter ranges in the form "x-y", where x and y are both positive integers between 1 and |n| + 1 ({abs(n) + 1}), inclusive, and y is greater than x (enter "all" for all, "i" for info and "[" to exit)')
             unindex += 1
+        binsum = binsum[:len(binsum) - 3]
+        if n < 0:
+            binsum += ")"
+        print("Sum: " + binsum)
 
 def arithmetic():
     global dif
@@ -1526,7 +1552,7 @@ def arithmetic():
                 print('Please enter a positive integer or "[" to exit')
                 continue
         while True:
-            un = input('Indexes to find terms (i, ]): ')
+            un = input('Indexes of terms to find (i, ]): ')
             if un == "i" or un == "info" or un == "inf":
                 print()
                 print("Please enter a list of indexes seperated by commas and using dashes to indicate ranges:")
@@ -1539,7 +1565,7 @@ def arithmetic():
             continue
         if comdif != 0:
             while True:
-                iun = input('Terms to find indexes (i, ]): ')
+                iun = input('Terms of indexes to find (i, ]): ')
                 if iun == "i" or iun == "info" or iun == "inf":
                     print()
                     print("Please enter a list of terms of the arithmetic series seperated by commas:")
@@ -1768,7 +1794,7 @@ def geometric():
                 print("Infinity is only accepted for common ratios between -1 and 0 and between 0 and -1")
                 continue
         while True:
-            un = input('Indexes to find terms (i, ]): ')
+            un = input('Indexes of terms to find (i, ]): ')
             if un == "i" or un == "info" or un == "inf":
                 print()
                 print("Please enter a list of indexes seperated by commas and using dashes to indicate ranges:")
@@ -1781,7 +1807,7 @@ def geometric():
             continue
         if abs(comrat) != 1:
             while True:
-                iun = input('Terms to find indexes (i, ]): ')
+                iun = input('Terms of indexes to find (i, ]): ')
                 if iun == "i" or iun == "info" or iun == "inf":
                     print()
                     print("Please enter a list of terms of the arithmetic series seperated by commas:")
