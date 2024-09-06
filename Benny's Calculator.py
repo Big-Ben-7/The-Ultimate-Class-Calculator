@@ -81,7 +81,7 @@ def from_polar():
     global ang
     global mod
     print()
-    print("Welcome to complex operations in polar form!")
+    print("Welcome to complex operation in polar form!")
     print("Please enter the modulus/absolute value and angle/argument of the terms")
     while True:
         clear_variables()
@@ -487,7 +487,7 @@ def from_rectangular():
     global ang
     global mod
     print()
-    print("Welcome to complex operations in rectangular form!")
+    print("Welcome to complex operation in rectangular form!")
     print("Please enter the first term in the form a + bi and the second term (if needed) in the form c + di")               
     while True:
         clear_variables()
@@ -850,7 +850,7 @@ def from_rectangular():
 def real_operation():
     global ans
     print()
-    print("Welcome to real operations!")
+    print("Welcome to real operation!")
     while True:
         clear_variables()
         print()
