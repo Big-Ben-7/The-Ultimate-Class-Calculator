@@ -1593,9 +1593,9 @@ def arithmetic():
                             keeps.append(sumterm)
                             print(sumterm + f" (term {unterm}) = {round(a + comdif * (unterm - 1), 12)}")
                         else:
-                            print('Term error: indexes must be positive integers')
+                            print('Term Error: indexes must be positive integers')
                     except:
-                        print('Term error: indexes must be positive integers')
+                        print('Term Error: indexes must be positive integers')
                 elif len(rangelist) == 2:
                     try:
                         if rangelist[0] == "ans":
@@ -1617,9 +1617,9 @@ def arithmetic():
                         elif rangelist[1] <= rangelist[0]:
                             print('Term Error: please enter ranges in the form "x-y", where y > x')
                         else:    
-                            print('Term error: indexes must be positive integers')
+                            print('Term Error: indexes must be positive integers')
                     except:
-                        print('Term error: indexes must be positive integers')
+                        print('Term Error: indexes must be positive integers')
                 else:
                     print('Term Error: please enter ranges in the form "x-y", where y > x')
                 unindex += 1
@@ -1835,9 +1835,9 @@ def geometric():
                             keeps.append(sumterm)
                             print(sumterm + f" (term {unterm}) = {round(a * comrat ** (unterm - 1), 12)}")
                         else:
-                            print('Term error: indexes must be positive integers')
+                            print('Term Error: indexes must be positive integers')
                     except:
-                        print('Term error: indexes must be positive integers')
+                        print('Term Error: indexes must be positive integers')
                 elif len(rangelist) == 2:
                     try:
                         if rangelist[0] == "ans":
@@ -1859,9 +1859,9 @@ def geometric():
                         elif rangelist[1] <= rangelist[0]:
                             print('Term Error: please enter ranges in the form "x-y", where y > x')
                         else:    
-                            print('Term error: indexes must be positive integers')
+                            print('Term Error: indexes must be positive integers')
                     except:
-                        print('Term error: indexes must be positive integers')
+                        print('Term Error: indexes must be positive integers')
                 else:
                     print('Term Error: please enter ranges in the form "x-y", where y > x')
                 unindex += 1
