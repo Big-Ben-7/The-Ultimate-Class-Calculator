@@ -4,12 +4,12 @@ import cmath
 import types
 global ans
 ans = 0.0
-global real
-real = 0.0
-global imag
-imag = 0.0
-global imag2
-imag2 = 0.0
+global rl
+rl = 0.0
+global im
+im = 0.0
+global im2
+im2 = 0.0
 global mod
 mod = 0.0
 global ang
@@ -26,10 +26,8 @@ global root2
 root2 = 0.0
 global binsum
 binsum = ""
-global index
-index = 0.0
 global keeps
-keeps = ["ans", "pi", "e", "tau", "inf", "nan", "infj", "nanj", "keeps", "real", "imag", "imag2", "mod", "ang", "sum", "rat", "root", "root2", "binsum", "dif", "index"]
+keeps = ["ans", "pi", "e", "tau", "inf", "nan", "infj", "nanj", "keeps", "rl", "im", "im2", "mod", "ang", "sum", "rat", "root", "root2", "binsum", "dif"]
 
 def clear_variables():
     for var in list(globals()):
@@ -70,7 +68,7 @@ def print_binomial(a, b, c, d, n, k, unterm, x, y):
         combined = combined[1:]
         binsum = binsum[:len(binsum) - 3] + " - "
     binsum += combined + " + "
-    covar = f"coef{unterm}"
+    covar = f"cf{unterm}"
     globals()[covar] = co
     keeps.append(covar)
     print(covar+ f" (term {unterm} coefficient) = {round(co, 12)}")
@@ -78,8 +76,8 @@ def print_binomial(a, b, c, d, n, k, unterm, x, y):
 
 def from_polar():
     global ans
-    global real
-    global imag
+    global rl
+    global im
     global ang
     global mod
     print()
@@ -96,9 +94,9 @@ def from_polar():
             print('Real numbers and expressions, such as "3 * sin(pi / 3)", can be entered as terms')
             print("The following non-parenthesized operators and functions can be entered as part of an expression:")
             print("Operators: + (add), - (subtract), * (multiply), / (divide), // (integer divide), % (remainder), ** (exponent)")
-            print("Functions: eg. abs(x), sqrt(x), cbrt(x), pow(x, y), log(x, base), factorial(x), comb(x, y), perm(x, y), sin(x), cos(x), tan(x), asin(x), acos(x), atan(x), degrees(x), radians(x), sum([x, y, z,...]), int(x), round(x), etc.")
+            print("Functions: eg. abs(x), sqrt(x), cbrt(x), pow(x, y), log(x, base), factorial(x), comb(x, y), perm(x, y), sin(x), cos(x), tan(x), asin(x), acos(x), atan(x), degrees(x), radians(x), sum([x, y, z,...]), int(x), round(x), etc")
             print('Real constants such as "pi", "e", and "tau" can be entered')
-            print('Real variables can also be entered, for example: "ans" (previous real answer), "real" (real part of previous complex result), "imag" (imaginary part of previous complex result), "root" (1st real solution of previous quadratic), "root2" (2nd real solution of previous quadratic), "imag2" (imaginary part of 2nd previous quadratic complex solution) "sum" (previous series summation), "rat" (previous geometric series common ratio), "dif" (previous arithmetic series common difference), "term1" (1st term of previous series), "coef1" (1st coefficient of previous binomial expansion), and stored variables')
+            print('Real variables can also be entered, for example: "ans" (previous real answer), "rl" (real part of previous complex result), "im" (imaginary part of previous complex result), "root" (1st real solution of previous quadratic), "root2" (2nd real solution of previous quadratic), "im2" (imaginary part of 2nd previous quadratic complex solution) "sum" (previous series summation), "rat" (previous geometric series common ratio), "dif" (previous arithmetic series common difference), "term1" (1st term of previous series), "cf1" (1st coefficient of previous binomial expansion), and stored variables')
             print("The above operators and functions can only be entered as part of an expression, not as an operation")
             print('Enter "rec" for rectangular form, "r" for real operation, "m" for matrix operation, "f" for function (this will direct to polynomial), "s" for summation (this will direct to binomial expansion)')
             print()
@@ -162,10 +160,10 @@ def from_polar():
                 print('The following operations can be entered: equals (=), add (+), subtract (-), multiply (*), divide (/), exponent (^), rectangular (rec)')
                 print()
                 print("Notes:")
-                print('The name, sign, or first 3 letters of any operation can be entered: eg. "absolute value", "abs", and "||" all work.')
-                print("Fractional exponents can be used to root: eg. (-1 + 0i) ^ (1/2 + 0i) = i.")
-                print('Expressions entered as terms can be operated on or evaluated with the "equals" (=) operation.')
-                print("The above operations can only be entered as an operation, not as part of an expression.")
+                print('The name, sign, or first 3 letters of any operation can be entered: eg. "absolute value", "abs", and "||" all work')
+                print("Fractional exponents can be used to root: eg. (-1 + 0i) ^ (1/2 + 0i) = i")
+                print('Expressions entered as terms can be operated on or evaluated with the "equals" (=) operation')
+                print("The above operations can only be entered as an operation, not as part of an expression")
             else:
                 break
         if op == "<" or op == "exit" or op == "exi":
@@ -468,10 +466,10 @@ def from_polar():
                         print(f"Result: {round(res.real, 12)} - {round(-1 * res.imag, 12)}i")
                     else:
                         print(f"Result: {round(res.real, 12)} - i")
-                real = res.real
-                print(f"real (real part) = {round(real, 12)}")
-                imag = res.imag
-                print(f"imag (imaginary part) = {round(imag, 12)}")                
+                rl = res.real
+                print(f"rl (real part) = {round(rl, 12)}")
+                im = res.imag
+                print(f"im (imaginary part) = {round(im, 12)}")                
             else:
                 print('Please enter a valid operation ("i" for info and "<" to exit)')
         except:
@@ -484,8 +482,8 @@ def from_polar():
 
 def from_rectangular():
     global ans
-    global real
-    global imag
+    global rl
+    global im
     global ang
     global mod
     print()
@@ -502,9 +500,9 @@ def from_rectangular():
             print('Real numbers and expressions, such as "3 * sin(pi / 3)", can be entered as values')
             print("The following non-parenthesized operators and functions can be entered as part of an expression:")
             print("Operators: + (add), - (subtract), * (multiply), / (divide), // (integer divide), % (remainder), ** (exponent)")
-            print("Functions: eg. abs(x), sqrt(x), cbrt(x), pow(x, y), log(x, base), factorial(x), comb(x, y), perm(x, y), sin(x), cos(x), tan(x), asin(x), acos(x), atan(x), degrees(x), radians(x), sum([x, y, z,...]), int(x), round(x), etc.")
+            print("Functions: eg. abs(x), sqrt(x), cbrt(x), pow(x, y), log(x, base), factorial(x), comb(x, y), perm(x, y), sin(x), cos(x), tan(x), asin(x), acos(x), atan(x), degrees(x), radians(x), sum([x, y, z,...]), int(x), round(x), etc")
             print('Real constants such as "pi", "e", and "tau" can be entered')
-            print('Real variables can also be entered, for example: "ans" (previous real answer), "real" (real part of previous complex result), "imag" (imaginary part of previous complex result), "root" (1st real solution of previous quadratic), "root2" (2nd real solution of previous quadratic), "imag2" (imaginary part of 2nd previous quadratic complex solution) "sum" (previous series summation), "rat" (previous geometric series common ratio), "dif" (previous arithmetic series common difference), "term1" (1st term of previous series), "coef1" (1st coefficient of previous binomial expansion), and stored variables')
+            print('Real variables can also be entered, for example: "ans" (previous real answer), "rl" (real part of previous complex result), "im" (imaginary part of previous complex result), "root" (1st real solution of previous quadratic), "root2" (2nd real solution of previous quadratic), "im2" (imaginary part of 2nd previous quadratic complex solution) "sum" (previous series summation), "rat" (previous geometric series common ratio), "dif" (previous arithmetic series common difference), "term1" (1st term of previous series), "cf1" (1st coefficient of previous binomial expansion), and stored variables')
             print("The above operators and functions can only be entered as part of an expression, not as an operation")
             print('Enter "p" for polar form, "r" for real operation, "m" for matrix operation, "f" for function (this will direct to polynomial), "s" for summation (this will direct to binomial expansion)')
             print()
@@ -571,10 +569,10 @@ def from_rectangular():
                 print('The following operations can be entered: equals (=), add (+), subtract (-), multiply (*), divide (/), exponent (^), absolute value or modulus (||), angle or argument (ang), polar (pol)')
                 print()
                 print("Notes:")
-                print('The name, sign, or first 3 letters of any operation can be entered: eg. "absolute value", "abs", and "||" all work.')
-                print("Fractional exponents can be used to root: eg. (-1 + 0i) ^ (1/2 + 0i) = i.")
-                print('Expressions entered as terms can be operated on or evaluated with the "equals" (=) operation.')
-                print("The above operations can only be entered as an operation, not as part of an expression.")
+                print('The name, sign, or first 3 letters of any operation can be entered: eg. "absolute value", "abs", and "||" all work')
+                print("Fractional exponents can be used to root: eg. (-1 + 0i) ^ (1/2 + 0i) = i")
+                print('Expressions entered as terms can be operated on or evaluated with the "equals" (=) operation')
+                print("The above operations can only be entered as an operation, not as part of an expression")
             else:
                 break
         if op == "<" or op == "exit" or op == "exi":
@@ -622,10 +620,10 @@ def from_rectangular():
                 res = complex(a, b)
                 print()
                 print(f"Result: {cterm1}")
-                real = res.real
-                print(f"real (real part) = {round(real, 12)}")
-                imag = res.imag
-                print(f"imag (imaginary part) = {round(imag, 12)}")
+                rl = res.real
+                print(f"rl (real part) = {round(rl, 12)}")
+                im = res.imag
+                print(f"im (imaginary part) = {round(im, 12)}")
             elif op == "+" or op == "add":
                 res = complex(a, b) + complex(c, d)
                 print()
@@ -648,10 +646,10 @@ def from_rectangular():
                         print(f"Result: {round(res.real, 12)} - {round(-1 * res.imag, 12)}i")
                     else:
                         print(f"Result: {round(res.real, 12)} - i")
-                real = res.real
-                print(f"real (real part) = {round(real, 12)}")
-                imag = res.imag
-                print(f"imag (imaginary part) = {round(imag, 12)}")
+                rl = res.real
+                print(f"rl (real part) = {round(rl, 12)}")
+                im = res.imag
+                print(f"im (imaginary part) = {round(im, 12)}")
             elif op == "-" or op == "subtract" or op == "sub":
                 res = complex(a, b) - complex(c, d)
                 print()
@@ -674,10 +672,10 @@ def from_rectangular():
                         print(f"Result: {round(res.real, 12)} - {round(-1 * res.imag, 12)}i")
                     else:
                         print(f"Result: {round(res.real, 12)} - i")
-                real = res.real
-                print(f"real (real part) = {round(real, 12)}")
-                imag = res.imag
-                print(f"imag (imaginary part) = {round(imag, 12)}")
+                rl = res.real
+                print(f"rl (real part) = {round(rl, 12)}")
+                im = res.imag
+                print(f"im (imaginary part) = {round(im, 12)}")
             elif op == "*" or op == "multiply" or op == "mul":
                 res = complex(a, b) * complex(c, d)
                 print()
@@ -700,10 +698,10 @@ def from_rectangular():
                         print(f"Result: {round(res.real, 12)} - {round(-1 * res.imag, 12)}i")
                     else:
                         print(f"Result: {round(res.real, 12)} - i")
-                real = res.real
-                print(f"real (real part) = {round(real, 12)}")
-                imag = res.imag
-                print(f"imag (imaginary part) = {round(imag, 12)}")
+                rl = res.real
+                print(f"rl (real part) = {round(rl, 12)}")
+                im = res.imag
+                print(f"im (imaginary part) = {round(im, 12)}")
             elif op == "/" or op == "divide" or op == "div":
                 res = complex(a, b) / complex(c, d)
                 print()
@@ -726,10 +724,10 @@ def from_rectangular():
                         print(f"Result: {round(res.real, 12)} - {round(-1 * res.imag, 12)}i")
                     else:
                         print(f"Result: {round(res.real, 12)} - i")
-                real = res.real
-                print(f"real (real part) = {round(real, 12)}")
-                imag = res.imag
-                print(f"imag (imaginary part) = {round(imag, 12)}")
+                rl = res.real
+                print(f"rl (real part) = {round(rl, 12)}")
+                im = res.imag
+                print(f"im (imaginary part) = {round(im, 12)}")
             elif op == "^" or op == "exponent" or op == "exp" or op == "**":
                 res = complex(a, b) ** complex(c, d)
                 print()
@@ -752,10 +750,10 @@ def from_rectangular():
                         print(f"Result: {round(res.real, 12)} - {round(-1 * res.imag, 12)}i")
                     else:
                         print(f"Result: {round(res.real, 12)} - i")
-                real = res.real
-                print(f"real (real part) = {round(real, 12)}")
-                imag = res.imag
-                print(f"imag (imaginary part) = {round(imag, 12)}")
+                rl = res.real
+                print(f"rl (real part) = {round(rl, 12)}")
+                im = res.imag
+                print(f"im (imaginary part) = {round(im, 12)}")
             elif op == "abs" or op == "absolute value" or op == "magnitude" or op == "mag" or op == "||" or op == "modulus" or op == "mod":
                 mod = abs(complex(a, b))
                 print()
@@ -861,21 +859,21 @@ def real_operation():
             break
         elif n == "i" or n == "inf" or n == "info":
             print()
-            print('Real numbers and expressions, such as "3 * sin(pi / 3)", can be entered as terms.')
+            print('Real numbers and expressions, such as "3 * sin(pi / 3)", can be entered as terms')
             print("The following non-parenthesized operators and functions can be entered as part of an expression:")
             print("Operators: + (add), - (subtract), * (multiply), / (divide), // (integer divide), % (remainder), ** (exponent)")
-            print("Functions: eg. abs(x), sqrt(x), cbrt(x), pow(x, y), log(x, base), factorial(x), comb(x, y), perm(x, y), sin(x), cos(x), tan(x), asin(x), acos(x), atan(x), degrees(x), radians(x), sum([x, y, z,...]), int(x), round(x), etc.")
-            print('Real constants such as "pi", "e", and "tau" can be entered.')
-            print('Real variables can also be entered, for example: "ans" (previous real answer), "real" (real part of previous complex result), "imag" (imaginary part of previous complex result), "root" (1st real solution of previous quadratic), "root2" (2nd real solution of previous quadratic), "imag2" (imaginary part of 2nd previous quadratic complex solution) "sum" (previous series summation), "rat" (previous geometric series common ratio), "dif" (previous arithmetic series common difference), "term1" (1st term of previous series), "coef1" (1st coefficient of previous binomial expansion), and stored variables')
-            print("The above operators and functions can only be entered as part of an expression, not as an operation.")
+            print("Functions: eg. abs(x), sqrt(x), cbrt(x), pow(x, y), log(x, base), factorial(x), comb(x, y), perm(x, y), sin(x), cos(x), tan(x), asin(x), acos(x), atan(x), degrees(x), radians(x), sum([x, y, z,...]), int(x), round(x), etc")
+            print('Real constants such as "pi", "e", and "tau" can be entered')
+            print('Real variables can also be entered, for example: "ans" (previous real answer), "rl" (real part of previous complex result), "im" (imaginary part of previous complex result), "root" (1st real solution of previous quadratic), "root2" (2nd real solution of previous quadratic), "im2" (imaginary part of 2nd previous quadratic complex solution) "sum" (previous series summation), "rat" (previous geometric series common ratio), "dif" (previous arithmetic series common difference), "term1" (1st term of previous series), "cf1" (1st coefficient of previous binomial expansion), and stored variables')
+            print("The above operators and functions can only be entered as part of an expression, not as an operation")
             print('Enter "c" for complex operation (this will direct to rectangular form), "m" for matrix operation, "f" for function (this will direct to polynomial), and "s" for summation (this will direct to binomial expansion)')
             print()
             print("Notes:")
-            print("Fractional exponents can be used to root: eg. 8 ^ (1/3) = 2.")
-            print('Trigonometric functions accept and output angles in radians. The degrees and radians functions or operations can be used to convert.')
-            print("The result of trigonometric inverse functions (eg. asin, acos, atan, etc.) will lie in their restricted domains.")
-            print("Integer divide (//) and int() will remove the decimal part from the output, wheras round() will follow the standard rounding rules: eg. 3 // 2 = int(3 / 2) = 1, but round(3 / 2) = 2.")
-            print("For more information, visit the python math and operators websites.")
+            print("Fractional exponents can be used to root: eg. 8 ^ (1/3) = 2")
+            print('Trigonometric functions accept and output angles in radians. The degrees and radians functions or operations can be used to convert')
+            print("The result of trigonometric inverse functions (eg. asin, acos, atan, etc.) will lie in their restricted domains")
+            print("Integer divide (//) and int() will remove the decimal part from the output, wheras round() will follow the standard rounding rules: eg. 3 // 2 = int(3 / 2) = 1, but round(3 / 2) = 2")
+            print("For more information, visit the python math and operators websites")
             continue
         elif n == "c" or n == "com" or n == "complex" or n == "complex operation":
             from_rectangular()
@@ -907,12 +905,12 @@ def real_operation():
                     print("Other: equals (=), store (sto), round (~), integer (int)")
                     print()
                     print("Notes:")
-                    print('The name, sign, or first 3 letters of any operation can be entered: eg. "factorial", "fac", and "!" all work.')
-                    print("Fractional exponents can be used to root: eg. 8 ^ (1/3) = 2.")
-                    print('The "integer divide" (//) and "integer" (int) operations will remove the decimal part from the output, wheras the "round" (~) operation will follow the standard rounding rules: eg. 3 // 2 = int(3 / 2) = 1, but round(3 / 2) = 2.')
+                    print('The name, sign, or first 3 letters of any operation can be entered: eg. "factorial", "fac", and "!" all work')
+                    print("Fractional exponents can be used to root: eg. 8 ^ (1/3) = 2")
+                    print('The "integer divide" (//) and "integer" (int) operations will remove the decimal part from the output, wheras the "round" (~) operation will follow the standard rounding rules: eg. 3 // 2 = int(3 / 2) = 1, but round(3 / 2) = 2')
                     print('The variable name for the "store" (sto) operation must begin with a capital letter')
-                    print('Expressions entered as terms can be operated on or evaluated with the "equals" (=) operation.')
-                    print("The above operations can only be entered as an operation, not as part of an expression.")
+                    print('Expressions entered as terms can be operated on or evaluated with the "equals" (=) operation')
+                    print("The above operations can only be entered as an operation, not as part of an expression")
                     print()
                 else:
                     break
@@ -981,33 +979,33 @@ def real_operation():
         try:
             if op == "equals" or op == "=" or op == "equ" or op == "==":
                 print()
-                print(f"ans = {round(n, 12)}")
+                print(f"ans (answer) = {round(n, 12)}")
             elif op == "add" or op == "+":
                 n += n2
                 print()
-                print(f"ans = {round(n, 12)}")
+                print(f"ans (answer) = {round(n, 12)}")
             elif op == "subtract" or op == "-" or op == "sub":
                 n -= n2
                 print()
-                print(f"ans = {round(n, 12)}")
+                print(f"ans (answer) = {round(n, 12)}")
             elif op == "multiply" or op == "*" or op == "mul":
                 n *= n2
                 print()
-                print(f"ans = {round(n, 12)}")
+                print(f"ans (answer) = {round(n, 12)}")
             elif op == "divide" or op == "/" or op == "div":
                 n /= n2
                 if n == 0:
                     n = 0.0
                 print()
-                print(f"ans = {round(n, 12)}")
+                print(f"ans (answer) = {round(n, 12)}")
             elif op == "remainder" or op == "r" or op == "%" or op == "modulo" or op == "rem" or op == "mod":
                 n %= n2
                 print()
-                print(f"ans = {round(n, 12)}")
+                print(f"ans (answer) = {round(n, 12)}")
             elif op == "exponent" or op == "^" or op == "exp" or op == "**":
                 n **= n2
                 print()
-                print(f"ans = {round(n, 12)}")
+                print(f"ans (answer) = {round(n, 12)}")
             elif op == "store" or op == "sto":
                 while True:
                     vname = input("Variable name (i): ")
@@ -1033,53 +1031,53 @@ def real_operation():
                     n2 = 12
                 n = round(n, n2)
                 print()
-                print(f"ans = {round(n, 12)}")
+                print(f"ans (answer) = {round(n, 12)}")
             elif op == "factorial" or op == "!" or op == "fac":
                 n = factorial(round(n))
                 print()
-                print(f"ans = {round(n, 12)}")
+                print(f"ans (answer) = {round(n, 12)}")
             elif op == "sqrt" or op == "square root" or op == "squ":
                 n = sqrt(n)
                 print()
-                print(f"ans = {round(n, 12)}")
+                print(f"ans (answer) = {round(n, 12)}")
             elif op == "cbrt" or op == "cube root" or op == "cub":
                 n = cbrt(n)
                 print()
-                print(f"ans = {round(n, 12)}")
+                print(f"ans (answer) = {round(n, 12)}")
             elif op == "log" or op == "logarithm":
                 n = log(n, n2)
                 print()
-                print(f"ans = {round(n, 12)}")
+                print(f"ans (answer) = {round(n, 12)}")
             elif op == "integer divide" or op == "int div" or op == "floor divide" or op == "flo div" or op == "//":
                 n //= n2
                 print()
                 if n == 0:
                     n = 0.0
-                print(f"ans = {round(n, 12)}")
+                print(f"ans (answer) = {round(n, 12)}")
             elif op == "integer" or op == "int":
                 n = int(n)
                 print()
-                print(f"ans = {round(n, 12)}")
+                print(f"ans (answer) = {round(n, 12)}")
             elif op == "choose" or op == "cho" or op == "comb":
                 n = comb(round(n), round(n2))
                 print()
-                print(f"ans = {round(n, 12)}")
+                print(f"ans (answer) = {round(n, 12)}")
             elif op == "perm" or op == "permute" or op == "per":
                 n = perm(round(n), round(n2))
                 print()
-                print(f"ans = {round(n, 12)}")
+                print(f"ans (answer) = {round(n, 12)}")
             elif op == "absolute value" or op == "||" or op == "abs" or op == "magnitude" or op == "mag":
                 n = abs(n)
                 print()
-                print(f"ans = {round(n, 12)}")
+                print(f"ans (answer) = {round(n, 12)}")
             elif op == "radians" or op == "rad":
                 n = radians(n)
                 print()
-                print(f"ans = {round(n, 12)}")
+                print(f"ans (answer) = {round(n, 12)}")
             elif op == "degrees" or op == "deg":
                 n = degrees(n)
                 print()
-                print(f"ans = {round(n, 12)}")             
+                print(f"ans (answer) = {round(n, 12)}")             
             elif op == "sin" or op == "sine" or op == "cos" or op == "cosine" or op == "tangent" or op == "tan":
                 angle = input("Inputted in radians (r) or degrees (d)? ")
                 if angle == "radians" or angle == "rad" or angle == "r":
@@ -1095,15 +1093,15 @@ def real_operation():
                     if op == "sin" or op == "sine":
                         n = sin(n)
                         print()
-                        print(f"ans = {round(n, 12)}")
+                        print(f"ans (answer) = {round(n, 12)}")
                     elif op == "cos" or op == "cosine":
                         n = cos(n)
                         print()
-                        print(f"ans = {round(n, 12)}")
+                        print(f"ans (answer) = {round(n, 12)}")
                     elif op == "tan" or op == "tangent":
                         n = tan()
                         print()
-                        print(f"ans = {round(n, 12)}")
+                        print(f"ans (answer) = {round(n, 12)}")
             elif op == "asin" or op == "arcsine" or op == "inverse sine" or op == "inv sin" or op == "acos" or op == "arccosine" or op == "inverse cosine" or op == "inv cos" or op == "atan" or op == "arctangent" or op == "inverse tangent" or op == "inv tan" or op == "asi" or op == "aco" or op == "ata":
                 unit = input("Output in radians (r) or degrees (d)? ")
                 quad = input("Output in default quadrant (yes/no)? ")
@@ -1174,9 +1172,9 @@ def real_operation():
                 if go == True:
                     print()
                     if unit == "radians" or unit == "rad" or unit == "r":
-                        print(f"ans = {round(n, 12)} radians")
+                        print(f"ans (answer) = {round(n, 12)} radians")
                     else:
-                        print(f"ans = {round(n, 12)} degrees")
+                        print(f"ans (answer) = {round(n, 12)} degrees")
             else:
                 print('Please enter a valid operation ("i" for info and "<" to exit)')
                 print()
@@ -1317,16 +1315,17 @@ def binomial_expansion():
             continue
         while True:
             print()
-            un = input(f"Index of terms to find/sum (1-{abs(n)+1} for all, i): ")
+            un = input(f"Indexes to find terms (1-{abs(n)+1}, i): ")
             if un == "i" or un == "info" or un == "inf":
                 print()
                 print("Please enter a list of exponents seperated by commas and using dashes to indicate ranges:")
-                print('eg. "1, 3, 6-8, 10" will output the 1st, 3rd, 6th, 7th, 8th, and 10th terms, given that n >= 9.')
+                print('eg. "1, 3, 6-8, 10" will output the 1st, 3rd, 6th, 7th, 8th, and 10th terms, given that n >= 9')
                 if n >= 0:
                     print("If n is negative (it's not!), only the denominator of each term will be outputted (the sum will still be complete)")
                 else:
                     print("If n is negative (it is!), only the denominator of each term will be outputted (the sum will still be complete)")
-                print(f"All indexes must be positive integers between 1 and |n| + 1 ({abs(n) + 1}), inclusive, and the second index of a range must be greater than the first index of the range.")
+                print(f"All indexes must be positive integers between 1 and |n| + 1 ({abs(n) + 1}), inclusive, and the second index of a range must be greater than the first index of the range")
+                print(f'Enter "all" or 1-{abs(n)+1} to find/sum all terms')
                 print()
             else:
                 break
@@ -1389,7 +1388,6 @@ def binomial_expansion():
 def arithmetic():
     global dif
     global sum
-    global index
     print()
     print("Welcome to arithmetic series!")
     while True:
@@ -1501,18 +1499,29 @@ def arithmetic():
                 print('Please enter a positive integer or "<" to exit')
                 continue
         while True:
-            un = input('Index of terms to find (i, >): ')
+            un = input('Indexes to find terms (i, >): ')
             if un == "i" or un == "info" or un == "inf":
                 print()
                 print("Please enter a list of indexes seperated by commas and using dashes to indicate ranges:")
-                print('eg. "1, 3, 6-8, 10" will output the 1st, 3rd, 6th, 7th, 8th, and 10th terms.')
-                print("All indexes must be positive integers, and the second index of a range must be greater than the first index of the range.")
+                print('eg. "1, 3, 6-8, 10" will output the 1st, 3rd, 6th, 7th, 8th, and 10th terms')
+                print("All indexes must be positive integers, and the second index of a range must be greater than the first index of the range")
                 print()
             else:
                 break
         if un == "<" or un == "exit" or un == "exi":
             continue
-        elif un != ">" and un != "skip" and un != "ski":
+        while True:
+            iun = input('Terms to find indexes (i, >): ')
+            if iun == "i" or iun == "info" or iun == "inf":
+                print()
+                print("Please enter a list of terms of the arithmetic series seperated by commas:")
+                print('eg. "1, 3, 6" will output the indexes of the terms 1, 3, and 6 (if they exist)')
+                print()
+            else:
+                break
+        if iun == "<" or iun == "exit" or iun == "exi":
+            continue
+        if un != ">" and un != "skip" and un != "ski":
             un = un.split(",")
             print()
             unindex = 0
@@ -1525,14 +1534,14 @@ def arithmetic():
                             unterm = ans
                         unterm = int(unterm)
                         if unterm > 0:
-                            sumterm = f"term{unterm}"
+                            sumterm = f"tm{unterm}"
                             globals()[sumterm] = a + comdif * (unterm - 1)
                             keeps.append(sumterm)
                             print(sumterm + f" (term {unterm}) = {round(a + comdif * (unterm - 1), 12)}")
                         else:
-                            print('Term Error: indexes must be positive integers (enter "i" for info, ">" to skip, and "<" to exit)')
+                            print('Term error: indexes must be positive integers')
                     except:
-                        print('Term Error: indexes must be positive integers (enter "i" for info, ">" to skip, and "<" to exit)')
+                        print('Term error: indexes must be positive integers')
                 elif len(rangelist) == 2:
                     try:
                         if rangelist[0] == "ans":
@@ -1546,20 +1555,43 @@ def arithmetic():
                             rangeindex = 0
                             while rangeindex < len(rangelist):
                                 unterm = rangelist[rangeindex]
-                                sumterm = f"term{unterm}"
+                                sumterm = f"tm{unterm}"
                                 globals()[sumterm] = a + comdif * (unterm - 1)
                                 keeps.append(sumterm)
                                 print(sumterm + f" (term {unterm}) = {round(a + comdif * (unterm - 1), 12)}")
                                 rangeindex += 1
                         elif rangelist[1] <= rangelist[0]:
-                            print('Term Error: the second index of a range must be greater than the first index of the range (enter "i" for info, ">" to skip, and "<" to exit)')
+                            print('Term Error: please enter ranges in the form "x-y", where y > x')
                         else:    
-                            print('Term Error: indexes must be positive integers (enter "i" for info, ">" to skip, and "<" to exit)')
+                            print('Term error: indexes must be positive integers')
                     except:
-                        print('Term Error: indexes must be positive integers (enter "i" for info, ">" to skip, and "<" to exit)')
+                        print('Term error: indexes must be positive integers')
                 else:
-                    print('Term Error: please enter ranges in the form "x-y", where x and y are both positive integers and y is greater than x (enter "i" for info, ">" to skip, and "<" to exit)')
+                    print('Term Error: please enter ranges in the form "x-y", where y > x')
                 unindex += 1
+        else:
+            print()
+        if iun != ">" and iun != "skip" and iun != "ski":
+            iun = iun.split(",")
+            iunindex = 0
+            while iunindex < len(iun):
+                try:
+                    iunterm = iun[iunindex]
+                    iunterm = eval(iunterm)
+                    indexcalc = (iunterm - a) / comdif + 1
+                    if round(indexcalc, 12) == round(indexcalc) and indexcalc > 0: 
+                        if round(iunterm, 12) >= 0:
+                            sumindex = f"ix{round(iunterm, 12)}"
+                        else:
+                            sumindex = f"ix_{abs(round(iunterm, 12))}"
+                        globals()[sumindex] = indexcalc
+                        keeps.append(sumindex)
+                        print(sumindex + f" (index of {round(iunterm, 12)}) = {int(indexcalc)}")
+                    else:
+                        print('Index Error: the term is not in the series')
+                except:
+                    print('Index Error: please enter a real number or expression')
+                iunindex += 1
         else:
             print()
         dif = comdif
@@ -1573,7 +1605,6 @@ def arithmetic():
 def geometric():
     global rat
     global sum
-    global index
     print()
     print("Welcome to geometric series!")
     while True:
@@ -1708,12 +1739,12 @@ def geometric():
                 continue
             
         while True:
-            un = input('Index of terms to find (i, >): ')
+            un = input('Indexes to find terms (i, >): ')
             if un == "i" or un == "info" or un == "inf":
                 print()
                 print("Please enter a list of indexes seperated by commas and using dashes to indicate ranges:")
-                print('eg. "1, 3, 6-8, 10" will output the 1st, 3rd, 6th, 7th, 8th, and 10th terms.')
-                print("All indexes must be positive integers, and the second index of a range must be greater than the first index of the range.")
+                print('eg. "1, 3, 6-8, 10" will output the 1st, 3rd, 6th, 7th, 8th, and 10th terms')
+                print("All indexes must be positive integers, and the second index of a range must be greater than the first index of the range")
                 print()
             else:
                 break
@@ -1732,14 +1763,14 @@ def geometric():
                             unterm = ans
                         unterm = int(unterm)
                         if unterm > 0:
-                            sumterm = f"term{unterm}"
+                            sumterm = f"tm{unterm}"
                             globals()[sumterm] = a * comrat ** (unterm - 1)
                             keeps.append(sumterm)
                             print(sumterm + f" (term {unterm}) = {round(a * comrat ** (unterm - 1), 12)}")
                         else:
-                            print('Term Error: indexes must be positive integers (enter "i" for info, ">" to skip, and "<" to exit)')
+                            print('Term error: indexes must be positive integers')
                     except:
-                        print('Term Error: indexes must be positive integers (enter "i" for info, ">" to skip, and "<" to exit)')
+                        print('Term error: indexes must be positive integers')
                 elif len(rangelist) == 2:
                     try:
                         if rangelist[0] == "ans":
@@ -1753,19 +1784,19 @@ def geometric():
                             rangeindex = 0
                             while rangeindex < len(rangelist):
                                 unterm = rangelist[rangeindex]
-                                sumterm = f"term{unterm}"
+                                sumterm = f"tm{unterm}"
                                 globals()[sumterm] = a * comrat ** (unterm - 1)
                                 keeps.append(sumterm)
                                 print(sumterm + f" (term {unterm}) = {round(a * comrat ** (unterm - 1), 12)}")
                                 rangeindex += 1
                         elif rangelist[1] <= rangelist[0]:
-                            print('Term Error: the second index of a range must be greater than the first index of the range (enter "i" for info, ">" to skip, and "<" to exit)')
+                            print('Term Error: please enter ranges in the form "x-y", where y > x')
                         else:    
-                            print('Term Error: indexes must be positive integers (enter "i" for info, ">" to skip, and "<" to exit)')
+                            print('Term error: indexes must be positive integers')
                     except:
-                        print('Term Error: indexes must be positive integers (enter "i" for info, ">" to skip, and "<" to exit)')
+                        print('Term error: indexes must be positive integers')
                 else:
-                    print('Term Error: please enter ranges in the form "x-y", where x and y are both positive integers and y is greater than x (enter "i" for info, ">" to skip, and "<" to exit)')
+                    print('Term Error: please enter ranges in the form "x-y", where y > x')
                 unindex += 1
         else:
             print()
@@ -1790,9 +1821,9 @@ def geometric():
 def polynomial():
     global root
     global root2
-    global imag
-    global imag2
-    global real
+    global im
+    global im2
+    global rl
     print()
     print("Welcome to polymial function!")
     print("Please enter the equation in the form ax^2 + bx + c = 0, where x is a non-numeric variable name")
@@ -1880,13 +1911,12 @@ def polynomial():
                     if round(im, 12) != -1:
                         print(f"Roots: x = {round(rl, 12)} + {round(im * -1, 12)}i or x = {round(rl, 12)} - {round(im * -1, 12)}i")
                     else:
-                        print(f"Roots: x = {round(rl, 12)} + i or x = {round(rl, 12)} - i")
-                real = rl
-                print(f"real (real part) = {round(real, 12)}")
-                imag = im * -1
-                print(f"imag (imaginary part) = {round(imag, 12)}")
-                imag2 = im
-                print(f"imag2 (2nd imaginary part) = {round(imag2, 12)}")
+                        print(f"Roots: x = {round(rl, 12)} + i or x = {round(rl, 12)} - i")              
+                print(f"rl (real part) = {round(rl, 12)}")
+                im2 = im
+                im *= -1
+                print(f"im (imaginary part) = {round(im, 12)}")
+                print(f"im2 (2nd imaginary part) = {round(im2, 12)}")
 
 def conic_section():
     print()
