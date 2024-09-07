@@ -36,22 +36,35 @@ def clear_variables():
         if not var.startswith('_') and var not in keeps and not isinstance(globals()[var], (types.ModuleType, types.FunctionType, types.BuiltinFunctionType, type)):
             del globals()[var]
 
-def find_constants(iunterm, c : str):
-    if c == "pi":
-        constant = pi
-    elif c == "e":
-        constant = e
+def series_find_constants(iunterm, indexcalc):
     global sumindex
-    if iunterm % constant == 0 and round(iunterm, 12) > 0:
-        if iunterm == constant:
-            sumindex = "ix" + c
+    scindex = 0
+    while scindex < 2:
+        if scindex == 0:
+            cstring = "pi"
+            constant = pi
         else:
-            sumindex = f"ix{round(iunterm / constant)}" + c
-    elif iunterm % constant == 0 and round(iunterm, 12) < 0:
-        if iunterm / constant == -1:
-            sumindex = f"ix_" + c
-        else:
-            sumindex = f"ix_{round(abs(iunterm / constant))}" + c
+            cstring = "e"
+            constant = e
+        if iunterm % constant == 0 and iunterm / constant > 0:
+            if iunterm == constant:
+                sumindex = "ix" + cstring
+                print(sumindex + f" (index of " + cstring + f") = {round(indexcalc)}")
+            else:
+                sumindex = f"ix{round(iunterm / constant)}" + cstring
+                print(sumindex + f" (index of {round((iunterm / constant))}" + cstring + f") = {round(indexcalc)}")
+            break
+        elif iunterm % constant == 0 and iunterm / constant < 0:
+            if iunterm / constant == -1:
+                sumindex = f"ix_" + cstring
+                print(sumindex + f" (index of -" + cstring + f") = {round(indexcalc)}")
+            else:
+                sumindex = f"ix_{round(abs(iunterm / constant))}" + cstring
+                print(sumindex + f" (index of -{round(abs(iunterm / constant))}" + cstring + f") = {round(indexcalc)}")
+            break
+        elif scindex == 1:
+            print(sumindex + f" (index of {round(iunterm, 12)}) = {round(indexcalc)}")
+        scindex += 1
 
 def print_binomial(a, b, c, d, n, k, unterm, x, y):
     global binsum
@@ -135,7 +148,7 @@ def from_polar():
         elif av == "f" or av == "function" or av == "fun":
             polynomial()
             break
-        elif av == "m" or av == "matrix" or av == "mat":
+        elif av == "m" or av == "matrix" or av == "mat" or av == "matrix operation":
             matrix_operation()
             break
         elif av == "s" or av == "sum" or av == "summation":
@@ -147,7 +160,7 @@ def from_polar():
                 print('Absolute values cannot be negative')
                 continue
         except:
-            print('Please enter a real nonnegative number or expression, "rec" for rectangular form, "r" for real operation, "m" for matrix operation, "f" for function, "s" for summation, "i" for info, or "\\" to exit')
+            print('Please enter a real nonnegative number or expression, "i" for info, or "\\" to exit')
             continue
         inang = input("Term 1 angle/argument: ")
         if inang == "\\" or inang == "exit" or inang == "exi":
@@ -545,13 +558,13 @@ def from_rectangular():
         elif a == "s" or a == "summation" or a == "sum":
             binomial_expansion()
             break
-        elif a == "m" or a == "mat" or a == "matrix":
+        elif a == "m" or a == "mat" or a == "matrix" or a == "matrix operation":
             matrix_operation()
             break
         try:
             a = eval(a)
         except:
-            print('Please enter a real number or expression, "p" for polar form, "r" for real operation, "m" for matrix operation, "f" for function, "s" for summation, "i" got info, or "\\" to exit')
+            print('Please enter a real number or expression, "i" for info, or "\\" to exit')
             continue
         b = input("b: ")
         if b == "\\" or b == "exit" or b == "exi":
@@ -908,7 +921,7 @@ def real_operation():
         elif n == "f" or n == "fun" or n == "function":
             polynomial()
             break
-        elif n == "m" or n == "mat" or n == "matrix" or n == "matric operation":
+        elif n == "m" or n == "mat" or n == "matrix" or n == "matrix operation":
             matrix_operation()
             break
         else:
@@ -918,7 +931,7 @@ def real_operation():
                     continue
                 n = eval(n)
             except:
-                print('Please enter a real number or expression, "c" for complex operation, "m" for matrix operation, "s" for summation, "f" for function, "i" for info, or "\\" to exit')
+                print('Please enter a real number or expression, "i" for info, or "\\" to exit')
                 continue
             while True:
                 op = input('Operation (i): ')
@@ -1261,20 +1274,23 @@ def binomial_expansion():
         elif a  == "g" or a == "geo" or a == "geometric" or a == "geometric series":
             geometric()
             break
+        elif a == "m" or a == "mat" or a == "matrix" or a == "matrix operation":
+            matrix_operation()
+            break
         elif a == "f" or a == "fun" or a == "function":
             polynomial()
             break
         elif a == "i" or a == "info" or a == "inf":
             print('Please enter a nonzero real number or expression as the first coefficient')
-            print('Enter "r" for real operation, "c" for complex operation (this will direct to rectangular form), "a" for arithmetic series, "g" for geometric series and "f" for function (this will direct to polynomial)')
+            print('Enter "r" for real operation, "a" for arithmetic series, "g" for geometric series, "c" for complex operation (this will direct to rectangular form), "m" for matrix operation, and "f" for function (this will direct to polynomial)')
             continue
         try:
             a = eval(a)
         except:
-            print('Please enter a nonzero real number or expression, "r" for real operation, "c" for complex operation, "a" for arithmetic series, "g" for geometric series, "f" for function, "i" for info, or "\\" to exit')
+            print('Please enter a nonzero real number or expression, "i" for info, or "\\" to exit')
             continue
         if a == 0:
-            print('Please enter a nonzero real number or expression, "r" for real operation, "c" for complex operation, "a" for arithmetic series, "g" for geometric series, "f" for function, "i" for info, or "\\" to exit')
+            print('Please enter a nonzero real number or expression, "i" for info, or "\\" to exit')
             continue
         while True:
             x = input("x (i): ")
@@ -1484,17 +1500,20 @@ def arithmetic():
         elif b == "b" or b == "bin" or b == "binomial" or b == "binomial expansion":
             binomial_expansion()
             break
+        elif b == "m" or b == "mat" or b == "matrix" or b == "matrix operation":
+            matrix_operation()
+            break
         elif b == "f" or b == "fun" or b == "function":
             polynomial()
             break
         elif b == "i" or b == "info" or b == "inf":
             print("Please enter a real number or expression as the value of one of the series terms")
-            print('Enter "r" for real operation, "c" for complex operation (this will direct to rectangular form), "b" for binomial expansion, "g" for geometric series, and "f" for function (this will direct to polynomial)')
+            print('Enter "r" for real operation, "b" for binomial expansion, "g" for geometric series, "c" for complex operation (this will direct to rectangular form), "m" for matrix operation, and "f" for function (this will direct to polynomial)')
             continue
         try:
             b = eval(b)
         except:
-            print('Please enter a real number or expression, "r" for real operation, "c" for complex operation, "b" for binomial expansion, "g" for geometric series, "f" for function, "i" for info, or "\\" to exit')
+            print('Please enter a real number or expression, "i" for info, or "\\" to exit')
             continue
         bn = input("Term index: ")
         if bn == "\\" or bn == "exit" or bn == "exi":
@@ -1664,11 +1683,9 @@ def arithmetic():
                             sumindex = f"ix{round(iunterm, 12)}"
                         else:
                             sumindex = f"ix_{abs(round(iunterm, 12))}"
-                        find_constants(iunterm, "pi")
-                        find_constants(iunterm, "e")
+                        series_find_constants(iunterm, indexcalc)
                         globals()[sumindex] = indexcalc
                         keeps.append(sumindex)
-                        print(sumindex + f" (index of {round(iunterm, 12)}) = {int(indexcalc)}")
                     else:
                         print('Index Error: the term is not in the series')
                 except:
@@ -1711,17 +1728,20 @@ def geometric():
         elif b == "f" or b == "fun" or b == "function":
             polynomial()
             break
+        elif b == "m" or b == "mat" or b == "matrix" or b == "matrix operation":
+            matrix_operation()
+            break
         elif b == "i" or b == "info" or b == "inf":
             print("Please enter a real number or expression as the value of one of the series terms")
-            print('Enter "r" for real operation, "c" for complex operation (this will direct to rectangular form), "b" for binomial expansion, "a" for arithmetic series, and "f" for function (this will direct to polynomial)')
+            print('Enter "r" for real operation, "b" for binomial expansion, "a" for arithmetic series, "c" for complex operation (this will direct to rectangular form), "m" for matrix operation, and "f" for function (this will direct to polynomial)')
             continue
         try:
             b = eval(b)
         except:
-            print('Please enter a nonzero real number or expression, "r" for real operation, "c" for complex operation, "b" for binomial expansion, "a" for arithmetic series, "f" for function, "i" for info, or "\\" to exit')
+            print('Please enter a nonzero real number or expression, "i" for info, or "\\" to exit')
             continue
         if round(b, 12) == 0:
-            print('Please enter a nonzero real number or expression, "r" for real operation, "c" for complex operation, "b" for binomial expansion, "a" for arithmetic series, "f" for function, "i" for info, or "\\" to exit')
+            print('Please enter a nonzero real number or expression, "i" for info, or "\\" to exit')
             continue
         bn = input("Term index: ")
         if bn == "\\" or bn == "exit" or bn == "exi":
@@ -1920,11 +1940,9 @@ def geometric():
                             sumindex = f"ix{round(iunterm, 12)}"
                         else:
                             sumindex = f"ix_{abs(round(iunterm, 12))}"
-                        find_constants(iunterm, "pi")
-                        find_constants(iunterm, "e")
+                        series_find_constants(iunterm, indexcalc)
                         globals()[sumindex] = indexcalc
                         keeps.append(sumindex)
-                        print(sumindex + f" (index of {round(iunterm, 12)}) = {int(indexcalc)}")
                     else:
                         print('Index Error: the term is not in the series')
                 except:
@@ -2060,7 +2078,7 @@ def matrix_operation():
 def system():
     print("Welcome to system of equations!")
 
-print("Welcome to Benny's Calculator!")
+print("Welcome to The Ultimate Class Calculator!")
 
 while True:
     clear_variables()
@@ -2107,7 +2125,7 @@ while True:
                 print('Please enter either "binomial" (b), "arithmetic" (a), "geometric" (g), or "\\" to exit')
         else:
             print('Please enter either "r" for real, "c" for complex, "m" for matrix, "s" for summation, or "\\" to exit')
-    
+
     else:
         print('Please enter either "o" for operation, "f" for function, or "\\" to exit)')
 
