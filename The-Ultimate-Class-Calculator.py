@@ -2122,6 +2122,8 @@ def symmetry():
         except:
             print('Please enter a real number or expression, or return to exit')
             continue
+        print(f"Point: ({round(x, 12)}, {round(y, 12)})")
+        print()
         m = input("m: ")
         try:
             m = eval(m)
