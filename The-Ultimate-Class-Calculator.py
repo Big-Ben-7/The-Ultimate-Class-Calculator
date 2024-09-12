@@ -1999,14 +1999,14 @@ def polynomial():
         elif a == "o" or a == "ope" or a == "operation":
             real_operation()
             break
-        elif a == "s" or a == "sum" or a == "summation":
-            binomial_expansion()
-            break
         elif a == "c" or a == "con" or a == "conic" or a == "conic section":
             conic_section()
             break
         elif a == "sys" or a == "system" or a == "system of equations":
             system()
+            break
+        elif a == "s" or a == "sym" or a == "symmetry":
+            symmetry()
             break
         elif a == "info" or a == "inf" or a == "i":
             print()
@@ -2220,14 +2220,19 @@ def symmetry():
         except:
             print('Please enter a real number or expression, or return to exit')
             continue
-        print(f"Point: ({round(x_input, 12)}, {round(y_input, 12)})")
+        print(f"Point to reflect: ({round(x_input, 12)}, {round(y_input, 12)})")
         print()
-        ang = atan(m)
-        x = x_input * cos(2 * ang) + (y_input - b) * sin(2 * ang)
-        y = x_input * sin(2 * ang) - (y_input - b) * cos(2* ang)
-        print(f"New point: ({round(x, 12)}, {round(y, 12)})")
+        if m != "v" and m != "ver" and m != "vertical":
+            ang = atan(m)
+            x = x_input * cos(2 * ang) + (y_input - b) * sin(2 * ang)
+            y = x_input * sin(2 * ang) - (y_input - b) * cos(2* ang)
+        else:
+            x = -x_input + 2 * b
+            y = y_input
+        print(f"Reflected point: ({round(x, 12)}, {round(y, 12)})")
         print(f"x (x-coordinate) = {round(x, 12)}")
         print(f"y (y-coordinate) = {round(y, 12)}")
+
 def conic_section():
     print()
     print("Welcome to conic sections!")
