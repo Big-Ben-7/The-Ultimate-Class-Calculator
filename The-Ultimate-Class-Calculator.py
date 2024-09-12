@@ -2086,7 +2086,7 @@ def symmetry():
     global y
     print()
     print("Welcome to fuction symmetry!")
-    print("Please enter the point to reflect in the form (x, y) and the symmetry line in the form y = mx + b")
+    print("Please enter points in the form (x, y) and lines (if needed) in the form y = mx + b")
     while True:
         clear_variables()
         print()
@@ -2096,6 +2096,7 @@ def symmetry():
         elif m == "info" or m == "inf" or m == "i":
             print()
             print("Please enter a real number or expression as the slope of the symmetry line")
+            print('Enter "p" to enter points instead of slope and y-intercept')
             print('Enter "v" for a vertical and "h" for a horizontal symmetry line')
             print('Enter "p" for polynomial, "sys" for system of equations, "c" for conic section, and "o" for operation (this will direct to real operation)')
             continue
@@ -2113,7 +2114,7 @@ def symmetry():
             break
         elif m == "h" or m == "hor" or m == "horizontal":
             m = 0
-        if m != "v" and m != "ver" and m != "vertical":
+        if m != "v" and m != "ver" and m != "vertical" and m != "p" and m != "points" and m != "poi":
             try:
                 m = eval(m)
             except:
@@ -2140,6 +2141,32 @@ def symmetry():
             else:
                 printm = f" + {round(b, 12)}"
             print("Symmetry line: y = " + printm + printb)
+        elif m == "p" or m == "points" or m == "poi":
+            p1 = input("Point 1: ")
+            if p1[0] == "(":
+                p1 = p1[1:]
+            if p1[len(p1) - 1] == ")":
+                p1 = p1[:len(p1) - 1]
+            p1 = p1.split(",", 1)
+            try:
+                p1[0] = eval(p1[0])
+                p1[1] = eval(p1[1])
+            except:
+                print("Please enter the points in the form (x, y), where x and y are real numbers or expressions")
+                continue
+            p2 = input("Point 2: ")
+            if p2[0] == "(":
+                p2 = p2[1:]
+            if p1[len(p2) - 1] == ")":
+                p2 = p2[:len(p2) - 1]
+            p2 = p2.split(",", 1)
+            try:
+                p2[0] = eval(p2[0])
+                p2[1] = eval(p2[1])
+            except:
+                print("Please enter the points in the form (x, y), where x and y are real numbers or expressions")
+                continue
+            m = (p2[1] - p1[1]) / (p2[0] - p1[0])
         else:
             xint = input("X-intercept: ")
             if xint == "" or xint == "exit" or xint == "exi":
