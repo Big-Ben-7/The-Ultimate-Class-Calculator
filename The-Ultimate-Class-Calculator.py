@@ -2163,6 +2163,9 @@ def symmetry():
             try:
                 p2[0] = eval(p2[0])
                 p2[1] = eval(p2[1])
+                if p2[0] == p1[0] and p2[1] == p1[1]:
+                    print("Please enter two different points")
+                    continue
             except:
                 print("Please enter the points in the form (x, y), where x and y are real numbers or expressions")
                 continue
