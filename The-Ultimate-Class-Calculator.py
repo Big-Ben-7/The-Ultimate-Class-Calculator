@@ -66,13 +66,13 @@ def series_find_constants(iunterm, indexcalc):
                 break
         elif constant % iunterm == 0:
             if constant / iunterm < 0:
-                sumindex = f"ix_" + cstring + f"D{round(abs(constant / iunterm))}"
+                sumindex = f"ix_" + cstring + f"_D_{round(abs(constant / iunterm))}"
                 print(sumindex + f" (index of -" + cstring + f"/{round(abs(constant / iunterm))}" + f") = {round(indexcalc)}")
                 globals()[sumindex] = indexcalc
                 keeps.append(sumindex)
                 break
             elif constant / iunterm > 0:
-                sumindex = f"ix" + cstring + f"D{round(constant / iunterm)}"
+                sumindex = f"ix" + cstring + f"_D_{round(constant / iunterm)}"
                 print(sumindex + f" (index of " + cstring + f"/{round((constant / iunterm))}" + f") = {round(indexcalc)}")
                 globals()[sumindex] = indexcalc
                 keeps.append(sumindex)
@@ -181,7 +181,7 @@ def from_polar():
                 print('Absolute values cannot be negative')
                 continue
         except:
-            print('Please enter a real nonnegative number or expression, "i" for info, or return/enter to exit')
+            print('Please enter a real nonnegative number or expression, "i" for info, or return to exit')
             continue
         inang = input("Term 1 angle/argument: ")
         if inang == "" or inang == "exit" or inang == "exi":
@@ -189,7 +189,7 @@ def from_polar():
         try:
             inang = eval(inang)
         except:
-            print('Please enter a real number or expression, or return/enter to exit')
+            print('Please enter a real number or expression, or return to exit')
             continue
         while True:
             angmode = input("Inputted in (r)adians or (d)egrees? ")
@@ -232,7 +232,7 @@ def from_polar():
                     print('Absolute values cannot be negative')
                     continue
             except:
-                print('Please enter a real number or expression, or return/enter to exit')
+                print('Please enter a real number or expression, or return to exit')
                 continue                        
             inang2 = input("Term 2 angle/argument: ")
             if inang2 == "" or inang2 == "exit" or inang2 == "exi":
@@ -240,7 +240,7 @@ def from_polar():
             try:
                 inang2 = eval(inang2)
             except:
-                print('Please enter a real number or expression, or return/enter to exit')
+                print('Please enter a real number or expression, or return to exit')
                 continue
             while True:
                 angmode2 = input("Inputted in (r)adians or (d)egrees? ")
@@ -524,11 +524,11 @@ def from_polar():
                 im = res.imag
                 print(f"im (imaginary part) = {round(im, 12)}")                
             else:
-                print('Please enter a valid operation ("i" for info and return/enter to exit)')
+                print('Please enter a valid operation ("i" for info and return to exit)')
         except:
             print("OPERATION ERROR") 
             print("This error occurs when the inputs do not meet their restrictions, for example: ")
-            print('Only real numbers, constants, and expressions can be entered as terms (enter "i" for info and return/enter to exit)')
+            print('Only real numbers, constants, and expressions can be entered as terms (enter "i" for info and return to exit)')
             print("Division by 0 is undefined")
             print("Raising 0 to a negative power is undefined")
             print()
@@ -585,7 +585,7 @@ def from_rectangular():
         try:
             a = eval(a)
         except:
-            print('Please enter a real number or expression, "i" for info, or return/enter to exit')
+            print('Please enter a real number or expression, "i" for info, or return to exit')
             continue
         b = input("b: ")
         if b == "" or b == "exit" or b == "exi":
@@ -593,7 +593,7 @@ def from_rectangular():
         try:
             b = eval(b)
         except:
-            print('Please enter a real number or expression, or return/enter to exit')
+            print('Please enter a real number or expression, or return to exit')
             continue
         if round(a, 12) != 0 and round(b, 12) > 0:
             if round(b, 12) != 1:
@@ -639,7 +639,7 @@ def from_rectangular():
             try:
                 c = eval(c)
             except:
-                print('Please enter a real number or expression, or return/enter to exit')
+                print('Please enter a real number or expression, or return to exit')
                 continue                        
             d = input("d: ")
             if d == "" or d == "exit" or d == "exi":
@@ -647,7 +647,7 @@ def from_rectangular():
             try:
                 d = eval(d)
             except:
-                print('Please enter a real number or expression, or return/enter to exit')
+                print('Please enter a real number or expression, or return to exit')
                 continue
             if round(c, 12) != 0 and round(d, 12) > 0:
                 if round(d, 12) != 1:
@@ -891,12 +891,12 @@ def from_rectangular():
                 else:
                     print(f"ang (angle/argument) = {round(ang, 12)} (degrees)")                    
             else:
-                print('Please enter a valid operation ("i" for info and return/enter to exit)')
+                print('Please enter a valid operation ("i" for info and return to exit)')
         except:
             print()
             print("OPERATION ERROR") 
             print("This error occurs when the inputs do not meet their restrictions, for example: ")
-            print('Only real numbers, constants, and expressions can be entered as terms (enter "i" for info and return/enter to exit)')
+            print('Only real numbers, constants, and expressions can be entered as terms (enter "i" for info and return to exit)')
             print("Division by 0 is undefined")
             print("Raising 0 to a negative power is undefined")
             print()
@@ -952,7 +952,7 @@ def real_operation():
                     continue
                 n = eval(n)
             except:
-                print('Please enter a real number or expression, "i" for info, or return/enter to exit')
+                print('Please enter a real number or expression, "i" for info, or return to exit')
                 continue
             while True:
                 op = input('Operation (i): ')
@@ -987,7 +987,7 @@ def real_operation():
                     try:
                         n2 = eval(n2)
                     except:
-                        print('Please enter a real number or expression, or return/enter to exit')
+                        print('Please enter a real number or expression, or return to exit')
                         continue
                 elif op == "round" or op == "~" or op == "rou":
                     n2 = input('Decimals to round (0-12): ')
@@ -998,7 +998,7 @@ def real_operation():
                     try:
                         n2 = int(n2)
                     except:
-                        print('Please enter an integer from 0 to 12 or return/enter to exit')
+                        print('Please enter an integer from 0 to 12 or return to exit')
                         continue
                 elif op == "log" or op == "logarithm":
                     if n > 0:
@@ -1008,7 +1008,7 @@ def real_operation():
                         try:
                             n2 = eval(n2)
                         except:
-                            print('Please enter a real number or expression greater than 0 and not equal to 1, or return/enter to exit')
+                            print('Please enter a real number or expression greater than 0 and not equal to 1, or return to exit')
                             continue                                
                 elif op == "choose" or op == "cho" or op == "comb":
                     if round(n, 12) == round(n) and n >= 0:
@@ -1018,7 +1018,7 @@ def real_operation():
                         try:
                             n2 = eval(n2)
                         except:
-                            print('Please enter a nonnegative integer or return/enter to exit')
+                            print('Please enter a nonnegative integer or return to exit')
                             continue                                    
                 elif op == "perm" or op == "permute" or op == "per":
                     if round(n, 12) == round(n) and n >= 0:
@@ -1028,7 +1028,7 @@ def real_operation():
                         try:
                             n2 = eval(n2)
                         except:
-                            print('Please enter a nonnegative integer or return/enter to exit')
+                            print('Please enter a nonnegative integer or return to exit')
                             continue  
                 else:
                     if op == "equal to" or op == "is":
@@ -1049,7 +1049,7 @@ def real_operation():
                     try:
                         n2 = eval(n2)
                     except:
-                        print('Please enter a real number or expression, or return/enter to exit')
+                        print('Please enter a real number or expression, or return to exit')
                         continue
         try:
             if op == "equals" or op == "=" or op == "equ":
@@ -1255,7 +1255,7 @@ def real_operation():
                     else:
                         print(f"ans (answer) = {round(n, 12)} degrees")
             else:
-                print('Please enter a valid operation ("i" for info and return/enter to exit)')
+                print('Please enter a valid operation ("i" for info and return to exit)')
                 print()
                 continue
             ans = n
@@ -1263,7 +1263,7 @@ def real_operation():
             print()
             print("OPERATION ERROR") 
             print("This error occurs when the inputs do not meet their restrictions, for example: ")
-            print('Only real numbers, constants, and expressions can be entered as terms (enter "i" for info and return/enter to exit)')
+            print('Only real numbers, constants, and expressions can be entered as terms (enter "i" for info and return to exit)')
             print("Division, integer division, and remainder/modulo by 0 is undefined")
             print("Raising 0 to a negative power is undefined")
             print("Taking an even root of a negative number is undefined over real numbers")
@@ -1308,10 +1308,10 @@ def binomial_expansion():
         try:
             a = eval(a)
         except:
-            print('Please enter a nonzero real number or expression, "i" for info, or return/enter to exit')
+            print('Please enter a nonzero real number or expression, "i" for info, or return to exit')
             continue
         if a == 0:
-            print('Please enter a nonzero real number or expression, "i" for info, or return/enter to exit')
+            print('Please enter a nonzero real number or expression, "i" for info, or return to exit')
             continue
         while True:
             x = input("x (i): ")
@@ -1324,12 +1324,12 @@ def binomial_expansion():
                     print("The variable will not store any value, it is just the name that will be printed in the result")
                     print()
                 elif x.find(" ") != -1 or x[0].isalpha() == False:
-                    print('For clarity, please enter a non-numeric variable name without spaces, "i" for info, or return/enter to exit')
+                    print('For clarity, please enter a non-numeric variable name without spaces, "i" for info, or return to exit')
                     print()
                 else:
                     break
             except:
-                print('Please enter a non-numeric variable name without spaces, "i" for info, or return/enter to exit')
+                print('Please enter a non-numeric variable name without spaces, "i" for info, or return to exit')
         if x == "exit" or x == "exi" or x == "":
             continue
         b = input("b: ")
@@ -1338,10 +1338,10 @@ def binomial_expansion():
         try:
             b = eval(b)
         except:
-            print('Please enter a nonzero real number or expression, or return/enter to exit')
+            print('Please enter a nonzero real number or expression, or return to exit')
             continue
         if b == 0:
-            print('Please enter a nonzero real number or expression, or return/enter to exit')
+            print('Please enter a nonzero real number or expression, or return to exit')
             continue
         if a == 1:
             aprint = ""
@@ -1360,10 +1360,10 @@ def binomial_expansion():
         try:
             c = eval(c)
         except:
-            print('Please enter a nonzero real number or expression, or return/enter to exit')
+            print('Please enter a nonzero real number or expression, or return to exit')
             continue
         if c == 0:
-            print('Please enter a nonzero real number or expression, or return/enter to exit')
+            print('Please enter a nonzero real number or expression, or return to exit')
             continue
         while True:
             y = input("y (i, /): ")
@@ -1379,12 +1379,12 @@ def binomial_expansion():
                 elif y == "skip" or y == "/" or y == "ski":
                     break
                 elif y.find(" ") != -1 or y[0].isalpha() == False:
-                    print('For clarity, please enter a non-numeric variable name without spaces, "i" for info, or return/enter to exit')
+                    print('For clarity, please enter a non-numeric variable name without spaces, "i" for info, or return to exit')
                     print()
                 else:
                     break
             except:
-                print('Please enter a non-numeric variable name without spaces, "i" for info, or return/enter to exit')
+                print('Please enter a non-numeric variable name without spaces, "i" for info, or return to exit')
                 print()
         if y == "exit" or y == "exi" or y == "":
             continue
@@ -1395,7 +1395,7 @@ def binomial_expansion():
             try:
                 d = eval(d)
             except:
-                print('Please enter a real number or expression, or return/enter to exit')
+                print('Please enter a real number or expression, or return to exit')
                 continue
         else:
             d = 0
@@ -1422,7 +1422,7 @@ def binomial_expansion():
             if n < 0:
                 binsum += "1 / ("
         except:
-            print('Please enter an integer or return/enter to exit')
+            print('Please enter an integer or return to exit')
             continue
         if term2[0] != "-":
             print("(" + term1 + " + " + term2 + ")" + " ^ " + f"{n}")
@@ -1464,9 +1464,9 @@ def binomial_expansion():
                         k = unterm - 1
                         print_binomial(a, b, c, d, n, k, unterm, x, y)
                     else:
-                        print(f'Term Error: indexes must be positive integers between 1 and |n| + 1 ({abs(n) + 1}), inclusive (enter "all" for all, "i" for info and return/enter to exit)')
+                        print(f'Term Error: indexes must be positive integers between 1 and |n| + 1 ({abs(n) + 1}), inclusive (enter "all" for all, "i" for info and return to exit)')
                 except:
-                    print(f'Term Error: indexes must be positive integers between 1 and |n| + 1 ({abs(n) + 1}), inclusive (enter "all" for all, "i" for info and return/enter to exit)')
+                    print(f'Term Error: indexes must be positive integers between 1 and |n| + 1 ({abs(n) + 1}), inclusive (enter "all" for all, "i" for info and return to exit)')
             elif len(rangelist) == 2:
                 try:
                     if rangelist[0] == "ans":
@@ -1484,13 +1484,13 @@ def binomial_expansion():
                             print_binomial(a, b, c, d, n, k, unterm, x, y)
                             rangeindex += 1
                     elif rangelist[1] <= rangelist[0]:
-                        print('Term Error: the second index of a range must be greater than the first index of the range (enter "all" for all, "i" for info and return/enter to exit)')
+                        print('Term Error: the second index of a range must be greater than the first index of the range (enter "all" for all, "i" for info and return to exit)')
                     else:    
-                        print(f'Term Error: indexes must be positive integers between 1 and |n| + 1 ({abs(n) + 1}), inclusive (enter "all" for all, "i" for info and return/enter to exit)')
+                        print(f'Term Error: indexes must be positive integers between 1 and |n| + 1 ({abs(n) + 1}), inclusive (enter "all" for all, "i" for info and return to exit)')
                 except:
-                    print(f'Term Error: indexes must be positive integers between 1 and |n| + 1 ({abs(n) + 1}), inclusive (enter "all" for all, "i" for info and return/enter to exit)')
+                    print(f'Term Error: indexes must be positive integers between 1 and |n| + 1 ({abs(n) + 1}), inclusive (enter "all" for all, "i" for info and return to exit)')
             else:
-                print(f'Term Error: please enter ranges in the form "x-y", where x and y are both positive integers between 1 and |n| + 1 ({abs(n) + 1}), inclusive, and y is greater than x (enter "all" for all, "i" for info and return/enter to exit)')
+                print(f'Term Error: please enter ranges in the form "x-y", where x and y are both positive integers between 1 and |n| + 1 ({abs(n) + 1}), inclusive, and y is greater than x (enter "all" for all, "i" for info and return to exit)')
             unindex += 1
         binsum = binsum[:len(binsum) - 3]
         if n < 0:
@@ -1534,7 +1534,7 @@ def arithmetic():
         try:
             b = eval(b)
         except:
-            print('Please enter a real number or expression, "i" for info, or return/enter to exit')
+            print('Please enter a real number or expression, "i" for info, or return to exit')
             continue
         bn = input("Term index: ")
         if bn == "" or bn == "exit" or bn == "exi":
@@ -1544,10 +1544,10 @@ def arithmetic():
         try:
             bn = int(bn)
         except:
-            print('Please enter a positive integer or return/enter to exit')
+            print('Please enter a positive integer or return to exit')
             continue
         if bn < 1:
-            print('Please enter a positive integer or return/enter to exit')
+            print('Please enter a positive integer or return to exit')
             continue
         comdif = input("Common difference (t to enter term): ")
         if comdif == "" or comdif == "exit" or comdif == "exi":
@@ -1559,7 +1559,7 @@ def arithmetic():
             try:
                 c = eval(c)  
             except:
-                print('Please enter a real number or expression, or return/enter to exit')
+                print('Please enter a real number or expression, or return to exit')
                 continue
             cn = input("Term index: ")
             if cn == "" or cn == "exit" or cn == "exi":
@@ -1569,7 +1569,7 @@ def arithmetic():
             try:
                 cn = int(cn)
             except:
-                print('Please enter a positive integer or return/enter to exit')
+                print('Please enter a positive integer or return to exit')
                 continue
             if bn < cn:
                 comdif = (c - b) / (cn - bn)
@@ -1581,7 +1581,7 @@ def arithmetic():
             try:
                 comdif = eval(comdif)
             except:
-                print('Please enter a real number or expression, or return/enter to exit')
+                print('Please enter a real number or expression, or return to exit')
                 continue
         cn = bn + 1
         c = b + comdif
@@ -1600,7 +1600,7 @@ def arithmetic():
                  try:
                     l = eval(l)
                  except:
-                    print('Please enter a real number or expression, or return/enter to exit')
+                    print('Please enter a real number or expression, or return to exit')
                     continue
                  if comdif == 0:
                     print("If the common difference is 0, enter a number of terms to sum instead")
@@ -1612,10 +1612,10 @@ def arithmetic():
             try:
                 n = int(n)
             except:
-                print('Please enter a positive integer, "/" to skip, or return/enter to exit')
+                print('Please enter a positive integer, "/" to skip, or return to exit')
                 continue
             if n <= 0:
-                print('Please enter a positive integer, "/" to skip, or return/enter to exit')
+                print('Please enter a positive integer, "/" to skip, or return to exit')
                 continue
         while True:
             un = input('Indexes of terms to find (i, /): ')
@@ -1753,10 +1753,10 @@ def geometric():
         try:
             b = eval(b)
         except:
-            print('Please enter a nonzero real number or expression, "i" for info, or return/enter to exit')
+            print('Please enter a nonzero real number or expression, "i" for info, or return to exit')
             continue
         if round(b, 12) == 0:
-            print('Please enter a nonzero real number or expression, "i" for info, or return/enter to exit')
+            print('Please enter a nonzero real number or expression, "i" for info, or return to exit')
             continue
         bn = input("Term index: ")
         if bn == "" or bn == "exit" or bn == "exi":
@@ -1766,10 +1766,10 @@ def geometric():
         try:
             bn = int(bn)
         except:
-            print('Please enter a positive integer or return/enter to exit')
+            print('Please enter a positive integer or return to exit')
             continue
         if bn < 1:
-            print('Please enter a positive integer or return/enter to exit')
+            print('Please enter a positive integer or return to exit')
             continue
         comrat = input("Common ratio (t to enter term): ")
         if comrat == "" or comrat == "exit" or comrat == "exi":
@@ -1781,10 +1781,10 @@ def geometric():
             try:
                 c = eval(c)  
             except:
-                print('Please enter a nonzero real number or expression, or return/enter to exit')
+                print('Please enter a nonzero real number or expression, or return to exit')
                 continue      
             if round(c, 12) == 0:
-                print('Please enter a nonzero real number or expression, or return/enter to exit')
+                print('Please enter a nonzero real number or expression, or return to exit')
                 continue
             cn = input("Term index: ")
             if cn == "" or cn == "exit" or cn == "exi":
@@ -1794,7 +1794,7 @@ def geometric():
             try:
                 cn = int(cn)
             except:
-                print('Please enter a positive integer or return/enter to exit')
+                print('Please enter a positive integer or return to exit')
                 continue
             if bn < cn:
                 comrat = (c / b) ** (1/(cn - bn))
@@ -1811,10 +1811,10 @@ def geometric():
             try:
                 comrat = eval(comrat)
             except:
-                print('Please enter a nonzero real number or expression, or return/enter to exit')
+                print('Please enter a nonzero real number or expression, or return to exit')
                 continue
             if round(comrat, 12) == 0:
-                print('Please enter a nonzero real number or expression, or return/enter to exit')
+                print('Please enter a nonzero real number or expression, or return to exit')
                 continue
         cn = bn + 1
         c = b * comrat
@@ -1832,7 +1832,7 @@ def geometric():
                 try:
                     l = eval(l)
                 except:
-                    print('Please enter a nonzero real number or expression, or return/enter to exit')
+                    print('Please enter a nonzero real number or expression, or return to exit')
                     continue
                 if l == 0:
                     print("The last term cannot be 0")
@@ -1853,10 +1853,10 @@ def geometric():
                 try:
                     n = int(n)
                 except:
-                    print('Please enter a positive integer, "i" for infinity, "/" to skip, or return/enter to exit')
+                    print('Please enter a positive integer, "i" for infinity, "/" to skip, or return to exit')
                     continue
                 if n <= 0:
-                    print('Please enter a positive integer, "i" for infinity, "/" to skip, or return/enter to exit')
+                    print('Please enter a positive integer, "i" for infinity, "/" to skip, or return to exit')
                     continue
             elif (n == "inf" or n == "infinity" or n == "i") and (comrat >= 1 or comrat <= -1):
                 print("Infinity is only accepted for common ratios between -1 and 0 and between 0 and -1")
@@ -2001,18 +2001,18 @@ def polynomial():
         elif a == "c" or a == "con" or a == "conic" or a == "conic section":
             conic_section()
             break
-        elif a == "sys" or a == "s" or a == "system" or a == "system of equations":
+        elif a == "sys" or a == "system" or a == "system of equations":
             system()
             break
         elif a == "info" or a == "inf" or a == "i":
             print()
             print("Please enter a real number or expression as the x^2 coefficient")
-            print('Enter "s" for system of equations, "c" for conic section, and "o" for operation (this will direct to real operation)')
+            print('Enter "sys" for system of equations, "c" for conic section, "s" for symmetry, and "o" for operation (this will direct to real operation)')
             continue
         try:
             a = eval(a)
         except:
-            print('Please enter a real number or expression, "sy" for system, "c" for conic, "o" for operation, "i" for info, or return/enter to exit')
+            print('Please enter a real number or expression, "i" for info, or return to exit')
             continue
         b = input('b: ')
         if b == "" or b == "exit" or b == "exi":
@@ -2020,7 +2020,7 @@ def polynomial():
         try:
             b = eval(b)
         except:
-            print('Please enter a real number or expression, or return/enter to exit')
+            print('Please enter a real number or expression, or return to exit')
             continue            
         c = input('c: ')   
         if c == "" or c == "exit" or c == "exi":
@@ -2028,7 +2028,7 @@ def polynomial():
         try:
             c = eval(c)
         except:
-            print('Please enter a real number or expression, or return/enter to exit')
+            print('Please enter a real number or expression, or return to exit')
             continue
         print()
         if round(a, 12) == 0 and round(b, 12) == 0 and round(c, 12) == 0:
@@ -2077,6 +2077,58 @@ def polynomial():
                 print(f"im (imaginary part) = {round(im, 12)}")
                 print(f"im2 (2nd imaginary part) = {round(im2, 12)}")
 
+def symmetry():
+    print()
+    print("Welcome to fuction symmetry!")
+    print("Please enter the point to reflect in the form (x, y) and the axis of symmetry in the form f(x) = mx + b")
+    while True:
+        clear_variables()
+        print()
+        x = input("x (i): ")
+        if x == "info" or x == "inf" or x == "i":
+            print()
+            print("Please enter a real number or expression as the x coordinate of the point to reflect")
+            print('Enter "p" for polynomial, "sys" for system of equations, "c" for conic section, and "o" for operation (this will direct to real operation)')
+            continue
+        elif x == "" or x == "exit" or x == "exi":
+            break
+        elif x == "p" or x == "pol" or x == "polynomial":
+            polynomial()
+            break
+        elif x == "sys" or x == "system" or x == "system of equations":
+            system()
+            break
+        elif x == "o" or x == "ope" or x == "operation":
+            real_operation()
+            break
+        elif x == "c" or x == "conic section" or x == "con" or x == "conic":
+            conic_section()
+            break
+        else:
+            try:
+                x = eval(x)
+            except:
+                print('Please enter a real number or expression, "i" for info, or return to exit')
+                continue
+        y = input("y: ")
+        try:
+            y = eval(y)
+        except:
+            print('Please enter a real number or expression, or return to exit')
+            continue
+        m = input("m: ")
+        try:
+            m = eval(m)
+        except:
+            print('Please enter a real number or expression, or return to exit')
+            continue
+        b = input("b: ")
+        try:
+            b = eval(b)
+        except:
+            print('Please enter a real number or expression, or return to exit')
+            continue
+
 def conic_section():
     print()
     print("Welcome to conic sections!")
@@ -2097,10 +2149,11 @@ while True:
         break
 
     elif cat == "f" or cat == "fun" or cat == "function":
-        funtype = input("Function type ((p)olynomial, (s)ystem, (c)onic)")
+        funtype = input("Function type ((p)olynomial, (sys)tem, (c)onic), (s)ymmetry")
         if funtype == "polynomial" or funtype == "p" or funtype == "pol":
             polynomial()
-
+        elif funtype == "s" or funtype == "sym" or funtype == "symmetry":
+            symmetry()
     elif cat == "operation" or cat == "ope" or cat == "o":
         opetype = input('Operation type ((r)eal, (c)omplex, (m)atrix, (s)ummation): ')
         if opetype == "" or opetype == "exit" or opetype == "exi":
@@ -2116,7 +2169,7 @@ while True:
             elif ctype == "" or ctype == "exit" or ctype == "exi":
                 continue
             else:
-                print('Please enter either "r" for rectangular, "p" for polar, or return/enter to exit')
+                print('Please enter either "r" for rectangular, "p" for polar, or return to exit')
         elif opetype == "m" or opetype == "mat" or opetype == "matrix":
             matrix_operation()
         elif opetype == "summation" or opetype == "sum" or opetype == "s":
@@ -2130,12 +2183,12 @@ while True:
             elif sumtype == "geometric" or sumtype == "geo" or sumtype == "g" or sumtype == "geometric series":
                 geometric()
             else:
-                print('Please enter either "b" for binomial, "a" for arithmetic, "g" for geometric, or return/enter to exit')
+                print('Please enter either "b" for binomial, "a" for arithmetic, "g" for geometric, or return to exit')
         else:
-            print('Please enter either "r" for real, "c" for complex, "m" for matrix, "s" for summation, or return/enter to exit')
+            print('Please enter either "r" for real, "c" for complex, "m" for matrix, "s" for summation, or return to exit')
 
     else:
-        print('Please enter either "o" for operation, "f" for function, or return/enter to exit)')
+        print('Please enter either "o" for operation, "f" for function, or return to exit)')
 
 # %% [markdown]
 # 
