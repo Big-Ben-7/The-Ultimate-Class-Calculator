@@ -2143,7 +2143,8 @@ def symmetry():
             print("Symmetry line: y = " + printm + printb)
         elif m == "p" or m == "points" or m == "poi":
             p1 = input("Point 1: ")
-            
+            if p1 == "" or p1 == "exit" or p1 == "exi":
+                continue
             if p1[0] == "(":
                 p1 = p1[1:]
             if p1[len(p1) - 1] == ")":
