@@ -24,10 +24,14 @@ global root
 root = 0.0
 global root2
 root2 = 0.0
+global x
+x = 0.0
+global y
+y = 0.0
 global binsum
 binsum = ""
 global keeps
-keeps = ["ans", "pi", "e", "tau", "inf", "nan", "infj", "nanj", "keeps", "rl", "im", "im2", "mod", "ang", "sum", "rat", "root", "root2", "binsum", "dif"]
+keeps = ["ans", "pi", "e", "tau", "inf", "nan", "infj", "nanj", "keeps", "x", "y", "rl", "im", "im2", "mod", "ang", "sum", "rat", "root", "root2", "binsum", "dif"]
 
 def clear_variables():
     for var in list(globals()):
@@ -2078,35 +2082,37 @@ def polynomial():
                 print(f"im2 (2nd imaginary part) = {round(im2, 12)}")
 
 def symmetry():
+    global x
+    global y
     print()
     print("Welcome to fuction symmetry!")
     print("Please enter the point to reflect in the form (x, y) and the axis of symmetry in the form f(x) = mx + b")
     while True:
         clear_variables()
         print()
-        x = input("x (i): ")
-        if x == "info" or x == "inf" or x == "i":
+        x_input = input("x (i): ")
+        if x_input == "info" or x_input == "inf" or x_input == "i":
             print()
             print("Please enter a real number or expression as the x coordinate of the point to reflect")
             print('Enter "p" for polynomial, "sys" for system of equations, "c" for conic section, and "o" for operation (this will direct to real operation)')
             continue
-        elif x == "" or x == "exit" or x == "exi":
+        elif x_input == "" or x_input == "exit" or x_input == "exi":
             break
-        elif x == "p" or x == "pol" or x == "polynomial":
+        elif x_input == "p" or x_input == "pol" or x_input == "polynomial":
             polynomial()
             break
-        elif x == "sys" or x == "system" or x == "system of equations":
+        elif x_input == "sys" or x_input == "system" or x_input == "system of equations":
             system()
             break
-        elif x == "o" or x == "ope" or x == "operation":
+        elif x_input == "o" or x_input == "ope" or x_input == "operation":
             real_operation()
             break
-        elif x == "c" or x == "conic section" or x == "con" or x == "conic":
+        elif x_input == "c" or x_input == "conic section" or x_input == "con" or x_input == "conic":
             conic_section()
             break
         else:
             try:
-                x = eval(x)
+                x_input = eval(x_input)
             except:
                 print('Please enter a real number or expression, "i" for info, or return to exit')
                 continue
@@ -2128,6 +2134,13 @@ def symmetry():
         except:
             print('Please enter a real number or expression, or return to exit')
             continue
+        ang = atan(m)
+        x = x_input * cos(2 * ang) + (y - b) * sin(2 * ang)
+        y = x_input * sin(2 * ang) - (y - b) * cos(2* ang)
+        print()
+        print(f"({round(x, 12)}, {round(y, 12)})")
+        print(f"x = {round(x, 12)}")
+        print(f"y = {round(y, 12)}")
 
 def conic_section():
     print()
