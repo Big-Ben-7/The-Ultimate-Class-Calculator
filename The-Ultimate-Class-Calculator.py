@@ -2086,64 +2086,95 @@ def symmetry():
     global y
     print()
     print("Welcome to fuction symmetry!")
-    print("Please enter the point to reflect in the form (x, y) and the axis of symmetry in the form f(x) = mx + b")
+    print("Please enter the point to reflect in the form (x, y) and the symmetry line in the form y = mx + b")
     while True:
         clear_variables()
         print()
-        x_input = input("x (i): ")
-        if x_input == "info" or x_input == "inf" or x_input == "i":
+        m = input("Slope (i): ")
+        if m == "" or m == "exit" or m == "exi":
+            break
+        elif m == "info" or m == "inf" or m == "i":
             print()
-            print("Please enter a real number or expression as the x coordinate of the point to reflect")
+            print("Please enter a real number or expression as the slope of the symmetry line")
+            print('Enter "v" for a vertical and "h" for a horizontal symmetry line')
             print('Enter "p" for polynomial, "sys" for system of equations, "c" for conic section, and "o" for operation (this will direct to real operation)')
             continue
-        elif x_input == "" or x_input == "exit" or x_input == "exi":
-            break
-        elif x_input == "p" or x_input == "pol" or x_input == "polynomial":
+        elif m == "p" or m == "pol" or m == "polynomial":
             polynomial()
             break
-        elif x_input == "sys" or x_input == "system" or x_input == "system of equations":
+        elif m == "sys" or m == "system" or m == "system of equations":
             system()
             break
-        elif x_input == "o" or x_input == "ope" or x_input == "operation":
+        elif m == "o" or m == "ope" or m == "operation":
             real_operation()
             break
-        elif x_input == "c" or x_input == "conic section" or x_input == "con" or x_input == "conic":
+        elif m == "c" or m == "conic section" or m == "con" or m == "conic":
             conic_section()
             break
-        else:
+        elif m == "h" or m == "hor" or m == "horizontal":
+            m = 0
+        if m != "v" and m != "ver" and m != "vertical":
             try:
-                x_input = eval(x_input)
+                m = eval(m)
             except:
                 print('Please enter a real number or expression, "i" for info, or return to exit')
                 continue
-        y = input("y: ")
-        try:
-            y = eval(y)
-        except:
-            print('Please enter a real number or expression, or return to exit')
-            continue
-        print(f"Point: ({round(x, 12)}, {round(y, 12)})")
+            b = input("Y-intercept: ")
+            if b == "" or b == "exit" or b == "exi":
+                continue
+            try:
+                b = eval(b)
+            except:
+                print('Please enter a real number or expression, or return to exit')
+                continue
+            if round(m, 12) == 0:
+                printm = ""
+            elif round(m, 12) == 1:
+                printm = f"x"
+            else:
+                printm = f"{round(m, 12)}x"
+            if round(b, 12) == 0 and round(m, 12) != 0:
+                printb = ""
+            elif round(b, 12) == 0:
+                printb = 0
+            else:
+                printm = f" + {round(b, 12)}"
+            print("Symmetry line: y = " + printm + printb)
+        else:
+            xint = input("X-intercept: ")
+            if xint == "" or xint == "exit" or xint == "exi":
+                continue
+            try:
+                xint = eval(xint)
+            except:
+                print('Please enter a real number or expression, or return to exit')
+                continue
+            print(f"Symmetry line: x = {xint}")
         print()
-        m = input("m: ")
+        x_input = input("X-coordinate: ")
+        if x_input == "" or x_input == "exit" or x_input == "exi":
+            continue
         try:
-            m = eval(m)
+            x_input = eval(x_input)
         except:
             print('Please enter a real number or expression, or return to exit')
             continue
-        b = input("b: ")
+        y_input = input("Y-coordinate: ")
+        if y_input == "" or y_input == "exit" or y_input == "exi":
+            continue
         try:
-            b = eval(b)
+            y_input = eval(y_input)
         except:
             print('Please enter a real number or expression, or return to exit')
             continue
+        print(f"Point: ({round(x_input, 12)}, {round(y_input, 12)})")
+        print()
         ang = atan(m)
-        x = x_input * cos(2 * ang) + (y - b) * sin(2 * ang)
-        y = x_input * sin(2 * ang) - (y - b) * cos(2* ang)
-        print()
-        print(f"({round(x, 12)}, {round(y, 12)})")
-        print(f"x = {round(x, 12)}")
-        print(f"y = {round(y, 12)}")
-
+        x = x_input * cos(2 * ang) + (y_input - b) * sin(2 * ang)
+        y = x_input * sin(2 * ang) - (y_input - b) * cos(2* ang)
+        print(f"New point: ({round(x, 12)}, {round(y, 12)})")
+        print(f"x (x-coordinate) = {round(x, 12)}")
+        print(f"y (y-coordinate) = {round(y, 12)}")
 def conic_section():
     print()
     print("Welcome to conic sections!")
