@@ -2096,7 +2096,7 @@ def symmetry():
         elif m == "info" or m == "inf" or m == "i":
             print()
             print("Please enter a real number or expression as the slope of the symmetry line")
-            print('Enter "p" to enter points instead of slope and y-intercept')
+            print('Enter "poi" to enter points instead of slope and y-intercept')
             print('Enter "v" for a vertical and "h" for a horizontal symmetry line')
             print('Enter "p" for polynomial, "sys" for system of equations, "c" for conic section, and "o" for operation (this will direct to real operation)')
             continue
@@ -2114,7 +2114,7 @@ def symmetry():
             break
         elif m == "h" or m == "hor" or m == "horizontal":
             m = 0
-        if m != "v" and m != "ver" and m != "vertical" and m != "p" and m != "points" and m != "poi":
+        if m != "v" and m != "ver" and m != "vertical" and m != "points" and m != "poi":
             try:
                 m = eval(m)
             except:
@@ -2141,7 +2141,7 @@ def symmetry():
             else:
                 printm = f" + {round(b, 12)}"
             print("Symmetry line: y = " + printm + printb)
-        elif m == "p" or m == "points" or m == "poi":
+        elif m == "points" or m == "poi":
             p1 = input("Point 1: ")
             if p1 == "" or p1 == "exit" or p1 == "exi":
                 continue
