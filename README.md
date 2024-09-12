@@ -1,6 +1,6 @@
 This is the ultimate calculator for all of your classes!
 
-It can:
+It can**:
 * Peform real operations (eg. basic operations, trig functions including inverse trig and radian-degree conversion, combinatorics including combinations and permutations, power functions including any base logs, storing variables, etc.)
 * Perform complex operations (eg. basic operations, power functions, conversion between rectangular and polar forms, etc.)
 * Perform matrix operations (eg. basic operations, inverse, transformations, etc.)
