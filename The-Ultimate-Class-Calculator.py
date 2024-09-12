@@ -2167,6 +2167,7 @@ def symmetry():
                 print("Please enter the points in the form (x, y), where x and y are real numbers or expressions")
                 continue
             m = (p2[1] - p1[1]) / (p2[0] - p1[0])
+            b = p1[1] - m * p1[0]
         else:
             xint = input("X-intercept: ")
             if xint == "" or xint == "exit" or xint == "exi":
