@@ -2113,7 +2113,7 @@ def symmetry():
             conic_section()
             break
         elif m == "h" or m == "hor" or m == "horizontal":
-            m = 0
+            m = "0"
         if m != "v" and m != "ver" and m != "vertical" and m != "points" and m != "poi":
             try:
                 m = eval(m)
@@ -2137,7 +2137,7 @@ def symmetry():
             if round(b, 12) == 0 and round(m, 12) != 0:
                 printb = ""
             elif round(b, 12) == 0:
-                printb = 0
+                printb = "0"
             else:
                 printm = f" + {round(b, 12)}"
             print("Symmetry line: y = " + printm + printb)
@@ -2189,7 +2189,7 @@ def symmetry():
                 if round(b, 12) == 0 and round(m, 12) != 0:
                     printb = ""
                 elif round(b, 12) == 0:
-                    printb = 0
+                    printb = "0"
                 else:
                     printm = f" + {round(b, 12)}"
                 print("Symmetry line: y = " + printm + printb)
@@ -2204,34 +2204,49 @@ def symmetry():
                 continue
             print(f"Symmetry line: x = {round(xint, 12)}")
         print()
-        x_input = input("X-coordinate: ")
-        if x_input == "" or x_input == "exit" or x_input == "exi":
+        reflect = input("Points to reflect (i): ")
+        if reflect == "" or reflect == "exit" or reflect == "exi":
             continue
-        try:
-            x_input = eval(x_input)
-        except:
-            print('Please enter a real number or expression, or return to exit')
+        elif reflect == "i" or reflect == "info" or reflect == "inf":
+            print()
+            print('Please enter a list of points to reflect in the form (x, y) separated by semicolons: eg. "(5, -3); (-1, 0); (4, 4)"')
+            print()
             continue
-        y_input = input("Y-coordinate: ")
-        if y_input == "" or y_input == "exit" or y_input == "exi":
-            continue
-        try:
-            y_input = eval(y_input)
-        except:
-            print('Please enter a real number or expression, or return to exit')
-            continue
-        print(f"Point to reflect: ({round(x_input, 12)}, {round(y_input, 12)})")
-        print()
-        if m != "v" and m != "ver" and m != "vertical":
-            ang = atan(m)
-            x = x_input * cos(2 * ang) + (y_input - b) * sin(2 * ang)
-            y = x_input * sin(2 * ang) - (y_input - b) * cos(2* ang)
-        else:
-            x = -x_input + 2 * b
-            y = y_input
-        print(f"Reflected point: ({round(x, 12)}, {round(y, 12)})")
-        print(f"x (x-coordinate) = {round(x, 12)}")
-        print(f"y (y-coordinate) = {round(y, 12)}")
+        reflect = reflect.split(";")
+        for i in range(0, len(reflect)):
+            a = reflect[i]
+            if a[0] == "(":
+                a = a[1:]
+            if a[len(a) - 1] == ")":
+                a = a[:len(a) - 1]
+            pointlist = a.split(",")
+            x_input = pointlist[0]
+            y_input = pointlist[1]
+            try:
+                x_input = eval(x_input)
+            except:
+                print('Point Error')
+                continue
+            try:
+                y_input = eval(y_input)
+            except:
+                print('Point Error')
+                continue
+            print()
+            if m != "v" and m != "ver" and m != "vertical":
+                ang = atan(m)
+                x = x_input * cos(2 * ang) + (y_input - b) * sin(2 * ang)
+                y = x_input * sin(2 * ang) - (y_input - b) * cos(2* ang)
+            else:
+                x = -x_input + 2 * xint
+                y = y_input
+            if x == 0:
+                x = 0.0
+            if y == 0:
+                y = 0.0
+            print(f"Reflected point {i + 1}: ({round(x, 12)}, {round(y, 12)})")
+            print(f"x = {round(x, 12)}")
+            print(f"y = {round(y, 12)}")
 
 def conic_section():
     print()
