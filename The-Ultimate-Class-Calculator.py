@@ -2161,7 +2161,7 @@ def symmetry():
                 continue
             if p2[0] == "(":
                 p2 = p2[1:]
-            if p1[len(p2) - 1] == ")":
+            if p2[len(p2) - 1] == ")":
                 p2 = p2[:len(p2) - 1]
             p2 = p2.split(",", 1)
             try:
