@@ -2162,7 +2162,7 @@ while True:
         break
 
     elif cat == "f" or cat == "fun" or cat == "function":
-        funtype = input("Function type ((p)olynomial, (sys)tem, (c)onic), (s)ymmetry")
+        funtype = input("Function type ((p)olynomial, (sys)tem, (c)onic), (s)ymmetry): ")
         if funtype == "polynomial" or funtype == "p" or funtype == "pol":
             polynomial()
         elif funtype == "s" or funtype == "sym" or funtype == "symmetry":
