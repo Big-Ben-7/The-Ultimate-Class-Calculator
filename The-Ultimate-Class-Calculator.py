@@ -2143,6 +2143,7 @@ def symmetry():
             print("Symmetry line: y = " + printm + printb)
         elif m == "p" or m == "points" or m == "poi":
             p1 = input("Point 1: ")
+            
             if p1[0] == "(":
                 p1 = p1[1:]
             if p1[len(p1) - 1] == ")":
@@ -2155,6 +2156,8 @@ def symmetry():
                 print("Please enter the points in the form (x, y), where x and y are real numbers or expressions")
                 continue
             p2 = input("Point 2: ")
+            if p2 == "" or p2 == "exit" or p2 == "exi":
+                continue
             if p2[0] == "(":
                 p2 = p2[1:]
             if p1[len(p2) - 1] == ")":
@@ -2169,8 +2172,26 @@ def symmetry():
             except:
                 print("Please enter the points in the form (x, y), where x and y are real numbers or expressions")
                 continue
-            m = (p2[1] - p1[1]) / (p2[0] - p1[0])
-            b = p1[1] - m * p1[0]
+            if p2[0] == p1[0]:
+                m = "v"
+                xint = p1[0]
+                print(f"Symmetry line: x = {round(xint, 12)}")
+            else:
+                m = (p2[1] - p1[1]) / (p2[0] - p1[0])
+                b = p1[1] - m * p1[0]
+                if round(m, 12) == 0:
+                    printm = ""
+                elif round(m, 12) == 1:
+                    printm = f"x"
+                else:
+                    printm = f"{round(m, 12)}x"
+                if round(b, 12) == 0 and round(m, 12) != 0:
+                    printb = ""
+                elif round(b, 12) == 0:
+                    printb = 0
+                else:
+                    printm = f" + {round(b, 12)}"
+                print("Symmetry line: y = " + printm + printb)
         else:
             xint = input("X-intercept: ")
             if xint == "" or xint == "exit" or xint == "exi":
@@ -2180,7 +2201,7 @@ def symmetry():
             except:
                 print('Please enter a real number or expression, or return to exit')
                 continue
-            print(f"Symmetry line: x = {xint}")
+            print(f"Symmetry line: x = {round(xint, 12)}")
         print()
         x_input = input("X-coordinate: ")
         if x_input == "" or x_input == "exit" or x_input == "exi":
