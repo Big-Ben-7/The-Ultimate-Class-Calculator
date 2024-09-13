@@ -24,14 +24,10 @@ global root
 root = 0.0
 global root2
 root2 = 0.0
-global x
-x = 0.0
-global y
-y = 0.0
 global binsum
 binsum = ""
 global keeps
-keeps = ["ans", "pi", "e", "tau", "inf", "nan", "infj", "nanj", "keeps", "x", "y", "rl", "im", "im2", "mod", "ang", "sum", "rat", "root", "root2", "binsum", "dif"]
+keeps = ["ans", "pi", "e", "tau", "inf", "nan", "infj", "nanj", "keeps", "rl", "im", "im2", "mod", "ang", "sum", "rat", "root", "root2", "binsum", "dif"]
 
 def clear_variables():
     for var in list(globals()):
@@ -2082,8 +2078,6 @@ def polynomial():
                 print(f"im2 (2nd imaginary part) = {round(im2, 12)}")
 
 def symmetry():
-    global x
-    global y
     print()
     print("Welcome to fuction symmetry!")
     print("Please enter points in the form (x, y) and lines (if needed) in the form y = mx + b")
@@ -2138,8 +2132,10 @@ def symmetry():
                 printb = ""
             elif round(b, 12) == 0:
                 printb = "0"
+            elif round(m, 12) == 0:
+                printb = f"{round(b, 12)}"
             else:
-                printm = f" + {round(b, 12)}"
+                printb = f" + {round(b, 12)}"
             print("Symmetry line: y = " + printm + printb)
         elif m == "points" or m == "poi":
             p1 = input("Point 1: ")
@@ -2190,8 +2186,10 @@ def symmetry():
                     printb = ""
                 elif round(b, 12) == 0:
                     printb = "0"
+                elif round(m, 12) == 0:
+                    printb = f"{round(b, 12)}"
                 else:
-                    printm = f" + {round(b, 12)}"
+                    printb = f" + {round(b, 12)}"
                 print("Symmetry line: y = " + printm + printb)
         else:
             xint = input("X-intercept: ")
@@ -2214,29 +2212,31 @@ def symmetry():
             continue
         reflect = reflect.split(";")
         for i in range(0, len(reflect)):
-            a = reflect[i]
-            if a[0] == "(":
-                a = a[1:]
-            if a[len(a) - 1] == ")":
-                a = a[:len(a) - 1]
-            pointlist = a.split(",")
+            print()
+            pointlist = reflect[i].split(",")
+            if len(pointlist) != 2:
+                print('Point Error: please enter points in the form (x, y)')
+                continue
             x_input = pointlist[0]
             y_input = pointlist[1]
+            if "(" in x_input:
+                x_input = x_input[x_input.find("(") + 1:]
+            if ")" in y_input:
+                y_input = y_input[:y_input.find(")")]
             try:
                 x_input = eval(x_input)
             except:
-                print('Point Error')
+                print('Point Error: please enter points in the form (x, y)')
                 continue
             try:
                 y_input = eval(y_input)
             except:
-                print('Point Error')
+                print('Point Error: please enter points in the form (x, y)')
                 continue
-            print()
             if m != "v" and m != "ver" and m != "vertical":
                 ang = atan(m)
                 x = x_input * cos(2 * ang) + (y_input - b) * sin(2 * ang)
-                y = x_input * sin(2 * ang) - (y_input - b) * cos(2* ang)
+                y = x_input * sin(2 * ang) - (y_input - b) * cos(2* ang) + b
             else:
                 x = -x_input + 2 * xint
                 y = y_input
@@ -2244,9 +2244,15 @@ def symmetry():
                 x = 0.0
             if y == 0:
                 y = 0.0
+            xco = f"x{i + 1}"
+            yco = f"y{i + 1}"
+            globals()[xco] = x
+            globals()[yco] = y
+            keeps.append(xco)
+            keeps.append(yco)
             print(f"Reflected point {i + 1}: ({round(x, 12)}, {round(y, 12)})")
-            print(f"x = {round(x, 12)}")
-            print(f"y = {round(y, 12)}")
+            print(xco + f" = {round(x, 12)}")
+            print(yco + f" = {round(y, 12)}")
 
 def conic_section():
     print()
