@@ -2131,7 +2131,7 @@ def symmetry():
             if round(b, 12) == 0 and round(m, 12) != 0:
                 printb = ""
             elif round(b, 12) == 0:
-                printb = "0"
+                printb = "0 (x-axis)"
             elif round(m, 12) == 0:
                 printb = f"{round(b, 12)}"
             else:
@@ -2172,7 +2172,10 @@ def symmetry():
             if p2[0] == p1[0]:
                 m = "v"
                 xint = p1[0]
-                print(f"Symmetry line: x = {round(xint, 12)}")
+                if xint != 0:
+                    print(f"Symmetry line: x = {round(xint, 12)}")
+                else:
+                    print("Symmetry line: x = 0 (y-axis)")
             else:
                 m = (p2[1] - p1[1]) / (p2[0] - p1[0])
                 b = p1[1] - m * p1[0]
@@ -2185,7 +2188,7 @@ def symmetry():
                 if round(b, 12) == 0 and round(m, 12) != 0:
                     printb = ""
                 elif round(b, 12) == 0:
-                    printb = "0"
+                    printb = "0 (x-axis)"
                 elif round(m, 12) == 0:
                     printb = f"{round(b, 12)}"
                 else:
@@ -2200,7 +2203,10 @@ def symmetry():
             except:
                 print('Please enter a real number or expression, or return to exit')
                 continue
-            print(f"Symmetry line: x = {round(xint, 12)}")
+            if xint != 0:
+                print(f"Symmetry line: x = {round(xint, 12)}")
+            else:
+                print("Symmetry line: x = 0 (y-axis)")
         print()
         reflect = input("Points to reflect (i): ")
         if reflect == "" or reflect == "exit" or reflect == "exi":
