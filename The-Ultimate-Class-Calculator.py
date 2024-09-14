@@ -150,7 +150,7 @@ def from_polar():
             print('Real constants such as "pi", "e", and "tau" can be entered')
             print('Real variables can also be entered, for example: "ans" (previous real answer), "rl" (real part of previous complex result), "im" (imaginary part of previous complex result), "root" (1st real solution of previous quadratic), "root2" (2nd real solution of previous quadratic), "im2" (imaginary part of 2nd previous quadratic complex solution) "sum" (previous series summation), "rat" (previous geometric series common ratio), "dif" (previous arithmetic series common difference), "term1" (1st term of previous series), "cf1" (1st coefficient of previous binomial expansion), and stored variables')
             print("The above operators and functions can only be entered as part of an expression, not as an operation")
-            print('Enter "rec" for rectangular form, "r" for real operation, "m" for matrix operation, "f" for function (this will direct to polynomial), "s" for summation (this will direct to binomial expansion)')
+            print('Enter "rec" for rectangular form, "r" for real operations, "m" for matrix operations, "f" for functions (this will direct to polynomials), "s" for summations (this will direct to binomial expansion)')
             print()
             print("Notes:")
             print("Fractional exponents can be used to root: eg. (-1 + 0i) ^ (1/2 + 0i) = i")
@@ -163,16 +163,16 @@ def from_polar():
         elif av == "rec" or av == "rectangular" or av == "rectangular form":
             from_rectangular()
             break
-        elif av == "r" or av == "real" or av == "rea" or av == "real operation":
+        elif av == "r" or av == "real" or av == "rea" or av == "real operations":
             real_operation()
             break
-        elif av == "f" or av == "function" or av == "fun":
+        elif av == "f" or av == "functions" or av == "fun":
             polynomial()
             break
-        elif av == "m" or av == "matrix" or av == "mat" or av == "matrix operation":
+        elif av == "m" or av == "matrix" or av == "mat" or av == "matrix operations":
             matrix_operation()
             break
-        elif av == "s" or av == "sum" or av == "summation":
+        elif av == "s" or av == "sum" or av == "summations":
             binomial_expansion()
             break
         try:
@@ -557,7 +557,7 @@ def from_rectangular():
             print('Real constants such as "pi", "e", and "tau" can be entered')
             print('Real variables can also be entered, for example: "ans" (previous real answer), "rl" (real part of previous complex result), "im" (imaginary part of previous complex result), "root" (1st real solution of previous quadratic), "root2" (2nd real solution of previous quadratic), "im2" (imaginary part of 2nd previous quadratic complex solution) "sum" (previous series summation), "rat" (previous geometric series common ratio), "dif" (previous arithmetic series common difference), "term1" (1st term of previous series), "cf1" (1st coefficient of previous binomial expansion), and stored variables')
             print("The above operators and functions can only be entered as part of an expression, not as an operation")
-            print('Enter "p" for polar form, "r" for real operation, "m" for matrix operation, "f" for function (this will direct to polynomial), "s" for summation (this will direct to binomial expansion)')
+            print('Enter "p" for polar form, "r" for real operations, "m" for matrix operations, "f" for functions (this will direct to polynomials), "s" for summations (this will direct to binomial expansion)')
             print()
             print("Notes:")
             print("Fractional exponents can be used to root: eg. (-1 + 0i) ^ (1/2 + 0i) = i")
@@ -570,16 +570,16 @@ def from_rectangular():
         elif a == "p" or a == "polar" or a == "pol" or a == "polar form":
             from_polar()
             break
-        elif a == "r" or a == "rea" or a == "real" or a == "real operation":
+        elif a == "r" or a == "rea" or a == "real" or a == "real operations":
             real_operation()
             break
-        elif a == "f" or a == "fun" or a == "function":
+        elif a == "f" or a == "fun" or a == "functions":
             polynomial()
             break
-        elif a == "s" or a == "summation" or a == "sum":
+        elif a == "s" or a == "summations" or a == "sum":
             binomial_expansion()
             break
-        elif a == "m" or a == "mat" or a == "matrix" or a == "matrix operation":
+        elif a == "m" or a == "mat" or a == "matrix" or a == "matrix operations":
             matrix_operation()
             break
         try:
@@ -904,7 +904,7 @@ def from_rectangular():
 def real_operation():
     global ans
     print()
-    print("Welcome to real operation!")
+    print("Welcome to real operations!")
     while True:
         clear_variables()
         print()
@@ -922,7 +922,7 @@ def real_operation():
             print('Real constants such as "pi", "e", and "tau" can be entered')
             print('Real variables can also be entered, for example: "ans" (previous real answer), "rl" (real part of previous complex result), "im" (imaginary part of previous complex result), "root" (1st real solution of previous quadratic), "root2" (2nd real solution of previous quadratic), "im2" (imaginary part of 2nd previous quadratic complex solution) "sum" (previous series summation), "rat" (previous geometric series common ratio), "dif" (previous arithmetic series common difference), "term1" (1st term of previous series), "cf1" (1st coefficient of previous binomial expansion), and stored variables')
             print("The above operators and functions can only be entered as part of an expression, not as an operation")
-            print('Enter "c" for complex operation (this will direct to rectangular form), "m" for matrix operation, "s" for summation (this will direct to binomial expansion), and "f" for function (this will direct to polynomial)')
+            print('Enter "c" for complex operations (this will direct to rectangular form), "m" for matrix operations, "s" for summations (this will direct to binomial expansion), and "f" for functions (this will direct to polynomials)')
             print()
             print("Notes:")
             print("Fractional exponents can be used to root: eg. 8 ^ (1/3) = 2")
@@ -933,16 +933,16 @@ def real_operation():
             print("Inputting a comparison statement as the second term will use 0 if the statement is false and 1 if the statement is true")
             print("For more information, visit the python math and operators websites")
             continue
-        elif n == "c" or n == "com" or n == "complex" or n == "complex operation":
+        elif n == "c" or n == "com" or n == "complex" or n == "complex operations":
             from_rectangular()
             break
-        elif n == "s" or n == "sum" or n == "summation":
+        elif n == "s" or n == "sum" or n == "summations":
             binomial_expansion()
             break
-        elif n == "f" or n == "fun" or n == "function":
+        elif n == "f" or n == "fun" or n == "functions":
             polynomial()
             break
-        elif n == "m" or n == "mat" or n == "matrix" or n == "matrix operation":
+        elif n == "m" or n == "mat" or n == "matrix" or n == "matrix operations":
             matrix_operation()
             break
         else:
@@ -1283,10 +1283,10 @@ def binomial_expansion():
         a = input("a (i): ")
         if a == "" or a == "exit" or a == "exi":
             break
-        elif a == "r" or a == "real" or a == "rea" or a == "real operation":
+        elif a == "r" or a == "real" or a == "rea" or a == "real operations":
             real_operation()
             break
-        elif a == "c" or a == "com" or a == "comp" or a == "complex operation":
+        elif a == "c" or a == "com" or a == "comp" or a == "complex operations":
             from_rectangular()
             break
         elif a  == "a" or a == "ari" or a == "arithmetic" or a == "arithmetic series":
@@ -1295,15 +1295,16 @@ def binomial_expansion():
         elif a  == "g" or a == "geo" or a == "geometric" or a == "geometric series":
             geometric()
             break
-        elif a == "m" or a == "mat" or a == "matrix" or a == "matrix operation":
+        elif a == "m" or a == "mat" or a == "matrix" or a == "matrix operations":
             matrix_operation()
             break
-        elif a == "f" or a == "fun" or a == "function":
+        elif a == "f" or a == "fun" or a == "functions":
             polynomial()
             break
         elif a == "i" or a == "info" or a == "inf":
+            print()
             print('Please enter a nonzero real number or expression as the first coefficient')
-            print('Enter "r" for real operation, "a" for arithmetic series, "g" for geometric series, "c" for complex operation (this will direct to rectangular form), "m" for matrix operation, and "f" for function (this will direct to polynomial)')
+            print('Enter "r" for real operations, "a" for arithmetic series, "g" for geometric series, "c" for complex operations (this will direct to rectangular form), "m" for matrix operations, and "f" for functions (this will direct to polynomials)')
             continue
         try:
             a = eval(a)
@@ -1509,10 +1510,10 @@ def arithmetic():
         b = input("Term (i): ")
         if b == "" or b == "exit" or b == "exi":
             break
-        elif b == "r" or b == "real" or b == "rea" or b == "real operation":
+        elif b == "r" or b == "real" or b == "rea" or b == "real operations":
             real_operation()
             break
-        elif b == "c" or b == "complex" or b == "com" or b == "complex operation":
+        elif b == "c" or b == "complex" or b == "com" or b == "complex operations":
             from_rectangular()
             break
         elif b == "g" or b == "geo" or b == "geometric" or b == "geometric series":
@@ -1521,38 +1522,59 @@ def arithmetic():
         elif b == "b" or b == "bin" or b == "binomial" or b == "binomial expansion":
             binomial_expansion()
             break
-        elif b == "m" or b == "mat" or b == "matrix" or b == "matrix operation":
+        elif b == "m" or b == "mat" or b == "matrix" or b == "matrix operations":
             matrix_operation()
             break
-        elif b == "f" or b == "fun" or b == "function":
+        elif b == "f" or b == "fun" or b == "functions":
             polynomial()
             break
         elif b == "i" or b == "info" or b == "inf":
+            print()
             print("Please enter a real number or expression as the value of one of the series terms")
-            print('Enter "r" for real operation, "b" for binomial expansion, "g" for geometric series, "c" for complex operation (this will direct to rectangular form), "m" for matrix operation, and "f" for function (this will direct to polynomial)')
+            print('Enter "s" to enter the sum of a number of terms instead')
+            print('Enter "r" for real operations, "b" for binomial expansion, "g" for geometric series, "c" for complex operations (this will direct to rectangular form), "m" for matrix operations, and "f" for functions (this will direct to polynomials)')
             continue
-        try:
-            b = eval(b)
-        except:
-            print('Please enter a real number or expression, "i" for info, or return to exit')
-            continue
-        bn = input("Term index: ")
-        if bn == "" or bn == "exit" or bn == "exi":
-            continue     
-        elif bn == "ans":
-            bn = ans
-        try:
-            bn = int(bn)
-        except:
-            print('Please enter a positive integer or return to exit')
-            continue
-        if bn < 1:
-            print('Please enter a positive integer or return to exit')
-            continue
-        comdif = input("Common difference (t to enter term): ")
+        elif b == "s" or b == "sum":
+            input_sum = input("Sum (t to enter terms): ")
+            if input_sum == "" or input_sum == "exi" or input_sum == "exit" or input_sum == "t" or input_sum == "ter" or input_sum == "terms":
+                continue
+            try:
+                input_sum = eval(input_sum)
+            except:
+                print("Please enter a real number or expression, or return to exit")
+            sum_number = input("Number of summed terms: ")
+            if sum_number == "" or sum_number == "exi" or sum_number == "exit" or sum_number == "t" or sum_number == "ter" or sum_number == "terms":
+                continue
+            try:
+                sum_number = int(sum_number)
+            except:
+                print("Please enter an integer or return to exit")
+        else:
+            try:
+                b = eval(b)
+            except:
+                print('Please enter a real number or expression, "i" for info, or return to exit')
+                continue
+            bn = input("Term index: ")
+            if bn == "" or bn == "exit" or bn == "exi":
+                continue     
+            elif bn == "ans":
+                bn = ans
+            try:
+                bn = int(bn)
+            except:
+                print('Please enter a positive integer or return to exit')
+                continue
+            if bn < 1:
+                print('Please enter a positive integer or return to exit')
+                continue
+        if b != "s" and b != "sum":
+            comdif = input("Common difference (t to enter term): ")
+        else:
+            comdif = input("Common difference: ")
         if comdif == "" or comdif == "exit" or comdif == "exi":
             continue
-        elif comdif == "t" or comdif == "ter" or comdif == "term":
+        elif (comdif == "t" or comdif == "ter" or comdif == "term") and b != "s" and b != "sum":
             c = input("Next term: ")
             if c == "" or c == "exit" or c == "exi":
                 continue
@@ -1583,9 +1605,12 @@ def arithmetic():
             except:
                 print('Please enter a real number or expression, or return to exit')
                 continue
-        cn = bn + 1
-        c = b + comdif
-        a = b - comdif * (bn - 1)
+        if b != "s" and b != "sum":
+            cn = bn + 1
+            c = b + comdif
+            a = b - comdif * (bn - 1)
+        else:
+            a = sum - comdif * (sum_number-1)
         print()
         n = input("Number of terms to sum (l to enter last term, /): ")
         if n != "/" and n != "skip" and n != "ski":
@@ -1728,10 +1753,10 @@ def geometric():
         b = input("Term (i): ")
         if b == "" or b == "exit" or b == "exi":
             break
-        elif b == "r" or b == "real" or b == "rea" or b == "real operation":
+        elif b == "r" or b == "real" or b == "rea" or b == "real operations":
             real_operation()
             break
-        elif b == "c" or b == "complex" or b == "com" or b == "complex operation":
+        elif b == "c" or b == "complex" or b == "com" or b == "complex operations":
             from_rectangular()
             break
         elif b == "a" or b == "ari" or b == "arithmetic" or b == "arithmetic series":
@@ -1740,15 +1765,16 @@ def geometric():
         elif b == "b" or b == "bin" or b == "binomial" or b == "binomial expansion":
             binomial_expansion()
             break
-        elif b == "f" or b == "fun" or b == "function":
+        elif b == "f" or b == "fun" or b == "functions":
             polynomial()
             break
-        elif b == "m" or b == "mat" or b == "matrix" or b == "matrix operation":
+        elif b == "m" or b == "mat" or b == "matrix" or b == "matrix operations":
             matrix_operation()
             break
         elif b == "i" or b == "info" or b == "inf":
+            print()
             print("Please enter a real number or expression as the value of one of the series terms")
-            print('Enter "r" for real operation, "b" for binomial expansion, "a" for arithmetic series, "c" for complex operation (this will direct to rectangular form), "m" for matrix operation, and "f" for function (this will direct to polynomial)')
+            print('Enter "r" for real operations, "b" for binomial expansion, "a" for arithmetic series, "c" for complex operations (this will direct to rectangular form), "m" for matrix operations, and "f" for functions (this will direct to polynomials)')
             continue
         try:
             b = eval(b)
@@ -1984,7 +2010,7 @@ def polynomial():
     global im2
     global rl
     print()
-    print("Welcome to polymial function!")
+    print("Welcome to polymial functions!")
     print("Please enter the equation in the form ax^2 + bx + c = 0, where x is a non-numeric variable name")
     while True:
         clear_variables()
@@ -1992,10 +2018,10 @@ def polynomial():
         a = input('a (i): ')
         if a == "" or a == "exit" or a == "exi":
             break
-        elif a == "o" or a == "ope" or a == "operation":
+        elif a == "o" or a == "ope" or a == "operations":
             real_operation()
             break
-        elif a == "c" or a == "con" or a == "conic" or a == "conic section":
+        elif a == "c" or a == "con" or a == "conic" or a == "conic sections":
             conic_section()
             break
         elif a == "sys" or a == "system" or a == "system of equations":
@@ -2007,7 +2033,7 @@ def polynomial():
         elif a == "info" or a == "inf" or a == "i":
             print()
             print("Please enter a real number or expression as the x^2 coefficient")
-            print('Enter "sys" for system of equations, "c" for conic section, "s" for symmetry, and "o" for operation (this will direct to real operation)')
+            print('Enter "sys" for system of equations, "c" for conic sections, "s" for symmetry, and "o" for operations (this will direct to real operation)')
             continue
         try:
             a = eval(a)
@@ -2090,25 +2116,25 @@ def symmetry():
         elif m == "info" or m == "inf" or m == "i":
             print()
             print("Please enter a real number or expression as the slope of the symmetry line")
-            print('Enter "poi" to enter points instead of slope and y-intercept')
+            print('Enter "p" to enter points instead of slope and y-intercept')
             print('Enter "v" for a vertical and "h" for a horizontal symmetry line')
-            print('Enter "p" for polynomial, "sys" for system of equations, "c" for conic section, and "o" for operation (this will direct to real operation)')
+            print('Enter "pol" for polynomials, "s" for system of equations, "c" for conic sections, and "o" for operations (this will direct to real operations)')
             continue
-        elif m == "p" or m == "pol" or m == "polynomial":
+        elif m == "pol" or m == "polynomials":
             polynomial()
             break
-        elif m == "sys" or m == "system" or m == "system of equations":
+        elif m == "s" or m == "sys" or m == "system" or m == "system of equations":
             system()
             break
-        elif m == "o" or m == "ope" or m == "operation":
+        elif m == "o" or m == "ope" or m == "operations":
             real_operation()
             break
-        elif m == "c" or m == "conic section" or m == "con" or m == "conic":
+        elif m == "c" or m == "conic sections" or m == "con" or m == "conic":
             conic_section()
             break
         elif m == "h" or m == "hor" or m == "horizontal":
             m = "0"
-        if m != "v" and m != "ver" and m != "vertical" and m != "points" and m != "poi":
+        if m != "v" and m != "ver" and m != "vertical" and m != "p" and m != "points" and m != "poi":
             try:
                 m = eval(m)
             except:
@@ -2137,9 +2163,9 @@ def symmetry():
             else:
                 printb = f" + {round(b, 12)}"
             print("Symmetry line: y = " + printm + printb)
-        elif m == "points" or m == "poi":
-            p1 = input("Point 1: ")
-            if p1 == "" or p1 == "exit" or p1 == "exi":
+        elif m == "p" or m == "points" or m == "poi":
+            p1 = input("Point 1 (s to enter slope): ")
+            if p1 == "" or p1 == "exit" or p1 == "exi" or p1 == "s" or p1 == "slo" or p1 == "slope":
                 continue
             if p1[0] == "(":
                 p1 = p1[1:]
@@ -2265,7 +2291,7 @@ def conic_section():
     print("Welcome to conic sections!")
 
 def matrix_operation():
-    print("Welcome to matrix operation!")
+    print("Welcome to matrix operations!")
 
 def system():
     print("Welcome to system of equations!")
@@ -2274,52 +2300,95 @@ print("Welcome to The Ultimate Class Calculator!")
 while True:
     clear_variables()
     print()
-    cat = input('Calculation category ((o)peration or (f)unction): ')
-    
+    cat = input('Calculation category (i): ')
     if cat == "exit" or cat == "" or cat == "exi":
         break
-
+    elif cat == "info" or cat == "inf" or cat == "i":
+        print()
+        print('Enter either "o" for operations or "f" for functions')
+        print("Operations include: real operations, complex operations, matrix operations, and summations (binomial expansion, arithmetic series, and geometric series)")
+        print("Functions include: polynomials, system of equations, conic sections, and symmetry")
     elif cat == "f" or cat == "fun" or cat == "function":
-        funtype = input("Function type ((p)olynomial, (sys)tem, (c)onic), (s)ymmetry): ")
-        if funtype == "polynomial" or funtype == "p" or funtype == "pol":
-            polynomial()
-        elif funtype == "s" or funtype == "sym" or funtype == "symmetry":
-            symmetry()
+        while True:
+            funtype = input("Function type (i): ")
+            if funtype == "" or funtype == "exit" or funtype == "exi":
+                break
+            elif funtype == "i" or funtype == "info" or funtype == "inf":
+                print()
+                print('Enter either "p" for polynomials, "se" for system of equations, "c" for conic sections, or "s" for symmetry')
+                print()
+            elif funtype == "polynomials" or funtype == "p" or funtype == "pol":
+                polynomial()
+                print()
+            elif funtype == "s" or funtype == "sym" or funtype == "symmetry":
+                symmetry()
+                print()
+            elif funtype == "se" or funtype == "system of equations" or funtype == "sys" or funtype == "system":
+                system()
+                print()
+            elif funtype == "con" or funtype == "conic" or funtype == "conic sections" or funtype == "c":
+                conic_section()
+                print()
+            else:
+                print('Please enter a valid function type, "i" for info, or return to exit')
+                print()
     elif cat == "operation" or cat == "ope" or cat == "o":
-        opetype = input('Operation type ((r)eal, (c)omplex, (m)atrix, (s)ummation): ')
-        if opetype == "" or opetype == "exit" or opetype == "exi":
-            continue
-        elif opetype == "real" or opetype == "rea" or opetype == "r":
-            real_operation()
-        elif opetype == "c" or opetype == "complex" or opetype == "com":
-            ctype = input("From (r)ectangular or (p)olar form: ")
-            if ctype == "rectangular" or ctype == "r" or ctype == "rect":
-                from_rectangular()
-            elif ctype == "polar" or ctype == "p" or ctype == "pol":
-                from_polar()
-            elif ctype == "" or ctype == "exit" or ctype == "exi":
-                continue
+        while True:
+            opetype = input('Operation type (i): ')
+            if opetype == "" or opetype == "exit" or opetype == "exi":
+                break
+            elif opetype == "i" or opetype == "inf" or opetype == "info":
+                print()
+                print('Enter either "r" for real, "c" for complex, "m" for matrix, or "s" for summations (binomial expansion, arithmetic series, and geometric series)')
+                print()
+            elif opetype == "real" or opetype == "rea" or opetype == "r" or opetype == "real operations":
+                real_operation()
+                print()
+            elif opetype == "c" or opetype == "complex" or opetype == "com" or opetype == "complex operations":
+                while True:
+                    ctype = input("From (r)ectangular or (p)olar form: ")
+                    if ctype == "rectangular" or ctype == "r" or ctype == "rect" or ctype == "rectangular form":
+                        from_rectangular()
+                        print()
+                    elif ctype == "polar" or ctype == "p" or ctype == "pol" or ctype == "polar form":
+                        from_polar()
+                        print()
+                    elif ctype == "" or ctype == "exit" or ctype == "exi":
+                        print()
+                        break
+                    else:
+                        print('Please enter either "r" for rectangular, "p" for polar, or return to exit')
+                        print()
+            elif opetype == "m" or opetype == "mat" or opetype == "matrix" or opetype == "matrix operations":
+                matrix_operation()
+                print()
+            elif opetype == "summations" or opetype == "sum" or opetype == "s":
+                while True:
+                    sumtype = input('Summation type (i): ')
+                    if sumtype == "" or sumtype == "exit" or sumtype == "exi":
+                        print()
+                        break
+                    elif sumtype == "i" or sumtype == "inf" or sumtype == "info":
+                        print()
+                        print('Enter either "b" for binomial expansion, "a" for arithmetic series, or "g" for geometric series')
+                        print()
+                    elif sumtype == "b" or sumtype == "binomial" or sumtype == "bin" or sumtype == "binomial expansion":
+                        binomial_expansion()
+                        print()
+                    elif sumtype == "a" or sumtype == "arithmetic" or sumtype == "ari" or sumtype == "arithmetic series":
+                        arithmetic()
+                        print()
+                    elif sumtype == "geometric" or sumtype == "geo" or sumtype == "g" or sumtype == "geometric series":
+                        geometric()
+                        print()
+                    else:
+                        print('Please enter a valid summation type, "i" for info, or return to exit')
+                        print()
             else:
-                print('Please enter either "r" for rectangular, "p" for polar, or return to exit')
-        elif opetype == "m" or opetype == "mat" or opetype == "matrix":
-            matrix_operation()
-        elif opetype == "summation" or opetype == "sum" or opetype == "s":
-            sumtype = input('Summation type ((b)inomial, (a)rithmetic, (g)eometric): ')
-            if sumtype == "" or sumtype == "exit" or sumtype == "exi":
-                continue
-            elif sumtype == "b" or sumtype == "binomial" or sumtype == "bin" or sumtype == "binomial expansion":
-                binomial_expansion()
-            elif sumtype == "a" or sumtype == "arithmetic" or sumtype == "ari" or sumtype == "arithmetic series":
-                arithmetic()
-            elif sumtype == "geometric" or sumtype == "geo" or sumtype == "g" or sumtype == "geometric series":
-                geometric()
-            else:
-                print('Please enter either "b" for binomial, "a" for arithmetic, "g" for geometric, or return to exit')
-        else:
-            print('Please enter either "r" for real, "c" for complex, "m" for matrix, "s" for summation, or return to exit')
-
+                print('Please enter either a valid operation type, "i" for info, or return to exit')
+                print()
     else:
-        print('Please enter either "o" for operation, "f" for function, or return to exit)')
+        print('Please enter a valid calculation category, "i" for info, or return to exit)')
 
 # %% [markdown]
 # 
