@@ -989,11 +989,10 @@ def real_operation():
                         continue
                 elif op == "round" or op == "~" or op == "rou":
                     n2 = input('Decimals to round (0-12): ')
-                    if n2 == "ans":
-                        n2 = ans
-                    elif n2 == "" or n2 == "exit" or n2 == "exi":
+                    if n2 == "" or n2 == "exit" or n2 == "exi":
                         continue
                     try:
+                        n2 = eval(n2)
                         n2 = int(n2)
                     except:
                         print('Please enter an integer from 0 to 12 or return to exit')
@@ -1373,7 +1372,7 @@ def binomial_expansion():
                     print()
                     print("Enter a non-numeric variable name without spaces")
                     print("The variable will not store any value, it is just the name that will be printed in the result")
-                    print("Skipping will is equivalent to setting the variable's exponent to 0")
+                    print("Skipping will set the variable's exponent to 0")
                     print()
                 elif y == "skip" or y == "/" or y == "ski":
                     break
@@ -1417,6 +1416,7 @@ def binomial_expansion():
         if n == "" or n == "exit" or n == "exi":
             continue
         try:
+            n = eval(n)
             n = int(n)
             if n < 0:
                 binsum += "1 / ("
@@ -1434,7 +1434,7 @@ def binomial_expansion():
             if un == "i" or un == "info" or un == "inf":
                 print()
                 print("Enter a list of indexes seperated by commas and using dashes to indicate ranges")
-                print('Eg. "1, 3, 6-8, 10" will output the 1st, 3rd, 6th, 7th, 8th, and 10th terms (if n >= 9)')
+                print('Eg. "1, 6-8, 10" will output the 1st, 6th, 7th, 8th, and 10th terms (if n >= 9)')
                 if n >= 0:
                     print("If n is negative (it's not!), only the denominator of each term will be outputted (the sum will still be complete)")
                 else:
@@ -1457,8 +1457,7 @@ def binomial_expansion():
             if len(rangelist) == 1:
                 try:
                     unterm = un[unindex]
-                    if unterm == "ans":
-                        unterm = ans
+                    unterm = eval(unterm)
                     unterm = int(unterm)
                     if 0 < unterm <= abs(n) + 1:
                         k = unterm - 1
@@ -1469,10 +1468,8 @@ def binomial_expansion():
                     print(f'Term "{un[unindex]}" error: indexes must be positive integers between 1 and |n| + 1 ({abs(n) + 1}), inclusive')
             elif len(rangelist) == 2:
                 try:
-                    if rangelist[0] == "ans":
-                        rangelist[0] = ans
-                    if rangelist[1] == "ans":
-                        rangelist[1] = ans
+                    rangelist[0] = eval(rangelist[0])
+                    rangelist[1] = eval(rangelist[1])
                     rangelist[0] = int(rangelist[0])
                     rangelist[1] = int(rangelist[1])
                     if rangelist[0] > 0 and rangelist[1] > rangelist[0] and rangelist[1] <= abs(n) + 1:
@@ -1532,20 +1529,26 @@ def arithmetic():
             print('Enter "r" for real operations, "b" for binomial expansion, "g" for geometric series, "c" for complex operations (this will direct to rectangular form), "m" for matrix operations, and "f" for functions (this will direct to polynomials)')
             continue
         elif b == "s" or b == "sum":
-            input_sum = input("Sum (t to enter terms): ")
+            input_sum = input("Sum: ")
             if input_sum == "" or input_sum == "exi" or input_sum == "exit" or input_sum == "t" or input_sum == "ter" or input_sum == "terms":
                 continue
             try:
                 input_sum = eval(input_sum)
             except:
                 print("Please enter a real number or expression, or return to exit")
+                continue
             sum_number = input("Number of summed terms: ")
-            if sum_number == "" or sum_number == "exi" or sum_number == "exit" or sum_number == "t" or sum_number == "ter" or sum_number == "terms":
+            if sum_number == "" or sum_number == "exi" or sum_number == "exit":
                 continue
             try:
+                sum_number = eval(sum_number)
                 sum_number = int(sum_number)
+                if sum_number <= 0:
+                    print("Please enter a positive integer or return to exit")
+                    continue
             except:
-                print("Please enter an integer or return to exit")
+                print("Please enter a positive integer or return to exit")
+                continue
         else:
             try:
                 b = eval(b)
@@ -1555,9 +1558,8 @@ def arithmetic():
             bn = input("Term index: ")
             if bn == "" or bn == "exit" or bn == "exi":
                 continue     
-            elif bn == "ans":
-                bn = ans
             try:
+                bn = eval(bn)
                 bn = int(bn)
             except:
                 print('Please enter a positive integer or return to exit')
@@ -1583,9 +1585,8 @@ def arithmetic():
             cn = input("Term index: ")
             if cn == "" or cn == "exit" or cn == "exi":
                 continue     
-            elif cn == "ans":
-                cn = ans
             try:
+                cn = eval(cn)
                 cn = int(cn)
             except:
                 print('Please enter a positive integer or return to exit')
@@ -1602,19 +1603,23 @@ def arithmetic():
             except:
                 print('Please enter a real number or expression, or return to exit')
                 continue
-        if b != "s" and b != "sum":
-            cn = bn + 1
-            c = b + comdif
-            a = b - comdif * (bn - 1)
-        else:
-            a = (2 * input_sum / sum_number - comdif * (sum_number - 1)) / 2
+            if b != "s" and b != "sum":
+                a = b - comdif * (bn - 1)
+                cn = bn + 1
+                c = b + comdif
+            else:
+                a = (2 * input_sum / sum_number - comdif * (sum_number - 1)) / 2
+                b = a
+                bn = 1
+                c = b + comdif
+                cn = bn + 1
         print()
         while True:
             n = input("Numbers of terms to sum (i, /): ")
             if n == "i" or n == "inf" or n == "info":
                 print()
-                print("Enter a list of positive numbers separated by commas and using dashes to indicate ranges")
-                print('Eg. "1, 3, 6-8, 10" will output the sum of the first 1, 3, 6, 7, 8, and 10 terms')
+                print("Enter a list of positive integers separated by commas and using dashes to indicate ranges")
+                print('Eg. "1, 6-8, 10" will output the sum of the first 1, 6, 7, 8, and 10 terms')
                 print('Enter "l" to enter last terms instead of numbers of terms')
                 print()
             else:
@@ -1622,11 +1627,9 @@ def arithmetic():
         if n != "/" and n != "skip" and n != "ski":
             if n == "" or n == "exit" or n == "exi":
                 continue     
-            elif n == "ans":
-                n = ans
             elif n == "l" or n == "las" or n == "las ter" or n == "last terms" or n == "last":
                  while True:
-                    l = input("Last terms: ")
+                    l = input("Last terms (i): ")
                     if l == "i" or l == "inf" or l == "info":
                         print()
                         print("Enter a list of terms separated by commas")
@@ -1650,6 +1653,7 @@ def arithmetic():
                     print("The entered term is not a term of the series. Please enter different terms")
                     continue
             try:
+                n = eval(n)
                 n = int(n)
             except:
                 print('Please enter a positive integer, "/" to skip, or return to exit')
@@ -1662,8 +1666,8 @@ def arithmetic():
             if un == "i" or un == "info" or un == "inf":
                 print()
                 print("Enter a list of indexes seperated by commas and using dashes to indicate ranges")
-                print('Enter "d" to output the common difference')
-                print('Eg. "1, d, 6-8, 10" will output the 1st, 6th, 7th, 8th, and 10th terms, and the common difference')
+                print('Enter "d" to find the common difference')
+                print('Eg. "1, d, 6-8" will output the 1st, 6th, 7th, and 8th terms, and the common difference')
                 print("All indexes must be positive integers, and the second index of a range must be greater than the first index of the range")
                 print()
             else:
@@ -1676,16 +1680,18 @@ def arithmetic():
                 if iun == "i" or iun == "info" or iun == "inf":
                     print()
                     print("Enter a list of terms seperated by commas")
-                    print('Eg. "1, 3, 6" will output the indexes of the terms 1, 3, and 6 (if they exist)')
+                    print('Enter "d" to find the common difference')
+                    print('Eg. "1, d, 6" will output the indexes of the terms 1 and 6 (if they exist), and the common difference')
                     print()
                 else:
                     break
             if iun == "" or iun == "exit" or iun == "exi":
                 continue
+        if (n != "/" and n != "skip" and n != "ski") or (un != "/" and un != "skip" and un != "ski") or (comdif != 0 and iun != "/" and iun != "skip" and iun != "ski"):
+            print()
         if n != "/" and n != "skip" and n != "ski":
             global sum
             keeps.append("sum")
-            print()
             sum = (2 * a + comdif * (n - 1)) * n / 2
             if round(sum, 12) == 0:
                 sum = 0.0
@@ -1693,21 +1699,18 @@ def arithmetic():
         if un != "/" and un != "skip" and un != "ski":
             un = un.replace(" ", "")
             un = un.split(",")
-            if n == "/" or n == "skip" or n == "ski":
-                print()
             unindex = 0
             while unindex < len(un):
                 rangelist = un[unindex].split("-")
                 if len(rangelist) == 1:
                     try:
                         unterm = un[unindex]
-                        if unterm == "ans":
-                            unterm = ans
                         if unterm == "d" or unterm == "difference" or unterm == "com dif" or unterm == "common difference":
                             dif = comdif
                             print(f"dif (common difference) = {round(dif, 12)}")
                             unindex += 1
                             continue
+                        unterm = eval(unterm)
                         unterm = int(unterm)
                         if unterm > 0:
                             sumterm = f"tm{unterm}"
@@ -1720,10 +1723,8 @@ def arithmetic():
                         print(f'Term "{un[unindex]}" error: indexes must be positive integers')
                 elif len(rangelist) == 2:
                     try:
-                        if rangelist[0] == "ans":
-                            rangelist[0] = ans
-                        if rangelist[1] == "ans":
-                            rangelist[1] = ans
+                        rangelist[0] = eval(rangelist[0])
+                        rangelist[1] = eval(rangelist[1])
                         rangelist[0] = int(rangelist[0])
                         rangelist[1] = int(rangelist[1])
                         if rangelist[0] > 0 and rangelist[1] > rangelist[0]:
@@ -1746,14 +1747,17 @@ def arithmetic():
                     print(f'Term "{un[unindex]}" error: please enter ranges in the form "x-y", where y > x')
                 unindex += 1
         if comdif != 0 and iun != "/" and iun != "skip" and iun != "ski":
-            if un == "/" or un == "skip" or un == "ski":
-                print()
             iun = iun.replace(" ", "")
             iun = iun.split(",")
             iunindex = 0
             while iunindex < len(iun):
                 try:
                     iunterm = iun[iunindex]
+                    if iunterm == "d" or iunterm == "difference" or iunterm == "comdif" or iunterm == "common difference":
+                        dif = comdif
+                        print(f"dif (common difference) = {round(dif, 12)}")
+                        iunindex += 1
+                        continue
                     iunterm = eval(iunterm)
                     indexcalc = (iunterm - a) / comdif + 1
                     if round(indexcalc, 12) == round(indexcalc) and indexcalc > 0: 
@@ -1795,33 +1799,58 @@ def geometric():
         elif b == "i" or b == "info" or b == "inf":
             print()
             print("Please enter a real number or expression as the value of one of the series terms")
+            print('Enter "s" to enter a sum instead of terms')
             print('Enter "r" for real operations, "b" for binomial expansion, "a" for arithmetic series, "c" for complex operations (this will direct to rectangular form), "m" for matrix operations, and "f" for functions (this will direct to polynomials)')
             continue
-        try:
-            b = eval(b)
-        except:
-            print('Please enter a nonzero real number or expression, "i" for info, or return to exit')
-            continue
-        if round(b, 12) == 0:
-            print('Please enter a nonzero real number or expression, "i" for info, or return to exit')
-            continue
-        bn = input("Term index: ")
-        if bn == "" or bn == "exit" or bn == "exi":
-            continue     
-        elif bn == "ans":
-            bn = ans
-        try:
-            bn = int(bn)
-        except:
-            print('Please enter a positive integer or return to exit')
-            continue
-        if bn < 1:
-            print('Please enter a positive integer or return to exit')
-            continue
-        comrat = input("Common ratio (t to enter term): ")
+        elif b == "s" or b == "sum":
+            input_sum = input("Sum: ")
+            if input_sum == "" or input_sum == "exi" or input_sum == "exit" or input_sum == "t" or input_sum == "ter" or input_sum == "terms":
+                continue
+            try:
+                input_sum = eval(input_sum)
+            except:
+                print("Please enter a real number or expression, or return to exit")
+                continue
+            sum_number = input("Number of summed terms: ")
+            if sum_number == "" or sum_number == "exi" or sum_number == "exit":
+                continue
+            try:
+                sum_number = eval(sum_number)
+                sum_number = int(sum_number)
+                if sum_number <= 0:
+                    print("Please enter a positive integer or return to exit")
+                    continue
+            except:
+                print("Please enter an integer or return to exit")
+                continue
+        else:
+            try:
+                b = eval(b)
+                if round(b, 12) == 0:
+                    print('Please enter a nonzero real number or expression, "i" for info, or return to exit')
+                    continue
+            except:
+                print('Please enter a nonzero real number or expression, "i" for info, or return to exit')
+                continue
+            bn = input("Term index: ")
+            if bn == "" or bn == "exit" or bn == "exi":
+                continue
+            try:
+                bn = eval(bn)
+                bn = int(bn)
+            except:
+                print('Please enter a positive integer or return to exit')
+                continue
+            if bn < 1:
+                print('Please enter a positive integer or return to exit')
+                continue
+        if b == "s" or b == "sum":
+            comrat = input("Common ratio: ")
+        else:
+            comrat = input("Common ratio (t to enter term): ")
         if comrat == "" or comrat == "exit" or comrat == "exi":
             continue
-        elif comrat == "t" or comrat == "term" or comrat == "ter":
+        elif (comrat == "t" or comrat == "term" or comrat == "ter") and b != "s" and b != "sum":
             c = input("Next term: ")
             if c == "" or c == "exit" or c == "exi":
                 continue
@@ -1835,10 +1864,9 @@ def geometric():
                 continue
             cn = input("Term index: ")
             if cn == "" or cn == "exit" or cn == "exi":
-                continue     
-            elif cn == "ans":
-                cn = ans
+                continue
             try:
+                cn = eval(cn)
                 cn = int(cn)
             except:
                 print('Please enter a positive integer or return to exit')
@@ -1851,6 +1879,7 @@ def geometric():
                         comrat *= -1
                     elif ratsign != "positive" and ratsign != "pos" and ratsign != "p" and ratsign != "+":
                         print('Please enter either "p" for positive or "n" for negative')
+                a = b / comrat ** (bn - 1)
             else:
                 print("The index of term 2 must be greater than the index of term 1")
                 continue
@@ -1863,10 +1892,23 @@ def geometric():
             if round(comrat, 12) == 0:
                 print('Please enter a nonzero real number or expression, or return to exit')
                 continue
-        cn = bn + 1
-        c = b * comrat
-        a = b / comrat ** (bn - 1)
-        a = b / comrat ** (bn - 1)
+            if (b == "s" or b == "sum") and comrat != 1:
+                a = input_sum * (1 - comrat) / (1-comrat) ** sum_number
+                input_sum = a * (1-comrat) ** n / (1-comrat)
+                b = a
+                bn = 1
+                cn = bn + 1
+                c = b * comrat
+            elif b == "s" or b == "sum":
+                a = input_sum ** (1 / sum_number)
+                b = a
+                bn = 1
+                c = b * comrat
+                cn = bn + 1
+            else:
+                cn = bn + 1
+                c = b * comrat
+                a = b / comrat ** (bn - 1)
         print()
         n = input("Number of terms to sum (i for infinity, l to enter last terms, /): ")
         if n != "/" and n != "skip" and n != "ski":
@@ -1895,9 +1937,8 @@ def geometric():
                     print("The term is not in the series")
                     continue
             elif n != "infinity" and n != "inf" and n != "i":
-                if n == "ans":
-                    n = ans
                 try:
+                    n = eval(n)
                     n = int(n)
                 except:
                     print('Please enter a positive integer, "i" for infinity, "/" to skip, or return to exit')
@@ -1913,8 +1954,8 @@ def geometric():
             if un == "i" or un == "info" or un == "inf":
                 print()
                 print("Enter a list of indexes seperated by commas and using dashes to indicate ranges")
-                print('Enter "r" to output the common ratio')
-                print('Eg. "1, r, 6-8, 10" will output the 1st, 6th, 7th, 8th, and 10th terms, and the common ratio')
+                print('Enter "r" to find the common ratio')
+                print('Eg. "1, r, 6-8" will output the 1st, 6th, 7th, and 8th terms, and the common ratio')
                 print("All indexes must be positive integers, and the second index of a range must be greater than the first index of the range")
                 print()
             else:
@@ -1927,17 +1968,19 @@ def geometric():
                 if iun == "i" or iun == "info" or iun == "inf":
                     print()
                     print("Enter a list of terms seperated by commas")
-                    print('Eg. "1, 3, 6" will output the indexes of the terms 1, 3, and 6 (if they exist)')
+                    print('Enter "r" to find the common ratio')
+                    print('Eg. "1, r, 6" will output the indexes of the terms 1 and 6 (if they exist), and the common ratio')
                     print()
                 else:
                     break
             if iun == "" or iun == "exit" or iun == "exi":
                 continue
+        if (n != "/" and n != "skip" and n != "ski") or (un != "/" and un != "skip" and un != "ski") or (abs(comrat) != 1 and iun != "/" and iun != "skip" and iun != "ski"):
+            print()
         global sum
         keeps.append(sum)
         if round(b, 12) != round(c, 12):
             if n != "/" and n != "skip" and n != "ski":
-                print()
                 if n != "infinity" and n != "inf" and n != "i":
                     sum = a * (1 - comrat ** n) / (1 - comrat)
                 else:
@@ -1947,27 +1990,23 @@ def geometric():
                 print(f"sum = {round(sum, 12)}")
         else:
             if n != "/" and n != "skip" and n != "ski":
-                print()
                 sum = b * n
                 print(f"sum = {round(sum, 12)}")
         if un != "/" and un != "skip" and un != "ski":
             un = un.replace(" ", "")
             un = un.split(",")
-            if n == "/" or n == "skip" or n == "ski":
-                print()
             unindex = 0
             while unindex < len(un):
                 rangelist = un[unindex].split("-")
                 if len(rangelist) == 1:
                     try:
                         unterm = un[unindex]
-                        if unterm == "ans":
-                            unterm = ans
-                        elif unterm == "r" or unterm == "ratio" or unterm == "comrat" or unterm == "common ratio":
+                        if unterm == "r" or unterm == "ratio" or unterm == "comrat" or unterm == "common ratio":
                             rat = comrat
                             print(f"rat (common ratio) = {round(rat, 12)}")
                             unindex += 1
                             continue
+                        unterm = eval(unterm)
                         unterm = int(unterm)
                         if unterm > 0:
                             sumterm = f"tm{unterm}"
@@ -1980,10 +2019,8 @@ def geometric():
                         print(f'Term "{un[unindex]}" error: indexes must be positive integers')
                 elif len(rangelist) == 2:
                     try:
-                        if rangelist[0] == "ans":
-                            rangelist[0] = ans
-                        if rangelist[1] == "ans":
-                            rangelist[1] = ans
+                        rangelist[0] = eval(rangelist[0])
+                        rangelist[1] = eval(rangelist[1])
                         rangelist[0] = int(rangelist[0])
                         rangelist[1] = int(rangelist[1])
                         if rangelist[0] > 0 and rangelist[1] > rangelist[0]:
@@ -2006,14 +2043,17 @@ def geometric():
                     print(f'Term "{un[unindex]}" error: please enter ranges in the form "x-y", where y > x')
                 unindex += 1
         if abs(comrat) != 1 and iun != "/" and iun != "skip" and iun != "ski":
-            if un == "/" or un == "skip" or un == "ski":
-                print()
             iun = iun.replace(" ", "")
             iun = iun.split(",")
             iunindex = 0
             while iunindex < len(iun):
                 try:
                     iunterm = iun[iunindex]
+                    if iunterm == "r" or iunterm == "ratio" or iunterm == "comrat" or iunterm == "common ratio":
+                        rat = comrat
+                        print(f"rat (common ratio) = {round(rat, 12)}")
+                        iunindex += 1
+                        continue
                     iunterm = eval(iunterm)
                     if iunterm == a:
                         indexcalc = 1
