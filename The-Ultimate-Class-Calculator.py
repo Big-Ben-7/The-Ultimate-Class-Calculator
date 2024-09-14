@@ -1610,7 +1610,7 @@ def arithmetic():
             c = b + comdif
             a = b - comdif * (bn - 1)
         else:
-            a = sum - comdif * (sum_number-1)
+            a = (2 * input_sum / sum_number - comdif * (sum_number - 1)) / 2
         print()
         n = input("Number of terms to sum (l to enter last term, /): ")
         if n != "/" and n != "skip" and n != "ski":
