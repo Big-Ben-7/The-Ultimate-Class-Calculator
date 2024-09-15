@@ -1168,9 +1168,13 @@ def real_operation():
                 else:
                     print(f"ans (answer) = {round(n, digits)}")
             elif op.lower() == "subtract" or op.lower() == "-" or op.lower() == "sub":
+                digits = decimals(n, n2)
                 n -= n2
                 print()
-                print(f"ans (answer) = {round(n, 12)}")
+                if digits == 0:
+                    print(f"ans (answer) = {round(n)}")
+                else:
+                    print(f"ans (answer) = {round(n, digits)}")
             elif op.lower() == "multiply" or op.lower() == "*" or op.lower() == "mul":
                 n *= n2
                 print()
