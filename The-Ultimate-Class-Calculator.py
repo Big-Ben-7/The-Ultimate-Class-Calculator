@@ -47,9 +47,9 @@ def settings():
         elif setting.lower() == "i" or setting.lower() == "inf" or setting.lower() == "info":
             print()
             print("Settings: ")
-            print(f"Significant figures ({sig}): if on, rounds operation answers according to significant figures (12 decimals max)")
+            print(f"In development!")
             continue
-        elif not(setting.lower() == "sig" or setting.lower() == "significant" or setting.lower() == "significant figures" or setting.lower() == "sig fig"):
+        else:
             print('Please enter a valid setting, "i" for info, or return to exit')
             continue
         value = input("On/off: ")
@@ -58,67 +58,9 @@ def settings():
         elif value.lower() != "on" and value.lower() != "off":
             print('Please enter either "on" or "off", or return to exit')
             continue
-        if setting.lower() == "sig" or setting.lower() == "significant" or setting.lower() == "significant figures" or setting.lower() == "sig fig":
-            if value.lower() == "on":
-                sig = "on"
-            else:
-                sig = "off"
-            continue
-
-def myround(n, d):
-    if d == 0:
-        return round(n)
-    a = f"{n}"
-    if "." in a:
-        if a[a.find(".") + d + 1] == "5" and d % 2 == 0:
-            a.replace(a[a.find(".") + d + 1], "6")
-            n = eval(a)
-        if d > len(a[a.find(".") + 1:]):
-            return eval(f"{round(n, d)}" + "0" * d - len(a[a.find(".") + 1:]))
-    else:
-        return eval(f"{round(n, d)}" + "." + "0" * d)
-    return round(n, d)
-
-def sigfigs(n):
-    if n.isfinite():
-        sigcount = 0
-        n = f"{n}"
-        for i in range(0, len(n)):
-            a = n[i]
-            if a != "0":
-                sigcount += 1
-            elif 0 < i < len(n) - 1:
-                if n[i-1] != "0" and n[i+1] != "0":
-                    sigcount += 1
-
-def decimals(n, n2):
-    if sig == "off":
-        return 12
-    if isfinite(n):
-        n = f"{n}"
-        if "." in n:
-            n = n[n.find(".") + 1:]
-            ndigits = len(n)
-        else:
-            ndigits = 0
-    else:
-        ndigits = 12
-    if isfinite(n2):
-        n2 = f"{n2}"
-        if "." in n2:
-            n2 = n2[n2.find(".") + 1:]
-            n2digits = len(n2)
-        else:
-            n2digits = 0
-    else:
-        n2digits = 12
-    digits = min(ndigits, n2digits)
-    if digits >= 12:
-        return 12
-    return digits
 
 def integer(n):
-    if myround(n) == myround(n, 12):
+    if round(n) == round(n, 12):
         return n
     
 def series_find_constants(iunterm, indexcalc):
@@ -131,8 +73,8 @@ def series_find_constants(iunterm, indexcalc):
             cstring = "e"
             constant = e
         if iunterm == 0:
-            sumindex = f"ix{myround(iunterm, 12)}"
-            print(sumindex + f" (index of {myround(iunterm, 12)}) = {myround(indexcalc)}")
+            sumindex = f"ix{round(iunterm, 12)}"
+            print(sumindex + f" (index of {round(iunterm, 12)}) = {round(indexcalc)}")
             globals()[sumindex] = indexcalc
             keeps.append(sumindex)
             break
@@ -140,42 +82,42 @@ def series_find_constants(iunterm, indexcalc):
             if iunterm / constant > 0:
                 if iunterm == constant:
                     sumindex = "ix" + cstring
-                    print(sumindex + f" (index of " + cstring + f") = {myround(indexcalc)}")
+                    print(sumindex + f" (index of " + cstring + f") = {round(indexcalc)}")
                 else:
-                    sumindex = f"ix{myround(iunterm / constant)}" + cstring
-                    print(sumindex + f" (index of {myround((iunterm / constant))}" + cstring + f") = {myround(indexcalc)}")
+                    sumindex = f"ix{round(iunterm / constant)}" + cstring
+                    print(sumindex + f" (index of {round((iunterm / constant))}" + cstring + f") = {round(indexcalc)}")
                 globals()[sumindex] = indexcalc
                 keeps.append(sumindex)
                 break
             elif iunterm / constant < 0:
                 if iunterm / constant == -1:
                     sumindex = f"ix_" + cstring
-                    print(sumindex + f" (index of -" + cstring + f") = {myround(indexcalc)}")
+                    print(sumindex + f" (index of -" + cstring + f") = {round(indexcalc)}")
                 else:
-                    sumindex = f"ix_{myround(abs(iunterm / constant))}" + cstring
-                    print(sumindex + f" (index of -{myround(abs(iunterm / constant))}" + cstring + f") = {myround(indexcalc)}")
+                    sumindex = f"ix_{round(abs(iunterm / constant))}" + cstring
+                    print(sumindex + f" (index of -{round(abs(iunterm / constant))}" + cstring + f") = {round(indexcalc)}")
                 globals()[sumindex] = indexcalc
                 keeps.append(sumindex)
                 break
         elif constant % iunterm == 0:
             if constant / iunterm < 0:
-                sumindex = f"ix_" + cstring + f"_D_{myround(abs(constant / iunterm))}"
-                print(sumindex + f" (index of -" + cstring + f"/{myround(abs(constant / iunterm))}" + f") = {myround(indexcalc)}")
+                sumindex = f"ix_" + cstring + f"_D_{round(abs(constant / iunterm))}"
+                print(sumindex + f" (index of -" + cstring + f"/{round(abs(constant / iunterm))}" + f") = {round(indexcalc)}")
                 globals()[sumindex] = indexcalc
                 keeps.append(sumindex)
                 break
             elif constant / iunterm > 0:
-                sumindex = f"ix" + cstring + f"_D_{myround(constant / iunterm)}"
-                print(sumindex + f" (index of " + cstring + f"/{myround((constant / iunterm))}" + f") = {myround(indexcalc)}")
+                sumindex = f"ix" + cstring + f"_D_{round(constant / iunterm)}"
+                print(sumindex + f" (index of " + cstring + f"/{round((constant / iunterm))}" + f") = {round(indexcalc)}")
                 globals()[sumindex] = indexcalc
                 keeps.append(sumindex)
                 break
         elif scindex == 1:
-            if myround(iunterm, 12) > 0:
-                sumindex = f"ix{myround(iunterm, 12)}"
+            if round(iunterm, 12) > 0:
+                sumindex = f"ix{round(iunterm, 12)}"
             else:
-                sumindex = f"ix_{abs(myround(iunterm, 12))}"
-            print(sumindex + f" (index of {myround(iunterm, 12)}) = {myround(indexcalc)}")
+                sumindex = f"ix_{abs(round(iunterm, 12))}"
+            print(sumindex + f" (index of {round(iunterm, 12)}) = {round(indexcalc)}")
             globals()[sumindex] = indexcalc
             keeps.append(sumindex)
         scindex += 1
@@ -183,14 +125,14 @@ def series_find_constants(iunterm, indexcalc):
 def print_binomial(a, b, c, d, n, k, unterm, x, y):
     global binsum
     co = comb(abs(n), k) * a ** (abs(n) - k) * c ** k
-    xpow = myround(b * (abs(n) - k), 12)
-    ypow = myround(d * k, 12)
-    if myround(co, 12) == 1 and (xpow != 0 or ypow != 0):
+    xpow = round(b * (abs(n) - k), 12)
+    ypow = round(d * k, 12)
+    if round(co, 12) == 1 and (xpow != 0 or ypow != 0):
         cost = ""
-    elif myround(co, 12) == -1 and (xpow != 0 or ypow != 0):
+    elif round(co, 12) == -1 and (xpow != 0 or ypow != 0):
         cost = "-"
     else:
-        cost = f"{myround(co, 12)} "
+        cost = f"{round(co, 12)} "
     if xpow == 1:
         xpowst = x + " "
     elif xpow == 0:
@@ -217,7 +159,7 @@ def print_binomial(a, b, c, d, n, k, unterm, x, y):
     covar = f"cf{unterm}"
     globals()[covar] = co
     keeps.append(covar)
-    print(covar+ f" (term {unterm} coefficient) = {myround(co, 12)}")
+    print(covar+ f" (term {unterm} coefficient) = {round(co, 12)}")
 
 def from_polar():
     global ans
@@ -239,21 +181,11 @@ def from_polar():
             print('Real numbers and expressions, such as "3 * sin(pi / 3)", can be entered as terms')
             print("The following non-parenthesized operators and functions can be entered as part of an expression:")
             print("Operators: + (add), - (subtract), * (multiply), / (divide), // (integer divide), % (remainder), ^ (exponent)")
-            print("Functions: eg. abs(x), sqrt(x), cbrt(x), pow(x, y), log(x, base), factorial(x), comb(x, y), perm(x, y), sin(x), cos(x), tan(x), asin(x), acos(x), atan(x), degrees(x), radians(x), sum([x, y, z,...]), int(x), myround(x), etc")
+            print("Functions: eg. abs(x), sqrt(x), cbrt(x), pow(x, y), log(x, base), factorial(x), comb(x, y), perm(x, y), sin(x), cos(x), tan(x), asin(x), acos(x), atan(x), degrees(x), radians(x), sum([x, y, z,...]), int(x), round(x), etc")
             print('Real constants such as "pi", "e", and "tau" can be entered')
             print('Real variables can also be entered, for example: "ans" (previous real answer), "rl" (real part of previous complex result), "im" (imaginary part of previous complex result), "root" (1st real solution of previous quadratic), "root2" (2nd real solution of previous quadratic), "im2" (imaginary part of 2nd previous quadratic complex solution) "sum" (previous series summation), "rat" (previous geometric series common ratio), "dif" (previous arithmetic series common difference), "term1" (1st term of previous series), "cf1" (1st coefficient of previous binomial expansion), and stored variables')
             print("The above operators and functions can only be entered as part of an expression, not as an operation")
             print('Enter "rec" for rectangular form, "r" for real operations, "m" for matrix operations, "f" for functions (this will direct to polynomials), "s" for summations (this will direct to binomial expansion)')
-            print()
-            print("Notes:")
-            print("Fractional exponents can be used to root: eg. (-1 + 0i) ^ (1/2 + 0i) = i")
-            print('This calculator does not imply multiplication ("*" must be used)')            
-            print("Inputting 2.4e-2, for example, is equivalent to inputting 2.4 * 10 ** -2")
-            print('Trigonometric functions accept and output angles in radians. The degrees and radians functions or operations can be used to convert')
-            print("The result of trigonometric inverse functions (eg. asin, acos, atan, etc.) will lie in their restricted domains")
-            print("Integer divide (//) and int() will remove the decimal part from the output, wheras round() will follow the standard rounding rules: eg. 3 // 2 = int(3 / 2) = 1, but myround(3 / 2) = 2")
-            print("Inputting a comparison statement will use 0 if the statement is false and 1 if the statement is true")
-            print("For more information, visit the python math and operators websites")
             continue
         elif av == "rec" or av == "rectangular" or av == "rectangular form":
             from_rectangular()
@@ -273,7 +205,7 @@ def from_polar():
         try:
             av = av.replace("^", "**")
             av = eval(av)
-            if myround(av, 12) < 0:
+            if round(av, 12) < 0:
                 print('Absolute values cannot be negative')
                 continue
         except:
@@ -300,7 +232,7 @@ def from_polar():
                 print('Please enter either "r" for radians or "d" for degrees')
         a = av * cos(ang)
         b = av * sin(ang)
-        cterm1 = f"{myround(av, 12)} cos({myround(inang, 12)}) + {myround(av, 12)} sin({myround(inang, 12)})i"
+        cterm1 = f"{round(av, 12)} cos({round(inang, 12)}) + {round(av, 12)} sin({round(inang, 12)})i"
         print("First term: " + cterm1)
         while True:
             print()
@@ -308,11 +240,6 @@ def from_polar():
             if op.lower() == "info" or op.lower() == "i" or op.lower() == "inf":
                 print()
                 print('The following operations can be entered: equals (=), add (+), subtract (-), multiply (*), divide (/), exponent (^), rectangular ([])')
-                print()
-                print("Notes:")
-                print('The name, sign, or first 3 letters of any operation can be entered: eg. "absolute value", "abs", and "||" all work')
-                print("Fractional exponents can be used to root: eg. (-1 + 0i) ^ (1/2 + 0i) = i")
-                print('Expressions entered as terms can be operated on or evaluated with the "equals" (=) operation')
                 print("The above operations can only be entered as an operation, not as part of an expression")
             else:
                 break
@@ -326,7 +253,7 @@ def from_polar():
             try:
                 av2 = av2.replace("^", "**")
                 av2 = eval(av2)
-                if myround(av2, 12) < 0:
+                if round(av2, 12) < 0:
                     print('Absolute values cannot be negative')
                     continue
             except:
@@ -353,7 +280,7 @@ def from_polar():
                     print('Please enter either "r" for radians or "d" for degrees')
             c = av2 * cos(ang2)
             d = av2 * sin(ang2)
-            cterm2 = f"{myround(av2, 12)} cos({myround(inang2, 12)}) + {myround(av2, 12)} sin({myround(inang2, 12)})i"
+            cterm2 = f"{round(av2, 12)} cos({round(inang2, 12)}) + {round(av2, 12)} sin({round(inang2, 12)})i"
             print("Second term: " + cterm2)
             print()
         try:
@@ -373,30 +300,30 @@ def from_polar():
                             break
                     if unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad":
                         if angle.lower() == "positive" or angle.lower() == "p" or angle.lower() == "pos" or angle.lower() == "+":
-                            if myround(ares, 12) < 0:
+                            if round(ares, 12) < 0:
                                 ares += 2 * pi
                         elif angle.lower() == "negative" or angle.lower() == "n" or angle.lower() == "neg" or angle.lower() == "-":
-                            if myround(ares, 12) > 0:
+                            if round(ares, 12) > 0:
                                 ares -= 2 * pi
                         break
                     elif unit.lower() == "d" or unit.lower() == "degrees" or unit.lower() == "deg":
                         ares = degrees(ares)
                         if angle.lower() == "positive" or angle.lower() == "p" or angle.lower() == "pos" or angle.lower() == "+":
-                            if myround(ares, 12) < 0:
+                            if round(ares, 12) < 0:
                                 ares += 360
                         elif angle.lower() == "negative" or angle.lower() == "n" or angle.lower() == "neg" or angle.lower() == "-":
-                            if myround(ares, 12) > 0:
+                            if round(ares, 12) > 0:
                                 ares -= 360
                         break
                 print()
-                print(f"Result: {myround(res[0], 12)} cos({myround(ares, 12)}) + {myround(res[0], 12)} sin({myround(ares, 12)})i")
+                print(f"Result: {round(res[0], 12)} cos({round(ares, 12)}) + {round(res[0], 12)} sin({round(ares, 12)})i")
                 mod = res[0]
-                print(f"mod (modulus/absolute value) = {myround(mod, 12)}")
+                print(f"mod (modulus/absolute value) = {round(mod, 12)}")
                 ang = ares
                 if unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad":
-                    print(f"ang (angle/argument) = {myround(ang, 12)} (radians)")
+                    print(f"ang (angle/argument) = {round(ang, 12)} (radians)")
                 else:
-                    print(f"ang (angle/argument) = {myround(ang, 12)} (degrees)")
+                    print(f"ang (angle/argument) = {round(ang, 12)} (degrees)")
             elif op.lower() == "+" or op.lower() == "add":
                 res = cmath.polar(complex(a, b) + complex(c, d))
                 ares = res[1]
@@ -413,30 +340,30 @@ def from_polar():
                             break
                     if unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad":
                         if angle.lower() == "positive" or angle.lower() == "p" or angle.lower() == "pos" or angle.lower() == "+":
-                            if myround(ares, 12) < 0:
+                            if round(ares, 12) < 0:
                                 ares += 2 * pi
                         elif angle.lower() == "negative" or angle.lower() == "n" or angle.lower() == "neg" or angle.lower() == "-":
-                            if myround(ares, 12) > 0:
+                            if round(ares, 12) > 0:
                                 ares -= 2 * pi
                         break
                     elif unit.lower() == "d" or unit.lower() == "degrees" or unit.lower() == "deg":
                         ares = degrees(ares)
                         if angle.lower() == "positive" or angle.lower() == "p" or angle.lower() == "pos" or angle.lower() == "+":
-                            if myround(ares, 12) < 0:
+                            if round(ares, 12) < 0:
                                 ares += 360
                         elif angle.lower() == "negative" or angle.lower() == "n" or angle.lower() == "neg" or angle.lower() == "-":
-                            if myround(ares, 12) > 0:
+                            if round(ares, 12) > 0:
                                 ares -= 360
                         break
                 print()
-                print(f"Result: {myround(res[0], 12)} cos({myround(ares, 12)}) + {myround(res[0], 12)} sin({myround(ares, 12)})i")
+                print(f"Result: {round(res[0], 12)} cos({round(ares, 12)}) + {round(res[0], 12)} sin({round(ares, 12)})i")
                 mod = res[0]
-                print(f"mod (modulus/absolute value) = {myround(mod, 12)}")
+                print(f"mod (modulus/absolute value) = {round(mod, 12)}")
                 ang = ares
                 if unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad":
-                    print(f"ang (angle/argument) = {myround(ang, 12)} (radians)")
+                    print(f"ang (angle/argument) = {round(ang, 12)} (radians)")
                 else:
-                    print(f"ang (angle/argument) = {myround(ang, 12)} (degrees)")
+                    print(f"ang (angle/argument) = {round(ang, 12)} (degrees)")
             elif op.lower() == "-" or op.lower() == "subtract" or op.lower() == "sub":
                 res = cmath.polar(complex(a, b) - complex(c, d))
                 ares = res[1]
@@ -453,30 +380,30 @@ def from_polar():
                             break
                     if unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad":
                         if angle.lower() == "positive" or angle.lower() == "p" or angle.lower() == "pos" or angle.lower() == "+":
-                            if myround(ares, 12) < 0:
+                            if round(ares, 12) < 0:
                                 ares += 2 * pi
                         elif angle.lower() == "negative" or angle.lower() == "n" or angle.lower() == "neg" or angle.lower() == "-":
-                            if myround(ares, 12) > 0:
+                            if round(ares, 12) > 0:
                                 ares -= 2 * pi
                         break
                     elif unit.lower() == "d" or unit.lower() == "degrees" or unit.lower() == "deg":
                         ares = degrees(ares)
                         if angle.lower() == "positive" or angle.lower() == "p" or angle.lower() == "pos" or angle.lower() == "+":
-                            if myround(ares, 12) < 0:
+                            if round(ares, 12) < 0:
                                 ares += 360
                         elif angle.lower() == "negative" or angle.lower() == "n" or angle.lower() == "neg" or angle.lower() == "-":
-                            if myround(ares, 12) > 0:
+                            if round(ares, 12) > 0:
                                 ares -= 360
                         break
                 print()
-                print(f"Result: {myround(res[0], 12)} cos({myround(ares, 12)}) + {myround(res[0], 12)} sin({myround(ares, 12)})i")
+                print(f"Result: {round(res[0], 12)} cos({round(ares, 12)}) + {round(res[0], 12)} sin({round(ares, 12)})i")
                 mod = res[0]
-                print(f"mod (modulus/absolute value) = {myround(mod, 12)}")
+                print(f"mod (modulus/absolute value) = {round(mod, 12)}")
                 ang = ares
                 if unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad":
-                    print(f"ang (angle/argument) = {myround(ang, 12)} (radians)")
+                    print(f"ang (angle/argument) = {round(ang, 12)} (radians)")
                 else:
-                    print(f"ang (angle/argument) = {myround(ang, 12)} (degrees)")
+                    print(f"ang (angle/argument) = {round(ang, 12)} (degrees)")
             elif op.lower() == "*" or op.lower() == "multiply" or op.lower() == "mul":
                 res = cmath.polar(complex(a, b) * complex(c, d))
                 ares = res[1]
@@ -493,30 +420,30 @@ def from_polar():
                             break
                     if unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad":
                         if angle.lower() == "positive" or angle.lower() == "p" or angle.lower() == "pos" or angle.lower() == "+":
-                            if myround(ares, 12) < 0:
+                            if round(ares, 12) < 0:
                                 ares += 2 * pi
                         elif angle.lower() == "negative" or angle.lower() == "n" or angle.lower() == "neg" or angle.lower() == "-":
-                            if myround(ares, 12) > 0:
+                            if round(ares, 12) > 0:
                                 ares -= 2 * pi
                         break
                     elif unit.lower() == "d" or unit.lower() == "degrees" or unit.lower() == "deg":
                         ares = degrees(ares)
                         if angle.lower() == "positive" or angle.lower() == "p" or angle.lower() == "pos" or angle.lower() == "+":
-                            if myround(ares, 12) < 0:
+                            if round(ares, 12) < 0:
                                 ares += 360
                         elif angle.lower() == "negative" or angle.lower() == "n" or angle.lower() == "neg" or angle.lower() == "-":
-                            if myround(ares, 12) > 0:
+                            if round(ares, 12) > 0:
                                 ares -= 360
                         break
                 print()
-                print(f"Result: {myround(res[0], 12)} cos({myround(ares, 12)}) + {myround(res[0], 12)} sin({myround(ares, 12)})i")
+                print(f"Result: {round(res[0], 12)} cos({round(ares, 12)}) + {round(res[0], 12)} sin({round(ares, 12)})i")
                 mod = res[0]
-                print(f"mod (modulus/absolute value) = {myround(mod, 12)}")
+                print(f"mod (modulus/absolute value) = {round(mod, 12)}")
                 ang = ares
                 if unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad":
-                    print(f"ang (angle/argument) = {myround(ang, 12)} (radians)")
+                    print(f"ang (angle/argument) = {round(ang, 12)} (radians)")
                 else:
-                    print(f"ang (angle/argument) = {myround(ang, 12)} (degrees)")
+                    print(f"ang (angle/argument) = {round(ang, 12)} (degrees)")
             elif op.lower() == "/" or op.lower() == "divide" or op.lower() == "div":
                 res = cmath.polar(complex(a, b) / complex(c, d))
                 ares = res[1]
@@ -533,30 +460,30 @@ def from_polar():
                             break
                     if unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad":
                         if angle.lower() == "positive" or angle.lower() == "p" or angle.lower() == "pos" or angle.lower() == "+":
-                            if myround(ares, 12) < 0:
+                            if round(ares, 12) < 0:
                                 ares += 2 * pi
                         elif angle.lower() == "negative" or angle.lower() == "n" or angle.lower() == "neg" or angle.lower() == "-":
-                            if myround(ares, 12) > 0:
+                            if round(ares, 12) > 0:
                                 ares -= 2 * pi
                         break
                     elif unit.lower() == "d" or unit.lower() == "degrees" or unit.lower() == "deg":
                         ares = degrees(ares)
                         if angle.lower() == "positive" or angle.lower() == "p" or angle.lower() == "pos" or angle.lower() == "+":
-                            if myround(ares, 12) < 0:
+                            if round(ares, 12) < 0:
                                 ares += 360
                         elif angle.lower() == "negative" or angle.lower() == "n" or angle.lower() == "neg" or angle.lower() == "-":
-                            if myround(ares, 12) > 0:
+                            if round(ares, 12) > 0:
                                 ares -= 360
                         break
                 print()
-                print(f"Result: {myround(res[0], 12)} cos({myround(ares, 12)}) + {myround(res[0], 12)} sin({myround(ares, 12)})i")
+                print(f"Result: {round(res[0], 12)} cos({round(ares, 12)}) + {round(res[0], 12)} sin({round(ares, 12)})i")
                 mod = res[0]
-                print(f"mod (modulus/absolute value) = {myround(mod, 12)}")
+                print(f"mod (modulus/absolute value) = {round(mod, 12)}")
                 ang = ares
                 if unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad":
-                    print(f"ang (angle/argument) = {myround(ang, 12)} (radians)")
+                    print(f"ang (angle/argument) = {round(ang, 12)} (radians)")
                 else:
-                    print(f"ang (angle/argument) = {myround(ang, 12)} (degrees)")
+                    print(f"ang (angle/argument) = {round(ang, 12)} (degrees)")
             elif op.lower() == "^" or op.lower() == "exponent" or op.lower() == "exp" or op.lower() == "**":
                 res = cmath.polar(complex(a, b) ** complex(c, d))
                 ares = res[1]
@@ -573,55 +500,55 @@ def from_polar():
                             break
                     if unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad":
                         if angle.lower() == "positive" or angle.lower() == "p" or angle.lower() == "pos" or angle.lower() == "+":
-                            if myround(ares, 12) < 0:
+                            if round(ares, 12) < 0:
                                 ares += 2 * pi
                         elif angle.lower() == "negative" or angle.lower() == "n" or angle.lower() == "neg" or angle.lower() == "-":
-                            if myround(ares, 12) > 0:
+                            if round(ares, 12) > 0:
                                 ares -= 2 * pi
                         break
                     elif unit.lower() == "d" or unit.lower() == "degrees" or unit.lower() == "deg":
                         ares = degrees(ares)
                         if angle.lower() == "positive" or angle.lower() == "p" or angle.lower() == "pos" or angle.lower() == "+":
-                            if myround(ares, 12) < 0:
+                            if round(ares, 12) < 0:
                                 ares += 360
                         elif angle.lower() == "negative" or angle.lower() == "n" or angle.lower() == "neg" or angle.lower() == "-":
-                            if myround(ares, 12) > 0:
+                            if round(ares, 12) > 0:
                                 ares -= 360
                         break
                 print()
-                print(f"Result: {myround(res[0], 12)} cos({myround(ares, 12)}) + {myround(res[0], 12)} sin({myround(ares, 12)})i")
+                print(f"Result: {round(res[0], 12)} cos({round(ares, 12)}) + {round(res[0], 12)} sin({round(ares, 12)})i")
                 mod = res[0]
-                print(f"mod (modulus/absolute value) = {myround(mod, 12)}")
+                print(f"mod (modulus/absolute value) = {round(mod, 12)}")
                 ang = ares
                 if unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad":
-                    print(f"ang (angle/argument) = {myround(ang, 12)} (radians)")
+                    print(f"ang (angle/argument) = {round(ang, 12)} (radians)")
                 else:
-                    print(f"ang (angle/argument) = {myround(ang, 12)} (degrees)")
+                    print(f"ang (angle/argument) = {round(ang, 12)} (degrees)")
             elif op.lower() == "rectangular" or op.lower() == "rec" or op.lower() == "rectangular form" or op.lower() == "rec for" or op.lower() == "[]":
                 res = cmath.rect(av, ang)
-                if myround(res.imag, 12) > 0 and myround(res.real, 12) != 0:
-                    if myround(res.imag, 12) != 1:
-                        print(f"Result: {myround(res.real, 12)} + {myround(res.imag, 12)}i")
+                if round(res.imag, 12) > 0 and round(res.real, 12) != 0:
+                    if round(res.imag, 12) != 1:
+                        print(f"Result: {round(res.real, 12)} + {round(res.imag, 12)}i")
                     else:
-                        print(f"Result: {myround(res.real, 12)} + i")
-                elif myround(res.real, 12) == 0 and myround(res.imag, 12) != 0:
-                    if myround(res.imag, 12) != 1 and myround(res.imag, 12) != -1:
-                        print(f"Result: {myround(res.imag, 12)}i")
-                    elif myround(res.imag, 12) == 1:
+                        print(f"Result: {round(res.real, 12)} + i")
+                elif round(res.real, 12) == 0 and round(res.imag, 12) != 0:
+                    if round(res.imag, 12) != 1 and round(res.imag, 12) != -1:
+                        print(f"Result: {round(res.imag, 12)}i")
+                    elif round(res.imag, 12) == 1:
                         print(f"Result: i")
                     else:
                         print(f"Result: -i")
-                elif myround(res.imag, 12) == 0:
-                    print(f"Result: {myround(res.real, 12)}")
+                elif round(res.imag, 12) == 0:
+                    print(f"Result: {round(res.real, 12)}")
                 else:
-                    if myround(res.imag, 12) != -1:
-                        print(f"Result: {myround(res.real, 12)} - {myround(-1 * res.imag, 12)}i")
+                    if round(res.imag, 12) != -1:
+                        print(f"Result: {round(res.real, 12)} - {round(-1 * res.imag, 12)}i")
                     else:
-                        print(f"Result: {myround(res.real, 12)} - i")
+                        print(f"Result: {round(res.real, 12)} - i")
                 rl = res.real
-                print(f"rl (real part) = {myround(rl, 12)}")
+                print(f"rl (real part) = {round(rl, 12)}")
                 im = res.imag
-                print(f"im (imaginary part) = {myround(im, 12)}")                
+                print(f"im (imaginary part) = {round(im, 12)}")                
             else:
                 print('Please enter a valid operation ("i" for info and return to exit)')
         except:
@@ -652,21 +579,11 @@ def from_rectangular():
             print('Real numbers and expressions, such as "3 * sin(pi / 3)", can be entered as values')
             print("The following non-parenthesized operators and functions can be entered as part of an expression:")
             print("Operators: + (add), - (subtract), * (multiply), / (divide), // (integer divide), % (remainder), ^ (exponent)")
-            print("Functions: eg. abs(x), sqrt(x), cbrt(x), pow(x, y), log(x, base), factorial(x), comb(x, y), perm(x, y), sin(x), cos(x), tan(x), asin(x), acos(x), atan(x), degrees(x), radians(x), sum([x, y, z,...]), int(x), myround(x), etc")
+            print("Functions: eg. abs(x), sqrt(x), cbrt(x), pow(x, y), log(x, base), factorial(x), comb(x, y), perm(x, y), sin(x), cos(x), tan(x), asin(x), acos(x), atan(x), degrees(x), radians(x), sum([x, y, z,...]), int(x), round(x), etc")
             print('Real constants such as "pi", "e", and "tau" can be entered')
             print('Real variables can also be entered, for example: "ans" (previous real answer), "rl" (real part of previous complex result), "im" (imaginary part of previous complex result), "root" (1st real solution of previous quadratic), "root2" (2nd real solution of previous quadratic), "im2" (imaginary part of 2nd previous quadratic complex solution) "sum" (previous series summation), "rat" (previous geometric series common ratio), "dif" (previous arithmetic series common difference), "term1" (1st term of previous series), "cf1" (1st coefficient of previous binomial expansion), and stored variables')
             print("The above operators and functions can only be entered as part of an expression, not as an operation")
             print('Enter "p" for polar form, "r" for real operations, "m" for matrix operations, "f" for functions (this will direct to polynomials), "s" for summations (this will direct to binomial expansion)')
-            print()
-            print("Notes:")
-            print("Fractional exponents can be used to root: eg. (-1 + 0i) ^ (1/2 + 0i) = i")
-            print('This calculator does not imply multiplication ("*" must be used)')            
-            print("Inputting 2.4e-2, for example, is equivalent to inputting 2.4 * 10 ** -2")
-            print('Trigonometric functions accept and output angles in radians. The degrees and radians functions or operations can be used to convert')
-            print("The result of trigonometric inverse functions (eg. asin, acos, atan, etc.) will lie in their restricted domains")
-            print("Integer divide (//) and int() will remove the decimal part from the output, wheras round() will follow the standard rounding rules: eg. 3 // 2 = int(3 / 2) = 1, but myround(3 / 2) = 2")
-            print("Inputting a comparison statement will use 0 if the statement is false and 1 if the statement is true")
-            print("For more information, visit the python math and operators websites")
             continue
         elif a == "p" or a == "polar" or a == "pol" or a == "polar form":
             from_polar()
@@ -698,25 +615,25 @@ def from_rectangular():
         except:
             print('Please enter a real number or expression, or return to exit')
             continue
-        if myround(a, 12) != 0 and myround(b, 12) > 0:
-            if myround(b, 12) != 1:
-                cterm1 = f"{myround(a, 12)} + {myround(b, 12)}i"
+        if round(a, 12) != 0 and round(b, 12) > 0:
+            if round(b, 12) != 1:
+                cterm1 = f"{round(a, 12)} + {round(b, 12)}i"
             else:
                 cterm1 = f"{a} + i"
-        elif myround(a, 12) != 0 and myround(b, 12) < 0:
-            if myround(b, 12) != -1:
-                cterm1 = f"{myround(a, 12)} - {myround(b * -1, 12)}i"
+        elif round(a, 12) != 0 and round(b, 12) < 0:
+            if round(b, 12) != -1:
+                cterm1 = f"{round(a, 12)} - {round(b * -1, 12)}i"
             else:
-                cterm1 = f"{myround(a, 12)} - i"
-        elif myround(a, 12) == 0 and myround(b, 12) != 0:
-            if myround(b, 12) != -1 and myround(b, 12) != 1:
-                cterm1 = f"{myround(b, 12)}i"
-            elif myround(b, 12) == 1:
+                cterm1 = f"{round(a, 12)} - i"
+        elif round(a, 12) == 0 and round(b, 12) != 0:
+            if round(b, 12) != -1 and round(b, 12) != 1:
+                cterm1 = f"{round(b, 12)}i"
+            elif round(b, 12) == 1:
                 cterm1 = "i"
             else:
                 cterm1 = "-i"
-        elif myround(b, 12) == 0:
-            cterm1 = f"{myround(a, 12)}"
+        elif round(b, 12) == 0:
+            cterm1 = f"{round(a, 12)}"
         print("First term: " + cterm1)
         while True:
             print()
@@ -724,11 +641,6 @@ def from_rectangular():
             if op.lower() == "info" or op.lower() == "i" or op.lower() == "inf":
                 print()
                 print('The following operations can be entered: equals (=), add (+), subtract (-), multiply (*), divide (/), exponent (^), absolute value or modulus (||), angle or argument (<), polar (|<)')
-                print()
-                print("Notes:")
-                print('The name, sign, or first 3 letters of any operation can be entered: eg. "absolute value", "abs", and "||" all work')
-                print("Fractional exponents can be used to root: eg. (-1 + 0i) ^ (1/2 + 0i) = i")
-                print('Expressions entered as terms can be operated on or evaluated with the "equals" (=) operation')
                 print("The above operations can only be entered as an operation, not as part of an expression")
             else:
                 break
@@ -754,25 +666,25 @@ def from_rectangular():
             except:
                 print('Please enter a real number or expression, or return to exit')
                 continue
-            if myround(c, 12) != 0 and myround(d, 12) > 0:
-                if myround(d, 12) != 1:
-                    cterm2 = f"{myround(c, 12)} + {myround(d, 12)}i"
+            if round(c, 12) != 0 and round(d, 12) > 0:
+                if round(d, 12) != 1:
+                    cterm2 = f"{round(c, 12)} + {round(d, 12)}i"
                 else:
-                    cterm2 = f"{myround(c, 12)} + i"
-            elif myround(c, 12) != 0 and myround(d, 12) < 0:
-                if myround(d, 12) != -1:
-                    cterm2 = f"{myround(c, 12)} - {myround(d * -1, 12)}i"
+                    cterm2 = f"{round(c, 12)} + i"
+            elif round(c, 12) != 0 and round(d, 12) < 0:
+                if round(d, 12) != -1:
+                    cterm2 = f"{round(c, 12)} - {round(d * -1, 12)}i"
                 else:
-                    cterm2 = f"{myround(c, 12)} - i"
-            elif myround(c, 12) == 0 and myround(d, 12) != 0:
-                if myround(d, 12) != 1 and myround(d, 12) != -1:
-                    cterm2 = f"{myround(d, 12)}i"
-                elif myround(d, 12) == 1:
+                    cterm2 = f"{round(c, 12)} - i"
+            elif round(c, 12) == 0 and round(d, 12) != 0:
+                if round(d, 12) != 1 and round(d, 12) != -1:
+                    cterm2 = f"{round(d, 12)}i"
+                elif round(d, 12) == 1:
                     cterm2 = "i"
                 else:
                     cterm2 = "-i"
-            elif myround(d, 12) == 0:
-                cterm2 = f"{myround(c, 12)}"
+            elif round(d, 12) == 0:
+                cterm2 = f"{round(c, 12)}"
             print("Second term: " + cterm2)
         try:
             if op.lower() == "=" or op.lower() == "equals" or op.lower() == "equ":
@@ -780,143 +692,143 @@ def from_rectangular():
                 print()
                 print(f"Result: {cterm1}")
                 rl = res.real
-                print(f"rl (real part) = {myround(rl, 12)}")
+                print(f"rl (real part) = {round(rl, 12)}")
                 im = res.imag
-                print(f"im (imaginary part) = {myround(im, 12)}")
+                print(f"im (imaginary part) = {round(im, 12)}")
             elif op.lower() == "+" or op.lower() == "add":
                 res = complex(a, b) + complex(c, d)
                 print()
-                if myround(res.imag, 12) > 0 and myround(res.real, 12) != 0:
-                    if myround(res.imag, 12) != 1:
-                        print(f"Result: {myround(res.real, 12)} + {myround(res.imag, 12)}i")
+                if round(res.imag, 12) > 0 and round(res.real, 12) != 0:
+                    if round(res.imag, 12) != 1:
+                        print(f"Result: {round(res.real, 12)} + {round(res.imag, 12)}i")
                     else:
-                        print(f"Result: {myround(res.real, 12)} + i")
-                elif myround(res.real, 12) == 0 and myround(res.imag, 12) != 0:
-                    if myround(res.imag, 12) != 1 and myround(res.imag, 12) != -1:
-                        print(f"Result: {myround(res.imag, 12)}i")
-                    elif myround(res.imag, 12) == 1:
+                        print(f"Result: {round(res.real, 12)} + i")
+                elif round(res.real, 12) == 0 and round(res.imag, 12) != 0:
+                    if round(res.imag, 12) != 1 and round(res.imag, 12) != -1:
+                        print(f"Result: {round(res.imag, 12)}i")
+                    elif round(res.imag, 12) == 1:
                         print(f"Result: i")
                     else:
                         print(f"Result: -i")
-                elif myround(res.imag, 12) == 0:
-                    print(f"Result: {myround(res.real, 12)}")
+                elif round(res.imag, 12) == 0:
+                    print(f"Result: {round(res.real, 12)}")
                 else:
-                    if myround(res.imag, 12) != -1:
-                        print(f"Result: {myround(res.real, 12)} - {myround(-1 * res.imag, 12)}i")
+                    if round(res.imag, 12) != -1:
+                        print(f"Result: {round(res.real, 12)} - {round(-1 * res.imag, 12)}i")
                     else:
-                        print(f"Result: {myround(res.real, 12)} - i")
+                        print(f"Result: {round(res.real, 12)} - i")
                 rl = res.real
-                print(f"rl (real part) = {myround(rl, 12)}")
+                print(f"rl (real part) = {round(rl, 12)}")
                 im = res.imag
-                print(f"im (imaginary part) = {myround(im, 12)}")
+                print(f"im (imaginary part) = {round(im, 12)}")
             elif op.lower() == "-" or op.lower() == "subtract" or op.lower() == "sub":
                 res = complex(a, b) - complex(c, d)
                 print()
-                if myround(res.imag, 12) > 0 and myround(res.real, 12) != 0:
-                    if myround(res.imag, 12) != 1:
-                        print(f"Result: {myround(res.real, 12)} + {myround(res.imag, 12)}i")
+                if round(res.imag, 12) > 0 and round(res.real, 12) != 0:
+                    if round(res.imag, 12) != 1:
+                        print(f"Result: {round(res.real, 12)} + {round(res.imag, 12)}i")
                     else:
-                        print(f"Result: {myround(res.real, 12)} + i")
-                elif myround(res.real, 12) == 0 and myround(res.imag, 12) != 0:
-                    if myround(res.imag, 12) != 1 and myround(res.imag, 12) != -1:
-                        print(f"Result: {myround(res.imag, 12)}i")
-                    elif myround(res.imag, 12) == 1:
+                        print(f"Result: {round(res.real, 12)} + i")
+                elif round(res.real, 12) == 0 and round(res.imag, 12) != 0:
+                    if round(res.imag, 12) != 1 and round(res.imag, 12) != -1:
+                        print(f"Result: {round(res.imag, 12)}i")
+                    elif round(res.imag, 12) == 1:
                         print(f"Result: i")
                     else:
                         print(f"Result: -i")
-                elif myround(res.imag, 12) == 0:
-                    print(f"Result: {myround(res.real, 12)}")
+                elif round(res.imag, 12) == 0:
+                    print(f"Result: {round(res.real, 12)}")
                 else:
-                    if myround(res.imag, 12) != -1:
-                        print(f"Result: {myround(res.real, 12)} - {myround(-1 * res.imag, 12)}i")
+                    if round(res.imag, 12) != -1:
+                        print(f"Result: {round(res.real, 12)} - {round(-1 * res.imag, 12)}i")
                     else:
-                        print(f"Result: {myround(res.real, 12)} - i")
+                        print(f"Result: {round(res.real, 12)} - i")
                 rl = res.real
-                print(f"rl (real part) = {myround(rl, 12)}")
+                print(f"rl (real part) = {round(rl, 12)}")
                 im = res.imag
-                print(f"im (imaginary part) = {myround(im, 12)}")
+                print(f"im (imaginary part) = {round(im, 12)}")
             elif op.lower() == "*" or op.lower() == "multiply" or op.lower() == "mul":
                 res = complex(a, b) * complex(c, d)
                 print()
-                if myround(res.imag, 12) > 0 and myround(res.real, 12) != 0:
-                    if myround(res.imag, 12) != 1:
-                        print(f"Result: {myround(res.real, 12)} + {myround(res.imag, 12)}i")
+                if round(res.imag, 12) > 0 and round(res.real, 12) != 0:
+                    if round(res.imag, 12) != 1:
+                        print(f"Result: {round(res.real, 12)} + {round(res.imag, 12)}i")
                     else:
-                        print(f"Result: {myround(res.real, 12)} + i")
-                elif myround(res.real, 12) == 0 and myround(res.imag, 12) != 0:
-                    if myround(res.imag, 12) != 1 and myround(res.imag, 12) != -1:
-                        print(f"Result: {myround(res.imag, 12)}i")
-                    elif myround(res.imag, 12) == 1:
+                        print(f"Result: {round(res.real, 12)} + i")
+                elif round(res.real, 12) == 0 and round(res.imag, 12) != 0:
+                    if round(res.imag, 12) != 1 and round(res.imag, 12) != -1:
+                        print(f"Result: {round(res.imag, 12)}i")
+                    elif round(res.imag, 12) == 1:
                         print(f"Result: i")
                     else:
                         print(f"Result: -i")
-                elif myround(res.imag, 12) == 0:
-                    print(f"Result: {myround(res.real, 12)}")
+                elif round(res.imag, 12) == 0:
+                    print(f"Result: {round(res.real, 12)}")
                 else:
-                    if myround(res.imag, 12) != -1:
-                        print(f"Result: {myround(res.real, 12)} - {myround(-1 * res.imag, 12)}i")
+                    if round(res.imag, 12) != -1:
+                        print(f"Result: {round(res.real, 12)} - {round(-1 * res.imag, 12)}i")
                     else:
-                        print(f"Result: {myround(res.real, 12)} - i")
+                        print(f"Result: {round(res.real, 12)} - i")
                 rl = res.real
-                print(f"rl (real part) = {myround(rl, 12)}")
+                print(f"rl (real part) = {round(rl, 12)}")
                 im = res.imag
-                print(f"im (imaginary part) = {myround(im, 12)}")
+                print(f"im (imaginary part) = {round(im, 12)}")
             elif op.lower() == "/" or op.lower() == "divide" or op.lower() == "div":
                 res = complex(a, b) / complex(c, d)
                 print()
-                if myround(res.imag, 12) > 0 and myround(res.real, 12) != 0:
-                    if myround(res.imag, 12) != 1:
-                        print(f"Result: {myround(res.real, 12)} + {myround(res.imag, 12)}i")
+                if round(res.imag, 12) > 0 and round(res.real, 12) != 0:
+                    if round(res.imag, 12) != 1:
+                        print(f"Result: {round(res.real, 12)} + {round(res.imag, 12)}i")
                     else:
-                        print(f"Result: {myround(res.real, 12)} + i")
-                elif myround(res.real, 12) == 0 and myround(res.imag, 12) != 0:
-                    if myround(res.imag, 12) != 1 and myround(res.imag, 12) != -1:
-                        print(f"Result: {myround(res.imag, 12)}i")
-                    elif myround(res.imag, 12) == 1:
+                        print(f"Result: {round(res.real, 12)} + i")
+                elif round(res.real, 12) == 0 and round(res.imag, 12) != 0:
+                    if round(res.imag, 12) != 1 and round(res.imag, 12) != -1:
+                        print(f"Result: {round(res.imag, 12)}i")
+                    elif round(res.imag, 12) == 1:
                         print(f"Result: i")
                     else:
                         print(f"Result: -i")
-                elif myround(res.imag, 12) == 0:
-                    print(f"Result: {myround(res.real, 12)}")
+                elif round(res.imag, 12) == 0:
+                    print(f"Result: {round(res.real, 12)}")
                 else:
-                    if myround(res.imag, 12) != -1:
-                        print(f"Result: {myround(res.real, 12)} - {myround(-1 * res.imag, 12)}i")
+                    if round(res.imag, 12) != -1:
+                        print(f"Result: {round(res.real, 12)} - {round(-1 * res.imag, 12)}i")
                     else:
-                        print(f"Result: {myround(res.real, 12)} - i")
+                        print(f"Result: {round(res.real, 12)} - i")
                 rl = res.real
-                print(f"rl (real part) = {myround(rl, 12)}")
+                print(f"rl (real part) = {round(rl, 12)}")
                 im = res.imag
-                print(f"im (imaginary part) = {myround(im, 12)}")
+                print(f"im (imaginary part) = {round(im, 12)}")
             elif op.lower() == "^" or op.lower() == "exponent" or op.lower() == "exp" or op.lower() == "**":
                 res = complex(a, b) ** complex(c, d)
                 print()
-                if myround(res.imag, 12) > 0 and myround(res.real, 12) != 0:
-                    if myround(res.imag, 12) != 1:
-                        print(f"Result: {myround(res.real, 12)} + {myround(res.imag, 12)}i")
+                if round(res.imag, 12) > 0 and round(res.real, 12) != 0:
+                    if round(res.imag, 12) != 1:
+                        print(f"Result: {round(res.real, 12)} + {round(res.imag, 12)}i")
                     else:
-                        print(f"Result: {myround(res.real, 12)} + i")
-                elif myround(res.real, 12) == 0 and myround(res.imag, 12) != 0:
-                    if myround(res.imag, 12) != 1 and myround(res.imag, 12) != -1:
-                        print(f"Result: {myround(res.imag, 12)}i")
-                    elif myround(res.imag, 12) == 1:
+                        print(f"Result: {round(res.real, 12)} + i")
+                elif round(res.real, 12) == 0 and round(res.imag, 12) != 0:
+                    if round(res.imag, 12) != 1 and round(res.imag, 12) != -1:
+                        print(f"Result: {round(res.imag, 12)}i")
+                    elif round(res.imag, 12) == 1:
                         print(f"Result: i")
                     else:
                         print(f"Result: -i")
-                elif myround(res.imag, 12) == 0:
-                    print(f"Result: {myround(res.real, 12)}")
+                elif round(res.imag, 12) == 0:
+                    print(f"Result: {round(res.real, 12)}")
                 else:
-                    if myround(res.imag, 12) != -1:
-                        print(f"Result: {myround(res.real, 12)} - {myround(-1 * res.imag, 12)}i")
+                    if round(res.imag, 12) != -1:
+                        print(f"Result: {round(res.real, 12)} - {round(-1 * res.imag, 12)}i")
                     else:
-                        print(f"Result: {myround(res.real, 12)} - i")
+                        print(f"Result: {round(res.real, 12)} - i")
                 rl = res.real
-                print(f"rl (real part) = {myround(rl, 12)}")
+                print(f"rl (real part) = {round(rl, 12)}")
                 im = res.imag
-                print(f"im (imaginary part) = {myround(im, 12)}")
+                print(f"im (imaginary part) = {round(im, 12)}")
             elif op.lower() == "abs" or op.lower() == "absolute value" or op.lower() == "magnitude" or op.lower() == "mag" or op.lower() == "||" or op.lower() == "modulus" or op.lower() == "mod":
                 mod = abs(complex(a, b))
                 print()
-                print(f"mod (modulus/absolute value) = {myround(mod, 12)}")
+                print(f"mod (modulus/absolute value) = {round(mod, 12)}")
             elif op.lower() == "<" or op.lower() == "angle" or op.lower() == "ang" or op.lower() == "phase" or op.lower() == "pha" or op.lower() == "argument" or op.lower() == "arg":
                 res = cmath.phase(a, b)
                 while True:
@@ -932,27 +844,27 @@ def from_rectangular():
                             break
                     if unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad":
                         if angle.lower() == "positive" or angle.lower() == "p" or angle.lower() == "pos" or angle.lower() == "+":
-                            if myround(res, 12) < 0:
+                            if round(res, 12) < 0:
                                 res += 2 * pi
                         elif angle.lower() == "negative" or angle.lower() == "n" or angle.lower() == "neg" or angle.lower() == "-":
-                            if myround(res, 12) > 0:
+                            if round(res, 12) > 0:
                                 res -= 2 * pi
                         break
                     elif unit.lower() == "d" or unit.lower() == "degrees" or unit.lower() == "deg":
                         res = degrees(ares)
                         if angle.lower() == "positive" or angle.lower() == "p" or angle.lower() == "pos" or angle.lower() == "+":
-                            if myround(res, 12) < 0:
+                            if round(res, 12) < 0:
                                 res += 360
                         elif angle.lower() == "negative" or angle.lower() == "n" or angle.lower() == "neg" or angle.lower() == "-":
-                            if myround(res, 12) > 0:
+                            if round(res, 12) > 0:
                                 res -= 360
                         break
                 print()                  
                 ang = res
                 if unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad":
-                    print(f"ang (angle/argument) = {myround(ang, 12)} (radians)")
+                    print(f"ang (angle/argument) = {round(ang, 12)} (radians)")
                 else:
-                    print(f"ang (angle/argument) = {myround(ang, 12)} (degrees)") 
+                    print(f"ang (angle/argument) = {round(ang, 12)} (degrees)") 
             elif op.lower() == "|<" or op.lower() == "polar" or op.lower() == "pol" or op.lower() == "polar form":
                 res = cmath.polar(complex(a, b))
                 ares = res[1]
@@ -971,30 +883,30 @@ def from_rectangular():
                             break
                     if unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad":
                         if angle.lower() == "positive" or angle.lower() == "p" or angle.lower() == "pos" or angle.lower() == "+":
-                            if myround(ares, 12) < 0:
+                            if round(ares, 12) < 0:
                                 ares += 2 * pi
                         elif angle.lower() == "negative" or angle.lower() == "n" or angle.lower() == "neg" or angle.lower() == "-":
-                            if myround(ares, 12) > 0:
+                            if round(ares, 12) > 0:
                                 ares -= 2 * pi
                         break
                     elif unit.lower() == "d" or unit.lower() == "degrees" or unit.lower() == "deg":
                         ares = degrees(ares)
                         if angle.lower() == "positive" or angle.lower() == "p" or angle.lower() == "pos" or angle.lower() == "+":
-                            if myround(ares, 12) < 0:
+                            if round(ares, 12) < 0:
                                 ares += 360
                         elif angle.lower() == "negative" or angle.lower() == "n" or angle.lower() == "neg" or angle.lower() == "-":
-                            if myround(ares, 12) > 0:
+                            if round(ares, 12) > 0:
                                 ares -= 360
                         break
                 print()
-                print(f"Result: {myround(res[0], 12)} cos({myround(ares, 12)}) + {myround(res[0], 12)} sin({myround(ares, 12)})i")
+                print(f"Result: {round(res[0], 12)} cos({round(ares, 12)}) + {round(res[0], 12)} sin({round(ares, 12)})i")
                 mod = res[0]
-                print(f"mod (modulus/absolute value) = {myround(abs, 12)}")
+                print(f"mod (modulus/absolute value) = {round(abs, 12)}")
                 ang = ares
                 if unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad":
-                    print(f"ang (angle/argument) = {myround(ang, 12)} (radians)")
+                    print(f"ang (angle/argument) = {round(ang, 12)} (radians)")
                 else:
-                    print(f"ang (angle/argument) = {myround(ang, 12)} (degrees)")                    
+                    print(f"ang (angle/argument) = {round(ang, 12)} (degrees)")                    
             else:
                 print('Please enter a valid operation ("i" for info and return to exit)')
         except:
@@ -1023,22 +935,11 @@ def real_operation():
             print("Arithmetic operators: + (add), - (subtract), * (multiply), / (divide), // (integer divide), % (remainder), ^ (exponent)")
             print("Comparison operators: == (equal to), != (not equal to), < (less than), <=, (less than or equal to), > (greater than), >= (greater than or equal to)")
             print("Logic operators: and (true if both are true), or (true if either is true), not() (inverts truth value)")
-            print("Functions: eg. abs(x), sqrt(x), cbrt(x), pow(x, y), log(x, base), factorial(x), comb(x, y), perm(x, y), sin(x), cos(x), tan(x), asin(x), acos(x), atan(x), degrees(x), radians(x), sum([x, y, z,...]), int(x), myround(x), etc")
+            print("Functions: eg. abs(x), sqrt(x), cbrt(x), pow(x, y), log(x, base), factorial(x), comb(x, y), perm(x, y), sin(x), cos(x), tan(x), asin(x), acos(x), atan(x), degrees(x), radians(x), sum([x, y, z,...]), int(x), round(x), etc")
             print('Real constants such as "pi", "e", and "tau" can be entered')
             print('Real variables can also be entered, for example: "ans" (previous real answer), "rl" (real part of previous complex result), "im" (imaginary part of previous complex result), "root" (1st real solution of previous quadratic), "root2" (2nd real solution of previous quadratic), "im2" (imaginary part of 2nd previous quadratic complex solution) "sum" (previous series summation), "rat" (previous geometric series common ratio), "dif" (previous arithmetic series common difference), "term1" (1st term of previous series), "cf1" (1st coefficient of previous binomial expansion), and stored variables')
             print("The above operators and functions can only be entered as part of an expression, not as an operation")
             print('Enter "c" for complex operations (this will direct to rectangular form), "m" for matrix operations, "s" for summations (this will direct to binomial expansion), and "f" for functions (this will direct to polynomials)')
-            print()
-            print("Notes:")
-            print("Fractional exponents can be used to root: eg. 8 ^ (1/3) = 2")
-            print('This calculator does not imply multiplication ("*" must be used)')            
-            print("Inputting 2.4e-2, for example, is equivalent to inputting 2.4 * 10 ** -2")
-            print('Trigonometric functions accept and output angles in radians. The degrees and radians functions or operations can be used to convert')
-            print("The result of trigonometric inverse functions (eg. asin, acos, atan, etc.) will lie in their restricted domains")
-            print("Integer divide (//) and int() will remove the decimal part from the output, wheras round() will follow the standard rounding rules: eg. 3 // 2 = int(3 / 2) = 1, but myround(3 / 2) = 2")
-            print('Inputting a comparison statement as the first term will output its truth value, eg. "-5 == -3 - 2 and pi < 5" = True')
-            print("Inputting a comparison statement as the second term will use 0 if the statement is false and 1 if the statement is true")
-            print("For more information, visit the python math and operators websites")
             continue
         elif n == "c" or n == "com" or n == "complex" or n == "complex operations":
             from_rectangular()
@@ -1060,7 +961,7 @@ def real_operation():
                     continue
                 n = eval(n)
                 try:
-                    roundtry = myround(n, 12)
+                    roundtry = round(n, 12)
                 except:
                     print(eval(n))
                     continue
@@ -1078,15 +979,6 @@ def real_operation():
                     print("Combinatorics: factorial (!), choose (cho), permute (per)")
                     print("Comparison: == (equal to), != (not equal to), < (less than), <= (less than or equal to), > (greater than), >= (greater than or equal to)")
                     print("Other: equals (=), store (sto), round (~), integer (int)")
-                    print()
-                    print("Notes:")
-                    print('The name, sign, or first 3 letters of any operation can be entered: eg. "factorial", "fac", and "!" all work')
-                    print('Fractional exponents can be used to root: eg. "8 ^ (1/3)" = 2')
-                    print('The "integer divide" (//) and "integer" (int) operations will remove the decimal part from the output, wheras the "round" (~) operation will follow the standard rounding rules: eg. 3 // 2 = int(3 / 2) = 1, but myround(3 / 2) = 2')
-                    print('The variable name for the "store" (sto) operation must begin with a capital letter')
-                    print('Comparison statement will output its truth value, eg. "-5 == -3 - 2 and pi < 5" = True')
-                    print('Expressions entered as terms can be operated on or evaluated with the "equals" (=) operation')
-                    print("The above operations can only be entered as an operation, not as part of an expression")
                     print()
                 else:
                     break
@@ -1126,8 +1018,8 @@ def real_operation():
                             print('Please enter a real number or expression greater than 0 and not equal to 1, or return to exit')
                             continue                                
                 elif op.lower() == "choose" or op.lower() == "cho" or op.lower() == "comb":
-                    if myround(n, 12) == myround(n) and n >= 0:
-                        n2 = input(f'From {myround(n)} choose: ')
+                    if round(n, 12) == round(n) and n >= 0:
+                        n2 = input(f'From {round(n)} choose: ')
                         if n2 == "" or n2 == "exit" or n2 == "exi":
                             continue
                         try:
@@ -1137,8 +1029,8 @@ def real_operation():
                             print('Please enter a nonnegative integer or return to exit')
                             continue                                    
                 elif op.lower() == "perm" or op.lower() == "permute" or op.lower() == "per":
-                    if myround(n, 12) == myround(n) and n >= 0:
-                        n2 = input(f'From {myround(n)} permute: ')
+                    if round(n, 12) == round(n) and n >= 0:
+                        n2 = input(f'From {round(n)} permute: ')
                         if n2 == "" or n2 == "exit" or n2 == "exi":
                             continue
                         try:
@@ -1172,41 +1064,33 @@ def real_operation():
         try:
             if op.lower() == "equals" or op.lower() == "=" or op.lower() == "equ":
                 print()
-                print(f"ans (answer) = {myround(n, 12)}")
+                print(f"ans (answer) = {round(n, 12)}")
             elif op.lower() == "add" or op.lower() == "+":
-                digits = decimals(n, n2)
                 n += n2
                 print()
-                if digits == 0:
-                    print(f"ans (answer) = {myround(n)}")
-                else:
-                    print(f"ans (answer) = {myround(n, digits)}")
+                print(f"ans (answer) = {round(n)}")
             elif op.lower() == "subtract" or op.lower() == "-" or op.lower() == "sub":
-                digits = decimals(n, n2)
                 n -= n2
                 print()
-                if digits == 0:
-                    print(f"ans (answer) = {myround(n)}")
-                else:
-                    print(f"ans (answer) = {myround(n, digits)}")
+                print(f"ans (answer) = {round(n)}")
             elif op.lower() == "multiply" or op.lower() == "*" or op.lower() == "mul":
                 n *= n2
                 print()
-                print(f"ans (answer) = {myround(n, 12)}")
+                print(f"ans (answer) = {round(n, 12)}")
             elif op.lower() == "divide" or op.lower() == "/" or op.lower() == "div":
                 n /= n2
                 if n == 0:
                     n = 0.0
                 print()
-                print(f"ans (answer) = {myround(n, 12)}")
+                print(f"ans (answer) = {round(n, 12)}")
             elif op.lower() == "remainder" or op.lower() == "r" or op.lower() == "%" or op.lower() == "modulo" or op.lower() == "rem" or op.lower() == "mod":
                 n %= n2
                 print()
-                print(f"ans (answer) = {myround(n, 12)}")
+                print(f"ans (answer) = {round(n, 12)}")
             elif op.lower() == "exponent" or op.lower() == "^" or op.lower() == "exp" or op.lower() == "**":
                 n **= n2
                 print()
-                print(f"ans (answer) = {myround(n, 12)}")
+                print(f"ans (answer) = {round(n, 12)}")
             elif op.lower() == "<" or op.lower() == ">" or op.lower() == ">=" or op.lower() == "<=" or op.lower() == "==" or op.lower() == "!=":
                 print()
                 print(eval(f"{n}" + op  + f"{n2}"))
@@ -1229,60 +1113,60 @@ def real_operation():
                     continue
                 globals()[vname] = n
                 print()
-                print(vname + f" = {myround(n, 12)}")
+                print(vname + f" = {round(n, 12)}")
                 keeps.append(vname)
             elif op.lower() == "round" or op.lower() == "~" or op.lower() == "rou":
                 if n2 > 12:
                     n2 = 12
-                n = myround(n, n2)
+                n = round(n, n2)
                 print()
-                print(f"ans (answer) = {myround(n, 12)}")
+                print(f"ans (answer) = {round(n, 12)}")
             elif op.lower() == "factorial" or op.lower() == "!" or op.lower() == "fac":
-                n = factorial(myround(n))
+                n = factorial(round(n))
                 print()
-                print(f"ans (answer) = {myround(n, 12)}")
+                print(f"ans (answer) = {round(n, 12)}")
             elif op.lower() == "sqrt" or op.lower() == "square root" or op.lower() == "squ":
                 n = sqrt(n)
                 print()
-                print(f"ans (answer) = {myround(n, 12)}")
+                print(f"ans (answer) = {round(n, 12)}")
             elif op.lower() == "cbrt" or op.lower() == "cube root" or op.lower() == "cub":
                 n = cbrt(n)
                 print()
-                print(f"ans (answer) = {myround(n, 12)}")
+                print(f"ans (answer) = {round(n, 12)}")
             elif op.lower() == "log" or op.lower() == "logarithm":
                 n = log(n, n2)
                 print()
-                print(f"ans (answer) = {myround(n, 12)}")
+                print(f"ans (answer) = {round(n, 12)}")
             elif op.lower() == "integer divide" or op.lower() == "int div" or op.lower() == "floor divide" or op.lower() == "flo div" or op.lower() == "//":
                 n //= n2
                 print()
                 if n == 0:
                     n = 0.0
-                print(f"ans (answer) = {myround(n, 12)}")
+                print(f"ans (answer) = {round(n, 12)}")
             elif op.lower() == "integer" or op.lower() == "int":
                 n = 0 + integer(n)
                 print()
-                print(f"ans (answer) = {myround(n, 12)}")
+                print(f"ans (answer) = {round(n, 12)}")
             elif op.lower() == "choose" or op.lower() == "cho" or op.lower() == "comb":
-                n = comb(myround(n), myround(n2))
+                n = comb(round(n), round(n2))
                 print()
-                print(f"ans (answer) = {myround(n, 12)}")
+                print(f"ans (answer) = {round(n, 12)}")
             elif op.lower() == "perm" or op.lower() == "permute" or op.lower() == "per":
-                n = perm(myround(n), myround(n2))
+                n = perm(round(n), round(n2))
                 print()
-                print(f"ans (answer) = {myround(n, 12)}")
+                print(f"ans (answer) = {round(n, 12)}")
             elif op.lower() == "absolute value" or op.lower() == "||" or op.lower() == "abs" or op.lower() == "magnitude" or op.lower() == "mag":
                 n = abs(n)
                 print()
-                print(f"ans (answer) = {myround(n, 12)}")
+                print(f"ans (answer) = {round(n, 12)}")
             elif op.lower() == "radians" or op.lower() == "rad":
                 n = radians(n)
                 print()
-                print(f"ans (answer) = {myround(n, 12)}")
+                print(f"ans (answer) = {round(n, 12)}")
             elif op.lower() == "degrees" or op.lower() == "deg":
                 n = degrees(n)
                 print()
-                print(f"ans (answer) = {myround(n, 12)}")             
+                print(f"ans (answer) = {round(n, 12)}")             
             elif op.lower() == "sin" or op.lower() == "sine" or op.lower() == "cos" or op.lower() == "cosine" or op.lower() == "tangent" or op.lower() == "tan":
                 angle = input("Inputted in (r)adians or (d)egrees? ")
                 if angle.lower() == "radians" or angle.lower() == "rad" or angle.lower() == "r":
@@ -1298,15 +1182,15 @@ def real_operation():
                     if op.lower() == "sin" or op.lower() == "sine":
                         n = sin(n)
                         print()
-                        print(f"ans (answer) = {myround(n, 12)}")
+                        print(f"ans (answer) = {round(n, 12)}")
                     elif op.lower() == "cos" or op.lower() == "cosine":
                         n = cos(n)
                         print()
-                        print(f"ans (answer) = {myround(n, 12)}")
+                        print(f"ans (answer) = {round(n, 12)}")
                     elif op.lower() == "tan" or op.lower() == "tangent":
                         n = tan()
                         print()
-                        print(f"ans (answer) = {myround(n, 12)}")
+                        print(f"ans (answer) = {round(n, 12)}")
             elif op.lower() == "asin" or op.lower() == "arcsine" or op.lower() == "inverse sine" or op.lower() == "inv sin" or op.lower() == "acos" or op.lower() == "arccosine" or op.lower() == "inverse cosine" or op.lower() == "inv cos" or op.lower() == "atan" or op.lower() == "arctangent" or op.lower() == "inverse tangent" or op.lower() == "inv tan" or op.lower() == "asi" or op.lower() == "aco" or op.lower() == "ata":
                 unit = input("Output in (r)adians or (d)egrees? ")
                 quad = input("Output in default quadrant (yes/no)? ")
@@ -1347,19 +1231,19 @@ def real_operation():
                 angle = input("Output (p)ositive or (n)egative angle? ")
                 if angle.lower() == "positive" or angle.lower() == "pos" or angle.lower() == "+" or angle.lower() == "p":
                     if unit.lower() == "radians" or unit.lower() == "rad" or unit.lower() == "r":
-                        if myround(n, 12) < 0:
+                        if round(n, 12) < 0:
                             n += 2 * pi
                     elif unit.lower() == "degrees" or unit.lower() == "deg" or unit.lower() == "d":
-                        if myround(n, 12) < 0:
+                        if round(n, 12) < 0:
                             n += 360
                     else:
                         go = False
                 elif angle.lower() == "negative" or angle.lower() == "neg" or angle.lower() == "-" or angle.lower() == "n":
                     if unit.lower() == "radians" or unit.lower() == "rad" or unit.lower() == "r":
-                        if myround(n, 12) > 0:
+                        if round(n, 12) > 0:
                             n -= 2 * pi
                     elif unit.lower() == "degrees" or unit.lower() == "deg" or unit.lower() == "d":
-                        if myround(n, 12) > 0:
+                        if round(n, 12) > 0:
                             n -= 360
                     else:
                         go = False
@@ -1377,9 +1261,9 @@ def real_operation():
                 if go == True:
                     print()
                     if unit.lower() == "radians" or unit.lower() == "rad" or unit.lower() == "r":
-                        print(f"ans (answer) = {myround(n, 12)} radians")
+                        print(f"ans (answer) = {round(n, 12)} radians")
                     else:
-                        print(f"ans (answer) = {myround(n, 12)} degrees")
+                        print(f"ans (answer) = {round(n, 12)} degrees")
             else:
                 print('Please enter a valid operation ("i" for info and return to exit)')
                 print()
@@ -1790,11 +1674,11 @@ def arithmetic():
                  except:
                     print('Please enter a real number or expression, or return to exit')
                     continue
-                 if myround(comdif, 12) == 0:
+                 if round(comdif, 12) == 0:
                     print("If the common difference is 0, enter a number of terms to sum instead")
                     continue
                  n = (l - a) / comdif + 1
-                 if myround(n) != round (n, 12) or n <= 0:
+                 if round(n) != round (n, 12) or n <= 0:
                     print("The entered term is not a term of the series. Please enter different terms")
                     continue
             else:
@@ -1821,7 +1705,7 @@ def arithmetic():
                 break
         if un == "" or un == "exit" or un == "exi":
             continue
-        if myround(comdif, 12) != 0:
+        if round(comdif, 12) != 0:
             while True:
                 iun = input('Terms of indexes to find (i, /): ')
                 if iun == "i" or iun == "info" or iun == "inf":
@@ -1834,15 +1718,15 @@ def arithmetic():
                     break
             if iun == "" or iun == "exit" or iun == "exi":
                 continue
-        if (n != "/" and n != "skip" and n != "ski") or (un != "/" and un != "skip" and un != "ski") or (myround(comdif, 12) != 0 and iun != "/" and iun != "skip" and iun != "ski"):
+        if (n != "/" and n != "skip" and n != "ski") or (un != "/" and un != "skip" and un != "ski") or (round(comdif, 12) != 0 and iun != "/" and iun != "skip" and iun != "ski"):
             print()
         if n != "/" and n != "skip" and n != "ski":
             global sum
             keeps.append("sum")
             sum = (2 * a + comdif * (n - 1)) * n / 2
-            if myround(sum, 12) == 0:
+            if round(sum, 12) == 0:
                 sum = 0.0
-            print(f"sum = {myround(sum, 12)}")
+            print(f"sum = {round(sum, 12)}")
         if un != "/" and un != "skip" and un != "ski":
             un = un.replace(" ", "")
             un = un.split(",")
@@ -1854,7 +1738,7 @@ def arithmetic():
                         unterm = un[unindex]
                         if unterm == "d" or unterm == "difference" or unterm == "com dif" or unterm == "common difference":
                             dif = comdif
-                            print(f"dif (common difference) = {myround(dif, 12)}")
+                            print(f"dif (common difference) = {round(dif, 12)}")
                             unindex += 1
                             continue
                         unterm = unterm.replace("^", "**")
@@ -1864,7 +1748,7 @@ def arithmetic():
                             sumterm = f"tm{unterm}"
                             globals()[sumterm] = a + comdif * (unterm - 1)
                             keeps.append(sumterm)
-                            print(sumterm + f" (term {unterm}) = {myround(a + comdif * (unterm - 1), 12)}")
+                            print(sumterm + f" (term {unterm}) = {round(a + comdif * (unterm - 1), 12)}")
                         else:
                             print(f'"{unterm}" is not a positive integers')
                     except:
@@ -1885,7 +1769,7 @@ def arithmetic():
                                 sumterm = f"tm{unterm}"
                                 globals()[sumterm] = a + comdif * (unterm - 1)
                                 keeps.append(sumterm)
-                                print(sumterm + f" (term {unterm}) = {myround(a + comdif * (unterm - 1), 12)}")
+                                print(sumterm + f" (term {unterm}) = {round(a + comdif * (unterm - 1), 12)}")
                                 rangeindex += 1
                         elif rangelist[1] <= rangelist[0]:
                             print(f'"{un[unindex]}" is not a range in the form "x-y", where y > x')
@@ -1896,7 +1780,7 @@ def arithmetic():
                 else:
                     print(f'"{un[unindex]}" is not a range in the form "x-y", where y > x')
                 unindex += 1
-        if myround(comdif, 12) != 0 and iun != "/" and iun != "skip" and iun != "ski":
+        if round(comdif, 12) != 0 and iun != "/" and iun != "skip" and iun != "ski":
             iun = iun.replace(" ", "")
             iun = iun.split(",")
             iunindex = 0
@@ -1905,13 +1789,13 @@ def arithmetic():
                     iunterm = iun[iunindex]
                     if iunterm == "d" or iunterm == "difference" or iunterm == "comdif" or iunterm == "common difference":
                         dif = comdif
-                        print(f"dif (common difference) = {myround(dif, 12)}")
+                        print(f"dif (common difference) = {round(dif, 12)}")
                         iunindex += 1
                         continue
                     iunterm = iunterm.replace("^", "**")
                     iunterm = eval(iunterm)
                     indexcalc = (iunterm - a) / comdif + 1
-                    if myround(indexcalc, 12) == myround(indexcalc) and indexcalc > 0: 
+                    if round(indexcalc, 12) == round(indexcalc) and indexcalc > 0: 
                         series_find_constants(iunterm, indexcalc)
                     else:
                         print(f'"{iunterm}" is not a term in the series')
@@ -1960,7 +1844,7 @@ def geometric():
             try:
                 input_sum = input_sum.replace("^", "**")
                 input_sum = eval(input_sum)
-                if myround(input_sum, 12) == 0:
+                if round(input_sum, 12) == 0:
                     print("Please enter a nonzero real number or expression, or return to exit")
                     continue
             except:
@@ -1984,7 +1868,7 @@ def geometric():
             try:
                 b = b.replace("^", "**")
                 b = eval(b)
-                if myround(b, 12) == 0:
+                if round(b, 12) == 0:
                     print('Please enter a nonzero real number or expression, "i" for info, or return to exit')
                     continue
             except:
@@ -2019,7 +1903,7 @@ def geometric():
             except:
                 print('Please enter a nonzero real number or expression, or return to exit')
                 continue      
-            if myround(c, 12) == 0:
+            if round(c, 12) == 0:
                 print('Please enter a nonzero real number or expression, or return to exit')
                 continue
             cn = input("Term index: ")
@@ -2051,7 +1935,7 @@ def geometric():
             except:
                 print('Please enter a nonzero real number or expression, or return to exit')
                 continue
-            if myround(comrat, 12) == 0:
+            if round(comrat, 12) == 0:
                 print('Please enter a nonzero real number or expression, or return to exit')
                 continue
             if (b == "s" or b == "sum") and (sum_number == "i" or sum_number == "inf" or sum_number == "infinity"):
@@ -2064,14 +1948,14 @@ def geometric():
                     bn = 1
                     c = b * comrat
                     cn = bn + 1
-            elif (b == "s" or b == "sum") and myround(comrat ** sum_number, 12) != 1:
+            elif (b == "s" or b == "sum") and round(comrat ** sum_number, 12) != 1:
                 a = input_sum * (1 - comrat) / (1 - comrat ** sum_number)
                 b = a
                 bn = 1
                 c = b * comrat
                 cn = bn + 1
-            elif (b == "s" or b == "sum") and myround(comrat, 12) == 1:
-                if myround(input_sum, 12) > 0:
+            elif (b == "s" or b == "sum") and round(comrat, 12) == 1:
+                if round(input_sum, 12) > 0:
                     a = input_sum ** (1 / sum_number)
                 else:
                     a = -1 * abs(input_sum) ** (1 / sum_number)
@@ -2079,7 +1963,7 @@ def geometric():
                 bn = 1
                 c = b * comrat
                 cn = bn + 1
-            elif (b == "s" or b == "sum") and myround(comrat, 12) == -1:
+            elif (b == "s" or b == "sum") and round(comrat, 12) == -1:
                 print("The common ratio cannot be -1 if the number of summed terms is even, as this will always result in a sum of 0 regardless of the term values")
                 continue
             else:
@@ -2111,7 +1995,7 @@ def geometric():
                     n = 1
                 else:
                     n = log(abs(l / a), abs(comrat)) + 1
-                if myround(n) != round (n, 12) or n <= 0:
+                if round(n) != round (n, 12) or n <= 0:
                     print("The term is not in the series")
                     continue
             elif n != "infinity" and n != "inf" and n != "i":
@@ -2141,7 +2025,7 @@ def geometric():
                 break
         if un == "" or un == "exit" or un == "exi":
             continue
-        if myround(abs(comrat), 12) != 1:
+        if round(abs(comrat), 12) != 1:
             while True:
                 iun = input('Terms of indexes to find (i, /): ')
                 if iun == "i" or iun == "info" or iun == "inf":
@@ -2154,23 +2038,23 @@ def geometric():
                     break
             if iun == "" or iun == "exit" or iun == "exi":
                 continue
-        if (n != "/" and n != "skip" and n != "ski") or (un != "/" and un != "skip" and un != "ski") or (myround(abs(comrat), 12) != 1 and iun != "/" and iun != "skip" and iun != "ski"):
+        if (n != "/" and n != "skip" and n != "ski") or (un != "/" and un != "skip" and un != "ski") or (round(abs(comrat), 12) != 1 and iun != "/" and iun != "skip" and iun != "ski"):
             print()
         global sum
         keeps.append(sum)
-        if myround(b, 12) != myround(c, 12):
+        if round(b, 12) != round(c, 12):
             if n != "/" and n != "skip" and n != "ski":
                 if n != "infinity" and n != "inf" and n != "i":
                     sum = a * (1 - comrat ** n) / (1 - comrat)
                 else:
                     sum = a / (1 - comrat)
-                if myround(sum, 12) == 0:
+                if round(sum, 12) == 0:
                     sum = 0.0
-                print(f"sum = {myround(sum, 12)}")
+                print(f"sum = {round(sum, 12)}")
         else:
             if n != "/" and n != "skip" and n != "ski":
                 sum = b * n
-                print(f"sum = {myround(sum, 12)}")
+                print(f"sum = {round(sum, 12)}")
         if un != "/" and un != "skip" and un != "ski":
             un = un.replace(" ", "")
             un = un.split(",")
@@ -2182,7 +2066,7 @@ def geometric():
                         unterm = un[unindex]
                         if unterm == "r" or unterm == "ratio" or unterm == "comrat" or unterm == "common ratio":
                             rat = comrat
-                            print(f"rat (common ratio) = {myround(rat, 12)}")
+                            print(f"rat (common ratio) = {round(rat, 12)}")
                             unindex += 1
                             continue
                         unterm = unterm.replace("^", "**")
@@ -2192,7 +2076,7 @@ def geometric():
                             sumterm = f"tm{unterm}"
                             globals()[sumterm] = a * comrat ** (unterm - 1)
                             keeps.append(sumterm)
-                            print(sumterm + f" (term {unterm}) = {myround(a * comrat ** (unterm - 1), 12)}")
+                            print(sumterm + f" (term {unterm}) = {round(a * comrat ** (unterm - 1), 12)}")
                         else:
                             print(f'"{unterm}" is not a positive integer')
                     except:
@@ -2213,7 +2097,7 @@ def geometric():
                                 sumterm = f"tm{unterm}"
                                 globals()[sumterm] = a * comrat ** (unterm - 1)
                                 keeps.append(sumterm)
-                                print(sumterm + f" (term {unterm}) = {myround(a * comrat ** (unterm - 1), 12)}")
+                                print(sumterm + f" (term {unterm}) = {round(a * comrat ** (unterm - 1), 12)}")
                                 rangeindex += 1
                         elif rangelist[1] <= rangelist[0]:
                             print(f'"{un[unindex]}" is not a range in the form "x-y", where y > x')
@@ -2224,7 +2108,7 @@ def geometric():
                 else:
                     print(f'"{un[unindex]}" is not a range in the form "x-y", where y > x')
                 unindex += 1
-        if myround(abs(comrat), 12) != 1 and iun != "/" and iun != "skip" and iun != "ski":
+        if round(abs(comrat), 12) != 1 and iun != "/" and iun != "skip" and iun != "ski":
             iun = iun.replace(" ", "")
             iun = iun.split(",")
             iunindex = 0
@@ -2233,7 +2117,7 @@ def geometric():
                     iunterm = iun[iunindex]
                     if iunterm == "r" or iunterm == "ratio" or iunterm == "comrat" or iunterm == "common ratio":
                         rat = comrat
-                        print(f"rat (common ratio) = {myround(rat, 12)}")
+                        print(f"rat (common ratio) = {round(rat, 12)}")
                         iunindex += 1
                         continue
                     iunterm = iunterm.replace("^", "**")
@@ -2246,7 +2130,7 @@ def geometric():
                         continue
                     else:
                         indexcalc = log(abs(iunterm / a), abs(comrat)) + 1
-                    if myround(indexcalc, 12) == myround(indexcalc) and indexcalc > 0 and ((myround(iunterm / a, 12) > 0 and comrat > 0) or (myround(iunterm, 12) < 0 and comrat < 0 and a < 0 and indexcalc % 2 != 0) or (myround(iunterm, 12) > 0 and comrat < 0 and a < 0 and indexcalc % 2 == 0) or (myround(iunterm, 12) < 0 and comrat < 0 and a > 0 and indexcalc % 2 == 0) or (myround(iunterm, 12) > 0 and comrat < 0 and a > 0 and indexcalc % 2 != 0)): 
+                    if round(indexcalc, 12) == round(indexcalc) and indexcalc > 0 and ((round(iunterm / a, 12) > 0 and comrat > 0) or (round(iunterm, 12) < 0 and comrat < 0 and a < 0 and indexcalc % 2 != 0) or (round(iunterm, 12) > 0 and comrat < 0 and a < 0 and indexcalc % 2 == 0) or (round(iunterm, 12) < 0 and comrat < 0 and a > 0 and indexcalc % 2 == 0) or (round(iunterm, 12) > 0 and comrat < 0 and a > 0 and indexcalc % 2 != 0)): 
                         series_find_constants(iunterm, indexcalc)
                     else:
                         print(f'"{iunterm}" is not a term in the series')
@@ -2311,51 +2195,51 @@ def polynomial():
             print('Please enter a real number or expression, or return to exit')
             continue
         print()
-        if myround(a, 12) == 0 and myround(b, 12) == 0 and myround(c, 12) == 0:
+        if round(a, 12) == 0 and round(b, 12) == 0 and round(c, 12) == 0:
             print("Roots: all numbers")
-        elif myround(a, 12) == 0 and myround(b, 12) == 0:
+        elif round(a, 12) == 0 and round(b, 12) == 0:
             print("No roots")
-        elif myround(a, 12) == 0:
+        elif round(a, 12) == 0:
             root = -c / b
-            print(f"Root: x = {myround(root, 12)}")
-            print(f"root = {myround(root, 12)}")
+            print(f"Root: x = {round(root, 12)}")
+            print(f"root = {round(root, 12)}")
         else:
             det = b ** 2 - 4 * a * c
-            if myround(det, 12) > 0:
+            if round(det, 12) > 0:
                 root = (-b - sqrt(det)) / (2 * a)
                 root2 = (-b + sqrt(det)) / (2 * a)
-                print(f"Roots: x = {myround(root, 12)} or x = {myround(root2, 12)}")
-                print(f"root = {myround(root, 12)}")
-                print(f"root2 = {myround(root2, 12)}")
-            elif myround(det, 12) == 0:
+                print(f"Roots: x = {round(root, 12)} or x = {round(root2, 12)}")
+                print(f"root = {round(root, 12)}")
+                print(f"root2 = {round(root2, 12)}")
+            elif round(det, 12) == 0:
                 root = -b / (2 * a)
-                print(f"Root: x = {myround(root, 12)}")
-                print(f"root = {myround(root, 12)}")
+                print(f"Root: x = {round(root, 12)}")
+                print(f"root = {round(root, 12)}")
             else:
                 rl = -b / (2 * a)
                 im = sqrt(-det) / (2 * a)
-                if myround(rl, 12) != 0 and myround(im, 12) > 0:
-                    if myround(im, 12) != 1:
-                        print(f"Roots: x = {myround(rl, 12)} - {myround(im, 12)}i or x = {myround(rl, 12)} + {myround(im, 12)}i")
+                if round(rl, 12) != 0 and round(im, 12) > 0:
+                    if round(im, 12) != 1:
+                        print(f"Roots: x = {round(rl, 12)} - {round(im, 12)}i or x = {round(rl, 12)} + {round(im, 12)}i")
                     else:
-                        print(f"Roots: x = {myround(rl, 12)} - i or x = {myround(rl, 12)} + i")
-                elif myround(rl, 12) == 0:
-                    if myround(im, 12) != 1 and myround(im, 12) != -1:
-                        print(f"Roots: x = {myround(im * -1, 12)}i or x = {myround(im, 12)}i")
-                    elif myround(im, 12) == 1:
+                        print(f"Roots: x = {round(rl, 12)} - i or x = {round(rl, 12)} + i")
+                elif round(rl, 12) == 0:
+                    if round(im, 12) != 1 and round(im, 12) != -1:
+                        print(f"Roots: x = {round(im * -1, 12)}i or x = {round(im, 12)}i")
+                    elif round(im, 12) == 1:
                         print(f"Roots: x = -i or x = i")
                     else:
                         print(f"Roots: x = i or x = -i")
-                elif myround(im, 12) < 0:
-                    if myround(im, 12) != -1:
-                        print(f"Roots: x = {myround(rl, 12)} + {myround(im * -1, 12)}i or x = {myround(rl, 12)} - {myround(im * -1, 12)}i")
+                elif round(im, 12) < 0:
+                    if round(im, 12) != -1:
+                        print(f"Roots: x = {round(rl, 12)} + {round(im * -1, 12)}i or x = {round(rl, 12)} - {round(im * -1, 12)}i")
                     else:
-                        print(f"Roots: x = {myround(rl, 12)} + i or x = {myround(rl, 12)} - i")              
-                print(f"rl (real part) = {myround(rl, 12)}")
+                        print(f"Roots: x = {round(rl, 12)} + i or x = {round(rl, 12)} - i")              
+                print(f"rl (real part) = {round(rl, 12)}")
                 im2 = im
                 im *= -1
-                print(f"im (imaginary part) = {myround(im, 12)}")
-                print(f"im2 (2nd imaginary part) = {myround(im2, 12)}")
+                print(f"im (imaginary part) = {round(im, 12)}")
+                print(f"im2 (2nd imaginary part) = {round(im2, 12)}")
 
 def symmetry():
     print()
@@ -2404,20 +2288,20 @@ def symmetry():
             except:
                 print('Please enter a real number or expression, or return to exit')
                 continue
-            if myround(m, 12) == 0:
+            if round(m, 12) == 0:
                 printm = ""
-            elif myround(m, 12) == 1:
+            elif round(m, 12) == 1:
                 printm = f"x"
             else:
-                printm = f"{myround(m, 12)}x"
-            if myround(b, 12) == 0 and myround(m, 12) != 0:
+                printm = f"{round(m, 12)}x"
+            if round(b, 12) == 0 and round(m, 12) != 0:
                 printb = ""
-            elif myround(b, 12) == 0:
+            elif round(b, 12) == 0:
                 printb = "0 (x-axis)"
-            elif myround(m, 12) == 0:
-                printb = f"{myround(b, 12)}"
+            elif round(m, 12) == 0:
+                printb = f"{round(b, 12)}"
             else:
-                printb = f" + {myround(b, 12)}"
+                printb = f" + {round(b, 12)}"
             print("Symmetry line: y = " + printm + printb)
         elif m == "p" or m == "points" or m == "poi":
             p1 = input("Point 1 (s to enter slope): ")
@@ -2459,26 +2343,26 @@ def symmetry():
                 m = "v"
                 xint = p1[0]
                 if xint != 0:
-                    print(f"Symmetry line: x = {myround(xint, 12)}")
+                    print(f"Symmetry line: x = {round(xint, 12)}")
                 else:
                     print("Symmetry line: x = 0 (y-axis)")
             else:
                 m = (p2[1] - p1[1]) / (p2[0] - p1[0])
                 b = p1[1] - m * p1[0]
-                if myround(m, 12) == 0:
+                if round(m, 12) == 0:
                     printm = ""
-                elif myround(m, 12) == 1:
+                elif round(m, 12) == 1:
                     printm = f"x"
                 else:
-                    printm = f"{myround(m, 12)}x"
-                if myround(b, 12) == 0 and myround(m, 12) != 0:
+                    printm = f"{round(m, 12)}x"
+                if round(b, 12) == 0 and round(m, 12) != 0:
                     printb = ""
-                elif myround(b, 12) == 0:
+                elif round(b, 12) == 0:
                     printb = "0 (x-axis)"
-                elif myround(m, 12) == 0:
-                    printb = f"{myround(b, 12)}"
+                elif round(m, 12) == 0:
+                    printb = f"{round(b, 12)}"
                 else:
-                    printb = f" + {myround(b, 12)}"
+                    printb = f" + {round(b, 12)}"
                 print("Symmetry line: y = " + printm + printb)
         else:
             xint = input("X-intercept: ")
@@ -2491,7 +2375,7 @@ def symmetry():
                 print('Please enter a real number or expression, or return to exit')
                 continue
             if xint != 0:
-                print(f"Symmetry line: x = {myround(xint, 12)}")
+                print(f"Symmetry line: x = {round(xint, 12)}")
             else:
                 print("Symmetry line: x = 0 (y-axis)")
         print()
@@ -2546,9 +2430,9 @@ def symmetry():
             globals()[yco] = y
             keeps.append(xco)
             keeps.append(yco)
-            print(f"Point {i + 1} -> ({myround(x, 12)}, {myround(y, 12)})")
-            print(xco + f" = {myround(x, 12)}")
-            print(yco + f" = {myround(y, 12)}")
+            print(f"Point {i + 1} -> ({round(x, 12)}, {round(y, 12)})")
+            print(xco + f" = {round(x, 12)}")
+            print(yco + f" = {round(y, 12)}")
 
 def conic_section():
     print()
@@ -2657,7 +2541,7 @@ def main():
         else:
             print('Please enter a valid calculation category, "i" for info, or return to exit)')
 
-myround()
+main()
 # %% [markdown]
 # 
 
