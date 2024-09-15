@@ -224,7 +224,7 @@ def from_polar():
             print()
             print('Real numbers and expressions, such as "3 * sin(pi / 3)", can be entered as terms')
             print("The following non-parenthesized operators and functions can be entered as part of an expression:")
-            print("Operators: + (add), - (subtract), * (multiply), / (divide), // (integer divide), % (remainder), ** (exponent)")
+            print("Operators: + (add), - (subtract), * (multiply), / (divide), // (integer divide), % (remainder), ^ (exponent)")
             print("Functions: eg. abs(x), sqrt(x), cbrt(x), pow(x, y), log(x, base), factorial(x), comb(x, y), perm(x, y), sin(x), cos(x), tan(x), asin(x), acos(x), atan(x), degrees(x), radians(x), sum([x, y, z,...]), int(x), round(x), etc")
             print('Real constants such as "pi", "e", and "tau" can be entered')
             print('Real variables can also be entered, for example: "ans" (previous real answer), "rl" (real part of previous complex result), "im" (imaginary part of previous complex result), "root" (1st real solution of previous quadratic), "root2" (2nd real solution of previous quadratic), "im2" (imaginary part of 2nd previous quadratic complex solution) "sum" (previous series summation), "rat" (previous geometric series common ratio), "dif" (previous arithmetic series common difference), "term1" (1st term of previous series), "cf1" (1st coefficient of previous binomial expansion), and stored variables')
@@ -257,6 +257,7 @@ def from_polar():
             binomial_expansion()
             break
         try:
+            av = av.replace("^", "**")
             av = eval(av)
             if round(av, 12) < 0:
                 print('Absolute values cannot be negative')
@@ -268,6 +269,7 @@ def from_polar():
         if inang == "" or inang == "exit" or inang == "exi":
             continue
         try:
+            inang = inang.replace("^", "**")
             inang = eval(inang)
         except:
             print('Please enter a real number or expression, or return to exit')
@@ -308,6 +310,7 @@ def from_polar():
             if av2 == "" or av2 == "exit" or av2 == "exi":
                 continue
             try:
+                av2 = av2.replace("^", "**")
                 av2 = eval(av2)
                 if round(av2, 12) < 0:
                     print('Absolute values cannot be negative')
@@ -319,6 +322,7 @@ def from_polar():
             if inang2 == "" or inang2 == "exit" or inang2 == "exi":
                 continue
             try:
+                inang2 = inang2.replace("^", "**")
                 inang2 = eval(inang2)
             except:
                 print('Please enter a real number or expression, or return to exit')
@@ -633,7 +637,7 @@ def from_rectangular():
             print()
             print('Real numbers and expressions, such as "3 * sin(pi / 3)", can be entered as values')
             print("The following non-parenthesized operators and functions can be entered as part of an expression:")
-            print("Operators: + (add), - (subtract), * (multiply), / (divide), // (integer divide), % (remainder), ** (exponent)")
+            print("Operators: + (add), - (subtract), * (multiply), / (divide), // (integer divide), % (remainder), ^ (exponent)")
             print("Functions: eg. abs(x), sqrt(x), cbrt(x), pow(x, y), log(x, base), factorial(x), comb(x, y), perm(x, y), sin(x), cos(x), tan(x), asin(x), acos(x), atan(x), degrees(x), radians(x), sum([x, y, z,...]), int(x), round(x), etc")
             print('Real constants such as "pi", "e", and "tau" can be entered')
             print('Real variables can also be entered, for example: "ans" (previous real answer), "rl" (real part of previous complex result), "im" (imaginary part of previous complex result), "root" (1st real solution of previous quadratic), "root2" (2nd real solution of previous quadratic), "im2" (imaginary part of 2nd previous quadratic complex solution) "sum" (previous series summation), "rat" (previous geometric series common ratio), "dif" (previous arithmetic series common difference), "term1" (1st term of previous series), "cf1" (1st coefficient of previous binomial expansion), and stored variables')
@@ -666,6 +670,7 @@ def from_rectangular():
             matrix_operation()
             break
         try:
+            a = a.replace("^", "**")
             a = eval(a)
         except:
             print('Please enter a real number or expression, "i" for info, or return to exit')
@@ -674,6 +679,7 @@ def from_rectangular():
         if b == "" or b == "exit" or b == "exi":
             continue
         try:
+            b = b.replace("^", "**")
             b = eval(b)
         except:
             print('Please enter a real number or expression, or return to exit')
@@ -720,6 +726,7 @@ def from_rectangular():
             if c == "" or c == "exit" or c == "exi":
                 continue
             try:
+                c = c.replace("^", "**")
                 c = eval(c)
             except:
                 print('Please enter a real number or expression, or return to exit')
@@ -728,6 +735,7 @@ def from_rectangular():
             if d == "" or d == "exit" or d == "exi":
                 continue
             try:
+                d = d.replace("^", "**")
                 d = eval(d)
             except:
                 print('Please enter a real number or expression, or return to exit')
@@ -998,7 +1006,7 @@ def real_operation():
             print()
             print('Real numbers and expressions, such as "3 * sin(pi / 3)", can be entered as terms')
             print("The following non-parenthesized operators and functions can be entered as part of an expression:")
-            print("Arithmetic operators: + (add), - (subtract), * (multiply), / (divide), // (integer divide), % (remainder), ** (exponent)")
+            print("Arithmetic operators: + (add), - (subtract), * (multiply), / (divide), // (integer divide), % (remainder), ^ (exponent)")
             print("Comparison operators: == (equal to), != (not equal to), < (less than), <=, (less than or equal to), > (greater than), >= (greater than or equal to)")
             print("Logic operators: and (true if both are true), or (true if either is true), not() (inverts truth value)")
             print("Functions: eg. abs(x), sqrt(x), cbrt(x), pow(x, y), log(x, base), factorial(x), comb(x, y), perm(x, y), sin(x), cos(x), tan(x), asin(x), acos(x), atan(x), degrees(x), radians(x), sum([x, y, z,...]), int(x), round(x), etc")
@@ -1032,15 +1040,16 @@ def real_operation():
             break
         else:
             try:
+                n = n.replace("^", "**")
                 if (eval(n) == True or eval(n) == False) and (n.find("==") != -1 or n.find("<") != -1 or n.find(">") != -1 or n.find("<=") != -1 or n.find(">=") != -1 or n.find("!=") != -1):
                     print(eval(n))
                     continue
+                n = eval(n)
                 try:
-                    roundtry = round(eval(n), 12)
+                    roundtry = round(n, 12)
                 except:
                     print(eval(n))
                     continue
-                n = eval(n)
             except:
                 print('Please enter a real number or expression, "i" for info, or return to exit')
                 continue
@@ -1075,6 +1084,7 @@ def real_operation():
                     if n2 == "" or n2 == "exit" or n2 == "exi":
                         continue
                     try:
+                        n2 = n2.replace("^", "**")
                         n2 = eval(n2)
                     except:
                         print('Please enter a real number or expression, or return to exit')
@@ -1084,6 +1094,7 @@ def real_operation():
                     if n2 == "" or n2 == "exit" or n2 == "exi":
                         continue
                     try:
+                        n2 = n2.replace("^", "**")
                         n2 = eval(n2)
                         n2 = 0 + integer(n2)
                     except:
@@ -1095,6 +1106,7 @@ def real_operation():
                         if n2 == "" or n2 == "exit" or n2 == "exi":
                             continue
                         try:
+                            n2 = n2.replace("^", "**")
                             n2 = eval(n2)
                         except:
                             print('Please enter a real number or expression greater than 0 and not equal to 1, or return to exit')
@@ -1105,6 +1117,7 @@ def real_operation():
                         if n2 == "" or n2 == "exit" or n2 == "exi":
                             continue
                         try:
+                            n2 = n2.replace("^", "**")
                             n2 = eval(n2)
                         except:
                             print('Please enter a nonnegative integer or return to exit')
@@ -1115,6 +1128,7 @@ def real_operation():
                         if n2 == "" or n2 == "exit" or n2 == "exi":
                             continue
                         try:
+                            n2 = n2.replace("^", "**")
                             n2 = eval(n2)
                         except:
                             print('Please enter a nonnegative integer or return to exit')
@@ -1136,11 +1150,12 @@ def real_operation():
                     if n2 == "" or n2 == "exit" or n2 == "exi":
                         continue
                     try:
+                        n2 = n2.replace("^", "**")
                         n2 = eval(n2)
                     except:
                         print('Please enter a real number or expression, or return to exit')
                         continue
-        #try:
+        try:
             if op.lower() == "equals" or op.lower() == "=" or op.lower() == "equ":
                 print()
                 print(f"ans (answer) = {round(n, 12)}")
@@ -1148,7 +1163,10 @@ def real_operation():
                 digits = decimals(n, n2)
                 n += n2
                 print()
-                print(f"ans (answer) = {round(n, digits)}")
+                if digits == 0:
+                    print(f"ans (answer) = {round(n)}")
+                else:
+                    print(f"ans (answer) = {round(n, digits)}")
             elif op.lower() == "subtract" or op.lower() == "-" or op.lower() == "sub":
                 n -= n2
                 print()
@@ -1349,7 +1367,7 @@ def real_operation():
                 print()
                 continue
             ans = n
-        ''''except:
+        except:
             print()
             print("OPERATION ERROR") 
             print("This error occurs when the inputs do not meet their restrictions, for example: ")
@@ -1359,7 +1377,7 @@ def real_operation():
             print("Taking an even root of a negative number is undefined over real numbers")
             print("The factorial, choose, and permute functions only accepts nonnegative integers")
             print("The logarithm function only accepts positive arguments and positive bases not equal to 1")
-            print()'''''''''
+            print()
 
 def binomial_expansion():
     global binsum
@@ -1397,6 +1415,7 @@ def binomial_expansion():
             print('Enter "r" for real operations, "a" for arithmetic series, "g" for geometric series, "c" for complex operations (this will direct to rectangular form), "m" for matrix operations, and "f" for functions (this will direct to polynomials)')
             continue
         try:
+            a = a.replace("^", "**")
             a = eval(a)
         except:
             print('Please enter a nonzero real number or expression, "i" for info, or return to exit')
@@ -1427,6 +1446,7 @@ def binomial_expansion():
         if b == "" or b == "exit" or b == "exi":
             continue
         try:
+            b = b.replace("^", "**")
             b = eval(b)
         except:
             print('Please enter a nonzero real number or expression, or return to exit')
@@ -1449,6 +1469,7 @@ def binomial_expansion():
         if c == "" or c == "exit" or c == "exi":
             continue
         try:
+            c = c.replace("^", "**")
             c = eval(c)
         except:
             print('Please enter a nonzero real number or expression, or return to exit')
@@ -1484,6 +1505,7 @@ def binomial_expansion():
             if d == "" or d == "exit" or d == "exi":
                 continue
             try:
+                d = d.replace("^", "**")
                 d = eval(d)
             except:
                 print('Please enter a real number or expression, or return to exit')
@@ -1509,6 +1531,7 @@ def binomial_expansion():
         if n == "" or n == "exit" or n == "exi":
             continue
         try:
+            n = n.replace("^", "**")
             n = eval(n)
             n = 0 + integer(n)
             if n < 0:
@@ -1550,6 +1573,7 @@ def binomial_expansion():
             if len(rangelist) == 1:
                 try:
                     unterm = un[unindex]
+                    unterm = unterm.replace("^", "**")
                     unterm = eval(unterm)
                     unterm = 0 + integer(unterm)
                     if 0 < unterm <= abs(n) + 1:
@@ -1561,6 +1585,8 @@ def binomial_expansion():
                     print(f'"{un[unindex]}" is not a positive integer between 1 and |n| + 1 ({abs(n) + 1}), inclusive')
             elif len(rangelist) == 2:
                 try:
+                    rangelist[0] = rangelist[0].replace("^", "**")
+                    rangelist[1] = rangelist[1].replace("^", "**")
                     rangelist[0] = eval(rangelist[0])
                     rangelist[1] = eval(rangelist[1])
                     rangelist[0] = 0 + integer(rangelist[0])
@@ -1626,6 +1652,7 @@ def arithmetic():
             if input_sum == "" or input_sum == "exi" or input_sum == "exit" or input_sum == "t" or input_sum == "ter" or input_sum == "terms":
                 continue
             try:
+                input_sum = input_sum.replace("^", "**")
                 input_sum = eval(input_sum)
             except:
                 print("Please enter a real number or expression, or return to exit")
@@ -1634,6 +1661,7 @@ def arithmetic():
             if sum_number == "" or sum_number == "exi" or sum_number == "exit":
                 continue
             try:
+                sum_number = sum_number.replace("^", "**")
                 sum_number = eval(sum_number)
                 sum_number = 0 + integer(sum_number)
                 if sum_number <= 0:
@@ -1644,6 +1672,7 @@ def arithmetic():
                 continue
         else:
             try:
+                b = b.replace("^", "**")
                 b = eval(b)
             except:
                 print('Please enter a real number or expression, "i" for info, or return to exit')
@@ -1652,6 +1681,7 @@ def arithmetic():
             if bn == "" or bn == "exit" or bn == "exi":
                 continue     
             try:
+                bn = bn.replace("^", "**")
                 bn = eval(bn)
                 bn = 0 + integer(bn)
             except:
@@ -1671,6 +1701,7 @@ def arithmetic():
             if c == "" or c == "exit" or c == "exi":
                 continue
             try:
+                c = c.replace("^", "**")
                 c = eval(c)  
             except:
                 print('Please enter a real number or expression, or return to exit')
@@ -1679,6 +1710,7 @@ def arithmetic():
             if cn == "" or cn == "exit" or cn == "exi":
                 continue     
             try:
+                cn = cn.replace("^", "**")
                 cn = eval(cn)
                 cn = 0 + integer(cn)
             except:
@@ -1692,6 +1724,7 @@ def arithmetic():
             a = b - comdif * (bn - 1)
         else:
             try:
+                comdif = comdif.replace("^", "**")
                 comdif = eval(comdif)
             except:
                 print('Please enter a real number or expression, or return to exit')
@@ -1734,6 +1767,7 @@ def arithmetic():
                  if l == "" or l == "exit" or l == "exi":
                     continue
                  try:
+                    l = l.replace("^", "**")
                     l = eval(l)
                  except:
                     print('Please enter a real number or expression, or return to exit')
@@ -1747,6 +1781,7 @@ def arithmetic():
                     continue
             else:
                 try:
+                    n = n.replace("^", "**")
                     n = eval(n)
                     n = 0 + integer(n)
                 except:
@@ -1804,6 +1839,7 @@ def arithmetic():
                             print(f"dif (common difference) = {round(dif, 12)}")
                             unindex += 1
                             continue
+                        unterm = unterm.replace("^", "**")
                         unterm = eval(unterm)
                         unterm = 0 + integer(unterm)
                         if unterm > 0:
@@ -1817,6 +1853,8 @@ def arithmetic():
                         print(f'"{un[unindex]}" is not a positive integer')
                 elif len(rangelist) == 2:
                     try:
+                        rangelist[0] = rangelist[0].replace("^", "**")
+                        rangelist[1] = rangelist[1].replace("^", "**")
                         rangelist[0] = eval(rangelist[0])
                         rangelist[1] = eval(rangelist[1])
                         rangelist[0] = 0 + integer(rangelist[0])
@@ -1852,6 +1890,7 @@ def arithmetic():
                         print(f"dif (common difference) = {round(dif, 12)}")
                         iunindex += 1
                         continue
+                    iunterm = iunterm.replace("^", "**")
                     iunterm = eval(iunterm)
                     indexcalc = (iunterm - a) / comdif + 1
                     if round(indexcalc, 12) == round(indexcalc) and indexcalc > 0: 
@@ -1901,6 +1940,7 @@ def geometric():
             if input_sum == "" or input_sum == "exi" or input_sum == "exit" or input_sum == "t" or input_sum == "ter" or input_sum == "terms":
                 continue
             try:
+                input_sum = input_sum.replace("^", "**")
                 input_sum = eval(input_sum)
                 if round(input_sum, 12) == 0:
                     print("Please enter a nonzero real number or expression, or return to exit")
@@ -1913,6 +1953,7 @@ def geometric():
                 continue
             elif sum_number != "i" and sum_number != "inf" and sum_number != "infinity":
                 try:
+                    sum_number = sum_number.replace("^", "**")
                     sum_number = eval(sum_number)
                     sum_number = 0 + integer(sum_number)
                     if sum_number <= 0:
@@ -1923,6 +1964,7 @@ def geometric():
                     continue
         else:
             try:
+                b = b.replace("^", "**")
                 b = eval(b)
                 if round(b, 12) == 0:
                     print('Please enter a nonzero real number or expression, "i" for info, or return to exit')
@@ -1934,6 +1976,7 @@ def geometric():
             if bn == "" or bn == "exit" or bn == "exi":
                 continue
             try:
+                bn = bn.replace("^", "**")
                 bn = eval(bn)
                 bn = 0 + integer(bn)
             except:
@@ -1953,6 +1996,7 @@ def geometric():
             if c == "" or c == "exit" or c == "exi":
                 continue
             try:
+                c = c.replace("^", "**")
                 c = eval(c)  
             except:
                 print('Please enter a nonzero real number or expression, or return to exit')
@@ -1964,6 +2008,7 @@ def geometric():
             if cn == "" or cn == "exit" or cn == "exi":
                 continue
             try:
+                cn = cn.replace("^", "**")
                 cn = eval(cn)
                 cn = 0 + integer(cn)
             except:
@@ -1983,6 +2028,7 @@ def geometric():
                 continue
         else:
             try:
+                comrat = comrat.replace("^", "**")
                 comrat = eval(comrat)
             except:
                 print('Please enter a nonzero real number or expression, or return to exit')
@@ -2032,6 +2078,7 @@ def geometric():
                 if l == "" or l == "exit" or l == "exi":
                     continue
                 try:
+                    l = l.replace("^", "**")
                     l = eval(l)
                 except:
                     print('Please enter a nonzero real number or expression, or return to exit')
@@ -2051,6 +2098,7 @@ def geometric():
                     continue
             elif n != "infinity" and n != "inf" and n != "i":
                 try:
+                    n = n.replace("^", "**")
                     n = eval(n)
                     n = 0 + integer(n)
                 except:
@@ -2119,6 +2167,7 @@ def geometric():
                             print(f"rat (common ratio) = {round(rat, 12)}")
                             unindex += 1
                             continue
+                        unterm = unterm.replace("^", "**")
                         unterm = eval(unterm)
                         unterm = 0 + integer(unterm)
                         if unterm > 0:
@@ -2132,6 +2181,8 @@ def geometric():
                         print(f'"{un[unindex]}" is not a positive integer')
                 elif len(rangelist) == 2:
                     try:
+                        rangelist[0] = rangelist[0].replace("^", "**")
+                        rangelist[1] = rangelist[1].replace("^", "**")
                         rangelist[0] = eval(rangelist[0])
                         rangelist[1] = eval(rangelist[1])
                         rangelist[0] = 0 + integer(rangelist[0])
@@ -2167,6 +2218,7 @@ def geometric():
                         print(f"rat (common ratio) = {round(rat, 12)}")
                         iunindex += 1
                         continue
+                    iunterm = iunterm.replace("^", "**")
                     iunterm = eval(iunterm)
                     if iunterm == a:
                         indexcalc = 1
@@ -2217,6 +2269,7 @@ def polynomial():
             print('Enter "sys" for system of equations, "c" for conic sections, "s" for symmetry, and "o" for operations (this will direct to real operation)')
             continue
         try:
+            a = a.replace("^", "**")
             a = eval(a)
         except:
             print('Please enter a real number or expression, "i" for info, or return to exit')
@@ -2225,6 +2278,7 @@ def polynomial():
         if b == "" or b == "exit" or b == "exi":
             continue
         try:
+            b = b.replace("^", "**")
             b = eval(b)
         except:
             print('Please enter a real number or expression, or return to exit')
@@ -2233,6 +2287,7 @@ def polynomial():
         if c == "" or c == "exit" or c == "exi":
             continue
         try:
+            c = c.replace("^", "**")
             c = eval(c)
         except:
             print('Please enter a real number or expression, or return to exit')
@@ -2317,6 +2372,7 @@ def symmetry():
             m = "0"
         if m != "v" and m != "ver" and m != "vertical" and m != "p" and m != "points" and m != "poi":
             try:
+                m = m.replace("^", "**")
                 m = eval(m)
             except:
                 print('Please enter a real number or expression, "i" for info, or return to exit')
@@ -2325,6 +2381,7 @@ def symmetry():
             if b == "" or b == "exit" or b == "exi":
                 continue
             try:
+                b = b.replace("^", "**")
                 b = eval(b)
             except:
                 print('Please enter a real number or expression, or return to exit')
@@ -2354,6 +2411,8 @@ def symmetry():
                 p1 = p1[:len(p1) - 1]
             p1 = p1.split(",", 1)
             try:
+                p1[0] = p1[0].replace("^", "**")
+                p1[1] = p1[1].replace("^", "**")
                 p1[0] = eval(p1[0])
                 p1[1] = eval(p1[1])
             except:
@@ -2368,6 +2427,8 @@ def symmetry():
                 p2 = p2[:len(p2) - 1]
             p2 = p2.split(",", 1)
             try:
+                p2[0] = p2[0].replace("^", "**")
+                p2[1] = p2[1].replace("^", "**")
                 p2[0] = eval(p2[0])
                 p2[1] = eval(p2[1])
                 if p2[0] == p1[0] and p2[1] == p1[1]:
@@ -2406,6 +2467,7 @@ def symmetry():
             if xint == "" or xint == "exit" or xint == "exi":
                 continue
             try:
+                xint = xint.replace("^", "**")
                 xint = eval(xint)
             except:
                 print('Please enter a real number or expression, or return to exit')
@@ -2438,11 +2500,13 @@ def symmetry():
             if ")" in y_input:
                 y_input = y_input[:y_input.find(")")]
             try:
+                x_input = x_input.replace("^", "**")
                 x_input = eval(x_input)
             except:
                 print(f'Point "{reflect[i]}" error: please enter points in the form (x, y)')
                 continue
             try:
+                y_input = y_input.replace("^", "**")
                 y_input = eval(y_input)
             except:
                 print(f'Point "{reflect[i]}" error: please enter points in the form (x, y)')
