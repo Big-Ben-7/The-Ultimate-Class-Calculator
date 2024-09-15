@@ -138,23 +138,29 @@ def print_binomial(a, b, c, d, n, k, unterm, x, y):
             xpowst = x + " "
         elif xpow == 0:
             xpowst = ""
+        elif xpow < 0:
+            xpowst = x + f"^({xpow}) "
         else:
             xpowst = x + f"^{xpow} "
         if ypow == 1:
             ypowst = y
         elif ypow == 0:
             ypowst = ""
+        elif ypow < 0:
+            ypowst = y + f"^({ypow})"
         else:
             ypowst = y + f"^{ypow}"
         combined = cost + xpowst + ypowst
     else:
         vpow = xpow + ypow
         if vpow == 1:
-            vpowst = x + " "
+            vpowst = x
         elif vpow == 0:
             vpowst = ""
+        elif vpow < 0:
+            vpowst = x + f"^({vpow})"
         else:
-            vpowst = x + f"^{vpow} "
+            vpowst = x + f"^{vpow}"
         combined = cost + vpowst
     if combined[len(combined) - 1] == " ":
         combined = combined[:len(combined) - 1]
@@ -1368,6 +1374,8 @@ def binomial_expansion():
             continue
         if a == 1:
             aprint = ""
+        elif a == -1:
+            aprint = "-"
         else:
             aprint = f"{a}"
         if b == 1:
@@ -1426,6 +1434,8 @@ def binomial_expansion():
             d = 0
         if c == 1:
             cprint = ""
+        elif c == -1:
+            cprint = "-"
         else:
             cprint = f"{c}"
         if d == 1 or d == 0:
