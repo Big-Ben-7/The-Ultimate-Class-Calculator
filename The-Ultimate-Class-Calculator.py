@@ -133,19 +133,29 @@ def print_binomial(a, b, c, d, n, k, unterm, x, y):
         cost = "-"
     else:
         cost = f"{round(co, 12)} "
-    if xpow == 1:
-        xpowst = x + " "
-    elif xpow == 0:
-        xpowst = ""
+    if x != y:
+        if xpow == 1:
+            xpowst = x + " "
+        elif xpow == 0:
+            xpowst = ""
+        else:
+            xpowst = x + f"^{xpow} "
+        if ypow == 1:
+            ypowst = y
+        elif ypow == 0:
+            ypowst = ""
+        else:
+            ypowst = y + f"^{ypow}"
+        combined = cost + xpowst + ypowst
     else:
-        xpowst = x + f"^{xpow} "
-    if ypow == 1:
-        ypowst = y
-    elif ypow == 0:
-        ypowst = ""
-    else:
-        ypowst = y + f"^{ypow}"
-    combined = cost + xpowst + ypowst
+        vpow = xpow + ypow
+        if vpow == 1:
+            vpowst = x + " "
+        elif vpow == 0:
+            vpowst = ""
+        else:
+            vpowst = x + f"^{vpow} "
+        combined = cost + vpowst
     if combined[len(combined) - 1] == " ":
         combined = combined[:len(combined) - 1]
     if n >= 0:
