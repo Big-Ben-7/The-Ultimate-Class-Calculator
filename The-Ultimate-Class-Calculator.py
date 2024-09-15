@@ -1824,18 +1824,19 @@ def geometric():
             except:
                 print("Please enter a nonzero real number or expression, or return to exit")
                 continue
-            sum_number = input("Number of summed terms: ")
+            sum_number = input("Number of summed terms (i for infinity): ")
             if sum_number == "" or sum_number == "exi" or sum_number == "exit":
                 continue
-            try:
-                sum_number = eval(sum_number)
-                sum_number = 0 + integer(sum_number)
-                if sum_number <= 0:
-                    print("Please enter a positive integer or return to exit")
+            elif sum_number != "i" and sum_number != "inf" and sum_number != "infinity":
+                try:
+                    sum_number = eval(sum_number)
+                    sum_number = 0 + integer(sum_number)
+                    if sum_number <= 0:
+                        print("Please enter a positive integer or return to exit")
+                        continue
+                except:
+                    print("Please enter an integer or return to exit")
                     continue
-            except:
-                print("Please enter an integer or return to exit")
-                continue
         else:
             try:
                 b = eval(b)
@@ -1905,12 +1906,22 @@ def geometric():
             if round(comrat, 12) == 0:
                 print('Please enter a nonzero real number or expression, or return to exit')
                 continue
-            if (b == "s" or b == "sum") and round(comrat ** sum_number, 12) != 1:
+            if (b == "s" or b == "sum") and (sum_number == "i" or sum_number == "inf" or sum_number == "infinity"):
+                if (comrat >= 1 or comrat <= -1):
+                    print("Infinity is only accepted for common ratios between -1 and 0 and between 0 and -1")
+                    continue
+                else:
+                    a = input_sum * (1 - comrat)
+                    b = a
+                    bn = 1
+                    c = b * comrat
+                    cn = bn + 1
+            elif (b == "s" or b == "sum") and round(comrat ** sum_number, 12) != 1:
                 a = input_sum * (1 - comrat) / (1 - comrat ** sum_number)
                 b = a
                 bn = 1
                 c = b * comrat
-                cn = bn + 1                
+                cn = bn + 1
             elif (b == "s" or b == "sum") and round(comrat, 12) == 1:
                 if round(input_sum, 12) > 0:
                     a = input_sum ** (1 / sum_number)
