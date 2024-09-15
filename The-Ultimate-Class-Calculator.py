@@ -1581,7 +1581,7 @@ def arithmetic():
             comdif = input("Common difference (t to enter term): ")
         else:
             comdif = input("Common difference: ")
-        if round(comdif, 12) == "" or round(comdif, 12) == "exit" or round(comdif, 12) == "exi":
+        if comdif == "" or comdif == "exit" or comdif == "exi":
             continue
         elif (round(comdif, 12) == "t" or round(comdif, 12) == "ter" or round(comdif, 12) == "term") and b != "s" and b != "sum":
             c = input("Next term: ")
