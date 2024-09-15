@@ -1583,7 +1583,7 @@ def arithmetic():
             comdif = input("Common difference: ")
         if comdif == "" or comdif == "exit" or comdif == "exi":
             continue
-        elif (round(comdif, 12) == "t" or round(comdif, 12) == "ter" or round(comdif, 12) == "term") and b != "s" and b != "sum":
+        elif (comdif == "t" or comdif == "ter" or comdif == "term") and b != "s" and b != "sum":
             c = input("Next term: ")
             if c == "" or c == "exit" or c == "exi":
                 continue
@@ -1662,15 +1662,16 @@ def arithmetic():
                  if round(n) != round (n, 12) or n <= 0:
                     print("The entered term is not a term of the series. Please enter different terms")
                     continue
-            try:
-                n = eval(n)
-                n = 0 + integer(n)
-            except:
-                print('Please enter a positive integer, "/" to skip, or return to exit')
-                continue
-            if n <= 0:
-                print('Please enter a positive integer, "/" to skip, or return to exit')
-                continue
+            else:
+                try:
+                    n = eval(n)
+                    n = 0 + integer(n)
+                except:
+                    print('Please enter a positive integer, "/" to skip, or return to exit')
+                    continue
+                if n <= 0:
+                    print('Please enter a positive integer, "/" to skip, or return to exit')
+                    continue
         while True:
             un = input('Indexes of terms to find (i, /): ')
             if un == "i" or un == "info" or un == "inf":
