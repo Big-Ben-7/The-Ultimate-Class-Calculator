@@ -24,13 +24,84 @@ global root2
 root2 = 0.0
 global binsum
 binsum = ""
+global sig
+sig = "off"
 global keeps
-keeps = ["ans", "pi", "e", "tau", "inf", "nan", "infj", "nanj", "keeps", "rl", "im", "im2", "mod", "ang", "rat", "root", "root2", "binsum", "dif"]
+keeps = ["ans", "pi", "e", "tau", "inf", "nan", "infj", "nanj", "keeps", "rl", "im", "im2", "mod", "ang", "rat", "root", "root2", "binsum", "dif", "sig"]
 
 def clear_variables():
     for var in list(globals()):
         if not var.startswith('_') and var not in keeps and not isinstance(globals()[var], (types.ModuleType, types.FunctionType, types.BuiltinFunctionType, type)):
             del globals()[var]
+
+def settings():
+    global sig
+    print()
+    print("Welcome to settings!")
+    print("Please enter the setting to turn on or off")
+    while True:
+        print()
+        setting = input("Setting (i): ")
+        if setting.lower() == "" or setting.lower() == "exit" or setting.lower() == "exi":
+            break
+        elif setting.lower() == "i" or setting.lower() == "inf" or setting.lower() == "info":
+            print()
+            print("Settings: ")
+            print(f"Significant figures ({sig}): if on, rounds operation answers according to significant figures (12 decimals max)")
+            continue
+        elif not(setting.lower() == "sig" or setting.lower() == "significant" or setting.lower() == "significant figures" or setting.lower() == "sig fig"):
+            print('Please enter a valid setting, "i" for info, or return to exit')
+            continue
+        value = input("On/off: ")
+        if value.lower() == "" or value.lower() == "exit" or value.lower() == "exi":
+            continue
+        elif value.lower() != "on" and value.lower() != "off":
+            print('Please enter either "on" or "off", or return to exit')
+            continue
+        if setting.lower() == "sig" or setting.lower() == "significant" or setting.lower() == "significant figures" or setting.lower() == "sig fig":
+            if value.lower() == "on":
+                sig = "on"
+            else:
+                sig = "off"
+            continue
+
+def sigfigs(n):
+    if n.isfinite():
+        sigcount = 0
+        n = f"{n}"
+        for i in range(0, len(n)):
+            a = n[i]
+            if a != "0":
+                sigcount += 1
+            elif 0 < i < len(n) - 1:
+                if n[i-1] != "0" and n[i+1] != "0":
+                    sigcount += 1
+
+def decimals(n, n2):
+    if sigfigs == "off":
+        return 12
+    if isfinite(n):
+        n = f"{n}"
+        if "." in n:
+            n = n[n.find(".") + 1:]
+            ndigits = len(n)
+        else:
+            ndigits = 0
+    else:
+        ndigits = 12
+    if isfinite(n2):
+        n2 = f"{n2}"
+        if "." in n:
+            n2= n2[n2.find(".") + 1:]
+            n2digits = len(n2)
+        else:
+            n2digits = 0
+    else:
+        n2digits = 12
+    digits = min(ndigits, n2digits)
+    if digits >= 12:
+        return 12
+    return digits
 
 def integer(n):
     if round(n) == round(n, 12):
@@ -162,6 +233,8 @@ def from_polar():
             print()
             print("Notes:")
             print("Fractional exponents can be used to root: eg. (-1 + 0i) ^ (1/2 + 0i) = i")
+            print('This calculator does not imply multiplication ("*" must be used)')            
+            print("Inputting 2.4e-2, for example, is equivalent to inputting 2.4 * 10 ** -2")
             print('Trigonometric functions accept and output angles in radians. The degrees and radians functions or operations can be used to convert')
             print("The result of trigonometric inverse functions (eg. asin, acos, atan, etc.) will lie in their restricted domains")
             print("Integer divide (//) and int() will remove the decimal part from the output, wheras round() will follow the standard rounding rules: eg. 3 // 2 = int(3 / 2) = 1, but round(3 / 2) = 2")
@@ -201,10 +274,10 @@ def from_polar():
             continue
         while True:
             angmode = input("Inputted in (r)adians or (d)egrees? ")
-            if angmode == "radians" or angmode == "rad" or angmode == "r":
+            if angmode.lower() == "radians" or angmode.lower() == "rad" or angmode.lower() == "r":
                 ang = inang
                 break
-            elif angmode == "degrees" or angmode == "deg" or angmode == "d":
+            elif angmode.lower() == "degrees" or angmode.lower() == "deg" or angmode.lower() == "d":
                 ang = radians(inang)
                 break
             else:
@@ -216,7 +289,7 @@ def from_polar():
         while True:
             print()
             op = input("Operation (i): ")
-            if op == "info" or op == "i" or op == "inf":
+            if op.lower() == "info" or op.lower() == "i" or op.lower() == "inf":
                 print()
                 print('The following operations can be entered: equals (=), add (+), subtract (-), multiply (*), divide (/), exponent (^), rectangular ([])')
                 print()
@@ -227,10 +300,10 @@ def from_polar():
                 print("The above operations can only be entered as an operation, not as part of an expression")
             else:
                 break
-        if op == "" or op == "exit" or op == "exi":
+        if op.lower() == "" or op.lower() == "exit" or op.lower() == "exi":
             continue
         print()
-        if not(op == "=" or op == "equals" or op == "equ" or op == "rectangular" or op == "rec" or op == "rectangular form"):
+        if not(op.lower() == "=" or op.lower() == "equals" or op.lower() == "equ" or op.lower() == "rectangular" or op.lower() == "rec" or op.lower() == "rectangular form"):
             av2 = input("Term 2 modulus/absolute value: ")
             if av2 == "" or av2 == "exit" or av2 == "exi":
                 continue
@@ -252,10 +325,10 @@ def from_polar():
                 continue
             while True:
                 angmode2 = input("Inputted in (r)adians or (d)egrees? ")
-                if angmode2 == "radians" or angmode2 == "rad" or angmode2 == "r":
+                if angmode2.lower() == "radians" or angmode2.lower() == "rad" or angmode2.lower() == "r":
                     ang2 = inang2
                     break
-                elif angmode2 == "degrees" or angmode2 == "deg" or angmode2 == "d":
+                elif angmode2.lower() == "degrees" or angmode2.lower() == "deg" or angmode2.lower() == "d":
                     ang2 = radians(inang2)
                     break
                 else:
@@ -266,34 +339,34 @@ def from_polar():
             print("Second term: " + cterm2)
             print()
         try:
-            if op == "=" or op == "equals" or op == "equ":
+            if op.lower() == "=" or op.lower() == "equals" or op.lower() == "equ":
                 res = cmath.polar(complex(a, b))
                 ares = res[1]
                 while True:
                     unit = input("Output in (r)adians or (d)egrees? ")
-                    if not(unit == "r" or unit == "radians" or unit == "rad" or unit == "d" or unit == "degrees" or unit == "deg"):
+                    if not(unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad" or unit.lower() == "d" or unit.lower() == "degrees" or unit.lower() == "deg"):
                         print('Please enter either "r" for radians or "d" for degrees')
                         continue
                     while True:
                         angle = input("Output (p)ositive or (n)egative angle? ")
-                        if not(angle == "positive" or angle == "p" or angle == "+" or angle == "pos" or angle == "-" or angle == "negative" or angle == "n" or angle == "neg"):
+                        if not(angle.lower() == "positive" or angle.lower() == "p" or angle.lower() == "+" or angle.lower() == "pos" or angle.lower() == "-" or angle.lower() == "negative" or angle.lower() == "n" or angle.lower() == "neg"):
                             print('Please enter either "p" for positive or "n" for negative')
                         else:
                             break
-                    if unit == "r" or unit == "radians" or unit == "rad":
-                        if angle == "positive" or angle == "p" or angle == "pos" or angle == "+":
+                    if unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad":
+                        if angle.lower() == "positive" or angle.lower() == "p" or angle.lower() == "pos" or angle.lower() == "+":
                             if round(ares, 12) < 0:
                                 ares += 2 * pi
-                        elif angle == "negative" or angle == "n" or angle == "neg" or angle == "-":
+                        elif angle.lower() == "negative" or angle.lower() == "n" or angle.lower() == "neg" or angle.lower() == "-":
                             if round(ares, 12) > 0:
                                 ares -= 2 * pi
                         break
-                    elif unit == "d" or unit == "degrees" or unit == "deg":
+                    elif unit.lower() == "d" or unit.lower() == "degrees" or unit.lower() == "deg":
                         ares = degrees(ares)
-                        if angle == "positive" or angle == "p" or angle == "pos" or angle == "+":
+                        if angle.lower() == "positive" or angle.lower() == "p" or angle.lower() == "pos" or angle.lower() == "+":
                             if round(ares, 12) < 0:
                                 ares += 360
-                        elif angle == "negative" or angle == "n" or angle == "neg" or angle == "-":
+                        elif angle.lower() == "negative" or angle.lower() == "n" or angle.lower() == "neg" or angle.lower() == "-":
                             if round(ares, 12) > 0:
                                 ares -= 360
                         break
@@ -302,38 +375,38 @@ def from_polar():
                 mod = res[0]
                 print(f"mod (modulus/absolute value) = {round(mod, 12)}")
                 ang = ares
-                if unit == "r" or unit == "radians" or unit == "rad":
+                if unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad":
                     print(f"ang (angle/argument) = {round(ang, 12)} (radians)")
                 else:
                     print(f"ang (angle/argument) = {round(ang, 12)} (degrees)")
-            elif op == "+" or op == "add":
+            elif op.lower() == "+" or op.lower() == "add":
                 res = cmath.polar(complex(a, b) + complex(c, d))
                 ares = res[1]
                 while True:
                     unit = input("Output in (r)adians or (d)egrees? ")
-                    if not(unit == "r" or unit == "radians" or unit == "rad" or unit == "d" or unit == "degrees" or unit == "deg"):
+                    if not(unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad" or unit.lower() == "d" or unit.lower() == "degrees" or unit.lower() == "deg"):
                         print('Please enter either "r" for radians or "d" for degrees')
                         continue
                     while True:
                         angle = input("Output (p)ositive or (n)egative angle? ")
-                        if not(angle == "positive" or angle == "p" or angle == "+" or angle == "pos" or angle == "-" or angle == "negative" or angle == "n" or angle == "neg"):
+                        if not(angle.lower() == "positive" or angle.lower() == "p" or angle.lower() == "+" or angle.lower() == "pos" or angle.lower() == "-" or angle.lower() == "negative" or angle.lower() == "n" or angle.lower() == "neg"):
                             print('Please enter either "p" for positive or "n" for negative')
                         else:
                             break
-                    if unit == "r" or unit == "radians" or unit == "rad":
-                        if angle == "positive" or angle == "p" or angle == "pos" or angle == "+":
+                    if unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad":
+                        if angle.lower() == "positive" or angle.lower() == "p" or angle.lower() == "pos" or angle.lower() == "+":
                             if round(ares, 12) < 0:
                                 ares += 2 * pi
-                        elif angle == "negative" or angle == "n" or angle == "neg" or angle == "-":
+                        elif angle.lower() == "negative" or angle.lower() == "n" or angle.lower() == "neg" or angle.lower() == "-":
                             if round(ares, 12) > 0:
                                 ares -= 2 * pi
                         break
-                    elif unit == "d" or unit == "degrees" or unit == "deg":
+                    elif unit.lower() == "d" or unit.lower() == "degrees" or unit.lower() == "deg":
                         ares = degrees(ares)
-                        if angle == "positive" or angle == "p" or angle == "pos" or angle == "+":
+                        if angle.lower() == "positive" or angle.lower() == "p" or angle.lower() == "pos" or angle.lower() == "+":
                             if round(ares, 12) < 0:
                                 ares += 360
-                        elif angle == "negative" or angle == "n" or angle == "neg" or angle == "-":
+                        elif angle.lower() == "negative" or angle.lower() == "n" or angle.lower() == "neg" or angle.lower() == "-":
                             if round(ares, 12) > 0:
                                 ares -= 360
                         break
@@ -342,38 +415,38 @@ def from_polar():
                 mod = res[0]
                 print(f"mod (modulus/absolute value) = {round(mod, 12)}")
                 ang = ares
-                if unit == "r" or unit == "radians" or unit == "rad":
+                if unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad":
                     print(f"ang (angle/argument) = {round(ang, 12)} (radians)")
                 else:
                     print(f"ang (angle/argument) = {round(ang, 12)} (degrees)")
-            elif op == "-" or op == "subtract" or op == "sub":
+            elif op.lower() == "-" or op.lower() == "subtract" or op.lower() == "sub":
                 res = cmath.polar(complex(a, b) - complex(c, d))
                 ares = res[1]
                 while True:
                     unit = input("Output in (r)adians or (d)egrees? ")
-                    if not(unit == "r" or unit == "radians" or unit == "rad" or unit == "d" or unit == "degrees" or unit == "deg"):
+                    if not(unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad" or unit.lower() == "d" or unit.lower() == "degrees" or unit.lower() == "deg"):
                         print('Please enter either "r" for radians or "d" for degrees')
                         continue
                     while True:
                         angle = input("Output (p)ositive or (n)egative angle? ")
-                        if not(angle == "positive" or angle == "p" or angle == "+" or angle == "pos" or angle == "-" or angle == "negative" or angle == "n" or angle == "neg"):
+                        if not(angle.lower() == "positive" or angle.lower() == "p" or angle.lower() == "+" or angle.lower() == "pos" or angle.lower() == "-" or angle.lower() == "negative" or angle.lower() == "n" or angle.lower() == "neg"):
                             print('Please enter either "p" for positive or "n" for negative')
                         else:
                             break
-                    if unit == "r" or unit == "radians" or unit == "rad":
-                        if angle == "positive" or angle == "p" or angle == "pos" or angle == "+":
+                    if unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad":
+                        if angle.lower() == "positive" or angle.lower() == "p" or angle.lower() == "pos" or angle.lower() == "+":
                             if round(ares, 12) < 0:
                                 ares += 2 * pi
-                        elif angle == "negative" or angle == "n" or angle == "neg" or angle == "-":
+                        elif angle.lower() == "negative" or angle.lower() == "n" or angle.lower() == "neg" or angle.lower() == "-":
                             if round(ares, 12) > 0:
                                 ares -= 2 * pi
                         break
-                    elif unit == "d" or unit == "degrees" or unit == "deg":
+                    elif unit.lower() == "d" or unit.lower() == "degrees" or unit.lower() == "deg":
                         ares = degrees(ares)
-                        if angle == "positive" or angle == "p" or angle == "pos" or angle == "+":
+                        if angle.lower() == "positive" or angle.lower() == "p" or angle.lower() == "pos" or angle.lower() == "+":
                             if round(ares, 12) < 0:
                                 ares += 360
-                        elif angle == "negative" or angle == "n" or angle == "neg" or angle == "-":
+                        elif angle.lower() == "negative" or angle.lower() == "n" or angle.lower() == "neg" or angle.lower() == "-":
                             if round(ares, 12) > 0:
                                 ares -= 360
                         break
@@ -382,38 +455,38 @@ def from_polar():
                 mod = res[0]
                 print(f"mod (modulus/absolute value) = {round(mod, 12)}")
                 ang = ares
-                if unit == "r" or unit == "radians" or unit == "rad":
+                if unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad":
                     print(f"ang (angle/argument) = {round(ang, 12)} (radians)")
                 else:
                     print(f"ang (angle/argument) = {round(ang, 12)} (degrees)")
-            elif op == "*" or op == "multiply" or op == "mul":
+            elif op.lower() == "*" or op.lower() == "multiply" or op.lower() == "mul":
                 res = cmath.polar(complex(a, b) * complex(c, d))
                 ares = res[1]
                 while True:
                     unit = input("Output in (r)adians or (d)egrees? ")
-                    if not(unit == "r" or unit == "radians" or unit == "rad" or unit == "d" or unit == "degrees" or unit == "deg"):
+                    if not(unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad" or unit.lower() == "d" or unit.lower() == "degrees" or unit.lower() == "deg"):
                         print('Please enter either "r" for radians or "d" for degrees')
                         continue
                     while True:
                         angle = input("Output (p)ositive or (n)egative angle? ")
-                        if not(angle == "positive" or angle == "p" or angle == "+" or angle == "pos" or angle == "-" or angle == "negative" or angle == "n" or angle == "neg"):
+                        if not(angle.lower() == "positive" or angle.lower() == "p" or angle.lower() == "+" or angle.lower() == "pos" or angle.lower() == "-" or angle.lower() == "negative" or angle.lower() == "n" or angle.lower() == "neg"):
                             print('Please enter either "p" for positive or "n" for negative')
                         else:
                             break
-                    if unit == "r" or unit == "radians" or unit == "rad":
-                        if angle == "positive" or angle == "p" or angle == "pos" or angle == "+":
+                    if unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad":
+                        if angle.lower() == "positive" or angle.lower() == "p" or angle.lower() == "pos" or angle.lower() == "+":
                             if round(ares, 12) < 0:
                                 ares += 2 * pi
-                        elif angle == "negative" or angle == "n" or angle == "neg" or angle == "-":
+                        elif angle.lower() == "negative" or angle.lower() == "n" or angle.lower() == "neg" or angle.lower() == "-":
                             if round(ares, 12) > 0:
                                 ares -= 2 * pi
                         break
-                    elif unit == "d" or unit == "degrees" or unit == "deg":
+                    elif unit.lower() == "d" or unit.lower() == "degrees" or unit.lower() == "deg":
                         ares = degrees(ares)
-                        if angle == "positive" or angle == "p" or angle == "pos" or angle == "+":
+                        if angle.lower() == "positive" or angle.lower() == "p" or angle.lower() == "pos" or angle.lower() == "+":
                             if round(ares, 12) < 0:
                                 ares += 360
-                        elif angle == "negative" or angle == "n" or angle == "neg" or angle == "-":
+                        elif angle.lower() == "negative" or angle.lower() == "n" or angle.lower() == "neg" or angle.lower() == "-":
                             if round(ares, 12) > 0:
                                 ares -= 360
                         break
@@ -422,38 +495,38 @@ def from_polar():
                 mod = res[0]
                 print(f"mod (modulus/absolute value) = {round(mod, 12)}")
                 ang = ares
-                if unit == "r" or unit == "radians" or unit == "rad":
+                if unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad":
                     print(f"ang (angle/argument) = {round(ang, 12)} (radians)")
                 else:
                     print(f"ang (angle/argument) = {round(ang, 12)} (degrees)")
-            elif op == "/" or op == "divide" or op == "div":
+            elif op.lower() == "/" or op.lower() == "divide" or op.lower() == "div":
                 res = cmath.polar(complex(a, b) / complex(c, d))
                 ares = res[1]
                 while True:
                     unit = input("Output in (r)adians or (d)egrees? ")
-                    if not(unit == "r" or unit == "radians" or unit == "rad" or unit == "d" or unit == "degrees" or unit == "deg"):
+                    if not(unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad" or unit.lower() == "d" or unit.lower() == "degrees" or unit.lower() == "deg"):
                         print('Please enter either "r" for radians or "d" for degrees')
                         continue
                     while True:
                         angle = input("Output (p)ositive or (n)egative angle? ")
-                        if not(angle == "positive" or angle == "p" or angle == "+" or angle == "pos" or angle == "-" or angle == "negative" or angle == "n" or angle == "neg"):
+                        if not(angle.lower() == "positive" or angle.lower() == "p" or angle.lower() == "+" or angle.lower() == "pos" or angle.lower() == "-" or angle.lower() == "negative" or angle.lower() == "n" or angle.lower() == "neg"):
                             print('Please enter either "p" for positive or "n" for negative')
                         else:
                             break
-                    if unit == "r" or unit == "radians" or unit == "rad":
-                        if angle == "positive" or angle == "p" or angle == "pos" or angle == "+":
+                    if unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad":
+                        if angle.lower() == "positive" or angle.lower() == "p" or angle.lower() == "pos" or angle.lower() == "+":
                             if round(ares, 12) < 0:
                                 ares += 2 * pi
-                        elif angle == "negative" or angle == "n" or angle == "neg" or angle == "-":
+                        elif angle.lower() == "negative" or angle.lower() == "n" or angle.lower() == "neg" or angle.lower() == "-":
                             if round(ares, 12) > 0:
                                 ares -= 2 * pi
                         break
-                    elif unit == "d" or unit == "degrees" or unit == "deg":
+                    elif unit.lower() == "d" or unit.lower() == "degrees" or unit.lower() == "deg":
                         ares = degrees(ares)
-                        if angle == "positive" or angle == "p" or angle == "pos" or angle == "+":
+                        if angle.lower() == "positive" or angle.lower() == "p" or angle.lower() == "pos" or angle.lower() == "+":
                             if round(ares, 12) < 0:
                                 ares += 360
-                        elif angle == "negative" or angle == "n" or angle == "neg" or angle == "-":
+                        elif angle.lower() == "negative" or angle.lower() == "n" or angle.lower() == "neg" or angle.lower() == "-":
                             if round(ares, 12) > 0:
                                 ares -= 360
                         break
@@ -462,38 +535,38 @@ def from_polar():
                 mod = res[0]
                 print(f"mod (modulus/absolute value) = {round(mod, 12)}")
                 ang = ares
-                if unit == "r" or unit == "radians" or unit == "rad":
+                if unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad":
                     print(f"ang (angle/argument) = {round(ang, 12)} (radians)")
                 else:
                     print(f"ang (angle/argument) = {round(ang, 12)} (degrees)")
-            elif op == "^" or op == "exponent" or op == "exp" or op == "**":
+            elif op.lower() == "^" or op.lower() == "exponent" or op.lower() == "exp" or op.lower() == "**":
                 res = cmath.polar(complex(a, b) ** complex(c, d))
                 ares = res[1]
                 while True:
                     unit = input("Output in (r)adians or (d)egrees? ")
-                    if not(unit == "r" or unit == "radians" or unit == "rad" or unit == "d" or unit == "degrees" or unit == "deg"):
+                    if not(unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad" or unit.lower() == "d" or unit.lower() == "degrees" or unit.lower() == "deg"):
                         print('Please enter either "r" for radians or "d" for degrees')
                         continue
                     while True:
                         angle = input("Output (p)ositive or (n)egative angle? ")
-                        if not(angle == "positive" or angle == "p" or angle == "+" or angle == "pos" or angle == "-" or angle == "negative" or angle == "n" or angle == "neg"):
+                        if not(angle.lower() == "positive" or angle.lower() == "p" or angle.lower() == "+" or angle.lower() == "pos" or angle.lower() == "-" or angle.lower() == "negative" or angle.lower() == "n" or angle.lower() == "neg"):
                             print('Please enter either "p" for positive or "n" for negative')
                         else:
                             break
-                    if unit == "r" or unit == "radians" or unit == "rad":
-                        if angle == "positive" or angle == "p" or angle == "pos" or angle == "+":
+                    if unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad":
+                        if angle.lower() == "positive" or angle.lower() == "p" or angle.lower() == "pos" or angle.lower() == "+":
                             if round(ares, 12) < 0:
                                 ares += 2 * pi
-                        elif angle == "negative" or angle == "n" or angle == "neg" or angle == "-":
+                        elif angle.lower() == "negative" or angle.lower() == "n" or angle.lower() == "neg" or angle.lower() == "-":
                             if round(ares, 12) > 0:
                                 ares -= 2 * pi
                         break
-                    elif unit == "d" or unit == "degrees" or unit == "deg":
+                    elif unit.lower() == "d" or unit.lower() == "degrees" or unit.lower() == "deg":
                         ares = degrees(ares)
-                        if angle == "positive" or angle == "p" or angle == "pos" or angle == "+":
+                        if angle.lower() == "positive" or angle.lower() == "p" or angle.lower() == "pos" or angle.lower() == "+":
                             if round(ares, 12) < 0:
                                 ares += 360
-                        elif angle == "negative" or angle == "n" or angle == "neg" or angle == "-":
+                        elif angle.lower() == "negative" or angle.lower() == "n" or angle.lower() == "neg" or angle.lower() == "-":
                             if round(ares, 12) > 0:
                                 ares -= 360
                         break
@@ -502,11 +575,11 @@ def from_polar():
                 mod = res[0]
                 print(f"mod (modulus/absolute value) = {round(mod, 12)}")
                 ang = ares
-                if unit == "r" or unit == "radians" or unit == "rad":
+                if unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad":
                     print(f"ang (angle/argument) = {round(ang, 12)} (radians)")
                 else:
                     print(f"ang (angle/argument) = {round(ang, 12)} (degrees)")
-            elif op == "rectangular" or op == "rec" or op == "rectangular form" or op == "rec for" or op == "[]":
+            elif op.lower() == "rectangular" or op.lower() == "rec" or op.lower() == "rectangular form" or op.lower() == "rec for" or op.lower() == "[]":
                 res = cmath.rect(av, ang)
                 if round(res.imag, 12) > 0 and round(res.real, 12) != 0:
                     if round(res.imag, 12) != 1:
@@ -569,6 +642,8 @@ def from_rectangular():
             print()
             print("Notes:")
             print("Fractional exponents can be used to root: eg. (-1 + 0i) ^ (1/2 + 0i) = i")
+            print('This calculator does not imply multiplication ("*" must be used)')            
+            print("Inputting 2.4e-2, for example, is equivalent to inputting 2.4 * 10 ** -2")
             print('Trigonometric functions accept and output angles in radians. The degrees and radians functions or operations can be used to convert')
             print("The result of trigonometric inverse functions (eg. asin, acos, atan, etc.) will lie in their restricted domains")
             print("Integer divide (//) and int() will remove the decimal part from the output, wheras round() will follow the standard rounding rules: eg. 3 // 2 = int(3 / 2) = 1, but round(3 / 2) = 2")
@@ -626,7 +701,7 @@ def from_rectangular():
         while True:
             print()
             op = input("Operation (i): ")
-            if op == "info" or op == "i" or op == "inf":
+            if op.lower() == "info" or op.lower() == "i" or op.lower() == "inf":
                 print()
                 print('The following operations can be entered: equals (=), add (+), subtract (-), multiply (*), divide (/), exponent (^), absolute value or modulus (||), angle or argument (<), polar (|<)')
                 print()
@@ -637,9 +712,9 @@ def from_rectangular():
                 print("The above operations can only be entered as an operation, not as part of an expression")
             else:
                 break
-        if op == "" or op == "exit" or op == "exi":
+        if op.lower() == "" or op.lower() == "exit" or op.lower() == "exi":
             continue
-        if not(op == "=" or op == "equals" or op == "equ" or op == "argument" or op == "arg" or op == "angle" or op == "ang" or op == "phase" or op == "pha" or op == "polar" or op == "pol" or op == "abs" or op == "absolute value" or op == "magnitude" or op == "mag" or op == "||" or op == "modulus" or op == "mod"):
+        if not(op.lower() == "=" or op.lower() == "equals" or op.lower() == "equ" or op.lower() == "argument" or op.lower() == "arg" or op.lower() == "angle" or op.lower() == "ang" or op.lower() == "phase" or op.lower() == "pha" or op.lower() == "polar" or op.lower() == "pol" or op.lower() == "abs" or op.lower() == "absolute value" or op.lower() == "magnitude" or op.lower() == "mag" or op.lower() == "||" or op.lower() == "modulus" or op.lower() == "mod"):
             print()
             c = input("c: ")
             if c == "" or c == "exit" or c == "exi":
@@ -678,7 +753,7 @@ def from_rectangular():
                 cterm2 = f"{round(c, 12)}"
             print("Second term: " + cterm2)
         try:
-            if op == "=" or op == "equals" or op == "equ":
+            if op.lower() == "=" or op.lower() == "equals" or op.lower() == "equ":
                 res = complex(a, b)
                 print()
                 print(f"Result: {cterm1}")
@@ -686,7 +761,7 @@ def from_rectangular():
                 print(f"rl (real part) = {round(rl, 12)}")
                 im = res.imag
                 print(f"im (imaginary part) = {round(im, 12)}")
-            elif op == "+" or op == "add":
+            elif op.lower() == "+" or op.lower() == "add":
                 res = complex(a, b) + complex(c, d)
                 print()
                 if round(res.imag, 12) > 0 and round(res.real, 12) != 0:
@@ -712,7 +787,7 @@ def from_rectangular():
                 print(f"rl (real part) = {round(rl, 12)}")
                 im = res.imag
                 print(f"im (imaginary part) = {round(im, 12)}")
-            elif op == "-" or op == "subtract" or op == "sub":
+            elif op.lower() == "-" or op.lower() == "subtract" or op.lower() == "sub":
                 res = complex(a, b) - complex(c, d)
                 print()
                 if round(res.imag, 12) > 0 and round(res.real, 12) != 0:
@@ -738,7 +813,7 @@ def from_rectangular():
                 print(f"rl (real part) = {round(rl, 12)}")
                 im = res.imag
                 print(f"im (imaginary part) = {round(im, 12)}")
-            elif op == "*" or op == "multiply" or op == "mul":
+            elif op.lower() == "*" or op.lower() == "multiply" or op.lower() == "mul":
                 res = complex(a, b) * complex(c, d)
                 print()
                 if round(res.imag, 12) > 0 and round(res.real, 12) != 0:
@@ -764,7 +839,7 @@ def from_rectangular():
                 print(f"rl (real part) = {round(rl, 12)}")
                 im = res.imag
                 print(f"im (imaginary part) = {round(im, 12)}")
-            elif op == "/" or op == "divide" or op == "div":
+            elif op.lower() == "/" or op.lower() == "divide" or op.lower() == "div":
                 res = complex(a, b) / complex(c, d)
                 print()
                 if round(res.imag, 12) > 0 and round(res.real, 12) != 0:
@@ -790,7 +865,7 @@ def from_rectangular():
                 print(f"rl (real part) = {round(rl, 12)}")
                 im = res.imag
                 print(f"im (imaginary part) = {round(im, 12)}")
-            elif op == "^" or op == "exponent" or op == "exp" or op == "**":
+            elif op.lower() == "^" or op.lower() == "exponent" or op.lower() == "exp" or op.lower() == "**":
                 res = complex(a, b) ** complex(c, d)
                 print()
                 if round(res.imag, 12) > 0 and round(res.real, 12) != 0:
@@ -816,76 +891,76 @@ def from_rectangular():
                 print(f"rl (real part) = {round(rl, 12)}")
                 im = res.imag
                 print(f"im (imaginary part) = {round(im, 12)}")
-            elif op == "abs" or op == "absolute value" or op == "magnitude" or op == "mag" or op == "||" or op == "modulus" or op == "mod":
+            elif op.lower() == "abs" or op.lower() == "absolute value" or op.lower() == "magnitude" or op.lower() == "mag" or op.lower() == "||" or op.lower() == "modulus" or op.lower() == "mod":
                 mod = abs(complex(a, b))
                 print()
                 print(f"mod (modulus/absolute value) = {round(mod, 12)}")
-            elif op == "<" or op == "angle" or op == "ang" or op == "phase" or op == "pha" or op == "argument" or op == "arg":
+            elif op.lower() == "<" or op.lower() == "angle" or op.lower() == "ang" or op.lower() == "phase" or op.lower() == "pha" or op.lower() == "argument" or op.lower() == "arg":
                 res = cmath.phase(a, b)
                 while True:
                     unit = input("Output in (r)adians or (d)egrees? ")
-                    if not(unit == "r" or unit == "radians" or unit == "rad" or unit == "d" or unit == "degrees" or unit == "deg"):
+                    if not(unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad" or unit.lower() == "d" or unit.lower() == "degrees" or unit.lower() == "deg"):
                         print('Please enter either "r" for radians or "d" for degrees')
                         continue
                     while True:
                         angle = input("Output (p)ositive or (n)egative angle? ")
-                        if not(angle == "positive" or angle == "p" or angle == "pos" or angle == "+" or angle == "-" or angle == "negative" or angle == "n" or angle == "neg"):
+                        if not(angle.lower() == "positive" or angle.lower() == "p" or angle.lower() == "pos" or angle.lower() == "+" or angle.lower() == "-" or angle.lower() == "negative" or angle.lower() == "n" or angle.lower() == "neg"):
                             print('Please enter either "p" for positive or "n" for negative')
                         else:
                             break
-                    if unit == "r" or unit == "radians" or unit == "rad":
-                        if angle == "positive" or angle == "p" or angle == "pos" or angle == "+":
+                    if unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad":
+                        if angle.lower() == "positive" or angle.lower() == "p" or angle.lower() == "pos" or angle.lower() == "+":
                             if round(res, 12) < 0:
                                 res += 2 * pi
-                        elif angle == "negative" or angle == "n" or angle == "neg" or angle == "-":
+                        elif angle.lower() == "negative" or angle.lower() == "n" or angle.lower() == "neg" or angle.lower() == "-":
                             if round(res, 12) > 0:
                                 res -= 2 * pi
                         break
-                    elif unit == "d" or unit == "degrees" or unit == "deg":
+                    elif unit.lower() == "d" or unit.lower() == "degrees" or unit.lower() == "deg":
                         res = degrees(ares)
-                        if angle == "positive" or angle == "p" or angle == "pos" or angle == "+":
+                        if angle.lower() == "positive" or angle.lower() == "p" or angle.lower() == "pos" or angle.lower() == "+":
                             if round(res, 12) < 0:
                                 res += 360
-                        elif angle == "negative" or angle == "n" or angle == "neg" or angle == "-":
+                        elif angle.lower() == "negative" or angle.lower() == "n" or angle.lower() == "neg" or angle.lower() == "-":
                             if round(res, 12) > 0:
                                 res -= 360
                         break
                 print()                  
                 ang = res
-                if unit == "r" or unit == "radians" or unit == "rad":
+                if unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad":
                     print(f"ang (angle/argument) = {round(ang, 12)} (radians)")
                 else:
                     print(f"ang (angle/argument) = {round(ang, 12)} (degrees)") 
-            elif op == "|<" or op == "polar" or op == "pol" or op == "polar form":
+            elif op.lower() == "|<" or op.lower() == "polar" or op.lower() == "pol" or op.lower() == "polar form":
                 res = cmath.polar(complex(a, b))
                 ares = res[1]
                 while True:
                     print()
                     unit = input("Output in (r)adians or (d)egrees? ")
-                    if not(unit == "r" or unit == "radians" or unit == "rad" or unit == "d" or unit == "degrees" or unit == "deg"):
+                    if not(unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad" or unit.lower() == "d" or unit.lower() == "degrees" or unit.lower() == "deg"):
                         print('Please enter either "r" for radians or "d" for degrees')
                         continue
                     while True:
                         angle = input("Output (p)ositive or (n)egative angle? ")
-                        if not(angle == "positive" or angle == "p" or angle == "+" or angle == "pos" or angle == "-" or angle == "negative" or angle == "n" or angle == "neg"):
+                        if not(angle.lower() == "positive" or angle.lower() == "p" or angle.lower() == "+" or angle.lower() == "pos" or angle.lower() == "-" or angle.lower() == "negative" or angle.lower() == "n" or angle.lower() == "neg"):
                             print('Please enter either "p" for positive or "n" for negative')
                             print()
                         else:
                             break
-                    if unit == "r" or unit == "radians" or unit == "rad":
-                        if angle == "positive" or angle == "p" or angle == "pos" or angle == "+":
+                    if unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad":
+                        if angle.lower() == "positive" or angle.lower() == "p" or angle.lower() == "pos" or angle.lower() == "+":
                             if round(ares, 12) < 0:
                                 ares += 2 * pi
-                        elif angle == "negative" or angle == "n" or angle == "neg" or angle == "-":
+                        elif angle.lower() == "negative" or angle.lower() == "n" or angle.lower() == "neg" or angle.lower() == "-":
                             if round(ares, 12) > 0:
                                 ares -= 2 * pi
                         break
-                    elif unit == "d" or unit == "degrees" or unit == "deg":
+                    elif unit.lower() == "d" or unit.lower() == "degrees" or unit.lower() == "deg":
                         ares = degrees(ares)
-                        if angle == "positive" or angle == "p" or angle == "pos" or angle == "+":
+                        if angle.lower() == "positive" or angle.lower() == "p" or angle.lower() == "pos" or angle.lower() == "+":
                             if round(ares, 12) < 0:
                                 ares += 360
-                        elif angle == "negative" or angle == "n" or angle == "neg" or angle == "-":
+                        elif angle.lower() == "negative" or angle.lower() == "n" or angle.lower() == "neg" or angle.lower() == "-":
                             if round(ares, 12) > 0:
                                 ares -= 360
                         break
@@ -894,7 +969,7 @@ def from_rectangular():
                 mod = res[0]
                 print(f"mod (modulus/absolute value) = {round(abs, 12)}")
                 ang = ares
-                if unit == "r" or unit == "radians" or unit == "rad":
+                if unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad":
                     print(f"ang (angle/argument) = {round(ang, 12)} (radians)")
                 else:
                     print(f"ang (angle/argument) = {round(ang, 12)} (degrees)")                    
@@ -934,6 +1009,8 @@ def real_operation():
             print()
             print("Notes:")
             print("Fractional exponents can be used to root: eg. 8 ^ (1/3) = 2")
+            print('This calculator does not imply multiplication ("*" must be used)')            
+            print("Inputting 2.4e-2, for example, is equivalent to inputting 2.4 * 10 ** -2")
             print('Trigonometric functions accept and output angles in radians. The degrees and radians functions or operations can be used to convert')
             print("The result of trigonometric inverse functions (eg. asin, acos, atan, etc.) will lie in their restricted domains")
             print("Integer divide (//) and int() will remove the decimal part from the output, wheras round() will follow the standard rounding rules: eg. 3 // 2 = int(3 / 2) = 1, but round(3 / 2) = 2")
@@ -958,13 +1035,18 @@ def real_operation():
                 if (eval(n) == True or eval(n) == False) and (n.find("==") != -1 or n.find("<") != -1 or n.find(">") != -1 or n.find("<=") != -1 or n.find(">=") != -1 or n.find("!=") != -1):
                     print(eval(n))
                     continue
+                try:
+                    roundtry = round(eval(n), 12)
+                except:
+                    print(eval(n))
+                    continue
                 n = eval(n)
             except:
                 print('Please enter a real number or expression, "i" for info, or return to exit')
                 continue
             while True:
                 op = input('Operation (i): ')
-                if op == "info" or op == "i" or op == "inf":
+                if op.lower() == "info" or op.lower() == "i" or op.lower() == "inf":
                     print()
                     print("The following operations can be entered:")
                     print('Basic: add (+), subtract (-), multiply (*), divide (/), integer divide or floor divide (//), remainder or modulo (r or %), absolute value or magnitude (||)')
@@ -985,10 +1067,10 @@ def real_operation():
                     print()
                 else:
                     break
-            if op == "exit" or op == "":
+            if op.lower() == "exit" or op.lower() == "":
                 continue
-            elif not(op == "store" or op == "sto" or op == "equals" or op == "=" or op == "equ" or op == "factorial" or op == "fac" or op == "!" or op == "sqrt" or op == "square root" or op == "squ" or op == "cbrt" or op == "cube root" or op == "cub" or op == "absolute value" or op == "||" or op == "abs" or op == "magnitude" or op == "mag" or op == "asin" or op == "arcsine" or op == "inverse sine" or op == "inv sin" or op == "acos" or op == "arccosine" or op == "inverse cosine" or op == "inv cos" or op == "atan" or op == "arctangent" or op == "inverse tangent" or op == "inv tan" or op == "asi" or op == "aco" or op == "ata" or op == "sin" or op == "sine" or op == "cos" or op == "cosine" or op == "tangent" or op == "tan" or op == "int" or op == "integer" or op == "radians" or op == "rad" or op == "degrees" or op == "deg"):
-                if op == "exponent" or op == "^" or op == "exp" or op == "**":
+            elif not(op.lower() == "store" or op.lower() == "sto" or op.lower() == "equals" or op.lower() == "=" or op.lower() == "equ" or op.lower() == "factorial" or op.lower() == "fac" or op.lower() == "!" or op.lower() == "sqrt" or op.lower() == "square root" or op.lower() == "squ" or op.lower() == "cbrt" or op.lower() == "cube root" or op.lower() == "cub" or op.lower() == "absolute value" or op.lower() == "||" or op.lower() == "abs" or op.lower() == "magnitude" or op.lower() == "mag" or op.lower() == "asin" or op.lower() == "arcsine" or op.lower() == "inverse sine" or op.lower() == "inv sin" or op.lower() == "acos" or op.lower() == "arccosine" or op.lower() == "inverse cosine" or op.lower() == "inv cos" or op.lower() == "atan" or op.lower() == "arctangent" or op.lower() == "inverse tangent" or op.lower() == "inv tan" or op.lower() == "asi" or op.lower() == "aco" or op.lower() == "ata" or op.lower() == "sin" or op.lower() == "sine" or op.lower() == "cos" or op.lower() == "cosine" or op.lower() == "tangent" or op.lower() == "tan" or op.lower() == "int" or op.lower() == "integer" or op.lower() == "radians" or op.lower() == "rad" or op.lower() == "degrees" or op.lower() == "deg"):
+                if op.lower() == "exponent" or op.lower() == "^" or op.lower() == "exp" or op.lower() == "**":
                     n2 = input('Exponent: ')
                     if n2 == "" or n2 == "exit" or n2 == "exi":
                         continue
@@ -997,7 +1079,7 @@ def real_operation():
                     except:
                         print('Please enter a real number or expression, or return to exit')
                         continue
-                elif op == "round" or op == "~" or op == "rou":
+                elif op.lower() == "round" or op.lower() == "~" or op.lower() == "rou":
                     n2 = input('Decimals to round (0-12): ')
                     if n2 == "" or n2 == "exit" or n2 == "exi":
                         continue
@@ -1007,7 +1089,7 @@ def real_operation():
                     except:
                         print('Please enter an integer from 0 to 12 or return to exit')
                         continue
-                elif op == "log" or op == "logarithm":
+                elif op.lower() == "log" or op.lower() == "logarithm":
                     if n > 0:
                         n2 = input('Base: ')
                         if n2 == "" or n2 == "exit" or n2 == "exi":
@@ -1017,7 +1099,7 @@ def real_operation():
                         except:
                             print('Please enter a real number or expression greater than 0 and not equal to 1, or return to exit')
                             continue                                
-                elif op == "choose" or op == "cho" or op == "comb":
+                elif op.lower() == "choose" or op.lower() == "cho" or op.lower() == "comb":
                     if round(n, 12) == round(n) and n >= 0:
                         n2 = input(f'From {round(n)} choose: ')
                         if n2 == "" or n2 == "exit" or n2 == "exi":
@@ -1027,7 +1109,7 @@ def real_operation():
                         except:
                             print('Please enter a nonnegative integer or return to exit')
                             continue                                    
-                elif op == "perm" or op == "permute" or op == "per":
+                elif op.lower() == "perm" or op.lower() == "permute" or op.lower() == "per":
                     if round(n, 12) == round(n) and n >= 0:
                         n2 = input(f'From {round(n)} permute: ')
                         if n2 == "" or n2 == "exit" or n2 == "exi":
@@ -1038,17 +1120,17 @@ def real_operation():
                             print('Please enter a nonnegative integer or return to exit')
                             continue  
                 else:
-                    if op == "equal to" or op == "is":
+                    if op.lower() == "equal to" or op.lower() == "is":
                         op = "=="
-                    elif op == "less than" or op == "less":
+                    elif op.lower() == "less than" or op.lower() == "less":
                         op = "<"
-                    elif op == "greater than" or op == "greater":
+                    elif op.lower() == "greater than" or op.lower() == "greater":
                         op = ">"
-                    elif op == "less than or equal to":
+                    elif op.lower() == "less than or equal to":
                         op = "<="
-                    elif op == "greater than or equal to":
+                    elif op.lower() == "greater than or equal to":
                         op = ">="
-                    elif op == "not equal to" or op == "not":
+                    elif op.lower() == "not equal to" or op.lower() == "not":
                         op = "!="
                     n2 = input('Next term: ')
                     if n2 == "" or n2 == "exit" or n2 == "exi":
@@ -1058,41 +1140,42 @@ def real_operation():
                     except:
                         print('Please enter a real number or expression, or return to exit')
                         continue
-        try:
-            if op == "equals" or op == "=" or op == "equ":
+        #try:
+            if op.lower() == "equals" or op.lower() == "=" or op.lower() == "equ":
                 print()
                 print(f"ans (answer) = {round(n, 12)}")
-            elif op == "add" or op == "+":
+            elif op.lower() == "add" or op.lower() == "+":
+                digits = decimals(n, n2)
                 n += n2
                 print()
-                print(f"ans (answer) = {round(n, 12)}")
-            elif op == "subtract" or op == "-" or op == "sub":
+                print(f"ans (answer) = {round(n, digits)}")
+            elif op.lower() == "subtract" or op.lower() == "-" or op.lower() == "sub":
                 n -= n2
                 print()
                 print(f"ans (answer) = {round(n, 12)}")
-            elif op == "multiply" or op == "*" or op == "mul":
+            elif op.lower() == "multiply" or op.lower() == "*" or op.lower() == "mul":
                 n *= n2
                 print()
                 print(f"ans (answer) = {round(n, 12)}")
-            elif op == "divide" or op == "/" or op == "div":
+            elif op.lower() == "divide" or op.lower() == "/" or op.lower() == "div":
                 n /= n2
                 if n == 0:
                     n = 0.0
                 print()
                 print(f"ans (answer) = {round(n, 12)}")
-            elif op == "remainder" or op == "r" or op == "%" or op == "modulo" or op == "rem" or op == "mod":
+            elif op.lower() == "remainder" or op.lower() == "r" or op.lower() == "%" or op.lower() == "modulo" or op.lower() == "rem" or op.lower() == "mod":
                 n %= n2
                 print()
                 print(f"ans (answer) = {round(n, 12)}")
-            elif op == "exponent" or op == "^" or op == "exp" or op == "**":
+            elif op.lower() == "exponent" or op.lower() == "^" or op.lower() == "exp" or op.lower() == "**":
                 n **= n2
                 print()
                 print(f"ans (answer) = {round(n, 12)}")
-            elif op == "<" or op == ">" or op == ">=" or op == "<=" or op == "==" or op == "!=":
+            elif op.lower() == "<" or op.lower() == ">" or op.lower() == ">=" or op.lower() == "<=" or op.lower() == "==" or op.lower() == "!=":
                 print()
                 print(eval(f"{n}" + op  + f"{n2}"))
                 continue
-            elif op == "store" or op == "sto":
+            elif op.lower() == "store" or op.lower() == "sto":
                 while True:
                     vname = input("Variable name (i): ")
                     if vname == "" or vname == "exit" or vname == "exi":
@@ -1112,134 +1195,134 @@ def real_operation():
                 print()
                 print(vname + f" = {round(n, 12)}")
                 keeps.append(vname)
-            elif op == "round" or op == "~" or op == "rou":
+            elif op.lower() == "round" or op.lower() == "~" or op.lower() == "rou":
                 if n2 > 12:
                     n2 = 12
                 n = round(n, n2)
                 print()
                 print(f"ans (answer) = {round(n, 12)}")
-            elif op == "factorial" or op == "!" or op == "fac":
+            elif op.lower() == "factorial" or op.lower() == "!" or op.lower() == "fac":
                 n = factorial(round(n))
                 print()
                 print(f"ans (answer) = {round(n, 12)}")
-            elif op == "sqrt" or op == "square root" or op == "squ":
+            elif op.lower() == "sqrt" or op.lower() == "square root" or op.lower() == "squ":
                 n = sqrt(n)
                 print()
                 print(f"ans (answer) = {round(n, 12)}")
-            elif op == "cbrt" or op == "cube root" or op == "cub":
+            elif op.lower() == "cbrt" or op.lower() == "cube root" or op.lower() == "cub":
                 n = cbrt(n)
                 print()
                 print(f"ans (answer) = {round(n, 12)}")
-            elif op == "log" or op == "logarithm":
+            elif op.lower() == "log" or op.lower() == "logarithm":
                 n = log(n, n2)
                 print()
                 print(f"ans (answer) = {round(n, 12)}")
-            elif op == "integer divide" or op == "int div" or op == "floor divide" or op == "flo div" or op == "//":
+            elif op.lower() == "integer divide" or op.lower() == "int div" or op.lower() == "floor divide" or op.lower() == "flo div" or op.lower() == "//":
                 n //= n2
                 print()
                 if n == 0:
                     n = 0.0
                 print(f"ans (answer) = {round(n, 12)}")
-            elif op == "integer" or op == "int":
+            elif op.lower() == "integer" or op.lower() == "int":
                 n = 0 + integer(n)
                 print()
                 print(f"ans (answer) = {round(n, 12)}")
-            elif op == "choose" or op == "cho" or op == "comb":
+            elif op.lower() == "choose" or op.lower() == "cho" or op.lower() == "comb":
                 n = comb(round(n), round(n2))
                 print()
                 print(f"ans (answer) = {round(n, 12)}")
-            elif op == "perm" or op == "permute" or op == "per":
+            elif op.lower() == "perm" or op.lower() == "permute" or op.lower() == "per":
                 n = perm(round(n), round(n2))
                 print()
                 print(f"ans (answer) = {round(n, 12)}")
-            elif op == "absolute value" or op == "||" or op == "abs" or op == "magnitude" or op == "mag":
+            elif op.lower() == "absolute value" or op.lower() == "||" or op.lower() == "abs" or op.lower() == "magnitude" or op.lower() == "mag":
                 n = abs(n)
                 print()
                 print(f"ans (answer) = {round(n, 12)}")
-            elif op == "radians" or op == "rad":
+            elif op.lower() == "radians" or op.lower() == "rad":
                 n = radians(n)
                 print()
                 print(f"ans (answer) = {round(n, 12)}")
-            elif op == "degrees" or op == "deg":
+            elif op.lower() == "degrees" or op.lower() == "deg":
                 n = degrees(n)
                 print()
                 print(f"ans (answer) = {round(n, 12)}")             
-            elif op == "sin" or op == "sine" or op == "cos" or op == "cosine" or op == "tangent" or op == "tan":
+            elif op.lower() == "sin" or op.lower() == "sine" or op.lower() == "cos" or op.lower() == "cosine" or op.lower() == "tangent" or op.lower() == "tan":
                 angle = input("Inputted in (r)adians or (d)egrees? ")
-                if angle == "radians" or angle == "rad" or angle == "r":
+                if angle.lower() == "radians" or angle.lower() == "rad" or angle.lower() == "r":
                     n = n
                     go = True
-                elif angle == "degrees" or angle == "deg" or angle == "d":
+                elif angle.lower() == "degrees" or angle.lower() == "deg" or angle.lower() == "d":
                     n = radians(n)
                     go = True
                 else:
                     print('Please enter either "r" for radians or "d" for degrees')
                     go = False
                 if go == True:
-                    if op == "sin" or op == "sine":
+                    if op.lower() == "sin" or op.lower() == "sine":
                         n = sin(n)
                         print()
                         print(f"ans (answer) = {round(n, 12)}")
-                    elif op == "cos" or op == "cosine":
+                    elif op.lower() == "cos" or op.lower() == "cosine":
                         n = cos(n)
                         print()
                         print(f"ans (answer) = {round(n, 12)}")
-                    elif op == "tan" or op == "tangent":
+                    elif op.lower() == "tan" or op.lower() == "tangent":
                         n = tan()
                         print()
                         print(f"ans (answer) = {round(n, 12)}")
-            elif op == "asin" or op == "arcsine" or op == "inverse sine" or op == "inv sin" or op == "acos" or op == "arccosine" or op == "inverse cosine" or op == "inv cos" or op == "atan" or op == "arctangent" or op == "inverse tangent" or op == "inv tan" or op == "asi" or op == "aco" or op == "ata":
+            elif op.lower() == "asin" or op.lower() == "arcsine" or op.lower() == "inverse sine" or op.lower() == "inv sin" or op.lower() == "acos" or op.lower() == "arccosine" or op.lower() == "inverse cosine" or op.lower() == "inv cos" or op.lower() == "atan" or op.lower() == "arctangent" or op.lower() == "inverse tangent" or op.lower() == "inv tan" or op.lower() == "asi" or op.lower() == "aco" or op.lower() == "ata":
                 unit = input("Output in (r)adians or (d)egrees? ")
                 quad = input("Output in default quadrant (yes/no)? ")
                 go = True
-                if op == "asin" or op == "asi" or op == "arcsine" or op == "inverse sine" or op == "inv sin":
+                if op.lower() == "asin" or op.lower() == "asi" or op.lower() == "arcsine" or op.lower() == "inverse sine" or op.lower() == "inv sin":
                     if quad == "yes" or quad == "y":
-                        if unit == "radians" or unit == "rad" or unit == "r":
+                        if unit.lower() == "radians" or unit.lower() == "rad" or unit.lower() == "r":
                             n = asin(n)
-                        elif unit == "degrees" or unit == "deg" or unit == "d":
+                        elif unit.lower() == "degrees" or unit.lower() == "deg" or unit.lower() == "d":
                             n = degrees(asin(n))                              
                     elif quad == "no" or quad == "n":
-                        if unit == "radians" or unit == "rad" or unit == "r":
+                        if unit.lower() == "radians" or unit.lower() == "rad" or unit.lower() == "r":
                             n = pi - asin(n)
-                        elif unit == "degrees" or unit == "deg" or unit == "d":
+                        elif unit.lower() == "degrees" or unit.lower() == "deg" or unit.lower() == "d":
                             n = 180 - degrees(asin(n))                           
-                elif op == "acos" or op == "arccosine" or op == "aco" or op == "inverse cosine" or op == "inv cos":
+                elif op.lower() == "acos" or op.lower() == "arccosine" or op.lower() == "aco" or op.lower() == "inverse cosine" or op.lower() == "inv cos":
                     if quad == "yes" or quad == "y":
-                        if unit == "radians" or unit == "rad" or unit == "r":
+                        if unit.lower() == "radians" or unit.lower() == "rad" or unit.lower() == "r":
                             n = acos(n)
-                        elif unit == "degrees" or unit == "deg" or unit == "d":
+                        elif unit.lower() == "degrees" or unit.lower() == "deg" or unit.lower() == "d":
                             n = degrees(acos(n))
                     elif quad == "no" or quad == "n":
-                        if unit == "radians" or unit == "rad" or unit == "r":
+                        if unit.lower() == "radians" or unit.lower() == "rad" or unit.lower() == "r":
                             n = -acos(n)
-                        elif unit == "degrees" or unit == "deg" or unit == "d":
+                        elif unit.lower() == "degrees" or unit.lower() == "deg" or unit.lower() == "d":
                             n = -degrees(acos(n))
-                elif op == "atan" or op == "arctangent" or op == "ata" or op == "inverse tangent" or op == "inv tan":
+                elif op.lower() == "atan" or op.lower() == "arctangent" or op.lower() == "ata" or op.lower() == "inverse tangent" or op.lower() == "inv tan":
                     if quad == "yes" or quad == "y":
-                        if unit == "radians" or unit == "rad" or unit == "r":
+                        if unit.lower() == "radians" or unit.lower() == "rad" or unit.lower() == "r":
                             n = atan(n)
-                        elif unit == "degrees" or unit == "deg" or unit == "d":
+                        elif unit.lower() == "degrees" or unit.lower() == "deg" or unit.lower() == "d":
                             n = degrees(atan(n))
                     elif quad == "no" or quad == "n":
-                        if unit == "radians" or unit == "rad" or unit == "r":
+                        if unit.lower() == "radians" or unit.lower() == "rad" or unit.lower() == "r":
                             n = pi - atan(n)
-                        elif unit == "degrees" or unit == "deg" or unit == "d":                            
+                        elif unit.lower() == "degrees" or unit.lower() == "deg" or unit.lower() == "d":                            
                             n = 180 - degrees(atan(n))
                 angle = input("Output (p)ositive or (n)egative angle? ")
-                if angle == "positive" or angle == "pos" or angle == "+" or angle == "p":
-                    if unit == "radians" or unit == "rad" or unit == "r":
+                if angle.lower() == "positive" or angle.lower() == "pos" or angle.lower() == "+" or angle.lower() == "p":
+                    if unit.lower() == "radians" or unit.lower() == "rad" or unit.lower() == "r":
                         if round(n, 12) < 0:
                             n += 2 * pi
-                    elif unit == "degrees" or unit == "deg" or unit == "d":
+                    elif unit.lower() == "degrees" or unit.lower() == "deg" or unit.lower() == "d":
                         if round(n, 12) < 0:
                             n += 360
                     else:
                         go = False
-                elif angle == "negative" or angle == "neg" or angle == "-" or angle == "n":
-                    if unit == "radians" or unit == "rad" or unit == "r":
+                elif angle.lower() == "negative" or angle.lower() == "neg" or angle.lower() == "-" or angle.lower() == "n":
+                    if unit.lower() == "radians" or unit.lower() == "rad" or unit.lower() == "r":
                         if round(n, 12) > 0:
                             n -= 2 * pi
-                    elif unit == "degrees" or unit == "deg" or unit == "d":
+                    elif unit.lower() == "degrees" or unit.lower() == "deg" or unit.lower() == "d":
                         if round(n, 12) > 0:
                             n -= 360
                     else:
@@ -1257,7 +1340,7 @@ def real_operation():
                     go = False
                 if go == True:
                     print()
-                    if unit == "radians" or unit == "rad" or unit == "r":
+                    if unit.lower() == "radians" or unit.lower() == "rad" or unit.lower() == "r":
                         print(f"ans (answer) = {round(n, 12)} radians")
                     else:
                         print(f"ans (answer) = {round(n, 12)} degrees")
@@ -1266,7 +1349,7 @@ def real_operation():
                 print()
                 continue
             ans = n
-        except:
+        ''''except:
             print()
             print("OPERATION ERROR") 
             print("This error occurs when the inputs do not meet their restrictions, for example: ")
@@ -1276,7 +1359,7 @@ def real_operation():
             print("Taking an even root of a negative number is undefined over real numbers")
             print("The factorial, choose, and permute functions only accepts nonnegative integers")
             print("The logarithm function only accepts positive arguments and positive bases not equal to 1")
-            print()
+            print()'''''''''
 
 def binomial_expansion():
     global binsum
@@ -2400,84 +2483,86 @@ while True:
     clear_variables()
     print()
     cat = input('Calculation category (i): ')
-    if cat == "exit" or cat == "" or cat == "exi":
+    if cat.lower() == "exit" or cat.lower() == "" or cat.lower() == "exi":
         break
-    elif cat == "info" or cat == "inf" or cat == "i":
+    elif cat.lower() == "info" or cat.lower() == "inf" or cat.lower() == "i":
         print()
-        print('Enter either "o" for operations or "f" for functions')
+        print('Enter either "o" for operations, "f" for functions, or "s" for settings')
         print("Operations include: real operations, complex operations, matrix operations, and summations (binomial expansion, arithmetic series, and geometric series)")
         print("Functions include: polynomials, system of equations, conic sections, and symmetry")
-    elif cat == "f" or cat == "fun" or cat == "function":
+    elif cat.lower() == "s" or cat.lower() == "set" or cat.lower() == "settings":
+        settings()
+    elif cat.lower() == "f" or cat.lower() == "fun" or cat.lower() == "function":
         while True:
             funtype = input("Function type (i): ")
-            if funtype == "" or funtype == "exit" or funtype == "exi":
+            if funtype.lower() == "" or funtype.lower() == "exit" or funtype.lower() == "exi":
                 break
-            elif funtype == "i" or funtype == "info" or funtype == "inf":
+            elif funtype.lower() == "i" or funtype.lower() == "info" or funtype.lower() == "inf":
                 print()
                 print('Enter either "p" for polynomials, "se" for system of equations, "c" for conic sections, or "s" for symmetry')
                 print()
-            elif funtype == "polynomials" or funtype == "p" or funtype == "pol":
+            elif funtype.lower() == "polynomials" or funtype.lower() == "p" or funtype.lower() == "pol":
                 polynomial()
                 print()
-            elif funtype == "s" or funtype == "sym" or funtype == "symmetry":
+            elif funtype.lower() == "s" or funtype.lower() == "sym" or funtype.lower() == "symmetry":
                 symmetry()
                 print()
-            elif funtype == "se" or funtype == "system of equations" or funtype == "sys" or funtype == "system":
+            elif funtype.lower() == "se" or funtype.lower() == "system of equations" or funtype.lower() == "sys" or funtype.lower() == "system":
                 system()
                 print()
-            elif funtype == "con" or funtype == "conic" or funtype == "conic sections" or funtype == "c":
+            elif funtype.lower() == "con" or funtype.lower() == "conic" or funtype.lower() == "conic sections" or funtype.lower() == "c":
                 conic_section()
                 print()
             else:
                 print('Please enter a valid function type, "i" for info, or return to exit')
                 print()
-    elif cat == "operation" or cat == "ope" or cat == "o":
+    elif cat.lower() == "operation" or cat.lower() == "ope" or cat.lower() == "o":
         while True:
             opetype = input('Operation type (i): ')
-            if opetype == "" or opetype == "exit" or opetype == "exi":
+            if opetype.lower() == "" or opetype.lower() == "exit" or opetype.lower() == "exi":
                 break
-            elif opetype == "i" or opetype == "inf" or opetype == "info":
+            elif opetype.lower() == "i" or opetype.lower() == "inf" or opetype.lower() == "info":
                 print()
                 print('Enter either "r" for real, "c" for complex, "m" for matrix, or "s" for summations (binomial expansion, arithmetic series, and geometric series)')
                 print()
-            elif opetype == "real" or opetype == "rea" or opetype == "r" or opetype == "real operations":
+            elif opetype.lower() == "real" or opetype.lower() == "rea" or opetype.lower() == "r" or opetype.lower() == "real operations":
                 real_operation()
                 print()
-            elif opetype == "c" or opetype == "complex" or opetype == "com" or opetype == "complex operations":
+            elif opetype.lower() == "c" or opetype.lower() == "complex" or opetype.lower() == "com" or opetype.lower() == "complex operations":
                 while True:
                     ctype = input("From (r)ectangular or (p)olar form: ")
-                    if ctype == "rectangular" or ctype == "r" or ctype == "rect" or ctype == "rectangular form":
+                    if ctype.lower() == "rectangular" or ctype.lower() == "r" or ctype.lower() == "rect" or ctype.lower() == "rectangular form":
                         from_rectangular()
                         print()
-                    elif ctype == "polar" or ctype == "p" or ctype == "pol" or ctype == "polar form":
+                    elif ctype.lower() == "polar" or ctype.lower() == "p" or ctype.lower() == "pol" or ctype.lower() == "polar form":
                         from_polar()
                         print()
-                    elif ctype == "" or ctype == "exit" or ctype == "exi":
+                    elif ctype.lower() == "" or ctype.lower() == "exit" or ctype.lower() == "exi":
                         print()
                         break
                     else:
                         print('Please enter either "r" for rectangular, "p" for polar, or return to exit')
                         print()
-            elif opetype == "m" or opetype == "mat" or opetype == "matrix" or opetype == "matrix operations":
+            elif opetype.lower() == "m" or opetype.lower() == "mat" or opetype.lower() == "matrix" or opetype.lower() == "matrix operations":
                 matrix_operation()
                 print()
-            elif opetype == "summations" or opetype == "sum" or opetype == "s":
+            elif opetype.lower() == "summations" or opetype.lower() == "sum" or opetype.lower() == "s":
                 while True:
                     sumtype = input('Summation type (i): ')
-                    if sumtype == "" or sumtype == "exit" or sumtype == "exi":
+                    if sumtype.lower() == "" or sumtype.lower() == "exit" or sumtype.lower() == "exi":
                         print()
                         break
-                    elif sumtype == "i" or sumtype == "inf" or sumtype == "info":
+                    elif sumtype.lower() == "i" or sumtype.lower() == "inf" or sumtype.lower() == "info":
                         print()
                         print('Enter either "b" for binomial expansion, "a" for arithmetic series, or "g" for geometric series')
                         print()
-                    elif sumtype == "b" or sumtype == "binomial" or sumtype == "bin" or sumtype == "binomial expansion":
+                    elif sumtype.lower() == "b" or sumtype.lower() == "binomial" or sumtype.lower() == "bin" or sumtype.lower() == "binomial expansion":
                         binomial_expansion()
                         print()
-                    elif sumtype == "a" or sumtype == "arithmetic" or sumtype == "ari" or sumtype == "arithmetic series":
+                    elif sumtype.lower() == "a" or sumtype.lower() == "arithmetic" or sumtype.lower() == "ari" or sumtype.lower() == "arithmetic series":
                         arithmetic()
                         print()
-                    elif sumtype == "geometric" or sumtype == "geo" or sumtype == "g" or sumtype == "geometric series":
+                    elif sumtype.lower() == "geometric" or sumtype.lower() == "geo" or sumtype.lower() == "g" or sumtype.lower() == "geometric series":
                         geometric()
                         print()
                     else:
