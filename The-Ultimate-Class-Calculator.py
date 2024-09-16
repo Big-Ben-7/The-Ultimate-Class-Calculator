@@ -1720,10 +1720,13 @@ def arithmetic():
                         number = 0 + integer(number)
                         if number <= 0:
                             print(f'"{number}" is not a positive integer')
-                        sum = (2 * a + comdif * (n - 1)) * n / 2
-                        if round(sum, 12) == 0:
-                            sum = 0.0
-                        print(f"sum = {round(sum, 12)}")
+                        sum = f"sum{number}"
+                        sumcalc = (2 * a + comdif * (n - 1)) * n / 2
+                        if round(sumcalc, 12) == 0:
+                            sumcalc = 0.0
+                        globals()[sum] = sumcalc
+                        keeps.append(sum)
+                        print(sum + f" (sum of first {number} terms) = {round(sum, 12)}")
                     except:
                         print(f'"{number}" is not a positive integer')
                 elif len(rangelist) == 2:
