@@ -543,7 +543,7 @@ def from_polar():
         except:
             print("OPERATION ERROR") 
             print("This error occurs when the inputs do not meet their restrictions, for example: ")
-            print('Only real numbers, constants, and expressions can be entered as terms (enter "i" for info and return to exit)')
+            print('Only real numbers, constants, and expressions can be entered as terms')
             print("Division by 0 is undefined")
             print("Raising 0 to a negative power is undefined")
             print()
@@ -902,7 +902,7 @@ def from_rectangular():
             print()
             print("OPERATION ERROR") 
             print("This error occurs when the inputs do not meet their restrictions, for example: ")
-            print('Only real numbers, constants, and expressions can be entered as terms (enter "i" for info and return to exit)')
+            print('Only real numbers, constants, and expressions can be entered as terms')
             print("Division by 0 is undefined")
             print("Raising 0 to a negative power is undefined")
             print()
@@ -1262,7 +1262,7 @@ def real_operation():
             print()
             print("OPERATION ERROR") 
             print("This error occurs when the inputs do not meet their restrictions, for example: ")
-            print('Only real numbers, constants, and expressions can be entered as terms (enter "i" for info and return to exit)')
+            print('Only real numbers, constants, and expressions can be entered as terms')
             print("Division, integer division, and remainder/modulo by 0 is undefined")
             print("Raising 0 to a negative power is undefined")
             print("Taking an even root of a negative number is undefined over real numbers")
@@ -1444,8 +1444,8 @@ def binomial_expansion():
             un = input(f"Indexes of terms to find (1-{abs(n)+1}, i): ")
             if un == "i" or un == "info" or un == "inf":
                 print()
-                print("Enter a list of indexes seperated by commas and using dashes to indicate ranges")
-                print('Eg. "1, 6-8, 10" will output the 1st, 6th, 7th, 8th, and 10th terms (if n >= 9)')
+                print("Enter a list of indexes seperated by commas and using colons to indicate ranges")
+                print('Eg. "1, 6:8, 10" will output the 1st, 6th, 7th, 8th, and 10th terms (if n >= 9)')
                 if n >= 0:
                     print("If n is negative (it's not!), only the denominator of each term will be outputted (the sum will still be complete)")
                 else:
@@ -1464,7 +1464,7 @@ def binomial_expansion():
         print()
         unindex = 0
         while unindex < len(un):
-            rangelist = un[unindex].split("-")
+            rangelist = un[unindex].split(":")
             if len(rangelist) == 1:
                 try:
                     unterm = un[unindex]
@@ -1501,12 +1501,13 @@ def binomial_expansion():
                 except:
                     print(f'"{un[unindex]}" is not a positive integer between 1 and |n| + 1 ({abs(n) + 1}), inclusive')
             else:
-                print(f'"{un[unindex]}" is not a range in the form x-y, where x and y are both positive integers between 1 and |n| + 1 ({abs(n) + 1}), inclusive, and y is greater than x')
+                print(f'"{un[unindex]}" is not a range in the form x:y, where x and y are both positive integers between 1 and |n| + 1 ({abs(n) + 1}), inclusive, and y is greater than x')
             unindex += 1
         binsum = binsum[:len(binsum) - 3]
         if n < 0:
             binsum += ")"
-        print("Sum: " + binsum)
+        if binsum != "":
+            print("Sum: " + binsum)
 
 def arithmetic():
     global dif
@@ -1639,8 +1640,8 @@ def arithmetic():
             n = input("Numbers of terms to sum (i, /): ")
             if n == "i" or n == "inf" or n == "info":
                 print()
-                print("Enter a list of positive integers separated by commas and using dashes to indicate ranges")
-                print('Eg. "1, 6-8, 10" will output the sum of the first 1, 6, 7, 8, and 10 terms')
+                print("Enter a list of positive integers separated by commas and using colons to indicate ranges")
+                print('Eg. "1, 6:8, 10" will output the sum of the first 1, 6, 7, 8, and 10 terms')
                 print('Enter "l" to enter last terms instead of numbers of terms (common difference cannot be 0)')
                 print()
             else:
@@ -1684,9 +1685,9 @@ def arithmetic():
             un = input('Indexes of terms to find (i, /): ')
             if un == "i" or un == "info" or un == "inf":
                 print()
-                print("Enter a list of indexes seperated by commas and using dashes to indicate ranges")
+                print("Enter a list of indexes seperated by commas and using colons to indicate ranges")
                 print('Enter "d" to find the common difference')
-                print('Eg. "1, d, 6-8" will output the 1st, 6th, 7th, and 8th terms, and the common difference')
+                print('Eg. "1, d, 6:8" will output the 1st, 6th, 7th, and 8th terms, and the common difference')
                 print("All indexes must be positive integers, and the second index of a range must be greater than the first index of the range")
                 print()
             else:
@@ -1713,38 +1714,53 @@ def arithmetic():
                 n = n[1:]
             n = n.split(",")
             for number in n:
-                rangelist = number.split("-")
-                if len(rangelist) == 1:
+                srangelist = number.split(":")
+                if len(srangelist) == 1:
                     try:
                         number = eval(number)
                         number = 0 + integer(number)
                         if number <= 0:
                             print(f'"{number}" is not a positive integer')
+                            continue
                         sum = f"sum{number}"
-                        sumcalc = (2 * a + comdif * (n - 1)) * n / 2
+                        sumcalc = (2 * a + comdif * (number - 1)) * number / 2
                         if round(sumcalc, 12) == 0:
                             sumcalc = 0.0
                         globals()[sum] = sumcalc
                         keeps.append(sum)
-                        print(sum + f" (sum of first {number} terms) = {round(sum, 12)}")
+                        print(sum + f" (sum of first {number} terms) = {round(sumcalc, 12)}")
                     except:
                         print(f'"{number}" is not a positive integer')
-                elif len(rangelist) == 2:
+                elif len(srangelist) == 2:
                     try:
-                        rangelist[0] = eval(rangelist[0])
-                        rangelist[1] = eval(rangelist[1])
-                        rangelist[0] = 0 + integer(rangelist[0])
-                        rangelist[1] = 0 + integer(rangelist[1])
+                        srangelist[0] = eval(srangelist[0])
+                        srangelist[1] = eval(srangelist[1])
+                        srangelist[0] = 0 + integer(srangelist[0])
+                        srangelist[1] = 0 + integer(srangelist[1])
+                        if srangelist[0] > 0 and srangelist[1] > srangelist[0]:
+                            srangelist = list(range(srangelist[0], srangelist[1] + 1))
+                            for item in srangelist:
+                                sum = f"sum{item}"
+                                sumcalc = (2 * a + comdif * (item - 1)) * item / 2
+                                if round(sumcalc, 12) == 0:
+                                    sumcalc = 0.0
+                                globals()[sum] = sumcalc
+                                keeps.append(sum)
+                                print(sum + f" (sum of first {item} terms) = {round(sumcalc, 12)}")
+                        elif srangelist[1] <= srangelist[0]:
+                            print(f'"{number}" is not a range in the form x:y, where y > x')
+                        else:    
+                            print(f'"{number}" is not a positive integer')
                     except:
-                        print(f'"{number}" is not positive integer')
+                        print(f'"{number}" is not a positive integer')
                 else:
-                    print(f'"{number}" is not a range in the form x-y, where y > x')
+                    print(f'"{number}" is not a range in the form x:y, where y > x')
         if un != "/" and un != "skip" and un != "ski":
             un = un.replace(" ", "")
             un = un.split(",")
             unindex = 0
             while unindex < len(un):
-                rangelist = un[unindex].split("-")
+                rangelist = un[unindex].split(":")
                 if len(rangelist) == 1:
                     try:
                         unterm = un[unindex]
@@ -1784,13 +1800,13 @@ def arithmetic():
                                 print(sumterm + f" (term {unterm}) = {round(a + comdif * (unterm - 1), 12)}")
                                 rangeindex += 1
                         elif rangelist[1] <= rangelist[0]:
-                            print(f'"{un[unindex]}" is not a range in the form x-y, where y > x')
+                            print(f'"{un[unindex]}" is not a range in the form x:y, where y > x')
                         else:    
                             print(f'"{un[unindex]}" is not a positive integer')
                     except:
                         print(f'"{un[unindex]}" is not a positive integer')
                 else:
-                    print(f'"{un[unindex]}" is not a range in the form x-y, where y > x')
+                    print(f'"{un[unindex]}" is not a range in the form x:y, where y > x')
                 unindex += 1
         if round(comdif, 12) != 0 and iun != "/" and iun != "skip" and iun != "ski":
             iun = iun.replace(" ", "")
@@ -2028,9 +2044,9 @@ def geometric():
             un = input('Indexes of terms to find (i, /): ')
             if un == "i" or un == "info" or un == "inf":
                 print()
-                print("Enter a list of indexes seperated by commas and using dashes to indicate ranges")
+                print("Enter a list of indexes seperated by commas and using colons to indicate ranges")
                 print('Enter "r" to find the common ratio')
-                print('Eg. "1, r, 6-8" will output the 1st, 6th, 7th, and 8th terms, and the common ratio')
+                print('Eg. "1, r, 6:8" will output the 1st, 6th, 7th, and 8th terms, and the common ratio')
                 print("All indexes must be positive integers, and the second index of a range must be greater than the first index of the range")
                 print()
             else:
@@ -2072,7 +2088,7 @@ def geometric():
             un = un.split(",")
             unindex = 0
             while unindex < len(un):
-                rangelist = un[unindex].split("-")
+                rangelist = un[unindex].split(":")
                 if len(rangelist) == 1:
                     try:
                         unterm = un[unindex]
@@ -2112,13 +2128,13 @@ def geometric():
                                 print(sumterm + f" (term {unterm}) = {round(a * comrat ** (unterm - 1), 12)}")
                                 rangeindex += 1
                         elif rangelist[1] <= rangelist[0]:
-                            print(f'"{un[unindex]}" is not a range in the form x-y, where y > x')
+                            print(f'"{un[unindex]}" is not a range in the form x:y, where y > x')
                         else:    
                             print(f'"{un[unindex]}" is not a positive integer')
                     except:
                         print(f'"{un[unindex]}" is not a positive integer')
                 else:
-                    print(f'"{un[unindex]}" is not a range in the form x-y, where y > x')
+                    print(f'"{un[unindex]}" is not a range in the form x:y, where y > x')
                 unindex += 1
         if round(abs(comrat), 12) != 1 and iun != "/" and iun != "skip" and iun != "ski":
             iun = iun.replace(" ", "")
