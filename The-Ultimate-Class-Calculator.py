@@ -1,33 +1,6 @@
-# %%
 from math import *
 import cmath
 import types
-global ans
-ans = 0.0
-global rl
-rl = 0.0
-global im
-im = 0.0
-global im2
-im2 = 0.0
-global mod
-mod = 0.0
-global ang
-ang = 0.0
-global rat
-rat = 0.0
-global dif
-dif = 0.0
-global root
-root = 0.0
-global root2
-root2 = 0.0
-global binsum
-binsum = ""
-global sig
-sig = "off"
-global keeps
-keeps = ["ans", "pi", "e", "tau", "inf", "nan", "infj", "nanj", "keeps", "rl", "im", "im2", "mod", "ang", "rat", "root", "root2", "binsum", "dif", "sig"]
 
 def clear_variables():
     for var in list(globals()):
@@ -1528,7 +1501,7 @@ def binomial_expansion():
                 except:
                     print(f'"{un[unindex]}" is not a positive integer between 1 and |n| + 1 ({abs(n) + 1}), inclusive')
             else:
-                print(f'"{un[unindex]}" is not a range in the form "x-y", where x and y are both positive integers between 1 and |n| + 1 ({abs(n) + 1}), inclusive, and y is greater than x')
+                print(f'"{un[unindex]}" is not a range in the form x-y, where x and y are both positive integers between 1 and |n| + 1 ({abs(n) + 1}), inclusive, and y is greater than x')
             unindex += 1
         binsum = binsum[:len(binsum) - 3]
         if n < 0:
@@ -1668,7 +1641,7 @@ def arithmetic():
                 print()
                 print("Enter a list of positive integers separated by commas and using dashes to indicate ranges")
                 print('Eg. "1, 6-8, 10" will output the sum of the first 1, 6, 7, 8, and 10 terms')
-                print('Enter "l" to enter last terms instead of numbers of terms')
+                print('Enter "l" to enter last terms instead of numbers of terms (common difference cannot be 0)')
                 print()
             else:
                 break
@@ -1676,7 +1649,10 @@ def arithmetic():
             if n == "" or n == "exit" or n == "exi":
                 continue     
             elif n == "l" or n == "las" or n == "las ter" or n == "last terms" or n == "last":
-                 while True:
+                if round(comdif, 12) == 0:
+                    print("If the common difference is 0, enter a number of terms to sum instead")
+                    continue
+                while True:
                     l = input("Last terms (i): ")
                     if l == "i" or l == "inf" or l == "info":
                         print()
@@ -1686,32 +1662,24 @@ def arithmetic():
                         print()
                     else:
                         break
-                 if l == "" or l == "exit" or l == "exi":
+                if l == "" or l == "exit" or l == "exi":
                     continue
-                 try:
-                    l = l.replace("^", "**")
-                    l = eval(l)
-                 except:
-                    print('Please enter a real number or expression, or return to exit')
-                    continue
-                 if round(comdif, 12) == 0:
-                    print("If the common difference is 0, enter a number of terms to sum instead")
-                    continue
-                 n = (l - a) / comdif + 1
-                 if round(n) != round (n, 12) or n <= 0:
-                    print("The entered term is not a term of the series. Please enter different terms")
-                    continue
+                l = l.replace("^", "**")
+                l = l.split(",")
+                n = ""
+                for term in l:
+                    try:
+                        term = eval(term)
+                    except:
+                        print('Please enter a real number or expression, or return to exit')
+                        continue
+                    ncalc = (l - a) / comdif + 1
+                    if round(ncalc) != round(ncalc, 12) or ncalc <= 0:
+                        print("The entered term is not a term of the series. Please enter different terms")
+                        continue
+                    n += f",{ncalc}"
             else:
-                try:
-                    n = n.replace("^", "**")
-                    n = eval(n)
-                    n = 0 + integer(n)
-                except:
-                    print('Please enter a positive integer, "/" to skip, or return to exit')
-                    continue
-                if n <= 0:
-                    print('Please enter a positive integer, "/" to skip, or return to exit')
-                    continue
+                n = n.replace("^", "**")
         while True:
             un = input('Indexes of terms to find (i, /): ')
             if un == "i" or un == "info" or un == "inf":
@@ -1741,12 +1709,33 @@ def arithmetic():
         if (n != "/" and n != "skip" and n != "ski") or (un != "/" and un != "skip" and un != "ski") or (round(comdif, 12) != 0 and iun != "/" and iun != "skip" and iun != "ski"):
             print()
         if n != "/" and n != "skip" and n != "ski":
-            global sum
-            keeps.append("sum")
-            sum = (2 * a + comdif * (n - 1)) * n / 2
-            if round(sum, 12) == 0:
-                sum = 0.0
-            print(f"sum = {round(sum, 12)}")
+            if n[0] == ",":
+                n = n[1:]
+            n = n.split(",")
+            for number in n:
+                rangelist = number.split("-")
+                if len(rangelist) == 1:
+                    try:
+                        number = eval(number)
+                        number = 0 + integer(number)
+                        if number <= 0:
+                            print(f'"{number}" is not a positive integer')
+                        sum = (2 * a + comdif * (n - 1)) * n / 2
+                        if round(sum, 12) == 0:
+                            sum = 0.0
+                        print(f"sum = {round(sum, 12)}")
+                    except:
+                        print(f'"{number}" is not a positive integer')
+                elif len(rangelist) == 2:
+                    try:
+                        rangelist[0] = eval(rangelist[0])
+                        rangelist[1] = eval(rangelist[1])
+                        rangelist[0] = 0 + integer(rangelist[0])
+                        rangelist[1] = 0 + integer(rangelist[1])
+                    except:
+                        print(f'"{number}" is not positive integer')
+                else:
+                    print(f'"{number}" is not a range in the form x-y, where y > x')
         if un != "/" and un != "skip" and un != "ski":
             un = un.replace(" ", "")
             un = un.split(",")
@@ -1792,13 +1781,13 @@ def arithmetic():
                                 print(sumterm + f" (term {unterm}) = {round(a + comdif * (unterm - 1), 12)}")
                                 rangeindex += 1
                         elif rangelist[1] <= rangelist[0]:
-                            print(f'"{un[unindex]}" is not a range in the form "x-y", where y > x')
+                            print(f'"{un[unindex]}" is not a range in the form x-y, where y > x')
                         else:    
                             print(f'"{un[unindex]}" is not a positive integer')
                     except:
                         print(f'"{un[unindex]}" is not a positive integer')
                 else:
-                    print(f'"{un[unindex]}" is not a range in the form "x-y", where y > x')
+                    print(f'"{un[unindex]}" is not a range in the form x-y, where y > x')
                 unindex += 1
         if round(comdif, 12) != 0 and iun != "/" and iun != "skip" and iun != "ski":
             iun = iun.replace(" ", "")
@@ -2015,7 +2004,7 @@ def geometric():
                     n = 1
                 else:
                     n = log(abs(l / a), abs(comrat)) + 1
-                if round(n) != round (n, 12) or n <= 0:
+                if round(n) != round(n, 12) or n <= 0:
                     print("The term is not in the series")
                     continue
             elif n != "infinity" and n != "inf" and n != "i":
@@ -2120,13 +2109,13 @@ def geometric():
                                 print(sumterm + f" (term {unterm}) = {round(a * comrat ** (unterm - 1), 12)}")
                                 rangeindex += 1
                         elif rangelist[1] <= rangelist[0]:
-                            print(f'"{un[unindex]}" is not a range in the form "x-y", where y > x')
+                            print(f'"{un[unindex]}" is not a range in the form x-y, where y > x')
                         else:    
                             print(f'"{un[unindex]}" is not a positive integer')
                     except:
                         print(f'"{un[unindex]}" is not a positive integer')
                 else:
-                    print(f'"{un[unindex]}" is not a range in the form "x-y", where y > x')
+                    print(f'"{un[unindex]}" is not a range in the form x-y, where y > x')
                 unindex += 1
         if round(abs(comrat), 12) != 1 and iun != "/" and iun != "skip" and iun != "ski":
             iun = iun.replace(" ", "")
@@ -2465,6 +2454,31 @@ def system():
     print("Welcome to system of equations!")
 
 def main():
+    global ans
+    ans = 0.0
+    global rl
+    rl = 0.0
+    global im
+    im = 0.0
+    global im2
+    im2 = 0.0
+    global mod
+    mod = 0.0
+    global ang
+    ang = 0.0
+    global rat
+    rat = 0.0
+    global dif
+    dif = 0.0
+    global root
+    root = 0.0
+    global root2
+    root2 = 0.0
+    global binsum
+    binsum = ""
+    global keeps
+    keeps = ["ans", "pi", "e", "tau", "inf", "nan", "infj", "nanj", "keeps", "rl", "im", "im2", "mod", "ang", "rat", "root", "root2", "binsum", "dif"]
+    
     print("Welcome to The Ultimate Class Calculator!")
     while True:
         clear_variables()
