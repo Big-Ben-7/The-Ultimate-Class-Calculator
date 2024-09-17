@@ -1444,7 +1444,7 @@ def binomial_expansion():
             un = input(f"Indexes of terms to find (1-{abs(n)+1}, i): ")
             if un == "i" or un == "info" or un == "inf":
                 print()
-                print("Enter a list of indexes seperated by commas and using colons to indicate ranges")
+                print("Enter a list of indexes seperated by commas (,) and using colons (:) to indicate ranges")
                 print('Eg. "1, 6:8, 10" will output the 1st, 6th, 7th, 8th, and 10th terms (if n >= 9)')
                 if n >= 0:
                     print("If n is negative (it's not!), only the denominator of each term will be outputted (the sum will still be complete)")
@@ -1640,7 +1640,7 @@ def arithmetic():
             n = input("Numbers of terms to sum (i, /): ")
             if n == "i" or n == "inf" or n == "info":
                 print()
-                print("Enter a list of positive integers separated by commas and using colons to indicate ranges")
+                print("Enter a list of positive integers separated by commas (,) and using colons (:) to indicate ranges")
                 print('Eg. "1, 6:8, 10" will output the sum of the first 1, 6, 7, 8, and 10 terms')
                 print('Enter "l" to enter last terms instead of numbers of terms (common difference cannot be 0)')
                 print()
@@ -1657,7 +1657,7 @@ def arithmetic():
                     l = input("Last terms (i): ")
                     if l == "i" or l == "inf" or l == "info":
                         print()
-                        print("Enter a list of terms separated by commas")
+                        print("Enter a list of terms separated by commas (,)")
                         print('Eg. "1, 3, 6" will output the sum up to the terms 1, 3, 6 (if they exist)')
                         print('Enter "l" to enter last terms instead of numbers of terms')
                         print()
@@ -1665,27 +1665,16 @@ def arithmetic():
                         break
                 if l == "" or l == "exit" or l == "exi":
                     continue
+                l = l.replace(" ", "")
                 l = l.replace("^", "**")
                 l = l.split(",")
-                n = ""
-                for term in l:
-                    try:
-                        term = eval(term)
-                    except:
-                        print('Please enter a real number or expression, or return to exit')
-                        continue
-                    ncalc = (l - a) / comdif + 1
-                    if round(ncalc) != round(ncalc, 12) or ncalc <= 0:
-                        print("The entered term is not a term of the series. Please enter different terms")
-                        continue
-                    n += f",{ncalc}"
             else:
                 n = n.replace("^", "**")
         while True:
             un = input('Indexes of terms to find (i, /): ')
             if un == "i" or un == "info" or un == "inf":
                 print()
-                print("Enter a list of indexes seperated by commas and using colons to indicate ranges")
+                print("Enter a list of indexes seperated by commas (,) and using colons (:) to indicate ranges")
                 print('Enter "d" to find the common difference')
                 print('Eg. "1, d, 6:8" will output the 1st, 6th, 7th, and 8th terms, and the common difference')
                 print("All indexes must be positive integers, and the second index of a range must be greater than the first index of the range")
@@ -1699,7 +1688,7 @@ def arithmetic():
                 iun = input('Terms of indexes to find (i, /): ')
                 if iun == "i" or iun == "info" or iun == "inf":
                     print()
-                    print("Enter a list of terms seperated by commas")
+                    print("Enter a list of terms seperated by commas (,)")
                     print('Enter "d" to find the common difference')
                     print('Eg. "1, d, 6" will output the indexes of the terms 1 and 6 (if they exist), and the common difference')
                     print()
@@ -1709,9 +1698,31 @@ def arithmetic():
                 continue
         if (n != "/" and n != "skip" and n != "ski") or (un != "/" and un != "skip" and un != "ski") or (round(comdif, 12) != 0 and iun != "/" and iun != "skip" and iun != "ski"):
             print()
-        if n != "/" and n != "skip" and n != "ski":
+        if n == "l" or n == "las" or n == "las ter" or n == "last terms" or n == "last":
+            for term in l:
+                try:
+                    term = eval(term)
+                except:
+                    print(f'Error: "{term}" is not a real number or expression')
+                    continue
+                ncalc = (term - a) / comdif + 1
+                if round(ncalc) != round(ncalc, 12) or ncalc <= 0:
+                    print(f'Error: "{term}" is not a term of the series')
+                    continue
+                ncalc = round(ncalc)
+                sum = f"sum{ncalc}"
+                sumcalc = (2 * a + (comdif * (ncalc - 1))) * ncalc / 2
+                if round(sumcalc, 12) == 0:
+                    sumcalc = 0.0
+                globals()[sum] = sumcalc
+                keeps.append(sum)
+                print(sum + f" (sum through term {ncalc} ({round(term, 12)})) = {round(sumcalc, 12)}")
+        elif n != "/" and n != "skip" and n != "ski":
+            n.replace(" ", "")
             if n[0] == ",":
                 n = n[1:]
+            if n[len(n) - 1] == ",":
+                n = n[:len(n) - 1]
             n = n.split(",")
             for number in n:
                 srangelist = number.split(":")
@@ -1728,7 +1739,7 @@ def arithmetic():
                             sumcalc = 0.0
                         globals()[sum] = sumcalc
                         keeps.append(sum)
-                        print(sum + f" (sum of first {number} terms) = {round(sumcalc, 12)}")
+                        print(sum + f" (sum through term {number}) = {round(sumcalc, 12)}")
                     except:
                         print(f'"{number}" is not a positive integer')
                 elif len(srangelist) == 2:
@@ -1757,6 +1768,7 @@ def arithmetic():
                     print(f'"{number}" is not a range in the form x:y, where y > x')
         if un != "/" and un != "skip" and un != "ski":
             un = un.replace(" ", "")
+            un = un.replace("^", "**")
             un = un.split(",")
             unindex = 0
             while unindex < len(un):
@@ -1769,7 +1781,6 @@ def arithmetic():
                             print(f"dif (common difference) = {round(dif, 12)}")
                             unindex += 1
                             continue
-                        unterm = unterm.replace("^", "**")
                         unterm = eval(unterm)
                         unterm = 0 + integer(unterm)
                         if unterm > 0:
@@ -1783,8 +1794,6 @@ def arithmetic():
                         print(f'"{un[unindex]}" is not a positive integer')
                 elif len(rangelist) == 2:
                     try:
-                        rangelist[0] = rangelist[0].replace("^", "**")
-                        rangelist[1] = rangelist[1].replace("^", "**")
                         rangelist[0] = eval(rangelist[0])
                         rangelist[1] = eval(rangelist[1])
                         rangelist[0] = 0 + integer(rangelist[0])
@@ -1810,6 +1819,7 @@ def arithmetic():
                 unindex += 1
         if round(comdif, 12) != 0 and iun != "/" and iun != "skip" and iun != "ski":
             iun = iun.replace(" ", "")
+            iun = iun.replace("^", "**")
             iun = iun.split(",")
             iunindex = 0
             while iunindex < len(iun):
@@ -1820,7 +1830,6 @@ def arithmetic():
                         print(f"dif (common difference) = {round(dif, 12)}")
                         iunindex += 1
                         continue
-                    iunterm = iunterm.replace("^", "**")
                     iunterm = eval(iunterm)
                     indexcalc = (iunterm - a) / comdif + 1
                     if round(indexcalc, 12) == round(indexcalc) and indexcalc > 0: 
@@ -2044,7 +2053,7 @@ def geometric():
             un = input('Indexes of terms to find (i, /): ')
             if un == "i" or un == "info" or un == "inf":
                 print()
-                print("Enter a list of indexes seperated by commas and using colons to indicate ranges")
+                print("Enter a list of indexes seperated by commas (,) and using colons (:) to indicate ranges")
                 print('Enter "r" to find the common ratio')
                 print('Eg. "1, r, 6:8" will output the 1st, 6th, 7th, and 8th terms, and the common ratio')
                 print("All indexes must be positive integers, and the second index of a range must be greater than the first index of the range")
@@ -2058,7 +2067,7 @@ def geometric():
                 iun = input('Terms of indexes to find (i, /): ')
                 if iun == "i" or iun == "info" or iun == "inf":
                     print()
-                    print("Enter a list of terms seperated by commas")
+                    print("Enter a list of terms seperated by commas (,)")
                     print('Enter "r" to find the common ratio')
                     print('Eg. "1, r, 6" will output the indexes of the terms 1 and 6 (if they exist), and the common ratio')
                     print()
@@ -2085,6 +2094,7 @@ def geometric():
                 print(f"sum = {round(sum, 12)}")
         if un != "/" and un != "skip" and un != "ski":
             un = un.replace(" ", "")
+            un = un.replace("^", "**")
             un = un.split(",")
             unindex = 0
             while unindex < len(un):
@@ -2097,7 +2107,6 @@ def geometric():
                             print(f"rat (common ratio) = {round(rat, 12)}")
                             unindex += 1
                             continue
-                        unterm = unterm.replace("^", "**")
                         unterm = eval(unterm)
                         unterm = 0 + integer(unterm)
                         if unterm > 0:
@@ -2111,8 +2120,6 @@ def geometric():
                         print(f'"{un[unindex]}" is not a positive integer')
                 elif len(rangelist) == 2:
                     try:
-                        rangelist[0] = rangelist[0].replace("^", "**")
-                        rangelist[1] = rangelist[1].replace("^", "**")
                         rangelist[0] = eval(rangelist[0])
                         rangelist[1] = eval(rangelist[1])
                         rangelist[0] = 0 + integer(rangelist[0])
@@ -2138,6 +2145,7 @@ def geometric():
                 unindex += 1
         if round(abs(comrat), 12) != 1 and iun != "/" and iun != "skip" and iun != "ski":
             iun = iun.replace(" ", "")
+            iun = iun.replace("^", "**")
             iun = iun.split(",")
             iunindex = 0
             while iunindex < len(iun):
@@ -2148,7 +2156,6 @@ def geometric():
                         print(f"rat (common ratio) = {round(rat, 12)}")
                         iunindex += 1
                         continue
-                    iunterm = iunterm.replace("^", "**")
                     iunterm = eval(iunterm)
                     if iunterm == a:
                         indexcalc = 1
@@ -2335,14 +2342,14 @@ def symmetry():
             p1 = input("Point 1 (s to enter slope): ")
             if p1 == "" or p1 == "exit" or p1 == "exi" or p1 == "s" or p1 == "slo" or p1 == "slope":
                 continue
+            p1 = p1.replace(" ", "")
+            p1 = p1.replace("^", "**")
             if p1[0] == "(":
                 p1 = p1[1:]
             if p1[len(p1) - 1] == ")":
                 p1 = p1[:len(p1) - 1]
             p1 = p1.split(",", 1)
             try:
-                p1[0] = p1[0].replace("^", "**")
-                p1[1] = p1[1].replace("^", "**")
                 p1[0] = eval(p1[0])
                 p1[1] = eval(p1[1])
             except:
@@ -2351,14 +2358,14 @@ def symmetry():
             p2 = input("Point 2: ")
             if p2 == "" or p2 == "exit" or p2 == "exi":
                 continue
+            p2 = p2.replace(" ", "")
+            p2 = p2.replace("^", "**")            
             if p2[0] == "(":
                 p2 = p2[1:]
             if p2[len(p2) - 1] == ")":
                 p2 = p2[:len(p2) - 1]
             p2 = p2.split(",", 1)
             try:
-                p2[0] = p2[0].replace("^", "**")
-                p2[1] = p2[1].replace("^", "**")
                 p2[0] = eval(p2[0])
                 p2[1] = eval(p2[1])
                 if p2[0] == p1[0] and p2[1] == p1[1]:
@@ -2412,16 +2419,17 @@ def symmetry():
             continue
         elif reflect == "i" or reflect == "info" or reflect == "inf":
             print()
-            print('Please enter a list of points to reflect in the form (x, y) separated by semicolons: eg. "(5, -3); (-1, 0); (4, 4)"')
+            print('Please enter a list of points to reflect in the form (x, y) separated by semicolons (;), eg. "(5, -3); (-1, 0); (4, 4)"')
             print()
             continue
         reflect = reflect.replace(" ", "")
+        reflect = reflect.replace("^", "**")
         reflect = reflect.split(";")
         for i in range(0, len(reflect)):
             print()
             pointlist = reflect[i].split(",")
             if len(pointlist) != 2:
-                print(f'Point "{reflect[i]}" error: please enter points in the form (x, y)')
+                print(f'Error: "{reflect[i]}" is not a point in the form (x, y)')
                 continue
             x_input = pointlist[0]
             y_input = pointlist[1]
@@ -2430,16 +2438,14 @@ def symmetry():
             if ")" in y_input:
                 y_input = y_input[:y_input.find(")")]
             try:
-                x_input = x_input.replace("^", "**")
                 x_input = eval(x_input)
             except:
-                print(f'Point "{reflect[i]}" error: please enter points in the form (x, y)')
+                print(f'Error: "{reflect[i]}" is not a point in the form (x, y)')
                 continue
             try:
-                y_input = y_input.replace("^", "**")
                 y_input = eval(y_input)
             except:
-                print(f'Point "{reflect[i]}" error: please enter points in the form (x, y)')
+                print(f'Error: "{reflect[i]}" is not a point in the form (x, y)')
                 continue
             if m != "v" and m != "ver" and m != "vertical":
                 ang = atan(m)
@@ -2458,7 +2464,7 @@ def symmetry():
             globals()[yco] = y
             keeps.append(xco)
             keeps.append(yco)
-            print(f"Point {i + 1} -> ({round(x, 12)}, {round(y, 12)})")
+            print(f"Point {i + 1}: ({round(x, 12)}, {round(y, 12)})")
             print(xco + f" = {round(x, 12)}")
             print(yco + f" = {round(y, 12)}")
 
