@@ -2121,7 +2121,7 @@ def geometric():
                         sum = f"sum{number}"
                         if round(b, 12) != round(c, 12):
                             if n != "infinity" and n != "all" and n != "a":
-                                sumcalc = a * (1 - comrat ** n) / (1 - comrat)
+                                sumcalc = a * (1 - comrat ** number) / (1 - comrat)
                             else:
                                 sumcalc = a / (1 - comrat)
                         else:
@@ -2145,7 +2145,7 @@ def geometric():
                                 sum = f"sum{item}"
                                 if round(b, 12) != round(c, 12):
                                     if n != "infinity" and n != "all" and n != "a":
-                                        sumcalc = a * (1 - comrat ** n) / (1 - comrat)
+                                        sumcalc = a * (1 - comrat ** number) / (1 - comrat)
                                     else:
                                         sumcalc = a / (1 - comrat)
                                 else:
