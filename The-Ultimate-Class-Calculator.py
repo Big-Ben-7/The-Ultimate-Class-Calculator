@@ -1490,12 +1490,9 @@ def binomial_expansion():
                     continue
                 if rangelist[0] > 0 and rangelist[1] > rangelist[0] and rangelist[1] <= abs(n) + 1:
                     rangelist = list(range(rangelist[0], rangelist[1] + 1))
-                    rangeindex = 0
-                    while rangeindex < len(rangelist):
-                        unterm = rangelist[rangeindex]
+                    for unterm in rangelist:
                         k = unterm - 1
                         print_binomial(a, b, c, d, n, k, unterm, x, y)
-                        rangeindex += 1
                 elif rangelist[1] <= rangelist[0]:
                     print(f'the second index of the range "{unterm}" must be greater than the first index')
                 else:    
@@ -1771,21 +1768,18 @@ def arithmetic():
             un = un.replace(" ", "")
             un = un.replace("^", "**")
             un = un.split(",")
-            unindex = 0
-            while unindex < len(un):
-                rangelist = un[unindex].split(":")
+            for unterm in un:
+                rangelist = unterm.split(":")
                 if len(rangelist) == 1:
                     try:
-                        unterm = un[unindex]
                         if unterm == "d" or unterm == "difference" or unterm == "com dif" or unterm == "common difference":
                             dif = comdif
                             print(f"dif (common difference) = {round(dif, 12)}")
-                            unindex += 1
                             continue
                         unterm = eval(unterm)
                         unterm = 0 + integer(unterm)
                     except:
-                        print(f'"{un[unindex]}" is not a positive integer')
+                        print(f'"{unterm}" is not a positive integer')
                         continue
                     if unterm > 0:
                         sumterm = f"tm{unterm}"
@@ -1801,48 +1795,40 @@ def arithmetic():
                         rangelist[0] = 0 + integer(rangelist[0])
                         rangelist[1] = 0 + integer(rangelist[1])
                     except:
-                        print(f'"{un[unindex]}" is not a positive integer')
+                        print(f'"{unterm}" is not a positive integer')
                         continue
                     if rangelist[0] > 0 and rangelist[1] > rangelist[0]:
                         rangelist = list(range(rangelist[0], rangelist[1] + 1))
-                        rangeindex = 0
-                        while rangeindex < len(rangelist):
-                            unterm = rangelist[rangeindex]
+                        for unterm in rangelist:
                             sumterm = f"tm{unterm}"
                             globals()[sumterm] = a + comdif * (unterm - 1)
                             keeps.append(sumterm)
                             print(sumterm + f" (term {unterm}) = {round(a + comdif * (unterm - 1), 12)}")
-                            rangeindex += 1
                     elif rangelist[1] <= rangelist[0]:
-                        print(f'"{un[unindex]}" is not a range in the form x:y, where y > x')
+                        print(f'"{unterm}" is not a range in the form x:y, where y > x')
                     else:    
-                        print(f'"{un[unindex]}" is not a positive integer')
+                        print(f'"{unterm}" is not a positive integer')
                 else:
-                    print(f'"{un[unindex]}" is not a range in the form x:y, where y > x')
-                unindex += 1
+                    print(f'"{unterm}" is not a range in the form x:y, where y > x')
         if round(comdif, 12) != 0 and iun != "/" and iun != "skip" and iun != "ski":
             iun = iun.replace(" ", "")
             iun = iun.replace("^", "**")
             iun = iun.split(",")
-            iunindex = 0
-            while iunindex < len(iun):
+            for iunterm in iun:
                 try:
-                    iunterm = iun[iunindex]
                     if iunterm == "d" or iunterm == "difference" or iunterm == "comdif" or iunterm == "common difference":
                         dif = comdif
                         print(f"dif (common difference) = {round(dif, 12)}")
-                        iunindex += 1
                         continue
                     iunterm = eval(iunterm)
                 except:
-                    print(f'"{iun[iunindex]}" is not a real number or expression')
+                    print(f'"{iunterm}" is not a real number or expression')
                     continue
                 indexcalc = (iunterm - a) / comdif + 1
                 if round(indexcalc, 12) == round(indexcalc) and indexcalc > 0: 
                     series_find_constants(iunterm, indexcalc)
                 else:
                     print(f'"{iunterm}" is not a term in the series')
-                iunindex += 1
 
 def geometric():
     global rat
@@ -2182,21 +2168,18 @@ def geometric():
             un = un.replace(" ", "")
             un = un.replace("^", "**")
             un = un.split(",")
-            unindex = 0
-            while unindex < len(un):
-                rangelist = un[unindex].split(":")
+            for unterm in un:
+                rangelist = unterm.split(":")
                 if len(rangelist) == 1:
                     try:
-                        unterm = un[unindex]
                         if unterm == "r" or unterm == "ratio" or unterm == "comrat" or unterm == "common ratio":
                             rat = comrat
                             print(f"rat (common ratio) = {round(rat, 12)}")
-                            unindex += 1
                             continue
                         unterm = eval(unterm)
                         unterm = 0 + integer(unterm)
                     except:
-                        print(f'"{un[unindex]}" is not a positive integer')
+                        print(f'"{unterm}" is not a positive integer')
                         continue
                     if unterm > 0:
                         sumterm = f"tm{unterm}"
@@ -2212,46 +2195,38 @@ def geometric():
                         rangelist[0] = 0 + integer(rangelist[0])
                         rangelist[1] = 0 + integer(rangelist[1])
                     except:
-                        print(f'"{un[unindex]}" is not a positive integer')
+                        print(f'"{unterm}" is not a positive integer')
                         continue
                     if rangelist[0] > 0 and rangelist[1] > rangelist[0]:
                         rangelist = list(range(rangelist[0], rangelist[1] + 1))
-                        rangeindex = 0
-                        while rangeindex < len(rangelist):
-                            unterm = rangelist[rangeindex]
+                        for unterm in rangelist:
                             sumterm = f"tm{unterm}"
                             globals()[sumterm] = a * comrat ** (unterm - 1)
                             keeps.append(sumterm)
                             print(sumterm + f" (term {unterm}) = {round(a * comrat ** (unterm - 1), 12)}")
-                            rangeindex += 1
                     elif rangelist[1] <= rangelist[0]:
-                        print(f'"{un[unindex]}" is not a range in the form x:y, where y > x')
+                        print(f'"{unterm}" is not a range in the form x:y, where y > x')
                     else:    
-                        print(f'"{un[unindex]}" is not a positive integer')
+                        print(f'"{unterm}" is not a positive integer')
                 else:
-                    print(f'"{un[unindex]}" is not a range in the form x:y, where y > x')
-                unindex += 1
+                    print(f'"{unterm}" is not a range in the form x:y, where y > x')
         if round(abs(comrat), 12) != 1 and iun != "/" and iun != "skip" and iun != "ski":
             iun = iun.replace(" ", "")
             iun = iun.replace("^", "**")
             iun = iun.split(",")
-            iunindex = 0
-            while iunindex < len(iun):
+            for iunterm in iun:
                 try:
-                    iunterm = iun[iunindex]
                     if iunterm == "r" or iunterm == "ratio" or iunterm == "comrat" or iunterm == "common ratio":
                         rat = comrat
                         print(f"rat (common ratio) = {round(rat, 12)}")
-                        iunindex += 1
                         continue
                     iunterm = eval(iunterm)
                 except:
-                    print(f'"{iun[iunindex]}" is not a real number or expression')
+                    print(f'"{iunterm}" is not a real number or expression')
                     continue
                 if iunterm == a:
                     indexcalc = 1
                 elif iunterm == a * -1:
-                    iunindex += 1
                     print(f'"{iunterm}" is not a term in the series')
                     continue
                 else:
@@ -2260,7 +2235,6 @@ def geometric():
                     series_find_constants(iunterm, indexcalc)
                 else:
                     print(f'"{iunterm}" is not a term in the series')
-                iunindex += 1
 
 def polynomial():
     global root
