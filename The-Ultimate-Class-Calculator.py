@@ -1462,17 +1462,15 @@ def binomial_expansion():
         un = un.replace(" ", "")
         un = un.split(",")
         print()
-        unindex = 0
-        while unindex < len(un):
-            rangelist = un[unindex].split(":")
+        for unterm in un:
+            rangelist = unterm.split(":")
             if len(rangelist) == 1:
                 try:
-                    unterm = un[unindex]
                     unterm = unterm.replace("^", "**")
                     unterm = eval(unterm)
                     unterm = 0 + integer(unterm)
                 except:
-                    print(f'"{un[unindex]}" is not a positive integer between 1 and |n| + 1 ({abs(n) + 1}), inclusive')
+                    print(f'"{unterm}" is not a positive integer between 1 and |n| + 1 ({abs(n) + 1}), inclusive')
                     continue
                 if 0 < unterm <= abs(n) + 1:
                     k = unterm - 1
@@ -1488,7 +1486,7 @@ def binomial_expansion():
                     rangelist[0] = 0 + integer(rangelist[0])
                     rangelist[1] = 0 + integer(rangelist[1])
                 except:
-                    print(f'"{un[unindex]}" is not a positive integer between 1 and |n| + 1 ({abs(n) + 1}), inclusive')
+                    print(f'"{unterm}" is not a positive integer between 1 and |n| + 1 ({abs(n) + 1}), inclusive')
                     continue
                 if rangelist[0] > 0 and rangelist[1] > rangelist[0] and rangelist[1] <= abs(n) + 1:
                     rangelist = list(range(rangelist[0], rangelist[1] + 1))
@@ -1499,12 +1497,11 @@ def binomial_expansion():
                         print_binomial(a, b, c, d, n, k, unterm, x, y)
                         rangeindex += 1
                 elif rangelist[1] <= rangelist[0]:
-                    print(f'the second index of the range "{un[unindex]}" must be greater than the first index')
+                    print(f'the second index of the range "{unterm}" must be greater than the first index')
                 else:    
-                    print(f'"{un[unindex]}" is not a positive integer between 1 and |n| + 1 ({abs(n) + 1}), inclusive')
+                    print(f'"{unterm}" is not a positive integer between 1 and |n| + 1 ({abs(n) + 1}), inclusive')
             else:
-                print(f'"{un[unindex]}" is not a range in the form x:y, where x and y are both positive integers between 1 and |n| + 1 ({abs(n) + 1}), inclusive, and y is greater than x')
-            unindex += 1
+                print(f'"{unterm}" is not a range in the form x:y, where x and y are both positive integers between 1 and |n| + 1 ({abs(n) + 1}), inclusive, and y is greater than x')
         binsum = binsum[:len(binsum) - 3]
         if n < 0:
             binsum += ")"
