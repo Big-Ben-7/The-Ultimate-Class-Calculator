@@ -1451,13 +1451,13 @@ def binomial_expansion():
                 else:
                     print("If n is negative (it is!), only the denominator of each term will be outputted (the sum will still be complete)")
                 print(f"All indexes must be positive integers between 1 and |n| + 1 ({abs(n) + 1}), inclusive, and the second index of a range must be greater than the first index of the range")
-                print(f'Enter "all" or 1-{abs(n)+1} to find/sum all terms')
+                print(f'Enter (a)ll (1-{abs(n)+1}) to find/sum all terms')
                 print()
             else:
                 break
         if un == "" or un == "exit" or un  == "exi":
             continue
-        if un == "all":
+        if un == "all" or un == "a":
             un = f"1-{abs(n)+1}"
         un = un.replace(" ", "")
         un = un.split(",")
@@ -1648,7 +1648,7 @@ def arithmetic():
                 break
         if n != "/" and n != "skip" and n != "ski":
             if n == "" or n == "exit" or n == "exi":
-                continue     
+                continue
             elif n == "l" or n == "las" or n == "las ter" or n == "last terms" or n == "last":
                 if round(comdif, 12) == 0:
                     print("If the common difference is 0, enter a number of terms to sum instead")
@@ -1658,12 +1658,12 @@ def arithmetic():
                     if l == "i" or l == "inf" or l == "info":
                         print()
                         print("Enter a list of terms separated by commas (,)")
-                        print('Eg. "1, 3, 6" will output the sum up to the terms 1, 3, 6 (if they exist)')
-                        print('Enter "l" to enter last terms instead of numbers of terms')
+                        print('Eg. "1, 3, 5" will output the sum up to the terms 1, 3, 5 (if they exist)')
+                        print('Enter "n" to enter numbers of terms instead of last terms')
                         print()
                     else:
                         break
-                if l == "" or l == "exit" or l == "exi":
+                if l == "" or l == "exit" or l == "exi" or l == "n" or l == "num" or l == "number" or l == "number of terms":
                     continue
                 l = l.replace(" ", "")
                 l = l.replace("^", "**")
@@ -1706,7 +1706,7 @@ def arithmetic():
                     print(f'Error: "{term}" is not a real number or expression')
                     continue
                 ncalc = (term - a) / comdif + 1
-                if round(ncalc) != round(ncalc, 12) or ncalc <= 0:
+                if round(ncalc) != round(ncalc, 12) or round(ncalc, 12) <= 0:
                     print(f'Error: "{term}" is not a term of the series')
                     continue
                 ncalc = round(ncalc)
@@ -1716,7 +1716,7 @@ def arithmetic():
                     sumcalc = 0.0
                 globals()[sum] = sumcalc
                 keeps.append(sum)
-                print(sum + f" (sum through term {ncalc} ({round(term, 12)})) = {round(sumcalc, 12)}")
+                print(sum + f" (sum through {round(term, 12)} (term {ncalc})) = {round(sumcalc, 12)}")
         elif n != "/" and n != "skip" and n != "ski":
             n.replace(" ", "")
             if n[0] == ",":
@@ -1789,7 +1789,7 @@ def arithmetic():
                             keeps.append(sumterm)
                             print(sumterm + f" (term {unterm}) = {round(a + comdif * (unterm - 1), 12)}")
                         else:
-                            print(f'"{unterm}" is not a positive integers')
+                            print(f'"{unterm}" is not a positive integer')
                     except:
                         print(f'"{un[unindex]}" is not a positive integer')
                 elif len(rangelist) == 2:
@@ -1977,7 +1977,7 @@ def geometric():
                 continue
             if (b == "s" or b == "sum") and (sum_number == "i" or sum_number == "inf" or sum_number == "infinity"):
                 if (comrat >= 1 or comrat <= -1):
-                    print("Infinity is only accepted for common ratios between -1 and 0 and between 0 and -1")
+                    print("Infinity is only accepted for nonzero common ratios between -1 and 1")
                     continue
                 else:
                     a = input_sum * (1 - comrat)
@@ -2008,46 +2008,43 @@ def geometric():
                 cn = bn + 1               
                 a = b / comrat ** (bn - 1)
         print()
-        n = input("Number of terms to sum (i for infinity, l to enter last terms, /): ")
+        while True:
+            n = input("Numbers of terms to sum (i, /): ")
+            if n == "i" or n == "inf" or n == "info":
+                print()
+                print("Enter a list of positive integers separated by commas (,) and using colons (:) to indicate ranges")
+                print('Eg. "1, 6:8, 10" will output the sum of the first 1, 6, 7, 8, and 10 terms')
+                print('Enter "l" to enter last terms instead of numbers of terms (common ratio cannot be 1 or -1)')
+                print('Enter (a)ll for an infinite series (common ratio must be nonzero and between -1 and 1)')
+                print()
+            else:
+                break
         if n != "/" and n != "skip" and n != "ski":
             if n == "" or n == "exit" or n == "exi":
                 continue
             elif n == "l" or n == "last terms" or n == "las" or n == "las ter" or n == "last":
-                l = input("Last terms: ")
-                if l == "" or l == "exit" or l == "exi":
-                    continue
-                try:
-                    l = l.replace("^", "**")
-                    l = eval(l)
-                except:
-                    print('Please enter a nonzero real number or expression, or return to exit')
-                    continue
-                if l == 0:
-                    print("The last term cannot be 0")
-                    continue
-                if abs(comrat) == 1 or l == a * -1:
+                if abs(comrat) == 1:
                     print("If the common ratio is 1 or -1, enter a number of terms to sum instead")
                     continue
-                if l == a:
-                    n = 1
-                else:
-                    n = log(abs(l / a), abs(comrat)) + 1
-                if round(n) != round(n, 12) or n <= 0:
-                    print("The term is not in the series")
+                while True:
+                    l = input("Last terms (i): ")
+                    if l == "i" or l == "inf" or l == "info":
+                        print()
+                        print("Enter a list of nonzero terms separated by commas (,)")
+                        print('Eg. "1, 3, 9" will output the sum up to the terms 1, 3, 9 (if they exist)')
+                        print('Enter "n" to enter numbers of terms instead last terms')
+                        print()
+                    else:
+                        break
+                if l == "" or l == "exit" or l == "exi" or l == "n" or l == "num" or l == "number" or l == "number of terms":
                     continue
-            elif n != "infinity" and n != "inf" and n != "i":
-                try:
-                    n = n.replace("^", "**")
-                    n = eval(n)
-                    n = 0 + integer(n)
-                except:
-                    print('Please enter a positive integer, "i" for infinity, "/" to skip, or return to exit')
-                    continue
-                if n <= 0:
-                    print('Please enter a positive integer, "i" for infinity, "/" to skip, or return to exit')
-                    continue
-            elif (n == "inf" or n == "infinity" or n == "i") and (comrat >= 1 or comrat <= -1):
-                print("Infinity is only accepted for common ratios between -1 and 0 and between 0 and -1")
+                l = l.replace(" ", "")
+                l = l.replace("^", "**")
+                l = l.split(",")
+            else:
+                n = n.replace("^", "**")
+            if (n == "a" or n == "all" or n == "infinity") and (round(comrat, 12) >= 1 or round(comrat, 12) <= -1):
+                print("Infinity is only accepted for nonzero common ratios between -1 and 1")
                 continue
         while True:
             un = input('Indexes of terms to find (i, /): ')
@@ -2077,21 +2074,95 @@ def geometric():
                 continue
         if (n != "/" and n != "skip" and n != "ski") or (un != "/" and un != "skip" and un != "ski") or (round(abs(comrat), 12) != 1 and iun != "/" and iun != "skip" and iun != "ski"):
             print()
-        global sum
-        keeps.append(sum)
-        if round(b, 12) != round(c, 12):
-            if n != "/" and n != "skip" and n != "ski":
-                if n != "infinity" and n != "inf" and n != "i":
-                    sum = a * (1 - comrat ** n) / (1 - comrat)
+        if n == "l" or n == "las" or n == "las ter" or n == "last terms" or n == "last":
+            for term in l:
+                try:
+                    term = eval(term)
+                except:
+                    print(f'Error: "{term}" is not a nonzero real number or expression')
+                    continue
+                if term == 0:
+                    print(f'Error: "{term}" is not a nonzero real nummber or expression')
+                    continue
+                if round(term, 12) == round(a, 12) * -1:
+                    print(f'Error: "{term}" causes the common ratio to be 1 or -1')
+                    continue
+                if l == a:
+                    ncalc = 1
                 else:
-                    sum = a / (1 - comrat)
-                if round(sum, 12) == 0:
-                    sum = 0.0
-                print(f"sum = {round(sum, 12)}")
-        else:
-            if n != "/" and n != "skip" and n != "ski":
-                sum = b * n
-                print(f"sum = {round(sum, 12)}")
+                    ncalc = log(abs(l / a), abs(comrat)) + 1
+                if round(ncalc) != round(ncalc, 12) or round(ncalc, 12) <= 0:
+                    print(f'Error: "{term}" is not a term of the series')
+                    continue
+                ncalc = round(ncalc)
+                sum = f"sum{ncalc}"
+                sumcalc = a * (1 - comrat ** ncalc) / (1 - comrat)
+                if round(sumcalc, 12) == 0:
+                    sumcalc = 0.0
+                globals()[sum] = sumcalc
+                keeps.append(sum)
+                print(sum + f" (sum through {round(term, 12)} (term {ncalc})) = {round(sumcalc, 12)}")
+        elif n != "/" and n != "skip" and n != "ski":
+            n.replace(" ", "")
+            if n[0] == ",":
+                n = n[1:]
+            if n[len(n) - 1] == ",":
+                n = n[:len(n) - 1]
+            n = n.split(",")
+            for number in n:
+                srangelist = number.split(":")
+                if len(srangelist) == 1:
+                    try:
+                        number = eval(number)
+                        number = 0 + integer(number)
+                        if number <= 0:
+                            print(f'"{number}" is not a positive integer')
+                            continue
+                        sum = f"sum{number}"
+                        if round(b, 12) != round(c, 12):
+                            if n != "infinity" and n != "all" and n != "a":
+                                sumcalc = a * (1 - comrat ** n) / (1 - comrat)
+                            else:
+                                sumcalc = a / (1 - comrat)
+                        else:
+                            sumcalc = b * n
+                        if round(sumcalc, 12) == 0:
+                            sumcalc = 0.0
+                        globals()[sum] = sumcalc
+                        keeps.append(sum)
+                        print(sum + f" (sum through term {number}) = {round(sumcalc, 12)}")
+                    except:
+                        print(f'"{number}" is not a positive integer')
+                elif len(srangelist) == 2:
+                    try:
+                        srangelist[0] = eval(srangelist[0])
+                        srangelist[1] = eval(srangelist[1])
+                        srangelist[0] = 0 + integer(srangelist[0])
+                        srangelist[1] = 0 + integer(srangelist[1])
+                        if srangelist[0] > 0 and srangelist[1] > srangelist[0]:
+                            srangelist = list(range(srangelist[0], srangelist[1] + 1))
+                            for item in srangelist:
+                                sum = f"sum{item}"
+                                if round(b, 12) != round(c, 12):
+                                    if n != "infinity" and n != "all" and n != "a":
+                                        sumcalc = a * (1 - comrat ** n) / (1 - comrat)
+                                    else:
+                                        sumcalc = a / (1 - comrat)
+                                else:
+                                    sumcalc = b * n
+                                if round(sumcalc, 12) == 0:
+                                    sumcalc = 0.0
+                                globals()[sum] = sumcalc
+                                keeps.append(sum)
+                                print(sum + f" (sum of first {item} terms) = {round(sumcalc, 12)}")
+                        elif srangelist[1] <= srangelist[0]:
+                            print(f'"{number}" is not a range in the form x:y, where y > x')
+                        else:    
+                            print(f'"{number}" is not a positive integer')
+                    except:
+                        print(f'"{number}" is not a positive integer')
+                else:
+                    print(f'"{number}" is not a range in the form x:y, where y > x')
         if un != "/" and un != "skip" and un != "ski":
             un = un.replace(" ", "")
             un = un.replace("^", "**")
