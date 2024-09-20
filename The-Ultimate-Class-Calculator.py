@@ -2,6 +2,31 @@ from math import *
 import cmath
 import types
 
+global ans
+ans = 0.0
+global rl
+rl = 0.0
+global im
+im = 0.0
+global im2
+im2 = 0.0
+global mod
+mod = 0.0
+global ang
+ang = 0.0
+global rat
+rat = 0.0
+global dif
+dif = 0.0
+global root
+root = 0.0
+global root2
+root2 = 0.0
+global binsum
+binsum = ""
+global keeps
+keeps = ["ans", "pi", "e", "tau", "inf", "nan", "infj", "nanj", "keeps", "rl", "im", "im2", "mod", "ang", "rat", "root", "root2", "binsum", "dif"]
+
 def clear_variables():
     for var in list(globals()):
         if not var.startswith('_') and var not in keeps and not isinstance(globals()[var], (types.ModuleType, types.FunctionType, types.BuiltinFunctionType, type)):
@@ -2567,48 +2592,76 @@ def math24():
         numbers = numbers.replace(" ", "")
         numbers = numbers.replace("^", "**")
         numbers = numbers.split(",")
-        if len(numbers) != 4:
-            print('Please enter a list of 4 real numbers or expressions, "i" for info, or return to exit')
+        "".join(numbers)
+        if len(numbers) != 4 or "0" in numbers:
+            print('Please enter a list of 4 nonzero real numbers or expressions, "i" for info, or return to exit')
             continue
         ops = [" + ", " - ", " * ", " / "]
         solved = False
-        for i1 in range(0, len(numbers)):
+        for i in range(0, 2):
             if solved == True:
                 break
-            for op1 in ops:
+            for i1 in range(0, len(numbers)):
                 if solved == True:
                     break
-                numbers2 = numbers
-                numbers2.pop(i1)
-                for i2 in range(0, len(numbers2)):
+                for op1 in ops:
                     if solved == True:
                         break
-                    for op2 in ops:
+                    numbers2 = numbers
+                    if i1 == len(numbers) - 1:
+                        numbers2 = numbers2[:i1]
+                    elif i1 == 0:
+                        numbers2 = numbers2[1:]
+                    else:
+                        numbers2 = numbers2[:i1] + numbers2[i1 + 1:]
+                    for i2 in range(0, len(numbers2)):
                         if solved == True:
                             break
-                        numbers3 = numbers2
-                        numbers3.pop(i2)
-                        for i3 in range(0, len(numbers3)):
+                        for op2 in ops:
                             if solved == True:
                                 break
-                            for op3 in ops:
-                                numbers4 = numbers3
-                                numbers4.pop(i3)
-                                try:
-                                    number4 = eval(numbers4[0])
-                                    number3 = eval(str(numbers3[i3]))
-                                    number2 = eval(str(numbers2[i2]))
-                                    number1 = eval(str(numbers[i1]))
-                                except:
-                                    print('Please enter a list of 4 real numbers or expressions, "i" for info, or return to exit')
-                                    solved = True
+                            numbers3 = numbers2
+                            if i2 == len(numbers2) - 1:
+                                numbers3 = numbers3[:i2]
+                            elif i2 == 0:
+                                numbers3 = numbers3[1:]
+                            else:
+                                numbers3 = numbers3[:i2] + numbers3[i2 + 1:]
+                            for i3 in range(0, len(numbers3)):
+                                if solved == True:
                                     break
-                                string = str(number1) + op1 + str(number2) + op2 + str(number3) + op3 + str(number4)
-                                if round(eval(string), 12) == 24:
-                                    print()
-                                    print("Solution: " + string + " = 24")
-                                    solved = True
-                                    break
+                                for op3 in ops:
+                                    numbers4 = numbers3
+                                    if i3 == len(numbers3) - 1:
+                                        numbers4 = numbers4[:i3]
+                                    elif i3 == 0:
+                                        numbers4 = numbers4[1:]
+                                    else:
+                                        numbers4 = numbers4[:i3] + numbers2[i3 + 1:]
+                                    try:
+                                        number4 = eval(numbers4[0])
+                                        number3 = eval(str(numbers3[i3]))
+                                        number2 = eval(str(numbers2[i2]))
+                                        number1 = eval(str(numbers[i1]))
+                                    except:
+                                        print('Please enter a list of 4 nonzero real numbers or expressions, "i" for info, or return to exit')
+                                        solved = True
+                                        break
+                                    if i == 0:
+                                        string = str(number1) + op1 + str(number2) + op2 + str(number3) + op3 + str(number4)
+                                        if round(eval(string), 12) == 24:
+                                            print()
+                                            print("Solution: " + string.replace("*", "x") + " = 24")
+                                            solved = True
+                                            break
+                                    else:
+                                        string2 = "(((" + str(number1) + op1 + str(number2) + ")" + op2 + str(number3) + ")" + op3 + str(number4) + ")"
+                                        string_print = "{[(" + str(number1) + op1 + str(number2) + ")" + op2 + str(number3) + "]" + op3 + str(number4) + "}"
+                                        if round(eval(string2), 12) == 24:
+                                            print()
+                                            print("Solution: " + string_print.replace("*", "x") + " = 24")
+                                            solved = True
+                                            break
         if solved == False:
             print()
             print("There is no possible way to create 24 with the 4 entered numbers")
@@ -2616,30 +2669,6 @@ def math24():
 
 def main():
     global ans
-    ans = 0.0
-    global rl
-    rl = 0.0
-    global im
-    im = 0.0
-    global im2
-    im2 = 0.0
-    global mod
-    mod = 0.0
-    global ang
-    ang = 0.0
-    global rat
-    rat = 0.0
-    global dif
-    dif = 0.0
-    global root
-    root = 0.0
-    global root2
-    root2 = 0.0
-    global binsum
-    binsum = ""
-    global keeps
-    keeps = ["ans", "pi", "e", "tau", "inf", "nan", "infj", "nanj", "keeps", "rl", "im", "im2", "mod", "ang", "rat", "root", "root2", "binsum", "dif"]
-    
     print("Welcome to The Ultimate Class Calculator!")
     while True:
         clear_variables()
@@ -2752,7 +2781,8 @@ def main():
         else:
             print('Please enter a calculation category, "i" for info, or return to exit)')
 
-main()
+#main()
+math24()
 # %% [markdown]
 # 
 
