@@ -7,8 +7,7 @@ It can:
 * Perform summations with geometric series, arithmetic series, and binomial expansion (can also find specific terms, indexes, and other features)
 * Find the root of cubic, quadratic, and linear equations and solve polynomial, rational, and absolute value inequalities.
 * Give parameters (slope, vertices, directrix, foci, length of major and minor axes, asymptotes, etc.) of conic sections (line, parabola, circle, ellipse, and hyperbola)
-* Graph functions
-* Perform other function math (eg. derivative, function transformations, function symmetry, broken domain functions, etc.)
+* Perform other function math (eg. function transformations, symmetry, etc.)
 
 This calculator is especially suited for high school and above courses, such as Algebra 2 and Precalculus (the creator is currently taking Advanced Honors Precalculus as a 9th grader). For instructions, see the user manual page (can also be accessed inside the calculator).
 
