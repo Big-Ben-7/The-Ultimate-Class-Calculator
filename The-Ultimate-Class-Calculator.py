@@ -2598,7 +2598,7 @@ def math24():
             continue
         ops = [" + ", " - ", " * ", " / "]
         solved = False
-        for i in range(0, 2):
+        for i in range(0, 9):
             if solved == True:
                 break
             for i1 in range(0, len(numbers)):
@@ -2654,14 +2654,36 @@ def math24():
                                             print("Solution: " + string.replace("*", "x") + " = 24")
                                             solved = True
                                             break
+                                    elif i == 1:
+                                        string = "(" + str(number1) + op1 + str(number2) + ")" + op2 + str(number3) + op3 + str(number4)
+                                        if round(eval(string), 12) == 24:
+                                            print()
+                                            print("Solution: " + string.replace("*", "x") + " = 24")
+                                            solved = True
+                                            break
+                                    elif i == 2:
+                                        string = str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + ")" + op3 + str(number4)
+                                        if round(eval(string), 12) == 24:
+                                            print()
+                                            print("Solution: " + string.replace("*", "x") + " = 24")
+                                            solved = True
+                                            break
+                                    elif i == 3:
+                                        string = str(number1) + op1 + str(number2) + op2 + "(" + str(number3) + op3 + str(number4) + ")"
+                                        if round(eval(string), 12) == 24:
+                                            print()
+                                            print("Solution: " + string.replace("*", "x") + " = 24")
+                                            solved = True
+                                            break
                                     else:
-                                        string2 = "(((" + str(number1) + op1 + str(number2) + ")" + op2 + str(number3) + ")" + op3 + str(number4) + ")"
-                                        string_print = "{[(" + str(number1) + op1 + str(number2) + ")" + op2 + str(number3) + "]" + op3 + str(number4) + "}"
-                                        if round(eval(string2), 12) == 24:
+                                        string = "((" + str(number1) + op1 + str(number2) + ")" + op2 + str(number3) + ")" + op3 + str(number4)
+                                        string_print = "[(" + str(number1) + op1 + str(number2) + ")" + op2 + str(number3) + "]" + op3 + str(number4)
+                                        if round(eval(string), 12) == 24:
                                             print()
                                             print("Solution: " + string_print.replace("*", "x") + " = 24")
                                             solved = True
                                             break
+
         if solved == False:
             print()
             print("There is no possible way to create 24 with the 4 entered numbers")
