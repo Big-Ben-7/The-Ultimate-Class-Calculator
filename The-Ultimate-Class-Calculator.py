@@ -23,7 +23,7 @@ def settings():
             print(f"In development!")
             continue
         else:
-            print('Please enter a valid setting, "i" for info, or return to exit')
+            print('Please enter a setting, "i" for info, or return to exit')
             continue
         value = input("On/off: ")
         if value.lower() == "" or value.lower() == "exit" or value.lower() == "exi":
@@ -539,7 +539,7 @@ def from_polar():
                 im = res.imag
                 print(f"im (imaginary part) = {round(im, 12)}")                
             else:
-                print('Please enter a valid operation ("i" for info and return to exit)')
+                print('Please enter a operation ("i" for info and return to exit)')
         except:
             print("OPERATION ERROR") 
             print("This error occurs when the inputs do not meet their restrictions, for example: ")
@@ -897,7 +897,7 @@ def from_rectangular():
                 else:
                     print(f"ang (angle/argument) = {round(ang, 12)} (degrees)")                    
             else:
-                print('Please enter a valid operation ("i" for info and return to exit)')
+                print('Please enter a operation ("i" for info and return to exit)')
         except:
             print()
             print("OPERATION ERROR") 
@@ -1254,7 +1254,7 @@ def real_operation():
                     else:
                         print(f"ans (answer) = {round(n, 12)} degrees")
             else:
-                print('Please enter a valid operation ("i" for info and return to exit)')
+                print('Please enter a operation ("i" for info and return to exit)')
                 print()
                 continue
             ans = n
@@ -2536,10 +2536,76 @@ def conic_section():
     print("Welcome to conic sections!")
 
 def matrix_operation():
+    print()
     print("Welcome to matrix operations!")
 
 def system():
+    print()
     print("Welcome to system of equations!")
+
+def sudoku():
+    print()
+    print("Welcome to Sudoku!")
+
+def math24():
+    print()
+    print("Welcome to the Math 24 Solver!")
+    while True:
+        clear_variables()
+        print()
+        numbers = input("Numbers (i): ")
+        if numbers == "" or numbers == "exit" or numbers == "exi":
+            break
+        elif numbers == "i" or numbers == "info" or numbers == "inf":
+            print()
+            print("Math 24 is a game where players try to create 24 using 4 numbers and the 4 operations (+, -, *, /)")
+            print("Each number can be used once and in any order and each operation can be used in any amount or order")
+            print("For the Math 24 Solver, enter the 4 numbers to create 24 in a list separated by commas")
+            print('Eg. with the numbers "2, 3, 5, 6", one solution (there are many solutions) is 5 * 6 - 2 * 3 (= 30 - 6 = 24)')            
+            print()
+            continue
+        numbers = numbers.replace(" ", "")
+        numbers = numbers.replace("^", "**")
+        numbers = numbers.split(",")
+        if len(numbers) != 4:
+            print('Please enter a list of 4 real numbers or expressions, "i" for info, or return to exit')
+            continue
+        ops = [" + ", " - ", " * ", " / "]
+        solved = False
+        for number1 in numbers:
+            if solved == True:
+                break
+            for op1 in ops:
+                if solved == True:
+                    break
+                for number2 in numbers[1:]:
+                    if solved == True:
+                        break
+                    for op2 in ops:
+                        if solved == True:
+                            break
+                        for number3 in numbers[2:]:
+                            if solved == True:
+                                break
+                            for op3 in ops:
+                                try:
+                                    number4 = eval(numbers[3])
+                                    number3 = eval(number3)
+                                    number2 = eval(number2)
+                                    number1 = eval(number1)
+                                except:
+                                    print('Please enter a list of 4 real numbers or expressions, "i" for info, or return to exit')
+                                    solved = True
+                                    break
+                                string = str(number1) + op1 + str(number2) + op2 + str(number3) + op3 + str(number4)
+                                if round(eval(string), 12) == 24:
+                                    print()
+                                    print("Solution: " + string + " = 24")
+                                    solved = True
+                                    break
+        if solved == False:
+            print()
+            print("There is no possible way to create 24 with the 4 entered numbers")
 
 def main():
     global ans
@@ -2576,9 +2642,10 @@ def main():
             break
         elif cat.lower() == "info" or cat.lower() == "inf" or cat.lower() == "i":
             print()
-            print('Enter either "o" for operations, "f" for functions, or "s" for settings')
+            print('Enter either "o" for operations, "f" for functions, "g" for game solvers, or "s" for settings')
             print("Operations include: real operations, complex operations, matrix operations, and summations (binomial expansion, arithmetic series, and geometric series)")
             print("Functions include: polynomials, system of equations, conic sections, and symmetry")
+            print("Games include: Math 24 and Sudoku")
         elif cat.lower() == "s" or cat.lower() == "set" or cat.lower() == "settings":
             settings()
         elif cat.lower() == "f" or cat.lower() == "fun" or cat.lower() == "function":
@@ -2603,7 +2670,7 @@ def main():
                     conic_section()
                     print()
                 else:
-                    print('Please enter a valid function type, "i" for info, or return to exit')
+                    print('Please enter a function type, "i" for info, or return to exit')
                     print()
         elif cat.lower() == "operation" or cat.lower() == "ope" or cat.lower() == "o":
             while True:
@@ -2655,13 +2722,28 @@ def main():
                             geometric()
                             print()
                         else:
-                            print('Please enter a valid summation type, "i" for info, or return to exit')
+                            print('Please enter a summation type, "i" for info, or return to exit')
                             print()
                 else:
-                    print('Please enter either a valid operation type, "i" for info, or return to exit')
+                    print('Please enter either a operation type, "i" for info, or return to exit')
                     print()
+        elif cat.lower() == "g" or cat.lower() == "gam" or cat.lower() == "game" or cat.lower() == "game solvers":
+            while True:
+                gametype = input("Game (i): ")
+                if gametype.lower() == "" or gametype.lower() == "exit" or gametype.lower() == "exi":
+                    break
+                elif gametype.lower() == "i" or gametype.lower() == "inf" or gametype.lower() == "info":
+                    print()
+                    print('Enter either "m" for Math 24 or "s" for Sudoku')
+                    print()
+                elif gametype.lower() == "m" or gametype.lower() == "mat" or gametype.lower() == "24" or gametype.lower() == "math 24":
+                    math24()
+                elif gametype.lower() == "s" or gametype.lower() == "sud" or gametype.lower() == "sudoku":
+                    sudoku()
+                else:
+                    print('Please enter a game, "i" for info, or return to exit')
         else:
-            print('Please enter a valid calculation category, "i" for info, or return to exit)')
+            print('Please enter a calculation category, "i" for info, or return to exit)')
 
 main()
 # %% [markdown]
