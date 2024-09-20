@@ -2572,27 +2572,33 @@ def math24():
             continue
         ops = [" + ", " - ", " * ", " / "]
         solved = False
-        for number1 in numbers:
+        for i1 in range(0, len(numbers)):
             if solved == True:
                 break
             for op1 in ops:
                 if solved == True:
                     break
-                for number2 in numbers[1:]:
+                numbers2 = numbers
+                numbers2.pop(i1)
+                for i2 in range(0, len(numbers2)):
                     if solved == True:
                         break
                     for op2 in ops:
                         if solved == True:
                             break
-                        for number3 in numbers[2:]:
+                        numbers3 = numbers2
+                        numbers3.pop(i2)
+                        for i3 in range(0, len(numbers3)):
                             if solved == True:
                                 break
                             for op3 in ops:
+                                numbers4 = numbers3
+                                numbers4.pop(i3)
                                 try:
-                                    number4 = eval(numbers[3])
-                                    number3 = eval(number3)
-                                    number2 = eval(number2)
-                                    number1 = eval(number1)
+                                    number4 = eval(numbers4[0])
+                                    number3 = eval(str(numbers3[i3]))
+                                    number2 = eval(str(numbers2[i2]))
+                                    number1 = eval(str(numbers[i1]))
                                 except:
                                     print('Please enter a list of 4 real numbers or expressions, "i" for info, or return to exit')
                                     solved = True
@@ -2606,6 +2612,7 @@ def math24():
         if solved == False:
             print()
             print("There is no possible way to create 24 with the 4 entered numbers")
+            continue
 
 def main():
     global ans
