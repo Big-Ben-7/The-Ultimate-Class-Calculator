@@ -2834,7 +2834,7 @@ def math24solve():
         sols = input("Number of solutions to find (a for all): ")
         if sols == "" or sols == "exit" or sols == "exi":
             continue
-        elif sols == "all":
+        elif sols == "all" or sols == "a":
             sols = "a"
         else:
             try:
@@ -2945,11 +2945,14 @@ def math24solve():
                                             pass
         if solutions == []:
             print()
-            print("There is no possible way to create 24 with the 4 entered numbers")
+            print("There are no possible ways to create 24 with the entered numbers")
         else:
             print()
             for i in range(0, len(solutions)):
                 print(f"Solution {i + 1}: " + solutions[i])
+            if solved == False:
+                print()
+                print(f"There are {len(solutions)} ways to create 24 with the entered numbers")
 
 def main():
     global ans
