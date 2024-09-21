@@ -567,7 +567,7 @@ def from_polar():
                 im = res.imag
                 print(f"im (imaginary part) = {round(im, 12)}")                
             else:
-                print('Please enter a operation ("i" for info and return to exit)')
+                print('Please enter an operation ("i" for info and return to exit)')
         except:
             print("OPERATION ERROR") 
             print("This error occurs when the inputs do not meet their restrictions, for example: ")
@@ -928,7 +928,7 @@ def from_rectangular():
                 else:
                     print(f"ang (angle/argument) = {round(ang, 12)} (degrees)")                    
             else:
-                print('Please enter a operation ("i" for info and return to exit)')
+                print('Please enter an operation ("i" for info and return to exit)')
         except:
             print()
             print("OPERATION ERROR") 
@@ -980,12 +980,14 @@ def real_operation():
             try:
                 n = n.replace("^", "**")
                 if (eval(n) == True or eval(n) == False) and (n.find("==") != -1 or n.find("<") != -1 or n.find(">") != -1 or n.find("<=") != -1 or n.find(">=") != -1 or n.find("!=") != -1):
+                    print()
                     print(eval(n))
                     continue
                 n = 0 + eval(n)
                 try:
                     roundtry = round(n, 12)
                 except:
+                    print()
                     print(eval(n))
                     continue
             except:
@@ -1096,7 +1098,7 @@ def real_operation():
                 n -= n2
                 print()
                 print(f"ans (answer) = {round(n)}")
-            elif op.lower() == "multiply" or op.lower() == "*" or op.lower() == "mul":
+            elif op.lower() == "multiply" or op.lower() == "*" or op.lower() == "mul" or op.lower() == "x":
                 n *= n2
                 print()
                 print(f"ans (answer) = {round(n, 12)}")
@@ -1288,7 +1290,7 @@ def real_operation():
                     else:
                         print(f"ans (answer) = {round(n, 12)} degrees")
             else:
-                print('Please enter a operation ("i" for info and return to exit)')
+                print('Please enter an operation ("i" for info and return to exit)')
                 print()
                 continue
             ans = n
@@ -2593,52 +2595,103 @@ def system():
     print("Welcome to system of equations!")
 
 def math24play():
-    print("In developement!")
+    print()
+    print("Welcome to Play Math 24!")
 
 def math24create():
+    print()
+    print("Welcome to Create Math 24!")
     while True:
         clear_variables
         print()
         tried = []
         solutions = []
         ops = [" + ", " - ", " * ", " / "]
-        start = input("Minimum number (i): ")
-        if start == "" or start == "exit" or start == "exi":
+        input_use = input("Numbers to use (i): ")
+        if input_use == "" or input_use == "exit" or input_use == "exi":
             break
-        elif start == "i" or start == "inf" or start == "info":
+        elif input_use == "i" or input_use == "inf" or input_use == "info":
             print()
-            print("Find all possible sets to create 24 using numbers from a minimum to a maximum")
+            print('Enter a list of numbers separated by commas (,) and using colons (:) to indicate ranges and increments')
+            print('Eg. "1, 2:6:2, 8:9" will output possible Math 24 sets using the numbers 1, 2, 4, 6, 8, and 9')
+            print("Note that the more numbers used (or the smaller the increments), the longer the calculation will take")
             print('Enter "p" for play, "s" for solver, "o" for operations (this will direct to real operations), and "f" for functions (this will direct to polynomials)')
             continue
-        elif start == "p" or start == "pla" or start == "play":
+        elif input_use == "p" or input_use == "pla" or input_use == "play":
             math24play()
             break
-        elif start == "s" or start == "sol" or start == "solver":
+        elif input_use == "s" or input_use == "sol" or input_use == "solver":
             math24solve()
             break
-        elif start == "o" or start == "ope" or start == "operations":
+        elif input_use == "o" or input_use == "ope" or input_use == "operations":
             real_operation()
             break
-        elif start == "f" or start == "fun" or start == "functions":
+        elif input_use == "f" or input_use == "fun" or input_use == "functions":
             polynomial()
             break
-        try:
-            start = 0 + eval(start)
-        except:
-            print("Please enter a real number or expression, or return to exit")
+        use = input_use.replace("^", "**").replace(" ", "").split(",")
+        fuse = []
+        back = False
+        for item in use:
+            rangelist = item.split(":")
+            if len(rangelist) == 1:
+                try:
+                    fuse.append(0 + eval(item))
+                except:
+                    print(f'Error: "{item}" is not a real number or expression')
+                    back = True
+                    break
+            elif len(rangelist) == 2:
+                try:
+                    rangelist[0] = 0 + eval(rangelist[0])
+                    rangelist[1] = 0 + eval(rangelist[1])
+                except:
+                    print(f'Error: "{item}" is not a real number or expression')
+                    back = True
+                    break
+                if rangelist[1] <= rangelist[0]:
+                    print(f'Error: "{item}" is not a range in the form x:y, where y > x')
+                    back = True
+                    break
+                for addend in range(rangelist[0], rangelist[1] + 1):
+                    fuse.append(addend)
+            elif len(rangelist) == 3:
+                try:
+                    rangelist[0] = 0 + eval(rangelist[0])
+                    rangelist[1] = 0 + eval(rangelist[1])
+                    rangelist[2] = 0 + eval(rangelist[2])
+                except:
+                    print(f'Error: "{item}" is not a real number or expression')
+                    back = True
+                    break
+                if rangelist[2] == 0:
+                    print(f'Error: "{item}" is not a range in the form x:y:z, where z is nonzero')
+                    back = True
+                    break
+                elif rangelist[2] > abs(rangelist[1] - rangelist[0]):
+                    print(f'Error: "{item}" is not a range in the form x:y:z, where z <= |y-x|')
+                    back = True
+                    break
+                if rangelist[1] >= rangelist[0]:
+                    rangelist[2] = abs(rangelist[2])
+                elif rangelist[1] < rangelist[0]:
+                    rangelist[2] = -1 * abs(rangelist[2])
+                for addend in range(rangelist[0], rangelist[1] + 1, rangelist[2]):
+                    fuse.append(addend)
+            else:
+                print(f'Error: "{item}" is not a range in the form x:y or x:y:z')
+                back = True
+                break
+        if back == True:
             continue
-        end = input("Maximum number: ")
-        if end == "" or end == "exit" or end == "exi":
-            break
-        try:
-            end = 0 + eval(end)
-        except:
-            print("Please enter a real number or expression, or return to exit")
-            continue
-        for n1 in range(start, end + 1):
-            for n2 in range(start, end + 1):
-                for n3 in range(start, end + 1):
-                    for n4 in range(start, end + 1):
+        for item in fuse:
+            if fuse.count(item) > 1:
+                fuse.remove(item)
+        fuse.sort()
+        for n1 in fuse:
+            for n2 in fuse:
+                for n3 in fuse:
+                    for n4 in fuse:
                         numbers = [n1, n2, n3, n4]
                         if sorted(numbers) in tried:
                             continue
@@ -2732,17 +2785,20 @@ def math24create():
                                                             pass
                                                 tried.append(sorted([number1, number2, number3, number4]))
         print()
-        print(f"Possible sets:")
-        for a in solutions:
-            res = ""
-            for b in a:
-                res += str(b) + ", "
-            res = "(" + res[:len(res) - 2] + ")"
-            print(res)
-        print()
-        print(f"There are {len(solutions)} possible sets using integers from {start} to {end}")
+        if len(solutions) != 0:
+            print(f"Possible Math 24 sets:")
+            for i in range(0, len(solutions)):
+                res = ""
+                for b in solutions[i]:
+                    res += str(b) + ", "
+                res = res[:len(res) - 2]
+                print(f"Set {i + 1}: " + res)
+        else:
+            print(f"There are no possible Math 24 sets using {input_use}")
 
 def math24solve():
+    print()
+    print("Welcome to Solve Math 24!")
     while True:
         clear_variables()
         print()
@@ -2819,9 +2875,9 @@ def math24solve():
                                         numbers4 = numbers4[:i3] + numbers2[i3 + 1:]
                                     try:
                                         number4 = 0 + eval(numbers4[0])
-                                        number3 = 0 + eval(str(numbers3[i3]))
-                                        number2 = 0 + eval(str(numbers2[i2]))
-                                        number1 = 0 + eval(str(numbers[i1]))
+                                        number3 = 0 + eval(numbers3[i3])
+                                        number2 = 0 + eval(numbers2[i2])
+                                        number1 = 0 + eval(numbers[i1])
                                     except:
                                         print('Please enter a list of 4 real numbers or expressions, "i" for info, or return to exit')
                                         solved = True
@@ -2970,7 +3026,7 @@ def main():
                             print('Please enter a summation type, "i" for info, or return to exit')
                             print()
                 else:
-                    print('Please enter either a operation type, "i" for info, or return to exit')
+                    print('Please enter either an operation type, "i" for info, or return to exit')
                     print()
         elif cat.lower() == "g" or cat.lower() == "gam" or cat.lower() == "games":
             while True:
@@ -2982,20 +3038,20 @@ def main():
                     print('Enter "m" for Math 24')
                     print()
                 elif game.lower() == "m" or game.lower() == "mat" or game.lower() == "24" or game.lower() == "math 24" or game.lower() == "24":
-                    print()
-                    print("Welcome to Math 24!")
                     while True:
-                        print()
                         mode = input("(P)lay, (c)reate, or (s)olve? ")
                         if mode.lower() == "" or mode.lower() == "exit" or mode.lower() == "exi":
                             print()
                             break
                         elif mode.lower() == "c" or mode.lower() == "crea" or mode.lower() == "create":
                             math24create()
+                            print()
                         elif mode.lower() == "s" or mode.lower() == "sol" or mode.lower() == "solve":
                             math24solve()
+                            print()
                         else:
                             print('Please enter either "p" for play, "c" for create, "s" for solve, or return to exit')
+                            print()
                             continue
                 else:
                     print('Please enter a game, "i" for info, or return to exit')
