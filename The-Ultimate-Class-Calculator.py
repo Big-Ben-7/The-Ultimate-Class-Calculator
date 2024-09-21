@@ -2673,14 +2673,10 @@ def math24():
                                                                     string = "(" + str(number1) + op1 + str(number2) + op2 + str(number3) + ")" + op3 + str(number4)
                                                                 elif i == 6:
                                                                     string = str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + op3 + str(number4) + ")"
-                                                                string.replace
-                                                                try:
-                                                                    if round(eval(string), 12) == 24:
-                                                                        solutions.append(sorted([number1, number2, number3, number4]))
-                                                                        solved = True
-                                                                        break
-                                                                except:
-                                                                    pass
+                                                                if round(eval(string), 12) == 24:
+                                                                    solutions.append(sorted([number1, number2, number3, number4]))
+                                                                    solved = True
+                                                                    break
                                                             else:
                                                                 if i == 7:
                                                                     string = "((" + str(number1) + op1 + str(number2) + ")" + op2 + str(number3) + ")" + op3 + str(number4)
@@ -2694,13 +2690,10 @@ def math24():
                                                                 else:
                                                                     string = "(" + str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + "))" + op3 + str(number4)
                                                                     string_print = "[" + str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + ")]" + op3 + str(number4)
-                                                                try:
-                                                                    if round(eval(string), 12) == 24:
-                                                                        solutions.append(sorted([number1, number2, number3, number4]))
-                                                                        solved = True
-                                                                        break
-                                                                except:
-                                                                    pass
+                                                                if round(eval(string), 12) == 24:
+                                                                    solutions.append(sorted([number1, number2, number3, number4]))
+                                                                    solved = True
+                                                                    break
                 for a in solutions:
                     print()
                     print(f"Possible sets({len(solutions)}):")
@@ -2798,7 +2791,6 @@ def math24():
                                                     string = "(" + str(number1) + op1 + str(number2) + op2 + str(number3) + ")" + op3 + str(number4)
                                                 elif i == 6:
                                                     string = str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + op3 + str(number4) + ")"
-                                                string.replace
                                                 try:
                                                     if round(eval(string), 12) == 24:
                                                         print()
