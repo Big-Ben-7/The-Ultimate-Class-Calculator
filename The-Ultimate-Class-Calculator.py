@@ -2598,7 +2598,7 @@ def math24():
             continue
         ops = [" + ", " - ", " * ", " / "]
         solved = False
-        for i in range(0, 9):
+        for i in range(0, 11):
             if solved == True:
                 break
             for i1 in range(0, len(numbers)):
@@ -2647,8 +2647,21 @@ def math24():
                                         print('Please enter a list of 4 nonzero real numbers or expressions, "i" for info, or return to exit')
                                         solved = True
                                         break
-                                    if i == 0:
-                                        string = str(number1) + op1 + str(number2) + op2 + str(number3) + op3 + str(number4)
+                                    if i <= 6:
+                                        if i == 0:
+                                            string = str(number1) + op1 + str(number2) + op2 + str(number3) + op3 + str(number4)
+                                        elif i == 1:
+                                            string = "(" + str(number1) + op1 + str(number2) + ")" + op2 + str(number3) + op3 + str(number4)
+                                        elif i == 2:
+                                            string = str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + ")" + op3 + str(number4)
+                                        elif i == 3:
+                                            string = str(number1) + op1 + str(number2) + op2 + "(" + str(number3) + op3 + str(number4) + ")"
+                                        elif i == 4:
+                                            string = "(" + str(number1) + op1 + str(number2) + ")" + op2 + "(" + str(number3) + op3 + str(number4) + ")"
+                                        elif i == 5:
+                                            string = "(" + str(number1) + op1 + str(number2) + op2 + str(number3) + ")" + op3 + str(number4)
+                                        elif i == 6:
+                                            string = str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + op3 + str(number4) + ")"
                                         try:
                                             if round(eval(string), 12) == 24:
                                                 print()
@@ -2656,40 +2669,20 @@ def math24():
                                                 solved = True
                                                 break
                                         except:
-                                            filler = "filler"
-                                    elif i == 1:
-                                        string = "(" + str(number1) + op1 + str(number2) + ")" + op2 + str(number3) + op3 + str(number4)
-                                        try:
-                                            if round(eval(string), 12) == 24:
-                                                print()
-                                                print("Solution: " + string.replace("*", "x") + " = 24")
-                                                solved = True
-                                                break
-                                        except:
-                                            filler = "filler"
-                                    elif i == 2:
-                                        string = str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + ")" + op3 + str(number4)
-                                        try:
-                                            if round(eval(string), 12) == 24:
-                                                print()
-                                                print("Solution: " + string.replace("*", "x") + " = 24")
-                                                solved = True
-                                                break
-                                        except:
-                                            filler = "filler"
-                                    elif i == 3:
-                                        string = str(number1) + op1 + str(number2) + op2 + "(" + str(number3) + op3 + str(number4) + ")"
-                                        try:
-                                            if round(eval(string), 12) == 24:
-                                                print()
-                                                print("Solution: " + string.replace("*", "x") + " = 24")
-                                                solved = True
-                                                break
-                                        except:
-                                            filler = "filler"
+                                            pass
                                     else:
-                                        string = "((" + str(number1) + op1 + str(number2) + ")" + op2 + str(number3) + ")" + op3 + str(number4)
-                                        string_print = "[(" + str(number1) + op1 + str(number2) + ")" + op2 + str(number3) + "]" + op3 + str(number4)
+                                        if i == 7:
+                                            string = "((" + str(number1) + op1 + str(number2) + ")" + op2 + str(number3) + ")" + op3 + str(number4)
+                                            string_print = "[(" + str(number1) + op1 + str(number2) + ")" + op2 + str(number3) + "]" + op3 + str(number4)
+                                        elif i == 8:
+                                            string = str(number1) + op1 + "(" + str(number2) + op2 + "(" + str(number3) + op3 + str(number4) + "))"
+                                            string_print = str(number1) + op1 + "[" + str(number2) + op2 + "(" + str(number3) + op3 + str(number4) + ")]"
+                                        elif i == 9:
+                                            string = str(number1) + op1 + "((" + str(number2) + op2 + str(number3) + ")" + op3 + str(number4) + ")"
+                                            string_print = str(number1) + op1 + "[(" + str(number2) + op2 + str(number3) + ")" + op3 + str(number4) + "]"
+                                        else:
+                                            string = "(" + str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + "))" + op3 + str(number4)
+                                            string_print = "[" + str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + ")]" + op3 + str(number4)
                                         try:
                                             if round(eval(string), 12) == 24:
                                                 print()
@@ -2697,7 +2690,7 @@ def math24():
                                                 solved = True
                                                 break
                                         except:
-                                            filler = "filler"
+                                            pass
 
         if solved == False:
             print()
@@ -2818,8 +2811,7 @@ def main():
         else:
             print('Please enter a calculation category, "i" for info, or return to exit)')
 
-#main()
-math24()
+main()
 # %% [markdown]
 # 
 
