@@ -2831,7 +2831,22 @@ def math24solve():
         if len(numbers) != 4:
             print('Please enter a list of 4 real numbers or expressions, "i" for info, or return to exit')
             continue
+        sols = input("Number of solutions to find (a for all): ")
+        if sols == "" or sols == "exit" or sols == "exi":
+            continue
+        elif sols == "all":
+            sols = "a"
+        else:
+            try:
+                sols = 0 + integer(eval(sols))
+                if sols <= 0:
+                    print('Please enter a positive integer, "a" for all, or return to exit')
+                    continue
+            except:
+                print('Please enter a positive integer, "a" for all, or return to exit')
+                continue
         ops = [" + ", " - ", " * ", " / "]
+        solutions = []
         solved = False
         for i in range(0, 11):
             if solved == True:
@@ -2899,10 +2914,11 @@ def math24solve():
                                             string = str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + op3 + str(number4) + ")"
                                         try:
                                             if round(eval(string), 12) == 24:
-                                                print()
-                                                print("Solution: " + string.replace("*", "x") + " = 24")
-                                                solved = True
-                                                break
+                                                solutions.append(string.replace("*", "x") + " = 24")
+                                                if sols != "a":
+                                                    if len(solutions) == sols:
+                                                        solved = True
+                                                        break
                                         except:
                                             pass
                                     else:
@@ -2920,17 +2936,20 @@ def math24solve():
                                             string_print = "[" + str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + ")]" + op3 + str(number4)
                                         try:
                                             if round(eval(string), 12) == 24:
-                                                print()
-                                                print("Solution: " + string_print.replace("*", "x") + " = 24")
-                                                solved = True
-                                                break
+                                                solutions.append(string_print.replace("*", "x") + " = 24")
+                                                if sols != "a":
+                                                    if len(solutions) == sols:
+                                                        solved = True
+                                                        break
                                         except:
                                             pass
-
-        if solved == False:
+        if solutions == []:
             print()
             print("There is no possible way to create 24 with the 4 entered numbers")
-            continue
+        else:
+            print()
+            for i in range(0, len(solutions)):
+                print(f"Solution {i + 1}: " + solutions[i])
 
 def main():
     global ans
