@@ -182,7 +182,7 @@ def from_polar():
     global ang
     global mod
     print()
-    print("Welcome to complex operation in polar form!")
+    print("Welcome to complex operations in polar form!")
     print("Please enter the modulus/absolute value and angle/argument of the terms")
     while True:
         clear_variables()
@@ -199,7 +199,7 @@ def from_polar():
             print('Real constants such as "pi", "e", and "tau" can be entered')
             print('Real variables can also be entered, for example: "ans" (previous real answer), "rl" (real part of previous complex result), "im" (imaginary part of previous complex result), "root" (1st real solution of previous quadratic), "root2" (2nd real solution of previous quadratic), "im2" (imaginary part of 2nd previous quadratic complex solution) "sum" (previous series summation), "rat" (previous geometric series common ratio), "dif" (previous arithmetic series common difference), "term1" (1st term of previous series), "cf1" (1st coefficient of previous binomial expansion), and stored variables')
             print("The above operators and functions can only be entered as part of an expression, not as an operation")
-            print('Enter "rec" for rectangular form, "r" for real operations, "m" for matrix operations, "f" for functions (this will direct to polynomials), "s" for summations (this will direct to binomial expansion)')
+            print('Enter "rec" for rectangular form, "r" for real operations, "m" for matrix operations, "s" for summations (this will direct to binomial expansion), "f" for functions (this will direct to polynomials), and "g" for game solvers (this will direct to Math 24)')
             continue
         elif av == "rec" or av == "rectangular" or av == "rectangular form":
             from_rectangular()
@@ -216,9 +216,12 @@ def from_polar():
         elif av == "s" or av == "sum" or av == "summations":
             binomial_expansion()
             break
+        elif av == "g" or av == "gam" or av == "game" or av == "game solvers":
+            math24()
+            break
         try:
             av = av.replace("^", "**")
-            av = eval(av)
+            av = 0 + eval(av)
             if round(av, 12) < 0:
                 print('Absolute values cannot be negative')
                 continue
@@ -230,7 +233,7 @@ def from_polar():
             continue
         try:
             inang = inang.replace("^", "**")
-            inang = eval(inang)
+            inang = 0 + eval(inang)
         except:
             print('Please enter a real number or expression, or return to exit')
             continue
@@ -266,7 +269,7 @@ def from_polar():
                 continue
             try:
                 av2 = av2.replace("^", "**")
-                av2 = eval(av2)
+                av2 = 0 + eval(av2)
                 if round(av2, 12) < 0:
                     print('Absolute values cannot be negative')
                     continue
@@ -278,7 +281,7 @@ def from_polar():
                 continue
             try:
                 inang2 = inang2.replace("^", "**")
-                inang2 = eval(inang2)
+                inang2 = 0 + eval(inang2)
             except:
                 print('Please enter a real number or expression, or return to exit')
                 continue
@@ -580,7 +583,7 @@ def from_rectangular():
     global ang
     global mod
     print()
-    print("Welcome to complex operation in rectangular form!")
+    print("Welcome to complex operations in rectangular form!")
     print("Please enter the first term in the form a + bi and the second term (if needed) in the form c + di")               
     while True:
         clear_variables()
@@ -597,7 +600,7 @@ def from_rectangular():
             print('Real constants such as "pi", "e", and "tau" can be entered')
             print('Real variables can also be entered, for example: "ans" (previous real answer), "rl" (real part of previous complex result), "im" (imaginary part of previous complex result), "root" (1st real solution of previous quadratic), "root2" (2nd real solution of previous quadratic), "im2" (imaginary part of 2nd previous quadratic complex solution) "sum" (previous series summation), "rat" (previous geometric series common ratio), "dif" (previous arithmetic series common difference), "term1" (1st term of previous series), "cf1" (1st coefficient of previous binomial expansion), and stored variables')
             print("The above operators and functions can only be entered as part of an expression, not as an operation")
-            print('Enter "p" for polar form, "r" for real operations, "m" for matrix operations, "f" for functions (this will direct to polynomials), "s" for summations (this will direct to binomial expansion)')
+            print('Enter "p" for polar form, "r" for real operations, "m" for matrix operations, "s" for summations (this will direct to binomial expansion), "f" for functions (this will direct to polynomials), and "g" for game solvers (this will direct to Math 24)')
             continue
         elif a == "p" or a == "polar" or a == "pol" or a == "polar form":
             from_polar()
@@ -614,9 +617,12 @@ def from_rectangular():
         elif a == "m" or a == "mat" or a == "matrix" or a == "matrix operations":
             matrix_operation()
             break
+        elif a == "g" or a == "gam" or a == "game" or a == "game solvers":
+            math24()
+            break
         try:
             a = a.replace("^", "**")
-            a = eval(a)
+            a = 0 + eval(a)
         except:
             print('Please enter a real number or expression, "i" for info, or return to exit')
             continue
@@ -625,7 +631,7 @@ def from_rectangular():
             continue
         try:
             b = b.replace("^", "**")
-            b = eval(b)
+            b = 0 + eval(b)
         except:
             print('Please enter a real number or expression, or return to exit')
             continue
@@ -667,7 +673,7 @@ def from_rectangular():
                 continue
             try:
                 c = c.replace("^", "**")
-                c = eval(c)
+                c = 0 + eval(c)
             except:
                 print('Please enter a real number or expression, or return to exit')
                 continue                        
@@ -676,7 +682,7 @@ def from_rectangular():
                 continue
             try:
                 d = d.replace("^", "**")
-                d = eval(d)
+                d = 0 + eval(d)
             except:
                 print('Please enter a real number or expression, or return to exit')
                 continue
@@ -953,7 +959,7 @@ def real_operation():
             print('Real constants such as "pi", "e", and "tau" can be entered')
             print('Real variables can also be entered, for example: "ans" (previous real answer), "rl" (real part of previous complex result), "im" (imaginary part of previous complex result), "root" (1st real solution of previous quadratic), "root2" (2nd real solution of previous quadratic), "im2" (imaginary part of 2nd previous quadratic complex solution) "sum" (previous series summation), "rat" (previous geometric series common ratio), "dif" (previous arithmetic series common difference), "term1" (1st term of previous series), "cf1" (1st coefficient of previous binomial expansion), and stored variables')
             print("The above operators and functions can only be entered as part of an expression, not as an operation")
-            print('Enter "c" for complex operations (this will direct to rectangular form), "m" for matrix operations, "s" for summations (this will direct to binomial expansion), and "f" for functions (this will direct to polynomials)')
+            print('Enter "c" for complex operations (this will direct to rectangular form), "m" for matrix operations, "s" for summations (this will direct to binomial expansion), "f" for functions (this will direct to polynomials), and "g" for game solvers (this will direct to Math 24)')
             continue
         elif n == "c" or n == "com" or n == "complex" or n == "complex operations":
             from_rectangular()
@@ -967,13 +973,16 @@ def real_operation():
         elif n == "m" or n == "mat" or n == "matrix" or n == "matrix operations":
             matrix_operation()
             break
+        elif n == "g" or n == "gam" or n == "game" or n == "game solvers":
+            math24()
+            break
         else:
             try:
                 n = n.replace("^", "**")
                 if (eval(n) == True or eval(n) == False) and (n.find("==") != -1 or n.find("<") != -1 or n.find(">") != -1 or n.find("<=") != -1 or n.find(">=") != -1 or n.find("!=") != -1):
                     print(eval(n))
                     continue
-                n = eval(n)
+                n = 0 + eval(n)
                 try:
                     roundtry = round(n, 12)
                 except:
@@ -1005,7 +1014,7 @@ def real_operation():
                         continue
                     try:
                         n2 = n2.replace("^", "**")
-                        n2 = eval(n2)
+                        n2 = 0 + eval(n2)
                     except:
                         print('Please enter a real number or expression, or return to exit')
                         continue
@@ -1015,7 +1024,7 @@ def real_operation():
                         continue
                     try:
                         n2 = n2.replace("^", "**")
-                        n2 = eval(n2)
+                        n2 = 0 + eval(n2)
                         n2 = 0 + integer(n2)
                     except:
                         print('Please enter an integer from 0 to 12 or return to exit')
@@ -1027,7 +1036,7 @@ def real_operation():
                             continue
                         try:
                             n2 = n2.replace("^", "**")
-                            n2 = eval(n2)
+                            n2 = 0 + eval(n2)
                         except:
                             print('Please enter a real number or expression greater than 0 and not equal to 1, or return to exit')
                             continue                                
@@ -1038,7 +1047,7 @@ def real_operation():
                             continue
                         try:
                             n2 = n2.replace("^", "**")
-                            n2 = eval(n2)
+                            n2 = 0 + eval(n2)
                         except:
                             print('Please enter a nonnegative integer or return to exit')
                             continue                                    
@@ -1049,7 +1058,7 @@ def real_operation():
                             continue
                         try:
                             n2 = n2.replace("^", "**")
-                            n2 = eval(n2)
+                            n2 = 0 + eval(n2)
                         except:
                             print('Please enter a nonnegative integer or return to exit')
                             continue  
@@ -1071,7 +1080,7 @@ def real_operation():
                         continue
                     try:
                         n2 = n2.replace("^", "**")
-                        n2 = eval(n2)
+                        n2 = 0 + eval(n2)
                     except:
                         print('Please enter a real number or expression, or return to exit')
                         continue
@@ -1325,14 +1334,17 @@ def binomial_expansion():
         elif a == "f" or a == "fun" or a == "functions":
             polynomial()
             break
+        elif a == "gam" or a == "game" or a == "game solvers":
+            math24()
+            break
         elif a == "i" or a == "info" or a == "inf":
             print()
             print('Enter a nonzero real number or expression as the first coefficient')
-            print('Enter "r" for real operations, "a" for arithmetic series, "g" for geometric series, "c" for complex operations (this will direct to rectangular form), "m" for matrix operations, and "f" for functions (this will direct to polynomials)')
+            print('Enter "r" for real operations, "a" for arithmetic series, "g" for geometric series, "c" for complex operations (this will direct to rectangular form), "m" for matrix operations, "f" for functions (this will direct to polynomials), and "gam" for game solvers (this will direct to Math 24)')
             continue
         try:
             a = a.replace("^", "**")
-            a = eval(a)
+            a = 0 + eval(a)
         except:
             print('Please enter a nonzero real number or expression, "i" for info, or return to exit')
             continue
@@ -1363,7 +1375,7 @@ def binomial_expansion():
             continue
         try:
             b = b.replace("^", "**")
-            b = eval(b)
+            b = 0 + eval(b)
         except:
             print('Please enter a nonzero real number or expression, or return to exit')
             continue
@@ -1388,7 +1400,7 @@ def binomial_expansion():
             continue
         try:
             c = c.replace("^", "**")
-            c = eval(c)
+            c = 0 + eval(c)
         except:
             print('Please enter a nonzero real number or expression, or return to exit')
             continue
@@ -1424,7 +1436,7 @@ def binomial_expansion():
                 continue
             try:
                 d = d.replace("^", "**")
-                d = eval(d)
+                d = 0 + eval(d)
             except:
                 print('Please enter a real number or expression, or return to exit')
                 continue
@@ -1452,7 +1464,7 @@ def binomial_expansion():
             continue
         try:
             n = n.replace("^", "**")
-            n = eval(n)
+            n = 0 + eval(n)
             n = 0 + integer(n)
             if n < 0:
                 binsum += "1 / ("
@@ -1492,7 +1504,7 @@ def binomial_expansion():
             if len(rangelist) == 1:
                 try:
                     unterm = unterm.replace("^", "**")
-                    unterm = eval(unterm)
+                    unterm = 0 + eval(unterm)
                     unterm = 0 + integer(unterm)
                 except:
                     print(f'"{unterm}" is not a positive integer between 1 and |n| + 1 ({abs(n) + 1}), inclusive')
@@ -1506,8 +1518,8 @@ def binomial_expansion():
                 try:
                     rangelist[0] = rangelist[0].replace("^", "**")
                     rangelist[1] = rangelist[1].replace("^", "**")
-                    rangelist[0] = eval(rangelist[0])
-                    rangelist[1] = eval(rangelist[1])
+                    rangelist[0] = 0 + eval(rangelist[0])
+                    rangelist[1] = 0 + eval(rangelist[1])
                     rangelist[0] = 0 + integer(rangelist[0])
                     rangelist[1] = 0 + integer(rangelist[1])
                 except:
@@ -1558,11 +1570,14 @@ def arithmetic():
         elif b == "f" or b == "fun" or b == "functions":
             polynomial()
             break
+        elif b == "gam" or b == "game" or b == "game solvers":
+            math24()
+            break
         elif b == "i" or b == "info" or b == "inf":
             print()
             print("Please enter a real number or expression as the value of one of the series terms")
             print('Enter "s" to enter a sum instead of terms')
-            print('Enter "r" for real operations, "b" for binomial expansion, "g" for geometric series, "c" for complex operations (this will direct to rectangular form), "m" for matrix operations, and "f" for functions (this will direct to polynomials)')
+            print('Enter "r" for real operations, "b" for binomial expansion, "g" for geometric series, "c" for complex operations (this will direct to rectangular form), "m" for matrix operations, "f" for functions (this will direct to polynomials), and "gam" for game solvers (this will direct to Math 24)')
             continue
         elif b == "s" or b == "sum":
             input_sum = input("Sum: ")
@@ -1570,7 +1585,7 @@ def arithmetic():
                 continue
             try:
                 input_sum = input_sum.replace("^", "**")
-                input_sum = eval(input_sum)
+                input_sum = 0 + eval(input_sum)
             except:
                 print("Please enter a real number or expression, or return to exit")
                 continue
@@ -1579,7 +1594,7 @@ def arithmetic():
                 continue
             try:
                 sum_number = sum_number.replace("^", "**")
-                sum_number = eval(sum_number)
+                sum_number = 0 + eval(sum_number)
                 sum_number = 0 + integer(sum_number)
                 if sum_number <= 0:
                     print("Please enter a positive integer or return to exit")
@@ -1590,7 +1605,7 @@ def arithmetic():
         else:
             try:
                 b = b.replace("^", "**")
-                b = eval(b)
+                b = 0 + eval(b)
             except:
                 print('Please enter a real number or expression, "i" for info, or return to exit')
                 continue
@@ -1599,7 +1614,7 @@ def arithmetic():
                 continue     
             try:
                 bn = bn.replace("^", "**")
-                bn = eval(bn)
+                bn = 0 + eval(bn)
                 bn = 0 + integer(bn)
             except:
                 print('Please enter a positive integer or return to exit')
@@ -1619,7 +1634,7 @@ def arithmetic():
                 continue
             try:
                 c = c.replace("^", "**")
-                c = eval(c)  
+                c = 0 + eval(c)  
             except:
                 print('Please enter a real number or expression, or return to exit')
                 continue
@@ -1628,7 +1643,7 @@ def arithmetic():
                 continue     
             try:
                 cn = cn.replace("^", "**")
-                cn = eval(cn)
+                cn = 0 + eval(cn)
                 cn = 0 + integer(cn)
             except:
                 print('Please enter a positive integer or return to exit')
@@ -1642,7 +1657,7 @@ def arithmetic():
         else:
             try:
                 comdif = comdif.replace("^", "**")
-                comdif = eval(comdif)
+                comdif = 0 + eval(comdif)
             except:
                 print('Please enter a real number or expression, or return to exit')
                 continue
@@ -1722,7 +1737,7 @@ def arithmetic():
         if n == "l" or n == "las" or n == "las ter" or n == "last terms" or n == "last":
             for term in l:
                 try:
-                    term = eval(term)
+                    term = 0 + eval(term)
                 except:
                     print(f'Error: "{term}" is not a real number or expression')
                     continue
@@ -1749,7 +1764,7 @@ def arithmetic():
                 srangelist = number.split(":")
                 if len(srangelist) == 1:
                     try:
-                        number = eval(number)
+                        number = 0 + eval(number)
                         number = 0 + integer(number)
                     except:
                         print(f'"{number}" is not a positive integer')
@@ -1766,8 +1781,8 @@ def arithmetic():
                     print(sum + f" (sum through term {number}) = {round(sumcalc, 12)}")
                 elif len(srangelist) == 2:
                     try:
-                        srangelist[0] = eval(srangelist[0])
-                        srangelist[1] = eval(srangelist[1])
+                        srangelist[0] = 0 + eval(srangelist[0])
+                        srangelist[1] = 0 + eval(srangelist[1])
                         srangelist[0] = 0 + integer(srangelist[0])
                         srangelist[1] = 0 + integer(srangelist[1])
                     except:
@@ -1801,7 +1816,7 @@ def arithmetic():
                             dif = comdif
                             print(f"dif (common difference) = {round(dif, 12)}")
                             continue
-                        unterm = eval(unterm)
+                        unterm = 0 + eval(unterm)
                         unterm = 0 + integer(unterm)
                     except:
                         print(f'"{unterm}" is not a positive integer')
@@ -1815,8 +1830,8 @@ def arithmetic():
                         print(f'"{unterm}" is not a positive integer')
                 elif len(rangelist) == 2:
                     try:
-                        rangelist[0] = eval(rangelist[0])
-                        rangelist[1] = eval(rangelist[1])
+                        rangelist[0] = 0 + eval(rangelist[0])
+                        rangelist[1] = 0 + eval(rangelist[1])
                         rangelist[0] = 0 + integer(rangelist[0])
                         rangelist[1] = 0 + integer(rangelist[1])
                     except:
@@ -1845,7 +1860,7 @@ def arithmetic():
                         dif = comdif
                         print(f"dif (common difference) = {round(dif, 12)}")
                         continue
-                    iunterm = eval(iunterm)
+                    iunterm = 0 + eval(iunterm)
                 except:
                     print(f'"{iunterm}" is not a real number or expression')
                     continue
@@ -1883,11 +1898,14 @@ def geometric():
         elif b == "m" or b == "mat" or b == "matrix" or b == "matrix operations":
             matrix_operation()
             break
+        elif b == "g" or b == "gam" or b == "game" or b == "game solvers":
+            math24()
+            break
         elif b == "i" or b == "info" or b == "inf":
             print()
             print("Please enter a nonzero real number or expression as the value of one of the series terms")
             print('Enter "s" to enter a sum instead of terms')
-            print('Enter "r" for real operations, "b" for binomial expansion, "a" for arithmetic series, "c" for complex operations (this will direct to rectangular form), "m" for matrix operations, and "f" for functions (this will direct to polynomials)')
+            print('Enter "r" for real operations, "b" for binomial expansion, "a" for arithmetic series, "c" for complex operations (this will direct to rectangular form), "m" for matrix operations, "f" for functions (this will direct to polynomials), and "g" for game solvers (this will direct to Math 24)')
             continue
         elif b == "s" or b == "sum":
             input_sum = input("Sum: ")
@@ -1895,7 +1913,7 @@ def geometric():
                 continue
             try:
                 input_sum = input_sum.replace("^", "**")
-                input_sum = eval(input_sum)
+                input_sum = 0 + eval(input_sum)
                 if round(input_sum, 12) == 0:
                     print("Please enter a nonzero real number or expression, or return to exit")
                     continue
@@ -1908,7 +1926,7 @@ def geometric():
             elif sum_number != "i" and sum_number != "inf" and sum_number != "infinity":
                 try:
                     sum_number = sum_number.replace("^", "**")
-                    sum_number = eval(sum_number)
+                    sum_number = 0 + eval(sum_number)
                     sum_number = 0 + integer(sum_number)
                     if sum_number <= 0:
                         print("Please enter a positive integer or return to exit")
@@ -1919,7 +1937,7 @@ def geometric():
         else:
             try:
                 b = b.replace("^", "**")
-                b = eval(b)
+                b = 0 + eval(b)
                 if round(b, 12) == 0:
                     print('Please enter a nonzero real number or expression, "i" for info, or return to exit')
                     continue
@@ -1931,7 +1949,7 @@ def geometric():
                 continue
             try:
                 bn = bn.replace("^", "**")
-                bn = eval(bn)
+                bn = 0 + eval(bn)
                 bn = 0 + integer(bn)
             except:
                 print('Please enter a positive integer or return to exit')
@@ -1951,7 +1969,7 @@ def geometric():
                 continue
             try:
                 c = c.replace("^", "**")
-                c = eval(c)  
+                c = 0 + eval(c)  
             except:
                 print('Please enter a nonzero real number or expression, or return to exit')
                 continue      
@@ -1963,7 +1981,7 @@ def geometric():
                 continue
             try:
                 cn = cn.replace("^", "**")
-                cn = eval(cn)
+                cn = 0 + eval(cn)
                 cn = 0 + integer(cn)
             except:
                 print('Please enter a positive integer or return to exit')
@@ -1983,7 +2001,7 @@ def geometric():
         else:
             try:
                 comrat = comrat.replace("^", "**")
-                comrat = eval(comrat)
+                comrat = 0 + eval(comrat)
             except:
                 print('Please enter a nonzero real number or expression, or return to exit')
                 continue
@@ -2091,7 +2109,7 @@ def geometric():
             for term in l:
                 if term != "infinity" and term != "inf":
                     try:
-                        term = eval(term)
+                        term = 0 + eval(term)
                     except:
                         print(f'Error: "{term}" is not a nonzero real number or expression')
                         continue
@@ -2132,7 +2150,7 @@ def geometric():
                 if len(srangelist) == 1:
                     if number != "infinity" and number != "inf":
                         try:
-                            number = eval(number)
+                            number = 0 + eval(number)
                             number = 0 + integer(number)
                         except:
                             print(f'"{number}" is not a positive integer')
@@ -2163,8 +2181,8 @@ def geometric():
                         print(sum + f" (sum through infinity) = {round(sumcalc, 12)}")
                 elif len(srangelist) == 2:
                     try:
-                        srangelist[0] = eval(srangelist[0])
-                        srangelist[1] = eval(srangelist[1])
+                        srangelist[0] = 0 + eval(srangelist[0])
+                        srangelist[1] = 0 + eval(srangelist[1])
                         srangelist[0] = 0 + integer(srangelist[0])
                         srangelist[1] = 0 + integer(srangelist[1])
                     except:
@@ -2201,7 +2219,7 @@ def geometric():
                             rat = comrat
                             print(f"rat (common ratio) = {round(rat, 12)}")
                             continue
-                        unterm = eval(unterm)
+                        unterm = 0 + eval(unterm)
                         unterm = 0 + integer(unterm)
                     except:
                         print(f'"{unterm}" is not a positive integer')
@@ -2215,8 +2233,8 @@ def geometric():
                         print(f'"{unterm}" is not a positive integer')
                 elif len(rangelist) == 2:
                     try:
-                        rangelist[0] = eval(rangelist[0])
-                        rangelist[1] = eval(rangelist[1])
+                        rangelist[0] = 0 + eval(rangelist[0])
+                        rangelist[1] = 0 + eval(rangelist[1])
                         rangelist[0] = 0 + integer(rangelist[0])
                         rangelist[1] = 0 + integer(rangelist[1])
                     except:
@@ -2245,7 +2263,7 @@ def geometric():
                         rat = comrat
                         print(f"rat (common ratio) = {round(rat, 12)}")
                         continue
-                    iunterm = eval(iunterm)
+                    iunterm = 0 + eval(iunterm)
                 except:
                     print(f'"{iunterm}" is not a real number or expression')
                     continue
@@ -2288,14 +2306,17 @@ def polynomial():
         elif a == "s" or a == "sym" or a == "symmetry":
             symmetry()
             break
+        elif a == "g" or a == "gam" or a == "game" or a == "game solvers":
+            math24()
+            break
         elif a == "info" or a == "inf" or a == "i":
             print()
             print("Please enter a real number or expression as the x^2 coefficient")
-            print('Enter "sys" for system of equations, "c" for conic sections, "s" for symmetry, and "o" for operations (this will direct to real operation)')
+            print('Enter "sys" for system of equations, "c" for conic sections, "s" for symmetry, "o" for operations (this will direct to real operation), and "g" for game solvers (this will direct to Math 24)')
             continue
         try:
             a = a.replace("^", "**")
-            a = eval(a)
+            a = 0 + eval(a)
         except:
             print('Please enter a real number or expression, "i" for info, or return to exit')
             continue
@@ -2304,7 +2325,7 @@ def polynomial():
             continue
         try:
             b = b.replace("^", "**")
-            b = eval(b)
+            b = 0 + eval(b)
         except:
             print('Please enter a real number or expression, or return to exit')
             continue            
@@ -2313,7 +2334,7 @@ def polynomial():
             continue
         try:
             c = c.replace("^", "**")
-            c = eval(c)
+            c = 0 + eval(c)
         except:
             print('Please enter a real number or expression, or return to exit')
             continue
@@ -2379,7 +2400,7 @@ def symmetry():
             print("Please enter a real number or expression as the slope of the symmetry line")
             print('Enter "p" to enter points instead of slope and y-intercept')
             print('Enter "v" for a vertical and "h" for a horizontal symmetry line')
-            print('Enter "pol" for polynomials, "s" for system of equations, "c" for conic sections, and "o" for operations (this will direct to real operations)')
+            print('Enter "pol" for polynomials, "s" for system of equations, "c" for conic sections, "o" for operations (this will direct to real operations), and "g" for game solvers (this will direct to Math 24)')
             continue
         elif m == "pol" or m == "polynomials":
             polynomial()
@@ -2393,12 +2414,15 @@ def symmetry():
         elif m == "c" or m == "conic sections" or m == "con" or m == "conic":
             conic_section()
             break
+        elif m == "g" or m == "gam" or m == "game" or m == "game solvers":
+            math24()
+            break
         elif m == "h" or m == "hor" or m == "horizontal":
             m = "0"
         if m != "v" and m != "ver" and m != "vertical" and m != "p" and m != "points" and m != "poi":
             try:
                 m = m.replace("^", "**")
-                m = eval(m)
+                m = 0 + eval(m)
             except:
                 print('Please enter a real number or expression, "i" for info, or return to exit')
                 continue
@@ -2407,7 +2431,7 @@ def symmetry():
                 continue
             try:
                 b = b.replace("^", "**")
-                b = eval(b)
+                b = 0 + eval(b)
             except:
                 print('Please enter a real number or expression, or return to exit')
                 continue
@@ -2438,8 +2462,8 @@ def symmetry():
                 p1 = p1[:len(p1) - 1]
             p1 = p1.split(",", 1)
             try:
-                p1[0] = eval(p1[0])
-                p1[1] = eval(p1[1])
+                p1[0] = 0 + eval(p1[0])
+                p1[1] = 0 + eval(p1[1])
             except:
                 print("Please enter the points in the form (x, y), where x and y are real numbers or expressions")
                 continue
@@ -2454,8 +2478,8 @@ def symmetry():
                 p2 = p2[:len(p2) - 1]
             p2 = p2.split(",", 1)
             try:
-                p2[0] = eval(p2[0])
-                p2[1] = eval(p2[1])
+                p2[0] = 0 + eval(p2[0])
+                p2[1] = 0 + eval(p2[1])
                 if p2[0] == p1[0] and p2[1] == p1[1]:
                     print("Please enter two different points")
                     continue
@@ -2493,7 +2517,7 @@ def symmetry():
                 continue
             try:
                 xint = xint.replace("^", "**")
-                xint = eval(xint)
+                xint = 0 + eval(xint)
             except:
                 print('Please enter a real number or expression, or return to exit')
                 continue
@@ -2526,12 +2550,12 @@ def symmetry():
             if ")" in y_input:
                 y_input = y_input[:y_input.find(")")]
             try:
-                x_input = eval(x_input)
+                x_input = 0 + eval(x_input)
             except:
                 print(f'Error: "{reflect[i]}" is not a point in the form (x, y)')
                 continue
             try:
-                y_input = eval(y_input)
+                y_input = 0 + eval(y_input)
             except:
                 print(f'Error: "{reflect[i]}" is not a point in the form (x, y)')
                 continue
@@ -2586,15 +2610,22 @@ def math24():
             print("Math 24 is a game where players try to create 24 using 4 numbers and the 4 operations (+, -, *, /)")
             print("Each number can be used once and in any order and each operation can be used in any amount or order")
             print("For the Math 24 Solver, enter the 4 numbers to create 24 in a list separated by commas")
-            print('Eg. with the numbers "2, 3, 5, 6", one solution (there are many solutions) is 5 * 6 - 2 * 3 (= 30 - 6 = 24)')            
+            print('Eg. with the numbers "2, 3, 5, 6", one solution (there are many solutions) is 5 * 6 - 2 * 3 (= 30 - 6 = 24)')    
+            print('Enter "o" for operations (this will direct to real operations) and "f" for functions (this will direct to polynomials)')        
             print()
             continue
+        elif numbers == "o" or numbers == "ope" or numbers == "operations":
+            real_operation()
+            break
+        elif numbers == "f" or numbers == "fun" or numbers == "functions":
+            polynomial()
+            break
         numbers = numbers.replace(" ", "")
         numbers = numbers.replace("^", "**")
         numbers = numbers.split(",")
         "".join(numbers)
-        if len(numbers) != 4 or "0" in numbers:
-            print('Please enter a list of 4 nonzero real numbers or expressions, "i" for info, or return to exit')
+        if len(numbers) != 4:
+            print('Please enter a list of 4 real numbers or expressions, "i" for info, or return to exit')
             continue
         ops = [" + ", " - ", " * ", " / "]
         solved = False
@@ -2639,12 +2670,12 @@ def math24():
                                     else:
                                         numbers4 = numbers4[:i3] + numbers2[i3 + 1:]
                                     try:
-                                        number4 = eval(numbers4[0])
-                                        number3 = eval(str(numbers3[i3]))
-                                        number2 = eval(str(numbers2[i2]))
-                                        number1 = eval(str(numbers[i1]))
+                                        number4 = 0 + eval(numbers4[0])
+                                        number3 = 0 + eval(str(numbers3[i3]))
+                                        number2 = 0 + eval(str(numbers2[i2]))
+                                        number1 = 0 + eval(str(numbers[i1]))
                                     except:
-                                        print('Please enter a list of 4 nonzero real numbers or expressions, "i" for info, or return to exit')
+                                        print('Please enter a list of 4 real numbers or expressions, "i" for info, or return to exit')
                                         solved = True
                                         break
                                     if i <= 6:
@@ -2662,6 +2693,7 @@ def math24():
                                             string = "(" + str(number1) + op1 + str(number2) + op2 + str(number3) + ")" + op3 + str(number4)
                                         elif i == 6:
                                             string = str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + op3 + str(number4) + ")"
+                                        string.replace
                                         try:
                                             if round(eval(string), 12) == 24:
                                                 print()
@@ -2714,7 +2746,7 @@ def main():
             print("Games include: Math 24 and Sudoku")
         elif cat.lower() == "s" or cat.lower() == "set" or cat.lower() == "settings":
             settings()
-        elif cat.lower() == "f" or cat.lower() == "fun" or cat.lower() == "function":
+        elif cat.lower() == "f" or cat.lower() == "fun" or cat.lower() == "functions":
             while True:
                 funtype = input("Function type (i): ")
                 if funtype.lower() == "" or funtype.lower() == "exit" or funtype.lower() == "exi":
@@ -2738,7 +2770,7 @@ def main():
                 else:
                     print('Please enter a function type, "i" for info, or return to exit')
                     print()
-        elif cat.lower() == "operation" or cat.lower() == "ope" or cat.lower() == "o":
+        elif cat.lower() == "operations" or cat.lower() == "ope" or cat.lower() == "o":
             while True:
                 opetype = input('Operation type (i): ')
                 if opetype.lower() == "" or opetype.lower() == "exit" or opetype.lower() == "exi":
@@ -2804,8 +2836,10 @@ def main():
                     print()
                 elif gametype.lower() == "m" or gametype.lower() == "mat" or gametype.lower() == "24" or gametype.lower() == "math 24":
                     math24()
+                    print()
                 elif gametype.lower() == "s" or gametype.lower() == "sud" or gametype.lower() == "sudoku":
                     sudoku()
+                    print()
                 else:
                     print('Please enter a game, "i" for info, or return to exit')
         else:
