@@ -2718,8 +2718,7 @@ def math24():
                     print("Each number can be used once and in any order and each operation can be used in any amount or order")
                     print("For the Math 24 Solver, enter the 4 numbers to create 24 in a list separated by commas")
                     print('Eg. with the numbers "2, 3, 5, 6", one solution (there are many solutions) is 5 * 6 - 2 * 3 (= 30 - 6 = 24)')    
-                    print('Enter "o" for operations (this will direct to real operations) and "f" for functions (this will direct to polynomials)')        
-                    print()
+                    print('Enter "o" for operations (this will direct to real operations) and "f" for functions (this will direct to polynomials)')
                     continue
                 elif numbers == "o" or numbers == "ope" or numbers == "operations":
                     real_operation()
