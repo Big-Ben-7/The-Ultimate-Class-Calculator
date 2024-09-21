@@ -2992,10 +2992,8 @@ def main():
                             break
                         elif mode.lower() == "c" or mode.lower() == "crea" or mode.lower() == "create":
                             math24create()
-                            print()
                         elif mode.lower() == "s" or mode.lower() == "sol" or mode.lower() == "solve":
                             math24solve()
-                            print()
                         else:
                             print('Please enter either "p" for play, "c" for create, "s" for solve, or return to exit')
                             continue
