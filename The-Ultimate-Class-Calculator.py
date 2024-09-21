@@ -199,7 +199,7 @@ def from_polar():
             print('Real constants such as "pi", "e", and "tau" can be entered')
             print('Real variables can also be entered, for example: "ans" (previous real answer), "rl" (real part of previous complex result), "im" (imaginary part of previous complex result), "root" (1st real solution of previous quadratic), "root2" (2nd real solution of previous quadratic), "im2" (imaginary part of 2nd previous quadratic complex solution) "sum" (previous series summation), "rat" (previous geometric series common ratio), "dif" (previous arithmetic series common difference), "term1" (1st term of previous series), "cf1" (1st coefficient of previous binomial expansion), and stored variables')
             print("The above operators and functions can only be entered as part of an expression, not as an operation")
-            print('Enter "rec" for rectangular form, "r" for real operations, "m" for matrix operations, "s" for summations (this will direct to binomial expansion), "f" for functions (this will direct to polynomials), and "g" for games (this will direct to Math 24)')
+            print('Enter "rec" for rectangular form, "r" for real operations, "m" for matrix operations, "s" for summations (this will direct to binomial expansion), "f" for functions (this will direct to polynomials), and "g" for games (this will direct to play Math 24)')
             continue
         elif av == "rec" or av == "rectangular" or av == "rectangular form":
             from_rectangular()
@@ -217,7 +217,7 @@ def from_polar():
             binomial_expansion()
             break
         elif av == "g" or av == "gam" or av == "games":
-            math24()
+            math24play()
             break
         try:
             av = av.replace("^", "**")
@@ -600,7 +600,7 @@ def from_rectangular():
             print('Real constants such as "pi", "e", and "tau" can be entered')
             print('Real variables can also be entered, for example: "ans" (previous real answer), "rl" (real part of previous complex result), "im" (imaginary part of previous complex result), "root" (1st real solution of previous quadratic), "root2" (2nd real solution of previous quadratic), "im2" (imaginary part of 2nd previous quadratic complex solution) "sum" (previous series summation), "rat" (previous geometric series common ratio), "dif" (previous arithmetic series common difference), "term1" (1st term of previous series), "cf1" (1st coefficient of previous binomial expansion), and stored variables')
             print("The above operators and functions can only be entered as part of an expression, not as an operation")
-            print('Enter "p" for polar form, "r" for real operations, "m" for matrix operations, "s" for summations (this will direct to binomial expansion), "f" for functions (this will direct to polynomials), and "g" for games (this will direct to Math 24)')
+            print('Enter "p" for polar form, "r" for real operations, "m" for matrix operations, "s" for summations (this will direct to binomial expansion), "f" for functions (this will direct to polynomials), and "g" for games (this will direct to play Math 24)')
             continue
         elif a == "p" or a == "polar" or a == "pol" or a == "polar form":
             from_polar()
@@ -618,7 +618,7 @@ def from_rectangular():
             matrix_operation()
             break
         elif a == "g" or a == "gam" or a == "games":
-            math24()
+            math24play()
             break
         try:
             a = a.replace("^", "**")
@@ -959,7 +959,7 @@ def real_operation():
             print('Real constants such as "pi", "e", and "tau" can be entered')
             print('Real variables can also be entered, for example: "ans" (previous real answer), "rl" (real part of previous complex result), "im" (imaginary part of previous complex result), "root" (1st real solution of previous quadratic), "root2" (2nd real solution of previous quadratic), "im2" (imaginary part of 2nd previous quadratic complex solution) "sum" (previous series summation), "rat" (previous geometric series common ratio), "dif" (previous arithmetic series common difference), "term1" (1st term of previous series), "cf1" (1st coefficient of previous binomial expansion), and stored variables')
             print("The above operators and functions can only be entered as part of an expression, not as an operation")
-            print('Enter "c" for complex operations (this will direct to rectangular form), "m" for matrix operations, "s" for summations (this will direct to binomial expansion), "f" for functions (this will direct to polynomials), and "g" for games (this will direct to Math 24)')
+            print('Enter "c" for complex operations (this will direct to rectangular form), "m" for matrix operations, "s" for summations (this will direct to binomial expansion), "f" for functions (this will direct to polynomials), and "g" for games (this will direct to play Math 24)')
             continue
         elif n == "c" or n == "com" or n == "complex" or n == "complex operations":
             from_rectangular()
@@ -974,7 +974,7 @@ def real_operation():
             matrix_operation()
             break
         elif n == "g" or n == "gam" or n == "games":
-            math24()
+            math24play()
             break
         else:
             try:
@@ -1335,12 +1335,12 @@ def binomial_expansion():
             polynomial()
             break
         elif a == "gam" or a == "ga" or a == "games":
-            math24()
+            math24play()
             break
         elif a == "i" or a == "info" or a == "inf":
             print()
             print('Enter a nonzero real number or expression as the first coefficient')
-            print('Enter "r" for real operations, "a" for arithmetic series, "g" for geometric series, "c" for complex operations (this will direct to rectangular form), "m" for matrix operations, "f" for functions (this will direct to polynomials), and "ga" for games (this will direct to Math 24)')
+            print('Enter "r" for real operations, "a" for arithmetic series, "g" for geometric series, "c" for complex operations (this will direct to rectangular form), "m" for matrix operations, "f" for functions (this will direct to polynomials), and "ga" for games (this will direct to play Math 24)')
             continue
         try:
             a = a.replace("^", "**")
@@ -1571,13 +1571,13 @@ def arithmetic():
             polynomial()
             break
         elif b == "gam" or b == "ga" or b == "games":
-            math24()
+            math24play()
             break
         elif b == "i" or b == "info" or b == "inf":
             print()
             print("Please enter a real number or expression as the value of one of the series terms")
             print('Enter "s" to enter a sum instead of terms')
-            print('Enter "r" for real operations, "b" for binomial expansion, "g" for geometric series, "c" for complex operations (this will direct to rectangular form), "m" for matrix operations, "f" for functions (this will direct to polynomials), and "ga" for games (this will direct to Math 24)')
+            print('Enter "r" for real operations, "b" for binomial expansion, "g" for geometric series, "c" for complex operations (this will direct to rectangular form), "m" for matrix operations, "f" for functions (this will direct to polynomials), and "ga" for games (this will direct to play Math 24)')
             continue
         elif b == "s" or b == "sum":
             input_sum = input("Sum: ")
@@ -1899,13 +1899,13 @@ def geometric():
             matrix_operation()
             break
         elif b == "g" or b == "gam" or b == "games":
-            math24()
+            math24play()
             break
         elif b == "i" or b == "info" or b == "inf":
             print()
             print("Please enter a nonzero real number or expression as the value of one of the series terms")
             print('Enter "s" to enter a sum instead of terms')
-            print('Enter "r" for real operations, "b" for binomial expansion, "a" for arithmetic series, "c" for complex operations (this will direct to rectangular form), "m" for matrix operations, "f" for functions (this will direct to polynomials), and "g" for games (this will direct to Math 24)')
+            print('Enter "r" for real operations, "b" for binomial expansion, "a" for arithmetic series, "c" for complex operations (this will direct to rectangular form), "m" for matrix operations, "f" for functions (this will direct to polynomials), and "g" for games (this will direct to play Math 24)')
             continue
         elif b == "s" or b == "sum":
             input_sum = input("Sum: ")
@@ -2307,12 +2307,12 @@ def polynomial():
             symmetry()
             break
         elif a == "g" or a == "gam" or a == "games":
-            math24()
+            math24play()
             break
         elif a == "info" or a == "inf" or a == "i":
             print()
             print("Please enter a real number or expression as the x^2 coefficient")
-            print('Enter "sys" for system of equations, "c" for conic sections, "s" for symmetry, "o" for operations (this will direct to real operation), and "g" for games (this will direct to Math 24)')
+            print('Enter "sys" for system of equations, "c" for conic sections, "s" for symmetry, "o" for operations (this will direct to real operation), and "g" for games (this will direct to play Math 24)')
             continue
         try:
             a = a.replace("^", "**")
@@ -2400,7 +2400,7 @@ def symmetry():
             print("Please enter a real number or expression as the slope of the symmetry line")
             print('Enter "p" to enter points instead of slope and y-intercept')
             print('Enter "v" for a vertical and "h" for a horizontal symmetry line')
-            print('Enter "pol" for polynomials, "s" for system of equations, "c" for conic sections, "o" for operations (this will direct to real operations), and "g" for games (this will direct to Math 24)')
+            print('Enter "pol" for polynomials, "s" for system of equations, "c" for conic sections, "o" for operations (this will direct to real operations), and "g" for games (this will direct to play Math 24)')
             continue
         elif m == "pol" or m == "polynomials":
             polynomial()
@@ -2415,7 +2415,7 @@ def symmetry():
             conic_section()
             break
         elif m == "g" or m == "gam" or m == "games":
-            math24()
+            math24play()
             break
         elif m == "h" or m == "hor" or m == "horizontal":
             m = "0"
@@ -2592,241 +2592,288 @@ def system():
     print()
     print("Welcome to system of equations!")
 
-def math24():
-    print()
-    print("Welcome to the Math 24!")
+def math24play():
+    print("In developement!")
+
+def math24create():
     while True:
+        clear_variables
         print()
-        mode = input("(P)lay or (s)olve? ")
-        if mode.lower() == "" or mode.lower() == "exit" or mode.lower() == "exi":
+        tried = []
+        solutions = []
+        ops = [" + ", " - ", " * ", " / "]
+        start = input("Minimum number (i): ")
+        if start == "" or start == "exit" or start == "exi":
             break
-        elif mode.lower() == "p" or mode.lower() == "pla" or mode.lower() == "play":
-            while True:
-                clear_variables
-                print()
-                solutions = []
-                ops = [" + ", " - ", " * ", " / "]
-                for n1 in range(1, 10):
-                    for n2 in range(1, 10):
-                        for n3 in range(1, 10):
-                            for n4 in range(1, 10):
-                                numbers = [n1, n2, n3, n4]
-                                if sorted(numbers) in solutions:
-                                    continue
-                                solved = False
-                                for i1 in range(0, len(numbers)):
-                                    if solved == True:
-                                        break
-                                    for op1 in ops:
-                                        if solved == True:
-                                            break
-                                        numbers2 = numbers
-                                        if i1 == len(numbers) - 1:
-                                            numbers2 = numbers2[:i1]
-                                        elif i1 == 0:
-                                            numbers2 = numbers2[1:]
-                                        else:
-                                            numbers2 = numbers2[:i1] + numbers2[i1 + 1:]
-                                        for i2 in range(0, len(numbers2)):
-                                            if solved == True:
-                                                break
-                                            for op2 in ops:
-                                                if solved == True:
-                                                    break
-                                                numbers3 = numbers2
-                                                if i2 == len(numbers2) - 1:
-                                                    numbers3 = numbers3[:i2]
-                                                elif i2 == 0:
-                                                    numbers3 = numbers3[1:]
-                                                else:
-                                                    numbers3 = numbers3[:i2] + numbers3[i2 + 1:]
-                                                for i3 in range(0, len(numbers3)):
-                                                    if solved == True:
-                                                        break
-                                                    for op3 in ops:
-                                                        if solved == True:
-                                                            break
-                                                        numbers4 = numbers3
-                                                        if i3 == len(numbers3) - 1:
-                                                            numbers4 = numbers4[:i3]
-                                                        elif i3 == 0:
-                                                            numbers4 = numbers4[1:]
-                                                        else:
-                                                            numbers4 = numbers4[:i3] + numbers2[i3 + 1:]
-                                                        number4 = numbers4[0]
-                                                        number3 = numbers3[i3]
-                                                        number2 = numbers2[i2]
-                                                        number1 = numbers[i1]
-                                                        for i in range(0, 11):
-                                                            if i <= 6:
-                                                                if i == 0:
-                                                                    string = str(number1) + op1 + str(number2) + op2 + str(number3) + op3 + str(number4)
-                                                                elif i == 1:
-                                                                    string = "(" + str(number1) + op1 + str(number2) + ")" + op2 + str(number3) + op3 + str(number4)
-                                                                elif i == 2:
-                                                                    string = str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + ")" + op3 + str(number4)
-                                                                elif i == 3:
-                                                                    string = str(number1) + op1 + str(number2) + op2 + "(" + str(number3) + op3 + str(number4) + ")"
-                                                                elif i == 4:
-                                                                    string = "(" + str(number1) + op1 + str(number2) + ")" + op2 + "(" + str(number3) + op3 + str(number4) + ")"
-                                                                elif i == 5:
-                                                                    string = "(" + str(number1) + op1 + str(number2) + op2 + str(number3) + ")" + op3 + str(number4)
-                                                                elif i == 6:
-                                                                    string = str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + op3 + str(number4) + ")"
-                                                                if round(eval(string), 12) == 24:
-                                                                    solutions.append(sorted([number1, number2, number3, number4]))
-                                                                    solved = True
-                                                                    break
-                                                            else:
-                                                                if i == 7:
-                                                                    string = "((" + str(number1) + op1 + str(number2) + ")" + op2 + str(number3) + ")" + op3 + str(number4)
-                                                                    string_print = "[(" + str(number1) + op1 + str(number2) + ")" + op2 + str(number3) + "]" + op3 + str(number4)
-                                                                elif i == 8:
-                                                                    string = str(number1) + op1 + "(" + str(number2) + op2 + "(" + str(number3) + op3 + str(number4) + "))"
-                                                                    string_print = str(number1) + op1 + "[" + str(number2) + op2 + "(" + str(number3) + op3 + str(number4) + ")]"
-                                                                elif i == 9:
-                                                                    string = str(number1) + op1 + "((" + str(number2) + op2 + str(number3) + ")" + op3 + str(number4) + ")"
-                                                                    string_print = str(number1) + op1 + "[(" + str(number2) + op2 + str(number3) + ")" + op3 + str(number4) + "]"
-                                                                else:
-                                                                    string = "(" + str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + "))" + op3 + str(number4)
-                                                                    string_print = "[" + str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + ")]" + op3 + str(number4)
-                                                                if round(eval(string), 12) == 24:
-                                                                    solutions.append(sorted([number1, number2, number3, number4]))
-                                                                    solved = True
-                                                                    break
-                for a in solutions:
-                    print()
-                    print(f"Possible sets({len(solutions)}):")
-                    print(a)
-        elif mode.lower() == "s" or mode.lower() == "sol" or mode.lower() == "solve":
-            while True:
-                clear_variables()
-                print()
-                numbers = input("Numbers (i): ")
-                if numbers == "" or numbers == "exit" or numbers == "exi":
-                    break
-                elif numbers == "i" or numbers == "info" or numbers == "inf":
-                    print()
-                    print("Math 24 is a game where players try to create 24 using 4 numbers and the 4 operations (+, -, *, /)")
-                    print("Each number can be used once and in any order and each operation can be used in any amount or order")
-                    print("For the Math 24 Solver, enter the 4 numbers to create 24 in a list separated by commas")
-                    print('Eg. with the numbers "2, 3, 5, 6", one solution (there are many solutions) is 5 * 6 - 2 * 3 (= 30 - 6 = 24)')    
-                    print('Enter "o" for operations (this will direct to real operations) and "f" for functions (this will direct to polynomials)')
-                    continue
-                elif numbers == "o" or numbers == "ope" or numbers == "operations":
-                    real_operation()
-                    break
-                elif numbers == "f" or numbers == "fun" or numbers == "functions":
-                    polynomial()
-                    break
-                numbers = numbers.replace(" ", "")
-                numbers = numbers.replace("^", "**")
-                numbers = numbers.split(",")
-                if len(numbers) != 4:
-                    print('Please enter a list of 4 real numbers or expressions, "i" for info, or return to exit')
-                    continue
-                ops = [" + ", " - ", " * ", " / "]
-                solved = False
-                for i in range(0, 11):
-                    if solved == True:
-                        break
-                    for i1 in range(0, len(numbers)):
-                        if solved == True:
-                            break
-                        for op1 in ops:
+        elif start == "i" or start == "inf" or start == "info":
+            print()
+            print("Find all possible sets to create 24 using numbers from a minimum to a maximum")
+            print('Enter "p" for play, "s" for solver, "o" for operations (this will direct to real operations), and "f" for functions (this will direct to polynomials)')
+            continue
+        elif start == "p" or start == "pla" or start == "play":
+            math24play()
+            break
+        elif start == "s" or start == "sol" or start == "solver":
+            math24solve()
+            break
+        elif start == "o" or start == "ope" or start == "operations":
+            real_operation()
+            break
+        elif start == "f" or start == "fun" or start == "functions":
+            polynomial()
+            break
+        try:
+            start = 0 + eval(start)
+        except:
+            print("Please enter a real number or expression, or return to exit")
+            continue
+        end = input("Maximum number: ")
+        if end == "" or end == "exit" or end == "exi":
+            break
+        try:
+            end = 0 + eval(end)
+        except:
+            print("Please enter a real number or expression, or return to exit")
+            continue
+        for n1 in range(start, end + 1):
+            for n2 in range(start, end + 1):
+                for n3 in range(start, end + 1):
+                    for n4 in range(start, end + 1):
+                        numbers = [n1, n2, n3, n4]
+                        if sorted(numbers) in tried:
+                            continue
+                        solved = False
+                        for i1 in range(0, len(numbers)):
                             if solved == True:
                                 break
-                            numbers2 = numbers
-                            if i1 == len(numbers) - 1:
-                                numbers2 = numbers2[:i1]
-                            elif i1 == 0:
-                                numbers2 = numbers2[1:]
-                            else:
-                                numbers2 = numbers2[:i1] + numbers2[i1 + 1:]
-                            for i2 in range(0, len(numbers2)):
+                            for op1 in ops:
                                 if solved == True:
                                     break
-                                for op2 in ops:
+                                numbers2 = numbers
+                                if i1 == len(numbers) - 1:
+                                    numbers2 = numbers2[:i1]
+                                elif i1 == 0:
+                                    numbers2 = numbers2[1:]
+                                else:
+                                    numbers2 = numbers2[:i1] + numbers2[i1 + 1:]
+                                for i2 in range(0, len(numbers2)):
                                     if solved == True:
                                         break
-                                    numbers3 = numbers2
-                                    if i2 == len(numbers2) - 1:
-                                        numbers3 = numbers3[:i2]
-                                    elif i2 == 0:
-                                        numbers3 = numbers3[1:]
-                                    else:
-                                        numbers3 = numbers3[:i2] + numbers3[i2 + 1:]
-                                    for i3 in range(0, len(numbers3)):
+                                    for op2 in ops:
                                         if solved == True:
                                             break
-                                        for op3 in ops:
-                                            numbers4 = numbers3
-                                            if i3 == len(numbers3) - 1:
-                                                numbers4 = numbers4[:i3]
-                                            elif i3 == 0:
-                                                numbers4 = numbers4[1:]
-                                            else:
-                                                numbers4 = numbers4[:i3] + numbers2[i3 + 1:]
-                                            try:
-                                                number4 = 0 + eval(numbers4[0])
-                                                number3 = 0 + eval(str(numbers3[i3]))
-                                                number2 = 0 + eval(str(numbers2[i2]))
-                                                number1 = 0 + eval(str(numbers[i1]))
-                                            except:
-                                                print('Please enter a list of 4 real numbers or expressions, "i" for info, or return to exit')
+                                        numbers3 = numbers2
+                                        if i2 == len(numbers2) - 1:
+                                            numbers3 = numbers3[:i2]
+                                        elif i2 == 0:
+                                            numbers3 = numbers3[1:]
+                                        else:
+                                            numbers3 = numbers3[:i2] + numbers3[i2 + 1:]
+                                        for i3 in range(0, len(numbers3)):
+                                            if solved == True:
+                                                break
+                                            for op3 in ops:
+                                                if solved == True:
+                                                    break
+                                                numbers4 = numbers3
+                                                if i3 == len(numbers3) - 1:
+                                                    numbers4 = numbers4[:i3]
+                                                elif i3 == 0:
+                                                    numbers4 = numbers4[1:]
+                                                else:
+                                                    numbers4 = numbers4[:i3] + numbers2[i3 + 1:]
+                                                number4 = numbers4[0]
+                                                number3 = numbers3[i3]
+                                                number2 = numbers2[i2]
+                                                number1 = numbers[i1]
+                                                for i in range(0, 11):
+                                                    if i <= 6:
+                                                        if i == 0:
+                                                            string = str(number1) + op1 + str(number2) + op2 + str(number3) + op3 + str(number4)
+                                                        elif i == 1:
+                                                            string = "(" + str(number1) + op1 + str(number2) + ")" + op2 + str(number3) + op3 + str(number4)
+                                                        elif i == 2:
+                                                            string = str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + ")" + op3 + str(number4)
+                                                        elif i == 3:
+                                                            string = str(number1) + op1 + str(number2) + op2 + "(" + str(number3) + op3 + str(number4) + ")"
+                                                        elif i == 4:
+                                                            string = "(" + str(number1) + op1 + str(number2) + ")" + op2 + "(" + str(number3) + op3 + str(number4) + ")"
+                                                        elif i == 5:
+                                                            string = "(" + str(number1) + op1 + str(number2) + op2 + str(number3) + ")" + op3 + str(number4)
+                                                        elif i == 6:
+                                                            string = str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + op3 + str(number4) + ")"
+                                                        try:
+                                                            if round(eval(string), 12) == 24:
+                                                                tried.append(sorted([number1, number2, number3, number4]))
+                                                                solutions.append(sorted([number1, number2, number3, number4]))
+                                                                solved = True
+                                                                break
+                                                        except:
+                                                            pass
+                                                    else:
+                                                        if i == 7:
+                                                            string = "((" + str(number1) + op1 + str(number2) + ")" + op2 + str(number3) + ")" + op3 + str(number4)
+                                                            string_print = "[(" + str(number1) + op1 + str(number2) + ")" + op2 + str(number3) + "]" + op3 + str(number4)
+                                                        elif i == 8:
+                                                            string = str(number1) + op1 + "(" + str(number2) + op2 + "(" + str(number3) + op3 + str(number4) + "))"
+                                                            string_print = str(number1) + op1 + "[" + str(number2) + op2 + "(" + str(number3) + op3 + str(number4) + ")]"
+                                                        elif i == 9:
+                                                            string = str(number1) + op1 + "((" + str(number2) + op2 + str(number3) + ")" + op3 + str(number4) + ")"
+                                                            string_print = str(number1) + op1 + "[(" + str(number2) + op2 + str(number3) + ")" + op3 + str(number4) + "]"
+                                                        else:
+                                                            string = "(" + str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + "))" + op3 + str(number4)
+                                                            string_print = "[" + str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + ")]" + op3 + str(number4)
+                                                        try:
+                                                            if round(eval(string), 12) == 24:
+                                                                solutions.append(sorted([number1, number2, number3, number4]))
+                                                                solved = True
+                                                                break
+                                                        except:
+                                                            pass
+                                                tried.append(sorted([number1, number2, number3, number4]))
+        print()
+        print(f"Possible sets:")
+        for a in solutions:
+            res = ""
+            for b in a:
+                res += str(b) + ", "
+            res = "(" + res[:len(res) - 2] + ")"
+            print(res)
+        print()
+        print(f"There are {len(solutions)} possible sets using integers from {start} to {end}")
+
+def math24solve():
+    while True:
+        clear_variables()
+        print()
+        numbers = input("Numbers (i): ")
+        if numbers == "" or numbers == "exit" or numbers == "exi":
+            break
+        elif numbers == "i" or numbers == "info" or numbers == "inf":
+            print()
+            print("Math 24 is a game where players try to create 24 using 4 numbers and the 4 operations (+, -, *, /)")
+            print("Each number can be used once and in any order and each operation can be used in any amount or order")
+            print("For the Math 24 Solver, enter the 4 numbers to create 24 in a list separated by commas")
+            print('Eg. with the numbers "2, 3, 5, 6", one solution (there are many solutions) is 5 * 6 - 2 * 3 (= 30 - 6 = 24)')    
+            print('Enter "p" for play, "c" for create, "o" for operations (this will direct to real operations) and "f" for functions (this will direct to polynomials)')
+            continue
+        elif numbers == "o" or numbers == "ope" or numbers == "operations":
+            real_operation()
+            break
+        elif numbers == "f" or numbers == "fun" or numbers == "functions":
+            polynomial()
+            break
+        elif numbers == "p" or numbers == "pla" or numbers == "play":
+            math24play()
+            break
+        elif numbers == "c" or numbers == "crea" or numbers == "create":
+            math24create()
+            break
+        numbers = numbers.replace(" ", "")
+        numbers = numbers.replace("^", "**")
+        numbers = numbers.split(",")
+        if len(numbers) != 4:
+            print('Please enter a list of 4 real numbers or expressions, "i" for info, or return to exit')
+            continue
+        ops = [" + ", " - ", " * ", " / "]
+        solved = False
+        for i in range(0, 11):
+            if solved == True:
+                break
+            for i1 in range(0, len(numbers)):
+                if solved == True:
+                    break
+                for op1 in ops:
+                    if solved == True:
+                        break
+                    numbers2 = numbers
+                    if i1 == len(numbers) - 1:
+                        numbers2 = numbers2[:i1]
+                    elif i1 == 0:
+                        numbers2 = numbers2[1:]
+                    else:
+                        numbers2 = numbers2[:i1] + numbers2[i1 + 1:]
+                    for i2 in range(0, len(numbers2)):
+                        if solved == True:
+                            break
+                        for op2 in ops:
+                            if solved == True:
+                                break
+                            numbers3 = numbers2
+                            if i2 == len(numbers2) - 1:
+                                numbers3 = numbers3[:i2]
+                            elif i2 == 0:
+                                numbers3 = numbers3[1:]
+                            else:
+                                numbers3 = numbers3[:i2] + numbers3[i2 + 1:]
+                            for i3 in range(0, len(numbers3)):
+                                if solved == True:
+                                    break
+                                for op3 in ops:
+                                    numbers4 = numbers3
+                                    if i3 == len(numbers3) - 1:
+                                        numbers4 = numbers4[:i3]
+                                    elif i3 == 0:
+                                        numbers4 = numbers4[1:]
+                                    else:
+                                        numbers4 = numbers4[:i3] + numbers2[i3 + 1:]
+                                    try:
+                                        number4 = 0 + eval(numbers4[0])
+                                        number3 = 0 + eval(str(numbers3[i3]))
+                                        number2 = 0 + eval(str(numbers2[i2]))
+                                        number1 = 0 + eval(str(numbers[i1]))
+                                    except:
+                                        print('Please enter a list of 4 real numbers or expressions, "i" for info, or return to exit')
+                                        solved = True
+                                        break
+                                    if i <= 6:
+                                        if i == 0:
+                                            string = str(number1) + op1 + str(number2) + op2 + str(number3) + op3 + str(number4)
+                                        elif i == 1:
+                                            string = "(" + str(number1) + op1 + str(number2) + ")" + op2 + str(number3) + op3 + str(number4)
+                                        elif i == 2:
+                                            string = str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + ")" + op3 + str(number4)
+                                        elif i == 3:
+                                            string = str(number1) + op1 + str(number2) + op2 + "(" + str(number3) + op3 + str(number4) + ")"
+                                        elif i == 4:
+                                            string = "(" + str(number1) + op1 + str(number2) + ")" + op2 + "(" + str(number3) + op3 + str(number4) + ")"
+                                        elif i == 5:
+                                            string = "(" + str(number1) + op1 + str(number2) + op2 + str(number3) + ")" + op3 + str(number4)
+                                        elif i == 6:
+                                            string = str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + op3 + str(number4) + ")"
+                                        try:
+                                            if round(eval(string), 12) == 24:
+                                                print()
+                                                print("Solution: " + string.replace("*", "x") + " = 24")
                                                 solved = True
                                                 break
-                                            if i <= 6:
-                                                if i == 0:
-                                                    string = str(number1) + op1 + str(number2) + op2 + str(number3) + op3 + str(number4)
-                                                elif i == 1:
-                                                    string = "(" + str(number1) + op1 + str(number2) + ")" + op2 + str(number3) + op3 + str(number4)
-                                                elif i == 2:
-                                                    string = str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + ")" + op3 + str(number4)
-                                                elif i == 3:
-                                                    string = str(number1) + op1 + str(number2) + op2 + "(" + str(number3) + op3 + str(number4) + ")"
-                                                elif i == 4:
-                                                    string = "(" + str(number1) + op1 + str(number2) + ")" + op2 + "(" + str(number3) + op3 + str(number4) + ")"
-                                                elif i == 5:
-                                                    string = "(" + str(number1) + op1 + str(number2) + op2 + str(number3) + ")" + op3 + str(number4)
-                                                elif i == 6:
-                                                    string = str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + op3 + str(number4) + ")"
-                                                try:
-                                                    if round(eval(string), 12) == 24:
-                                                        print()
-                                                        print("Solution: " + string.replace("*", "x") + " = 24")
-                                                        solved = True
-                                                        break
-                                                except:
-                                                    pass
-                                            else:
-                                                if i == 7:
-                                                    string = "((" + str(number1) + op1 + str(number2) + ")" + op2 + str(number3) + ")" + op3 + str(number4)
-                                                    string_print = "[(" + str(number1) + op1 + str(number2) + ")" + op2 + str(number3) + "]" + op3 + str(number4)
-                                                elif i == 8:
-                                                    string = str(number1) + op1 + "(" + str(number2) + op2 + "(" + str(number3) + op3 + str(number4) + "))"
-                                                    string_print = str(number1) + op1 + "[" + str(number2) + op2 + "(" + str(number3) + op3 + str(number4) + ")]"
-                                                elif i == 9:
-                                                    string = str(number1) + op1 + "((" + str(number2) + op2 + str(number3) + ")" + op3 + str(number4) + ")"
-                                                    string_print = str(number1) + op1 + "[(" + str(number2) + op2 + str(number3) + ")" + op3 + str(number4) + "]"
-                                                else:
-                                                    string = "(" + str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + "))" + op3 + str(number4)
-                                                    string_print = "[" + str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + ")]" + op3 + str(number4)
-                                                try:
-                                                    if round(eval(string), 12) == 24:
-                                                        print()
-                                                        print("Solution: " + string_print.replace("*", "x") + " = 24")
-                                                        solved = True
-                                                        break
-                                                except:
-                                                    pass
+                                        except:
+                                            pass
+                                    else:
+                                        if i == 7:
+                                            string = "((" + str(number1) + op1 + str(number2) + ")" + op2 + str(number3) + ")" + op3 + str(number4)
+                                            string_print = "[(" + str(number1) + op1 + str(number2) + ")" + op2 + str(number3) + "]" + op3 + str(number4)
+                                        elif i == 8:
+                                            string = str(number1) + op1 + "(" + str(number2) + op2 + "(" + str(number3) + op3 + str(number4) + "))"
+                                            string_print = str(number1) + op1 + "[" + str(number2) + op2 + "(" + str(number3) + op3 + str(number4) + ")]"
+                                        elif i == 9:
+                                            string = str(number1) + op1 + "((" + str(number2) + op2 + str(number3) + ")" + op3 + str(number4) + ")"
+                                            string_print = str(number1) + op1 + "[(" + str(number2) + op2 + str(number3) + ")" + op3 + str(number4) + "]"
+                                        else:
+                                            string = "(" + str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + "))" + op3 + str(number4)
+                                            string_print = "[" + str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + ")]" + op3 + str(number4)
+                                        try:
+                                            if round(eval(string), 12) == 24:
+                                                print()
+                                                print("Solution: " + string_print.replace("*", "x") + " = 24")
+                                                solved = True
+                                                break
+                                        except:
+                                            pass
 
-                if solved == False:
-                    print()
-                    print("There is no possible way to create 24 with the 4 entered numbers")
-                    continue
-        else:
-            print('Please enter either "p" for play, "s" for solve, or return to exit')
+        if solved == False:
+            print()
+            print("There is no possible way to create 24 with the 4 entered numbers")
             continue
 
 def main():
@@ -2927,16 +2974,31 @@ def main():
                     print()
         elif cat.lower() == "g" or cat.lower() == "gam" or cat.lower() == "games":
             while True:
-                gametype = input("Game (i): ")
-                if gametype.lower() == "" or gametype.lower() == "exit" or gametype.lower() == "exi":
+                game = input("Game (i): ")
+                if game.lower() == "" or game.lower() == "exit" or game.lower() == "exi":
                     break
-                elif gametype.lower() == "i" or gametype.lower() == "inf" or gametype.lower() == "info":
+                elif game.lower() == "i" or game.lower() == "inf" or game.lower() == "info":
                     print()
                     print('Enter "m" for Math 24')
                     print()
-                elif gametype.lower() == "m" or gametype.lower() == "mat" or gametype.lower() == "24" or gametype.lower() == "math 24":
-                    math24()
+                elif game.lower() == "m" or game.lower() == "mat" or game.lower() == "24" or game.lower() == "math 24" or game.lower() == "24":
                     print()
+                    print("Welcome to Math 24!")
+                    while True:
+                        print()
+                        mode = input("(P)lay, (c)reate, or (s)olve? ")
+                        if mode.lower() == "" or mode.lower() == "exit" or mode.lower() == "exi":
+                            print()
+                            break
+                        elif mode.lower() == "c" or mode.lower() == "crea" or mode.lower() == "create":
+                            math24create()
+                            print()
+                        elif mode.lower() == "s" or mode.lower() == "sol" or mode.lower() == "solve":
+                            math24solve()
+                            print()
+                        else:
+                            print('Please enter either "p" for play, "c" for create, "s" for solve, or return to exit')
+                            continue
                 else:
                     print('Please enter a game, "i" for info, or return to exit')
                     print()
