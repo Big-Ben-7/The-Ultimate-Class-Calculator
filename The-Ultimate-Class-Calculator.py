@@ -2842,6 +2842,7 @@ def main():
                     print()
                 else:
                     print('Please enter a game, "i" for info, or return to exit')
+                    print()
         else:
             print('Please enter a calculation category, "i" for info, or return to exit)')
 
