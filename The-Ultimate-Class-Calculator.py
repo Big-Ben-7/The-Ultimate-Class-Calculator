@@ -1094,11 +1094,11 @@ def real_operation():
             elif op.lower() == "add" or op.lower() == "+":
                 n += n2
                 print()
-                print(f"ans (answer) = {round(n)}")
+                print(f"ans (answer) = {round(n, 12)}")
             elif op.lower() == "subtract" or op.lower() == "-" or op.lower() == "sub":
                 n -= n2
                 print()
-                print(f"ans (answer) = {round(n)}")
+                print(f"ans (answer) = {round(n, 12)}")
             elif op.lower() == "multiply" or op.lower() == "*" or op.lower() == "mul" or op.lower() == "x":
                 n *= n2
                 print()
