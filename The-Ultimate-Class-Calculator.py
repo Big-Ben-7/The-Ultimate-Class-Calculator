@@ -1,4 +1,5 @@
 from math import *
+from random import *
 import cmath
 import types
 
@@ -2597,6 +2598,8 @@ def system():
 def math24play():
     print()
     print("Welcome to Play Math 24!")
+    while True:
+        print()
 
 def math24create():
     print()
