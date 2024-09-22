@@ -568,7 +568,7 @@ def from_polar():
                 im = res.imag
                 print(f"im (imaginary part) = {round(im, 12)}")                
             else:
-                print('Please enter an operation ("i" for info and return to exit)')
+                print('Please enter a valid operation ("i" for info and return to exit)')
         except:
             print("OPERATION ERROR") 
             print("This error occurs when the inputs do not meet their restrictions, for example: ")
@@ -929,7 +929,7 @@ def from_rectangular():
                 else:
                     print(f"ang (angle/argument) = {round(ang, 12)} (degrees)")                    
             else:
-                print('Please enter an operation ("i" for info and return to exit)')
+                print('Please enter a valid operation ("i" for info and return to exit)')
         except:
             print()
             print("OPERATION ERROR") 
@@ -1294,7 +1294,7 @@ def real_operation():
                     else:
                         print(f"ans (answer) = {round(n, 12)} degrees")
             else:
-                print('Please enter an operation ("i" for info and return to exit)')
+                print('Please enter a valid operation ("i" for info and return to exit)')
                 print()
                 continue
             ans = n
