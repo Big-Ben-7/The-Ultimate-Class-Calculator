@@ -1144,7 +1144,10 @@ def real_operation():
             elif op.lower() == "round" or op.lower() == "~" or op.lower() == "rou":
                 if n2 > 12:
                     n2 = 12
-                n = round(n, n2)
+                if n2 == 0:
+                    n = round(n)
+                else:
+                    n = round(n, n2)
                 print()
                 print(f"ans (answer) = {round(n, 12)}")
             elif op.lower() == "factorial" or op.lower() == "!" or op.lower() == "fac":
