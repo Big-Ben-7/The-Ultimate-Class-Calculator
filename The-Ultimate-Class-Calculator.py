@@ -2669,7 +2669,7 @@ def math24play():
                 continue
         if input_sol == "" or input_sol == "exi" or input_sol == "exit":
             break
-        elif sol == "/" or sol == "ski" or sol == "skip":
+        elif input_sol == "/" or input_sol == "ski" or input_sol == "skip":
             continue
         elif input_sol == "c" or input_sol == "cre" or input_sol == "create":
             math24create()
@@ -2858,19 +2858,16 @@ def math24create():
                                                         pass
                                                 tried.append(sorted([number1, number2, number3, number4]))
         print()
-        for a in solutions:
-            print(a, end = ", ")
-        print()
-        #if len(solutions) != 0:
-            #print(f"Possible Math 24 sets:")
-            #for i in range(0, len(solutions)):
-                #res = ""
-                #for b in solutions[i]:
-                    #res += str(b) + ", "
-                #res = res[:len(res) - 2]
-                #print(f"Set {i + 1}: " + res)
-        #else:
-            #print(f"There are no possible Math 24 sets using {input_use}")
+        if len(solutions) != 0:
+            print(f"Possible Math 24 sets:")
+            for i in range(0, len(solutions)):
+                res = ""
+                for b in solutions[i]:
+                    res += str(b) + ", "
+                res = res[:len(res) - 2]
+                print(f"Set {i + 1}: " + res)
+        else:
+            print(f"There are no possible Math 24 sets using {input_use}")
 
 def math24solve():
     print()
@@ -2986,9 +2983,10 @@ def math24solve():
                                             string = "(" + str(number1) + op1 + str(number2) + op2 + str(number3) + ")" + op3 + str(number4)
                                         elif i == 6:
                                             string = str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + op3 + str(number4) + ")"
+                                        string_print = string + " = 24"
                                         try:
-                                            if round(eval(string), 12) == 24:
-                                                solutions.append(string.replace("*", "x") + " = 24")
+                                            if round(eval(string), 12) == 24 and string_print not in solutions:
+                                                solutions.append(string_print)
                                                 if sols != "a":
                                                     if len(solutions) == sols:
                                                         solved = True
@@ -3008,9 +3006,10 @@ def math24solve():
                                         else:
                                             string = "(" + str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + "))" + op3 + str(number4)
                                             string_print = "[" + str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + ")]" + op3 + str(number4)
+                                        string_print += " = 24"
                                         try:
-                                            if round(eval(string), 12) == 24:
-                                                solutions.append(string_print.replace("*", "x") + " = 24")
+                                            if round(eval(string), 12) == 24 and string_print not in solutions:
+                                                solutions.append(string_print)
                                                 if sols != "a":
                                                     if len(solutions) == sols:
                                                         solved = True
