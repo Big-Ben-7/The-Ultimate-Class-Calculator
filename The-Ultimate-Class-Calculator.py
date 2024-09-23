@@ -1,5 +1,5 @@
 from math import *
-from random import *
+import random
 import cmath
 import types
 
@@ -30,7 +30,7 @@ keeps = ["ans", "pi", "e", "tau", "inf", "nan", "infj", "nanj", "keeps", "rl", "
 
 def clear_variables():
     for var in list(globals()):
-        if not var.startswith('_') and var not in keeps and not isinstance(globals()[var], (types.ModuleType, types.FunctionType, types.BuiltinFunctionType, type)):
+        if var not in keeps and not isinstance(globals()[var], (types.ModuleType, types.FunctionType, types.BuiltinFunctionType, type)):
             del globals()[var]
 
 def settings():
@@ -221,7 +221,7 @@ def from_polar():
             math24play()
             break
         try:
-            av = av.replace("^", "**")
+            av = av.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
             av = 0 + eval(av)
             if round(av, 12) < 0:
                 print('Absolute values cannot be negative')
@@ -233,7 +233,7 @@ def from_polar():
         if inang == "" or inang == "exit" or inang == "exi":
             continue
         try:
-            inang = inang.replace("^", "**")
+            inang = inang.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
             inang = 0 + eval(inang)
         except:
             print('Please enter a real number or expression, or return to exit')
@@ -269,7 +269,7 @@ def from_polar():
             if av2 == "" or av2 == "exit" or av2 == "exi":
                 continue
             try:
-                av2 = av2.replace("^", "**")
+                av2 = av2.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                 av2 = 0 + eval(av2)
                 if round(av2, 12) < 0:
                     print('Absolute values cannot be negative')
@@ -281,7 +281,7 @@ def from_polar():
             if inang2 == "" or inang2 == "exit" or inang2 == "exi":
                 continue
             try:
-                inang2 = inang2.replace("^", "**")
+                inang2 = inang2.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                 inang2 = 0 + eval(inang2)
             except:
                 print('Please enter a real number or expression, or return to exit')
@@ -622,7 +622,7 @@ def from_rectangular():
             math24play()
             break
         try:
-            a = a.replace("^", "**")
+            a = a.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
             a = 0 + eval(a)
         except:
             print('Please enter a real number or expression, "i" for info, or return to exit')
@@ -631,7 +631,7 @@ def from_rectangular():
         if b == "" or b == "exit" or b == "exi":
             continue
         try:
-            b = b.replace("^", "**")
+            b = b.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
             b = 0 + eval(b)
         except:
             print('Please enter a real number or expression, or return to exit')
@@ -673,7 +673,7 @@ def from_rectangular():
             if c == "" or c == "exit" or c == "exi":
                 continue
             try:
-                c = c.replace("^", "**")
+                c = c.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                 c = 0 + eval(c)
             except:
                 print('Please enter a real number or expression, or return to exit')
@@ -682,7 +682,7 @@ def from_rectangular():
             if d == "" or d == "exit" or d == "exi":
                 continue
             try:
-                d = d.replace("^", "**")
+                d = d.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                 d = 0 + eval(d)
             except:
                 print('Please enter a real number or expression, or return to exit')
@@ -979,7 +979,7 @@ def real_operation():
             break
         else:
             try:
-                n = n.replace("^", "**")
+                n = n.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                 if (eval(n) == True or eval(n) == False) and (n.find("==") != -1 or n.find("<") != -1 or n.find(">") != -1 or n.find("<=") != -1 or n.find(">=") != -1 or n.find("!=") != -1):
                     print()
                     print(eval(n))
@@ -1016,7 +1016,7 @@ def real_operation():
                     if n2 == "" or n2 == "exit" or n2 == "exi":
                         continue
                     try:
-                        n2 = n2.replace("^", "**")
+                        n2 = n2.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                         n2 = 0 + eval(n2)
                     except:
                         print('Please enter a real number or expression, or return to exit')
@@ -1026,7 +1026,7 @@ def real_operation():
                     if n2 == "" or n2 == "exit" or n2 == "exi":
                         continue
                     try:
-                        n2 = n2.replace("^", "**")
+                        n2 = n2.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                         n2 = 0 + eval(n2)
                         n2 = 0 + integer(n2)
                     except:
@@ -1038,7 +1038,7 @@ def real_operation():
                         if n2 == "" or n2 == "exit" or n2 == "exi":
                             continue
                         try:
-                            n2 = n2.replace("^", "**")
+                            n2 = n2.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                             n2 = 0 + eval(n2)
                         except:
                             print('Please enter a real number or expression greater than 0 and not equal to 1, or return to exit')
@@ -1049,7 +1049,7 @@ def real_operation():
                         if n2 == "" or n2 == "exit" or n2 == "exi":
                             continue
                         try:
-                            n2 = n2.replace("^", "**")
+                            n2 = n2.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                             n2 = 0 + eval(n2)
                         except:
                             print('Please enter a nonnegative integer or return to exit')
@@ -1060,7 +1060,7 @@ def real_operation():
                         if n2 == "" or n2 == "exit" or n2 == "exi":
                             continue
                         try:
-                            n2 = n2.replace("^", "**")
+                            n2 = n2.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                             n2 = 0 + eval(n2)
                         except:
                             print('Please enter a nonnegative integer or return to exit')
@@ -1082,7 +1082,7 @@ def real_operation():
                     if n2 == "" or n2 == "exit" or n2 == "exi":
                         continue
                     try:
-                        n2 = n2.replace("^", "**")
+                        n2 = n2.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                         n2 = 0 + eval(n2)
                     except:
                         print('Please enter a real number or expression, or return to exit')
@@ -1349,7 +1349,7 @@ def binomial_expansion():
             print('Enter "r" for real operations, "a" for arithmetic series, "g" for geometric series, "c" for complex operations (this will direct to rectangular form), "m" for matrix operations, "f" for functions (this will direct to polynomials), and "ga" for games (this will direct to play Math 24)')
             continue
         try:
-            a = a.replace("^", "**")
+            a = a.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
             a = 0 + eval(a)
         except:
             print('Please enter a nonzero real number or expression, "i" for info, or return to exit')
@@ -1380,7 +1380,7 @@ def binomial_expansion():
         if b == "" or b == "exit" or b == "exi":
             continue
         try:
-            b = b.replace("^", "**")
+            b = b.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
             b = 0 + eval(b)
         except:
             print('Please enter a nonzero real number or expression, or return to exit')
@@ -1405,7 +1405,7 @@ def binomial_expansion():
         if c == "" or c == "exit" or c == "exi":
             continue
         try:
-            c = c.replace("^", "**")
+            c = c.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
             c = 0 + eval(c)
         except:
             print('Please enter a nonzero real number or expression, or return to exit')
@@ -1441,7 +1441,7 @@ def binomial_expansion():
             if d == "" or d == "exit" or d == "exi":
                 continue
             try:
-                d = d.replace("^", "**")
+                d = d.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                 d = 0 + eval(d)
             except:
                 print('Please enter a real number or expression, or return to exit')
@@ -1469,7 +1469,7 @@ def binomial_expansion():
         if n == "" or n == "exit" or n == "exi":
             continue
         try:
-            n = n.replace("^", "**")
+            n = n.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
             n = 0 + eval(n)
             n = 0 + integer(n)
             if n < 0:
@@ -1509,7 +1509,7 @@ def binomial_expansion():
             rangelist = unterm.split(":")
             if len(rangelist) == 1:
                 try:
-                    unterm = unterm.replace("^", "**")
+                    unterm = unterm.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                     unterm = 0 + eval(unterm)
                     unterm = 0 + integer(unterm)
                 except:
@@ -1522,8 +1522,8 @@ def binomial_expansion():
                     print(f'"{unterm}" is not a positive integer between 1 and |n| + 1 ({abs(n) + 1}), inclusive')
             elif len(rangelist) == 2:
                 try:
-                    rangelist[0] = rangelist[0].replace("^", "**")
-                    rangelist[1] = rangelist[1].replace("^", "**")
+                    rangelist[0] = rangelist[0].replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
+                    rangelist[1] = rangelist[1].replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                     rangelist[0] = 0 + eval(rangelist[0])
                     rangelist[1] = 0 + eval(rangelist[1])
                     rangelist[0] = 0 + integer(rangelist[0])
@@ -1590,7 +1590,7 @@ def arithmetic():
             if input_sum == "" or input_sum == "exi" or input_sum == "exit" or input_sum == "t" or input_sum == "ter" or input_sum == "terms":
                 continue
             try:
-                input_sum = input_sum.replace("^", "**")
+                input_sum = input_sum.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                 input_sum = 0 + eval(input_sum)
             except:
                 print("Please enter a real number or expression, or return to exit")
@@ -1599,7 +1599,7 @@ def arithmetic():
             if sum_number == "" or sum_number == "exi" or sum_number == "exit":
                 continue
             try:
-                sum_number = sum_number.replace("^", "**")
+                sum_number = sum_number.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                 sum_number = 0 + eval(sum_number)
                 sum_number = 0 + integer(sum_number)
                 if sum_number <= 0:
@@ -1610,7 +1610,7 @@ def arithmetic():
                 continue
         else:
             try:
-                b = b.replace("^", "**")
+                b = b.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                 b = 0 + eval(b)
             except:
                 print('Please enter a real number or expression, "i" for info, or return to exit')
@@ -1619,7 +1619,7 @@ def arithmetic():
             if bn == "" or bn == "exit" or bn == "exi":
                 continue     
             try:
-                bn = bn.replace("^", "**")
+                bn = bn.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                 bn = 0 + eval(bn)
                 bn = 0 + integer(bn)
             except:
@@ -1639,7 +1639,7 @@ def arithmetic():
             if c == "" or c == "exit" or c == "exi":
                 continue
             try:
-                c = c.replace("^", "**")
+                c = c.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                 c = 0 + eval(c)  
             except:
                 print('Please enter a real number or expression, or return to exit')
@@ -1648,7 +1648,7 @@ def arithmetic():
             if cn == "" or cn == "exit" or cn == "exi":
                 continue     
             try:
-                cn = cn.replace("^", "**")
+                cn = cn.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                 cn = 0 + eval(cn)
                 cn = 0 + integer(cn)
             except:
@@ -1662,7 +1662,7 @@ def arithmetic():
             a = b - comdif * (bn - 1)
         else:
             try:
-                comdif = comdif.replace("^", "**")
+                comdif = comdif.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                 comdif = 0 + eval(comdif)
             except:
                 print('Please enter a real number or expression, or return to exit')
@@ -1708,10 +1708,10 @@ def arithmetic():
                 if l == "" or l == "exit" or l == "exi" or l == "n" or l == "num" or l == "number" or l == "number of terms":
                     continue
                 l = l.replace(" ", "")
-                l = l.replace("^", "**")
+                l = l.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                 l = l.split(",")
             else:
-                n = n.replace("^", "**")
+                n = n.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
         while True:
             un = input('Indexes of terms to find (i, /): ')
             if un == "i" or un == "info" or un == "inf":
@@ -1812,7 +1812,7 @@ def arithmetic():
                     print(f'"{number}" is not a range in the form x:y, where y > x')
         if un != "/" and un != "skip" and un != "ski":
             un = un.replace(" ", "")
-            un = un.replace("^", "**")
+            un = un.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
             un = un.split(",")
             for unterm in un:
                 rangelist = unterm.split(":")
@@ -1858,7 +1858,7 @@ def arithmetic():
                     print(f'"{unterm}" is not a range in the form x:y, where y > x')
         if round(comdif, 12) != 0 and iun != "/" and iun != "skip" and iun != "ski":
             iun = iun.replace(" ", "")
-            iun = iun.replace("^", "**")
+            iun = iun.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
             iun = iun.split(",")
             for iunterm in iun:
                 try:
@@ -1918,7 +1918,7 @@ def geometric():
             if input_sum == "" or input_sum == "exi" or input_sum == "exit" or input_sum == "t" or input_sum == "ter" or input_sum == "terms":
                 continue
             try:
-                input_sum = input_sum.replace("^", "**")
+                input_sum = input_sum.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                 input_sum = 0 + eval(input_sum)
                 if round(input_sum, 12) == 0:
                     print("Please enter a nonzero real number or expression, or return to exit")
@@ -1931,7 +1931,7 @@ def geometric():
                 continue
             elif sum_number != "i" and sum_number != "inf" and sum_number != "infinity":
                 try:
-                    sum_number = sum_number.replace("^", "**")
+                    sum_number = sum_number.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                     sum_number = 0 + eval(sum_number)
                     sum_number = 0 + integer(sum_number)
                     if sum_number <= 0:
@@ -1942,7 +1942,7 @@ def geometric():
                     continue
         else:
             try:
-                b = b.replace("^", "**")
+                b = b.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                 b = 0 + eval(b)
                 if round(b, 12) == 0:
                     print('Please enter a nonzero real number or expression, "i" for info, or return to exit')
@@ -1954,7 +1954,7 @@ def geometric():
             if bn == "" or bn == "exit" or bn == "exi":
                 continue
             try:
-                bn = bn.replace("^", "**")
+                bn = bn.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                 bn = 0 + eval(bn)
                 bn = 0 + integer(bn)
             except:
@@ -1974,7 +1974,7 @@ def geometric():
             if c == "" or c == "exit" or c == "exi":
                 continue
             try:
-                c = c.replace("^", "**")
+                c = c.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                 c = 0 + eval(c)  
             except:
                 print('Please enter a nonzero real number or expression, or return to exit')
@@ -1986,7 +1986,7 @@ def geometric():
             if cn == "" or cn == "exit" or cn == "exi":
                 continue
             try:
-                cn = cn.replace("^", "**")
+                cn = cn.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                 cn = 0 + eval(cn)
                 cn = 0 + integer(cn)
             except:
@@ -2006,7 +2006,7 @@ def geometric():
                 continue
         else:
             try:
-                comrat = comrat.replace("^", "**")
+                comrat = comrat.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                 comrat = 0 + eval(comrat)
             except:
                 print('Please enter a nonzero real number or expression, or return to exit')
@@ -2079,10 +2079,10 @@ def geometric():
                 if l == "" or l == "exit" or l == "exi" or l == "n" or l == "num" or l == "number" or l == "number of terms":
                     continue
                 l = l.replace(" ", "")
-                l = l.replace("^", "**")
+                l = l.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                 l = l.split(",")
             else:
-                n = n.replace("^", "**")
+                n = n.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
         while True:
             un = input('Indexes of terms to find (i, /): ')
             if un == "i" or un == "info" or un == "inf":
@@ -2215,7 +2215,7 @@ def geometric():
                     print(f'"{number}" is not a range in the form x:y, where y > x')
         if un != "/" and un != "skip" and un != "ski":
             un = un.replace(" ", "")
-            un = un.replace("^", "**")
+            un = un.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
             un = un.split(",")
             for unterm in un:
                 rangelist = unterm.split(":")
@@ -2261,7 +2261,7 @@ def geometric():
                     print(f'"{unterm}" is not a range in the form x:y, where y > x')
         if round(abs(comrat), 12) != 1 and iun != "/" and iun != "skip" and iun != "ski":
             iun = iun.replace(" ", "")
-            iun = iun.replace("^", "**")
+            iun = iun.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
             iun = iun.split(",")
             for iunterm in iun:
                 try:
@@ -2321,7 +2321,7 @@ def polynomial():
             print('Enter "sys" for system of equations, "c" for conic sections, "s" for symmetry, "o" for operations (this will direct to real operation), and "g" for games (this will direct to play Math 24)')
             continue
         try:
-            a = a.replace("^", "**")
+            a = a.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
             a = 0 + eval(a)
         except:
             print('Please enter a real number or expression, "i" for info, or return to exit')
@@ -2330,7 +2330,7 @@ def polynomial():
         if b == "" or b == "exit" or b == "exi":
             continue
         try:
-            b = b.replace("^", "**")
+            b = b.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
             b = 0 + eval(b)
         except:
             print('Please enter a real number or expression, or return to exit')
@@ -2339,7 +2339,7 @@ def polynomial():
         if c == "" or c == "exit" or c == "exi":
             continue
         try:
-            c = c.replace("^", "**")
+            c = c.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
             c = 0 + eval(c)
         except:
             print('Please enter a real number or expression, or return to exit')
@@ -2427,7 +2427,7 @@ def symmetry():
             m = "0"
         if m != "v" and m != "ver" and m != "vertical" and m != "p" and m != "points" and m != "poi":
             try:
-                m = m.replace("^", "**")
+                m = m.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                 m = 0 + eval(m)
             except:
                 print('Please enter a real number or expression, "i" for info, or return to exit')
@@ -2436,7 +2436,7 @@ def symmetry():
             if b == "" or b == "exit" or b == "exi":
                 continue
             try:
-                b = b.replace("^", "**")
+                b = b.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                 b = 0 + eval(b)
             except:
                 print('Please enter a real number or expression, or return to exit')
@@ -2461,7 +2461,7 @@ def symmetry():
             if p1 == "" or p1 == "exit" or p1 == "exi" or p1 == "s" or p1 == "slo" or p1 == "slope":
                 continue
             p1 = p1.replace(" ", "")
-            p1 = p1.replace("^", "**")
+            p1 = p1.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
             if p1[0] == "(":
                 p1 = p1[1:]
             if p1[len(p1) - 1] == ")":
@@ -2477,7 +2477,7 @@ def symmetry():
             if p2 == "" or p2 == "exit" or p2 == "exi":
                 continue
             p2 = p2.replace(" ", "")
-            p2 = p2.replace("^", "**")            
+            p2 = p2.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")            
             if p2[0] == "(":
                 p2 = p2[1:]
             if p2[len(p2) - 1] == ")":
@@ -2522,7 +2522,7 @@ def symmetry():
             if xint == "" or xint == "exit" or xint == "exi":
                 continue
             try:
-                xint = xint.replace("^", "**")
+                xint = xint.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                 xint = 0 + eval(xint)
             except:
                 print('Please enter a real number or expression, or return to exit')
@@ -2541,7 +2541,7 @@ def symmetry():
             print()
             continue
         reflect = reflect.replace(" ", "")
-        reflect = reflect.replace("^", "**")
+        reflect = reflect.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
         reflect = reflect.split(";")
         for i in range(0, len(reflect)):
             print()
@@ -2601,14 +2601,86 @@ def system():
 def math24play():
     print()
     print("Welcome to Play Math 24!")
+    easy = [[1, 1, 1, 8], [1, 1, 1, 11], [1, 1, 1, 12], [1, 1, 2, 6], [1, 1, 2, 7], [1, 1, 2, 8], [1, 1, 2, 9], [1, 1, 2, 10], [1, 1, 2, 11], [1, 1, 2, 12], [1, 1, 3, 4], [1, 1, 3, 5], [1, 1, 3, 6], [1, 1, 3, 7], [1, 1, 3, 8], [1, 1, 3, 9], [1, 1, 3, 10], [1, 1, 3, 11], [1, 1, 3, 12], [1, 1, 4, 4], [1, 1, 4, 5], [1, 1, 4, 6], [1, 1, 4, 7], [1, 1, 4, 8], [1, 1, 4, 9], [1, 1, 4, 10], [1, 1, 4, 12], [1, 1, 5, 5], [1, 1, 5, 6], [1, 1, 5, 7], [1, 1, 5, 8], [1, 1, 6, 6], [1, 1, 6, 8], [1, 1, 6, 9], [1, 1, 6, 12], [1, 1, 7, 10], [1, 1, 8, 8], [1, 1, 10, 12], [1, 1, 11, 11], [1, 1, 11, 12], [1, 1, 12, 12], [1, 2, 2, 4], [1, 2, 2, 5], [1, 2, 2, 6], [1, 2, 2, 7], [1, 2, 2, 8], [1, 2, 2, 9], [1, 2, 2, 10], [1, 2, 2, 11], [1, 2, 2, 12], [1, 2, 3, 3], [1, 2, 3, 4], [1, 2, 3, 5], [1, 2, 3, 6], [1, 2, 3, 7], [1, 2, 3, 8], [1, 2, 3, 9], [1, 2, 3, 10], [1, 2, 3, 11], [1, 2, 3, 12], [1, 2, 4, 4], [1, 2, 4, 5], [1, 2, 4, 6], [1, 2, 4, 7], [1, 2, 4, 8], [1, 2, 4, 9], [1, 2, 4, 10], [1, 2, 4, 11], [1, 2, 4, 12], [1, 2, 5, 5], [1, 2, 5, 6], [1, 2, 5, 7], [1, 2, 5, 8], [1, 2, 5, 9], [1, 2, 5, 10], [1, 2, 5, 12], [1, 2, 6, 6], [1, 2, 6, 7], [1, 2, 6, 8], [1, 2, 6, 9], [1, 2, 6, 10], [1, 2, 6, 11], [1, 2, 6, 12], [1, 2, 7, 7], [1, 2, 7, 8], [1, 2, 7, 9], [1, 2, 7, 10], [1, 2, 7, 11], [1, 2, 7, 12], [1, 2, 8, 8], [1, 2, 8, 9], [1, 2, 8, 10], [1, 2, 9, 11], [1, 2, 9, 12], [1, 2, 10, 11], [1, 2, 10, 12], [1, 2, 11, 11], [1, 2, 11, 12], [1, 2, 12, 12], [1, 3, 3, 3], [1, 3, 3, 4], [1, 3, 3, 5], [1, 3, 3, 6], [1, 3, 3, 7], [1, 3, 3, 8], [1, 3, 3, 9], [1, 3, 3, 10], [1, 3, 3, 11], [1, 3, 3, 12], [1, 3, 4, 4], [1, 3, 4, 5], [1, 3, 4, 6], [1, 3, 4, 7], [1, 3, 4, 8], [1, 3, 4, 9], [1, 3, 4, 10], [1, 3, 4, 11], [1, 3, 4, 12], [1, 3, 5, 6], [1, 3, 5, 7], [1, 3, 5, 8], [1, 3, 5, 9], [1, 3, 5, 10], [1, 3, 5, 11], [1, 3, 5, 12], [1, 3, 6, 6], [1, 3, 6, 7], [1, 3, 6, 8], [1, 3, 6, 9], [1, 3, 6, 10], [1, 3, 6, 11], [1, 3, 6, 12], [1, 3, 7, 7], [1, 3, 7, 8], [1, 3, 7, 9], [1, 3, 7, 10], [1, 3, 7, 12], [1, 3, 8, 8], [1, 3, 8, 9], [1, 3, 8, 10], [1, 3, 8, 11], [1, 3, 8, 12], [1, 3, 9, 9], [1, 3, 9, 10], [1, 3, 9, 11], [1, 3, 9, 12], [1, 3, 10, 10], [1, 3, 10, 11], [1, 3, 10, 12], [1, 3, 11, 11], [1, 3, 11, 12], [1, 3, 12, 12], [1, 4, 4, 4], [1, 4, 4, 5], [1, 4, 4, 6], [1, 4, 4, 7], [1, 4, 4, 8], [1, 4, 4, 9], [1, 4, 4, 10], [1, 4, 4, 11], [1, 4, 4, 12], [1, 4, 5, 5], [1, 4, 5, 6], [1, 4, 5, 7], [1, 4, 5, 8], [1, 4, 5, 9], [1, 4, 5, 10], [1, 4, 5, 11], [1, 4, 5, 12], [1, 4, 6, 6], [1, 4, 6, 7], [1, 4, 6, 8], [1, 4, 6, 9], [1, 4, 6, 10], [1, 4, 6, 11], [1, 4, 6, 12], [1, 4, 7, 7], [1, 4, 7, 8], [1, 4, 7, 9], [1, 4, 7, 11], [1, 4, 7, 12], [1, 4, 8, 8], [1, 4, 8, 9], [1, 4, 8, 11], [1, 4, 8, 12], [1, 4, 9, 10], [1, 4, 9, 11], [1, 4, 9, 12], [1, 4, 10, 10], [1, 4, 10, 11], [1, 4, 10, 12], [1, 4, 12, 12], [1, 5, 5, 5], [1, 5, 5, 6], [1, 5, 5, 9], [1, 5, 5, 10], [1, 5, 5, 11], [1, 5, 5, 12], [1, 5, 6, 6], [1, 5, 6, 7], [1, 5, 6, 8], [1, 5, 6, 9], [1, 5, 6, 10], [1, 5, 6, 11], [1, 5, 6, 12], [1, 5, 7, 8], [1, 5, 7, 9], [1, 5, 7, 10], [1, 5, 7, 11], [1, 5, 7, 12], [1, 5, 8, 8], [1, 5, 8, 9], [1, 5, 8, 10], [1, 5, 8, 11], [1, 5, 8, 12], [1, 5, 9, 9], [1, 5, 9, 10], [1, 5, 9, 11], [1, 5, 9, 12], [1, 5, 10, 10], [1, 5, 10, 11], [1, 5, 10, 12], [1, 5, 11, 11], [1, 5, 11, 12], [1, 5, 12, 12], [1, 6, 6, 6], [1, 6, 6, 8], [1, 6, 6, 9], [1, 6, 6, 10], [1, 6, 6, 11], [1, 6, 6, 12], [1, 6, 7, 9], [1, 6, 7, 10], [1, 6, 7, 11], [1, 6, 7, 12], [1, 6, 8, 8], [1, 6, 8, 9], [1, 6, 8, 10], [1, 6, 8, 11], [1, 6, 8, 12], [1, 6, 9, 9], [1, 6, 9, 10], [1, 6, 9, 12], [1, 6, 10, 12], [1, 6, 11, 12], [1, 6, 12, 12], [1, 7, 7, 9], [1, 7, 7, 10], [1, 7, 7, 11], [1, 7, 7, 12], [1, 7, 8, 8], [1, 7, 8, 9], [1, 7, 8, 10], [1, 7, 8, 11], [1, 7, 8, 12], [1, 7, 9, 9], [1, 7, 9, 10], [1, 7, 9, 11], [1, 7, 9, 12], [1, 7, 10, 12], [1, 7, 12, 12], [1, 8, 8, 8], [1, 8, 8, 9], [1, 8, 8, 10], [1, 8, 8, 11], [1, 8, 8, 12], [1, 8, 9, 11], [1, 8, 9, 12], [1, 8, 10, 11], [1, 8, 10, 12], [1, 8, 11, 12], [1, 8, 12, 12], [1, 9, 9, 12], [1, 9, 10, 12], [1, 9, 11, 11], [1, 9, 11, 12], [1, 9, 12, 12], [1, 10, 10, 12], [1, 10, 11, 12], [1, 10, 12, 12], [1, 11, 11, 12], [1, 11, 12, 12], [1, 12, 12, 12], [2, 2, 2, 3], [2, 2, 2, 4], [2, 2, 2, 5], [2, 2, 2, 7], [2, 2, 2, 8], [2, 2, 2, 9], [2, 2, 2, 10], [2, 2, 2, 11], [2, 2, 2, 12], [2, 2, 3, 3], [2, 2, 3, 4], [2, 2, 3, 5], [2, 2, 3, 6], [2, 2, 3, 7], [2, 2, 3, 8], [2, 2, 3, 9], [2, 2, 3, 10], [2, 2, 3, 11], [2, 2, 3, 12], [2, 2, 4, 4], [2, 2, 4, 5], [2, 2, 4, 6], [2, 2, 4, 7], [2, 2, 4, 8], [2, 2, 4, 9], [2, 2, 4, 10], [2, 2, 4, 11], [2, 2, 4, 12], [2, 2, 5, 5], [2, 2, 5, 6], [2, 2, 5, 7], [2, 2, 5, 8], [2, 2, 5, 9], [2, 2, 5, 10], [2, 2, 5, 11], [2, 2, 5, 12], [2, 2, 6, 6], [2, 2, 6, 7], [2, 2, 6, 8], [2, 2, 6, 9], [2, 2, 6, 10], [2, 2, 6, 11], [2, 2, 6, 12], [2, 2, 7, 7], [2, 2, 7, 8], [2, 2, 7, 10], [2, 2, 7, 12], [2, 2, 8, 8], [2, 2, 8, 9], [2, 2, 8, 10], [2, 2, 8, 12], [2, 2, 9, 10], [2, 2, 9, 11], [2, 2, 9, 12], [2, 2, 10, 10], [2, 2, 10, 11], [2, 2, 11, 11], [2, 2, 11, 12], [2, 2, 12, 12], [2, 3, 3, 3], [2, 3, 3, 5], [2, 3, 3, 6], [2, 3, 3, 7], [2, 3, 3, 8], [2, 3, 3, 9], [2, 3, 3, 10], [2, 3, 3, 11], [2, 3, 3, 12], [2, 3, 4, 4], [2, 3, 4, 5], [2, 3, 4, 6], [2, 3, 4, 7], [2, 3, 4, 8], [2, 3, 4, 9], [2, 3, 4, 10], [2, 3, 4, 11], [2, 3, 4, 12], [2, 3, 5, 5], [2, 3, 5, 6], [2, 3, 5, 7], [2, 3, 5, 8], [2, 3, 5, 9], [2, 3, 5, 10], [2, 3, 5, 11], [2, 3, 5, 12], [2, 3, 6, 6], [2, 3, 6, 7], [2, 3, 6, 8], [2, 3, 6, 9], [2, 3, 6, 10], [2, 3, 6, 11], [2, 3, 6, 12], [2, 3, 7, 7], [2, 3, 7, 8], [2, 3, 7, 9], [2, 3, 7, 10], [2, 3, 7, 11], [2, 3, 7, 12], [2, 3, 8, 8], [2, 3, 8, 9], [2, 3, 8, 10], [2, 3, 8, 11], [2, 3, 8, 12], [2, 3, 9, 9], [2, 3, 9, 10], [2, 3, 9, 12], [2, 3, 10, 10], [2, 3, 10, 12], [2, 3, 11, 11], [2, 3, 11, 12], [2, 3, 12, 12], [2, 4, 4, 4], [2, 4, 4, 5], [2, 4, 4, 6], [2, 4, 4, 7], [2, 4, 4, 8], [2, 4, 4, 9], [2, 4, 4, 10], [2, 4, 4, 11], [2, 4, 4, 12], [2, 4, 5, 5], [2, 4, 5, 6], [2, 4, 5, 7], [2, 4, 5, 8], [2, 4, 5, 9], [2, 4, 5, 10], [2, 4, 5, 11], [2, 4, 5, 12], [2, 4, 6, 6], [2, 4, 6, 7], [2, 4, 6, 8], [2, 4, 6, 9], [2, 4, 6, 10], [2, 4, 6, 11], [2, 4, 6, 12], [2, 4, 7, 7], [2, 4, 7, 8], [2, 4, 7, 9], [2, 4, 7, 10], [2, 4, 7, 11], [2, 4, 7, 12], [2, 4, 8, 8], [2, 4, 8, 9], [2, 4, 8, 10], [2, 4, 8, 11], [2, 4, 8, 12], [2, 4, 9, 9], [2, 4, 9, 10], [2, 4, 9, 12], [2, 4, 10, 10], [2, 4, 10, 11], [2, 4, 10, 12], [2, 4, 11, 11], [2, 4, 11, 12], [2, 4, 12, 12], [2, 5, 5, 7], [2, 5, 5, 8], [2, 5, 5, 9], [2, 5, 5, 10], [2, 5, 5, 11], [2, 5, 5, 12], [2, 5, 6, 6], [2, 5, 6, 7], [2, 5, 6, 8], [2, 5, 6, 9], [2, 5, 6, 10], [2, 5, 6, 11], [2, 5, 6, 12], [2, 5, 7, 7], [2, 5, 7, 8], [2, 5, 7, 9], [2, 5, 7, 10], [2, 5, 7, 11], [2, 5, 8, 8], [2, 5, 8, 9], [2, 5, 8, 10], [2, 5, 8, 11], [2, 5, 8, 12], [2, 5, 9, 10], [2, 5, 9, 11], [2, 5, 9, 12], [2, 5, 10, 10], [2, 5, 10, 11], [2, 5, 10, 12], [2, 5, 11, 12], [2, 5, 12, 12], [2, 6, 6, 6], [2, 6, 6, 7], [2, 6, 6, 8], [2, 6, 6, 9], [2, 6, 6, 10], [2, 6, 6, 11], [2, 6, 6, 12], [2, 6, 7, 8], [2, 6, 7, 9], [2, 6, 7, 10], [2, 6, 7, 11], [2, 6, 7, 12], [2, 6, 8, 8], [2, 6, 8, 9], [2, 6, 8, 10], [2, 6, 8, 11], [2, 6, 8, 12], [2, 6, 9, 9], [2, 6, 9, 10], [2, 6, 9, 11], [2, 6, 9, 12], [2, 6, 10, 10], [2, 6, 10, 11], [2, 6, 10, 12], [2, 6, 11, 12], [2, 6, 12, 12], [2, 7, 7, 8], [2, 7, 7, 10], [2, 7, 7, 11], [2, 7, 7, 12], [2, 7, 8, 8], [2, 7, 8, 9], [2, 7, 8, 11], [2, 7, 8, 12], [2, 7, 9, 10], [2, 7, 9, 11], [2, 7, 10, 10], [2, 7, 10, 11], [2, 7, 10, 12], [2, 7, 11, 12], [2, 7, 12, 12], [2, 8, 8, 8], [2, 8, 8, 9], [2, 8, 8, 10], [2, 8, 8, 11], [2, 8, 8, 12], [2, 8, 9, 9], [2, 8, 9, 10], [2, 8, 9, 11], [2, 8, 9, 12], [2, 8, 10, 10], [2, 8, 10, 11], [2, 8, 10, 12], [2, 8, 11, 11], [2, 8, 11, 12], [2, 8, 12, 12], [2, 9, 9, 11], [2, 9, 9, 12], [2, 9, 10, 10], [2, 9, 10, 11], [2, 9, 10, 12], [2, 9, 11, 11], [2, 10, 10, 11], [2, 10, 10, 12], [2, 10, 11, 11], [2, 10, 11, 12], [2, 11, 11, 11], [2, 11, 11, 12], [2, 11, 12, 12], [2, 12, 12, 12], [3, 3, 3, 3], [3, 3, 3, 4], [3, 3, 3, 5], [3, 3, 3, 6], [3, 3, 3, 7], [3, 3, 3, 8], [3, 3, 3, 9], [3, 3, 3, 10], [3, 3, 3, 11], [3, 3, 3, 12], [3, 3, 4, 4], [3, 3, 4, 5], [3, 3, 4, 6], [3, 3, 4, 7], [3, 3, 4, 8], [3, 3, 4, 9], [3, 3, 4, 11], [3, 3, 4, 12], [3, 3, 5, 5], [3, 3, 5, 6], [3, 3, 5, 7], [3, 3, 5, 9], [3, 3, 5, 10], [3, 3, 5, 12], [3, 3, 6, 6], [3, 3, 6, 7], [3, 3, 6, 8], [3, 3, 6, 9], [3, 3, 6, 10], [3, 3, 6, 11], [3, 3, 6, 12], [3, 3, 7, 7], [3, 3, 7, 8], [3, 3, 7, 9], [3, 3, 7, 11], [3, 3, 7, 12], [3, 3, 8, 8], [3, 3, 8, 9], [3, 3, 8, 10], [3, 3, 8, 12], [3, 3, 9, 9], [3, 3, 9, 10], [3, 3, 9, 11], [3, 3, 9, 12], [3, 3, 11, 12], [3, 3, 12, 12], [3, 4, 4, 4], [3, 4, 4, 5], [3, 4, 4, 6], [3, 4, 4, 7], [3, 4, 4, 8], [3, 4, 4, 9], [3, 4, 4, 10], [3, 4, 4, 11], [3, 4, 4, 12], [3, 4, 5, 5], [3, 4, 5, 6], [3, 4, 5, 7], [3, 4, 5, 8], [3, 4, 5, 9], [3, 4, 5, 10], [3, 4, 5, 11], [3, 4, 5, 12], [3, 4, 6, 6], [3, 4, 6, 8], [3, 4, 6, 9], [3, 4, 6, 10], [3, 4, 6, 11], [3, 4, 6, 12], [3, 4, 7, 7], [3, 4, 7, 8], [3, 4, 7, 9], [3, 4, 7, 10], [3, 4, 7, 11], [3, 4, 7, 12], [3, 4, 8, 9], [3, 4, 8, 10], [3, 4, 8, 11], [3, 4, 8, 12], [3, 4, 9, 9], [3, 4, 9, 11], [3, 4, 9, 12], [3, 4, 10, 10], [3, 4, 10, 12], [3, 4, 11, 12], [3, 4, 12, 12], [3, 5, 5, 6], [3, 5, 5, 7], [3, 5, 5, 8], [3, 5, 5, 9], [3, 5, 5, 11], [3, 5, 5, 12], [3, 5, 6, 6], [3, 5, 6, 7], [3, 5, 6, 8], [3, 5, 6, 9], [3, 5, 6, 10], [3, 5, 6, 11], [3, 5, 6, 12], [3, 5, 7, 8], [3, 5, 7, 9], [3, 5, 7, 10], [3, 5, 7, 11], [3, 5, 7, 12], [3, 5, 8, 8], [3, 5, 8, 9], [3, 5, 8, 11], [3, 5, 8, 12], [3, 5, 9, 9], [3, 5, 9, 10], [3, 5, 9, 12], [3, 5, 10, 10], [3, 5, 10, 11], [3, 5, 10, 12], [3, 5, 11, 11], [3, 5, 11, 12], [3, 5, 12, 12], [3, 6, 6, 6], [3, 6, 6, 7], [3, 6, 6, 8], [3, 6, 6, 9], [3, 6, 6, 10], [3, 6, 6, 11], [3, 6, 6, 12], [3, 6, 7, 7], [3, 6, 7, 8], [3, 6, 7, 9], [3, 6, 7, 10], [3, 6, 7, 12], [3, 6, 8, 8], [3, 6, 8, 9], [3, 6, 8, 10], [3, 6, 8, 12], [3, 6, 9, 9], [3, 6, 9, 10], [3, 6, 9, 11], [3, 6, 9, 12], [3, 6, 10, 10], [3, 6, 10, 11], [3, 6, 10, 12], [3, 6, 11, 11], [3, 6, 11, 12], [3, 6, 12, 12], [3, 7, 7, 7], [3, 7, 7, 8], [3, 7, 7, 9], [3, 7, 7, 10], [3, 7, 7, 12], [3, 7, 8, 8], [3, 7, 8, 9], [3, 7, 8, 11], [3, 7, 8, 12], [3, 7, 9, 9], [3, 7, 9, 10], [3, 7, 9, 11], [3, 7, 9, 12], [3, 7, 10, 10], [3, 7, 10, 11], [3, 7, 11, 11], [3, 7, 11, 12], [3, 7, 12, 12], [3, 8, 8, 8], [3, 8, 8, 9], [3, 8, 8, 10], [3, 8, 8, 11], [3, 8, 8, 12], [3, 8, 9, 9], [3, 8, 9, 10], [3, 8, 9, 11], [3, 8, 9, 12], [3, 8, 10, 10], [3, 8, 10, 11], [3, 8, 10, 12], [3, 8, 11, 11], [3, 8, 11, 12], [3, 8, 12, 12], [3, 9, 9, 9], [3, 9, 9, 10], [3, 9, 9, 11], [3, 9, 9, 12], [3, 9, 10, 10], [3, 9, 10, 11], [3, 9, 10, 12], [3, 9, 11, 11], [3, 9, 11, 12], [3, 9, 12, 12], [3, 10, 10, 12], [3, 10, 11, 12], [3, 11, 11, 12], [3, 11, 12, 12], [3, 12, 12, 12], [4, 4, 4, 4], [4, 4, 4, 5], [4, 4, 4, 6], [4, 4, 4, 7], [4, 4, 4, 8], [4, 4, 4, 9], [4, 4, 4, 10], [4, 4, 4, 11], [4, 4, 4, 12], [4, 4, 5, 5], [4, 4, 5, 6], [4, 4, 5, 7], [4, 4, 5, 8], [4, 4, 5, 10], [4, 4, 5, 11], [4, 4, 5, 12], [4, 4, 6, 8], [4, 4, 6, 9], [4, 4, 6, 10], [4, 4, 6, 11], [4, 4, 6, 12], [4, 4, 7, 7], [4, 4, 7, 8], [4, 4, 7, 9], [4, 4, 7, 10], [4, 4, 7, 12], [4, 4, 8, 8], [4, 4, 8, 9], [4, 4, 8, 10], [4, 4, 8, 11], [4, 4, 8, 12], [4, 4, 9, 11], [4, 4, 9, 12], [4, 4, 10, 10], [4, 4, 10, 12], [4, 4, 11, 12], [4, 4, 12, 12], [4, 5, 5, 5], [4, 5, 5, 6], [4, 5, 5, 7], [4, 5, 5, 8], [4, 5, 5, 9], [4, 5, 5, 10], [4, 5, 6, 6], [4, 5, 6, 7], [4, 5, 6, 8], [4, 5, 6, 9], [4, 5, 6, 10], [4, 5, 6, 11], [4, 5, 6, 12], [4, 5, 7, 7], [4, 5, 7, 8], [4, 5, 7, 9], [4, 5, 7, 10], [4, 5, 7, 11], [4, 5, 7, 12], [4, 5, 8, 8], [4, 5, 8, 9], [4, 5, 8, 10], [4, 5, 8, 11], [4, 5, 8, 12], [4, 5, 9, 9], [4, 5, 9, 10], [4, 5, 9, 12], [4, 5, 10, 10], [4, 5, 10, 11], [4, 5, 10, 12], [4, 5, 11, 11], [4, 5, 11, 12], [4, 5, 12, 12], [4, 6, 6, 6], [4, 6, 6, 7], [4, 6, 6, 8], [4, 6, 6, 9], [4, 6, 6, 10], [4, 6, 6, 12], [4, 6, 7, 7], [4, 6, 7, 8], [4, 6, 7, 9], [4, 6, 7, 10], [4, 6, 7, 12], [4, 6, 8, 8], [4, 6, 8, 9], [4, 6, 8, 10], [4, 6, 8, 12], [4, 6, 9, 9], [4, 6, 9, 10], [4, 6, 9, 12], [4, 6, 10, 10], [4, 6, 10, 11], [4, 6, 10, 12], [4, 6, 11, 11], [4, 6, 11, 12], [4, 6, 12, 12], [4, 7, 7, 7], [4, 7, 7, 8], [4, 7, 7, 11], [4, 7, 8, 8], [4, 7, 8, 9], [4, 7, 8, 10], [4, 7, 8, 11], [4, 7, 8, 12], [4, 7, 9, 9], [4, 7, 9, 10], [4, 7, 9, 11], [4, 7, 9, 12], [4, 7, 10, 10], [4, 7, 10, 11], [4, 7, 10, 12], [4, 7, 11, 11], [4, 7, 11, 12], [4, 7, 12, 12], [4, 8, 8, 8], [4, 8, 8, 9], [4, 8, 8, 10], [4, 8, 8, 11], [4, 8, 8, 12], [4, 8, 9, 9], [4, 8, 9, 10], [4, 8, 9, 11], [4, 8, 9, 12], [4, 8, 10, 10], [4, 8, 10, 11], [4, 8, 10, 12], [4, 8, 11, 11], [4, 8, 11, 12], [4, 8, 12, 12], [4, 9, 9, 10], [4, 9, 9, 12], [4, 9, 10, 11], [4, 9, 10, 12], [4, 9, 11, 11], [4, 9, 11, 12], [4, 9, 12, 12], [4, 10, 10, 11], [4, 10, 10, 12], [4, 10, 11, 12], [4, 10, 12, 12], [4, 12, 12, 12], [5, 5, 5, 5], [5, 5, 5, 6], [5, 5, 5, 9], [5, 5, 5, 12], [5, 5, 6, 6], [5, 5, 6, 7], [5, 5, 6, 8], [5, 5, 6, 11], [5, 5, 7, 7], [5, 5, 7, 8], [5, 5, 7, 10], [5, 5, 7, 11], [5, 5, 8, 8], [5, 5, 8, 9], [5, 5, 8, 10], [5, 5, 8, 11], [5, 5, 8, 12], [5, 5, 9, 9], [5, 5, 9, 10], [5, 5, 9, 11], [5, 5, 10, 10], [5, 5, 10, 11], [5, 5, 11, 11], [5, 5, 11, 12], [5, 5, 12, 12], [5, 6, 6, 6], [5, 6, 6, 7], [5, 6, 6, 8], [5, 6, 6, 9], [5, 6, 6, 10], [5, 6, 6, 12], [5, 6, 7, 7], [5, 6, 7, 8], [5, 6, 7, 9], [5, 6, 7, 12], [5, 6, 8, 8], [5, 6, 8, 9], [5, 6, 8, 10], [5, 6, 8, 12], [5, 6, 9, 9], [5, 6, 9, 10], [5, 6, 9, 11], [5, 6, 9, 12], [5, 6, 10, 10], [5, 6, 10, 11], [5, 6, 10, 12], [5, 6, 11, 11], [5, 6, 11, 12], [5, 6, 12, 12], [5, 7, 7, 9], [5, 7, 7, 10], [5, 7, 7, 11], [5, 7, 8, 8], [5, 7, 8, 9], [5, 7, 8, 10], [5, 7, 9, 10], [5, 7, 9, 11], [5, 7, 9, 12], [5, 7, 10, 10], [5, 7, 10, 11], [5, 7, 10, 12], [5, 7, 11, 11], [5, 7, 12, 12], [5, 8, 8, 8], [5, 8, 8, 9], [5, 8, 8, 10], [5, 8, 9, 11], [5, 8, 9, 12], [5, 8, 10, 11], [5, 8, 10, 12], [5, 8, 11, 12], [5, 8, 12, 12], [5, 9, 9, 11], [5, 9, 9, 12], [5, 9, 10, 10], [5, 9, 10, 11], [5, 9, 12, 12], [5, 10, 10, 11], [5, 10, 10, 12], [5, 10, 11, 11], [5, 11, 12, 12], [6, 6, 6, 6], [6, 6, 6, 8], [6, 6, 6, 9], [6, 6, 6, 10], [6, 6, 6, 11], [6, 6, 6, 12], [6, 6, 7, 9], [6, 6, 7, 10], [6, 6, 7, 11], [6, 6, 7, 12], [6, 6, 8, 8], [6, 6, 8, 9], [6, 6, 8, 10], [6, 6, 8, 11], [6, 6, 8, 12], [6, 6, 9, 10], [6, 6, 9, 11], [6, 6, 9, 12], [6, 6, 10, 12], [6, 6, 11, 12], [6, 6, 12, 12], [6, 7, 7, 10], [6, 7, 7, 11], [6, 7, 8, 9], [6, 7, 8, 10], [6, 7, 8, 11], [6, 7, 8, 12], [6, 7, 9, 9], [6, 7, 9, 12], [6, 7, 10, 10], [6, 7, 10, 12], [6, 7, 11, 11], [6, 7, 11, 12], [6, 7, 12, 12], [6, 8, 8, 8], [6, 8, 8, 9], [6, 8, 8, 10], [6, 8, 8, 11], [6, 8, 8, 12], [6, 8, 9, 9], [6, 8, 9, 10], [6, 8, 9, 11], [6, 8, 9, 12], [6, 8, 10, 11], [6, 8, 10, 12], [6, 8, 11, 11], [6, 8, 11, 12], [6, 8, 12, 12], [6, 9, 9, 10], [6, 9, 9, 11], [6, 9, 9, 12], [6, 9, 10, 11], [6, 9, 10, 12], [6, 9, 11, 12], [6, 9, 12, 12], [6, 10, 10, 10], [6, 10, 11, 12], [6, 10, 12, 12], [6, 11, 11, 12], [6, 11, 12, 12], [6, 12, 12, 12], [7, 7, 7, 12], [7, 7, 8, 11], [7, 7, 9, 10], [7, 7, 11, 12], [7, 7, 12, 12], [7, 8, 8, 9], [7, 8, 8, 10], [7, 8, 8, 11], [7, 8, 8, 12], [7, 8, 9, 10], [7, 8, 9, 12], [7, 8, 10, 10], [7, 8, 10, 11], [7, 8, 11, 12], [7, 8, 12, 12], [7, 9, 10, 11], [7, 9, 10, 12], [7, 9, 11, 11], [7, 9, 11, 12], [7, 9, 12, 12], [7, 10, 10, 11], [7, 10, 10, 12], [7, 10, 12, 12], [8, 8, 8, 10], [8, 8, 8, 11], [8, 8, 8, 12], [8, 8, 9, 11], [8, 8, 9, 12], [8, 8, 10, 12], [8, 8, 11, 12], [8, 8, 12, 12], [8, 9, 9, 12], [8, 9, 10, 12], [8, 9, 11, 11], [8, 9, 11, 12], [8, 9, 12, 12], [8, 10, 10, 12], [8, 10, 11, 11], [8, 10, 12, 12], [8, 11, 12, 12], [9, 9, 9, 12], [9, 9, 11, 12], [9, 9, 12, 12], [9, 10, 11, 12], [9, 10, 12, 12], [9, 11, 11, 11], [9, 11, 12, 12], [9, 12, 12, 12], [10, 10, 10, 12], [10, 10, 11, 12], [10, 10, 12, 12], [10, 11, 11, 12], [10, 11, 12, 12], [10, 12, 12, 12], [11, 11, 11, 12], [11, 11, 12, 12], [11, 12, 12, 12], [12, 12, 12, 12]]
     while True:
+        clear_variables()
         print()
-
+        numbers = easy[random.randrange(0, len(easy))]
+        print_numbers = ""
+        for number in numbers:
+            print_numbers += str(number) + ", "
+        print("Numbers: " + print_numbers[:len(print_numbers) - 2])
+        while True:
+            print()
+            input_sol = input("Solution (i): ")
+            if input_sol == "" or input_sol == "exi" or input_sol == "exit" or input_sol == "c" or input_sol == "cre" or input_sol == "create" or input_sol == "s" or input_sol == "sol" or input_sol == "solve" or input_sol == "o" or input_sol == "ope" or input_sol == "operations" or input_sol == "f" or input_sol == "fun" or input_sol == "functions":
+                break
+            elif input_sol == "i" or input_sol == "inf" or input_sol == "info":
+                print()
+                print("Math 24 is a game where players try to create the number 24 using 4 numbers and the 4 operations (+, -, *, /)")
+                print("Enter a solution with each of the 4 numbers used once and any 3 operations, using parenthesis to change order")
+                print('Eg. with the numbers 1, 5, 5, and 5, one solution is "5 * (5 - 1/5)"')
+                print('Enter "c" for create, "s" for solve, "o" for operations (this will direct to real operations) and "f" for functions (this will direct to polynomials)')
+                continue
+            sol = input_sol.replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")").replace(" ", "").replace("+", " + ").replace("-", " - ").replace("/", " / ").replace("*", " * ")
+            counter_list = sol.split(" ")
+            counter = 0
+            valid = True
+            for a in counter_list:
+                a = a.replace("(", "").replace(")", "")
+                if a in ["+", "-", "/", "*"]:
+                    counter += 1
+                elif a not in [str(numbers[0]), str(numbers[1]), str(numbers[2]), str(numbers[3])]:
+                    valid = False
+            print(sol)
+            print(counter_list)
+            print(valid)
+            print(counter)
+            print(counter_list.count(str(numbers[0])))
+            print(counter_list.count(str(numbers[1])))
+            print(counter_list.count(str(numbers[2])))
+            print(counter_list.count(str(numbers[3])))
+            print(counter_list.count("("))
+            print(counter_list.count(")"))
+            if counter == 3 and counter_list.count(str(numbers[0])) == numbers.count(numbers[0]) and counter_list.count(str(numbers[1])) == numbers.count(numbers[1]) and counter_list.count(str(numbers[2])) == numbers.count(numbers[2]) and counter_list.count(str(numbers[3])) == numbers.count(numbers[3]) and counter_list.count("(") == counter_list.count(")") and valid == True:
+                try:
+                    if round(eval(sol), 12) == 24:
+                        print()
+                        print(sol + " = 24")
+                        print("Solved!")
+                        break
+                    else:
+                        print()
+                        print(sol + f" = {round(eval(sol), 12)}, not 24")
+                        print("Try again!")
+                        continue
+                except:
+                    print("The expression could not be evaluated")
+                    print('Please enter a valid solution, "i" for info, or return to exit')
+                    continue
+            else:
+                print('Please enter a valid solution, "i" for info, or return to exit')
+                continue
+        if input_sol == "" or input_sol == "exi" or input_sol == "exit":
+            break
+        if sol == "c" or sol == "cre" or sol == "create":
+            math24create()
+            break
+        elif sol == "s" or sol == "sol" or sol == "solve":
+            math24solve()
+            break
+        elif sol == "o" or sol == "ope" or sol == "operations":
+            real_operation()
+            break
+        elif sol == "f" or sol == "fun" or sol == "functions":
+            polynomial()
+            break
+            
 def math24create():
     print()
     print("Welcome to Create Math 24!")
     while True:
-        clear_variables
+        clear_variables()
         print()
         tried = []
         solutions = []
@@ -2635,7 +2707,7 @@ def math24create():
         elif input_use == "f" or input_use == "fun" or input_use == "functions":
             polynomial()
             break
-        use = input_use.replace("^", "**").replace(" ", "").split(",")
+        use = input_use.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")").replace(" ", "").split(",")
         fuse = []
         back = False
         for item in use:
@@ -2746,61 +2818,51 @@ def math24create():
                                                 number2 = numbers2[i2]
                                                 number1 = numbers[i1]
                                                 for i in range(0, 11):
-                                                    if i <= 6:
-                                                        if i == 0:
-                                                            string = str(number1) + op1 + str(number2) + op2 + str(number3) + op3 + str(number4)
-                                                        elif i == 1:
-                                                            string = "(" + str(number1) + op1 + str(number2) + ")" + op2 + str(number3) + op3 + str(number4)
-                                                        elif i == 2:
-                                                            string = str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + ")" + op3 + str(number4)
-                                                        elif i == 3:
-                                                            string = str(number1) + op1 + str(number2) + op2 + "(" + str(number3) + op3 + str(number4) + ")"
-                                                        elif i == 4:
-                                                            string = "(" + str(number1) + op1 + str(number2) + ")" + op2 + "(" + str(number3) + op3 + str(number4) + ")"
-                                                        elif i == 5:
-                                                            string = "(" + str(number1) + op1 + str(number2) + op2 + str(number3) + ")" + op3 + str(number4)
-                                                        elif i == 6:
-                                                            string = str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + op3 + str(number4) + ")"
-                                                        try:
-                                                            if round(eval(string), 12) == 24:
-                                                                tried.append(sorted([number1, number2, number3, number4]))
-                                                                solutions.append(sorted([number1, number2, number3, number4]))
-                                                                solved = True
-                                                                break
-                                                        except:
-                                                            pass
+                                                    if i == 0:
+                                                        string = str(number1) + op1 + str(number2) + op2 + str(number3) + op3 + str(number4)
+                                                    elif i == 1:
+                                                        string = "(" + str(number1) + op1 + str(number2) + ")" + op2 + str(number3) + op3 + str(number4)
+                                                    elif i == 2:
+                                                        string = str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + ")" + op3 + str(number4)
+                                                    elif i == 3:
+                                                        string = str(number1) + op1 + str(number2) + op2 + "(" + str(number3) + op3 + str(number4) + ")"
+                                                    elif i == 4:
+                                                        string = "(" + str(number1) + op1 + str(number2) + ")" + op2 + "(" + str(number3) + op3 + str(number4) + ")"
+                                                    elif i == 5:
+                                                        string = "(" + str(number1) + op1 + str(number2) + op2 + str(number3) + ")" + op3 + str(number4)
+                                                    elif i == 6:
+                                                        string = str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + op3 + str(number4) + ")"
+                                                    elif i == 7:
+                                                        string = "((" + str(number1) + op1 + str(number2) + ")" + op2 + str(number3) + ")" + op3 + str(number4)
+                                                    elif i == 8:
+                                                        string = str(number1) + op1 + "(" + str(number2) + op2 + "(" + str(number3) + op3 + str(number4) + "))"
+                                                    elif i == 9:
+                                                        string = str(number1) + op1 + "((" + str(number2) + op2 + str(number3) + ")" + op3 + str(number4) + ")"
                                                     else:
-                                                        if i == 7:
-                                                            string = "((" + str(number1) + op1 + str(number2) + ")" + op2 + str(number3) + ")" + op3 + str(number4)
-                                                            string_print = "[(" + str(number1) + op1 + str(number2) + ")" + op2 + str(number3) + "]" + op3 + str(number4)
-                                                        elif i == 8:
-                                                            string = str(number1) + op1 + "(" + str(number2) + op2 + "(" + str(number3) + op3 + str(number4) + "))"
-                                                            string_print = str(number1) + op1 + "[" + str(number2) + op2 + "(" + str(number3) + op3 + str(number4) + ")]"
-                                                        elif i == 9:
-                                                            string = str(number1) + op1 + "((" + str(number2) + op2 + str(number3) + ")" + op3 + str(number4) + ")"
-                                                            string_print = str(number1) + op1 + "[(" + str(number2) + op2 + str(number3) + ")" + op3 + str(number4) + "]"
-                                                        else:
-                                                            string = "(" + str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + "))" + op3 + str(number4)
-                                                            string_print = "[" + str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + ")]" + op3 + str(number4)
-                                                        try:
-                                                            if round(eval(string), 12) == 24:
-                                                                solutions.append(sorted([number1, number2, number3, number4]))
-                                                                solved = True
-                                                                break
-                                                        except:
-                                                            pass
+                                                        string = "(" + str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + "))" + op3 + str(number4)
+                                                    try:
+                                                        if round(eval(string), 12) == 24:
+                                                            tried.append(sorted([number1, number2, number3, number4]))
+                                                            solutions.append(sorted([number1, number2, number3, number4]))
+                                                            solved = True
+                                                            break
+                                                    except:
+                                                        pass
                                                 tried.append(sorted([number1, number2, number3, number4]))
         print()
-        if len(solutions) != 0:
-            print(f"Possible Math 24 sets:")
-            for i in range(0, len(solutions)):
-                res = ""
-                for b in solutions[i]:
-                    res += str(b) + ", "
-                res = res[:len(res) - 2]
-                print(f"Set {i + 1}: " + res)
-        else:
-            print(f"There are no possible Math 24 sets using {input_use}")
+        for a in solutions:
+            print(a, end = ", ")
+        print()
+        #if len(solutions) != 0:
+            #print(f"Possible Math 24 sets:")
+            #for i in range(0, len(solutions)):
+                #res = ""
+                #for b in solutions[i]:
+                    #res += str(b) + ", "
+                #res = res[:len(res) - 2]
+                #print(f"Set {i + 1}: " + res)
+        #else:
+            #print(f"There are no possible Math 24 sets using {input_use}")
 
 def math24solve():
     print()
@@ -2813,10 +2875,8 @@ def math24solve():
             break
         elif numbers == "i" or numbers == "info" or numbers == "inf":
             print()
-            print("Math 24 is a game where players try to create 24 using 4 numbers and the 4 operations (+, -, *, /)")
-            print("Each number can be used once and in any order and each operation can be used in any amount or order")
-            print("For the Math 24 Solver, enter the 4 numbers to create 24 in a list separated by commas")
-            print('Eg. with the numbers "2, 3, 5, 6", one solution (there are many solutions) is 5 * 6 - 2 * 3 (= 30 - 6 = 24)')    
+            print("Enter the 4 numbers to create 24 in a list separated by commas")
+            print('Eg. with the numbers "1, 5, 5, 5", one solution is 5 * (5 - 1/5) = 24')    
             print('Enter "p" for play, "c" for create, "o" for operations (this will direct to real operations) and "f" for functions (this will direct to polynomials)')
             continue
         elif numbers == "o" or numbers == "ope" or numbers == "operations":
@@ -2828,11 +2888,11 @@ def math24solve():
         elif numbers == "p" or numbers == "pla" or numbers == "play":
             math24play()
             break
-        elif numbers == "c" or numbers == "crea" or numbers == "create":
+        elif numbers == "c" or numbers == "cre" or numbers == "create":
             math24create()
             break
         numbers = numbers.replace(" ", "")
-        numbers = numbers.replace("^", "**")
+        numbers = numbers.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
         numbers = numbers.split(",")
         if len(numbers) != 4:
             print('Please enter a list of 4 real numbers or expressions, "i" for info, or return to exit')
@@ -3071,7 +3131,10 @@ def main():
                         if mode.lower() == "" or mode.lower() == "exit" or mode.lower() == "exi":
                             print()
                             break
-                        elif mode.lower() == "c" or mode.lower() == "crea" or mode.lower() == "create":
+                        elif mode.lower() == "p" or mode.lower() == "play" or mode.lower() == "pla":
+                            math24play()
+                            print()
+                        elif mode.lower() == "c" or mode.lower() == "cre" or mode.lower() == "create":
                             math24create()
                             print()
                         elif mode.lower() == "s" or mode.lower() == "sol" or mode.lower() == "solve":
