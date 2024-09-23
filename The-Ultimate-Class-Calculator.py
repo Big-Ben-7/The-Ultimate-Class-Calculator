@@ -2626,11 +2626,24 @@ def math24play():
             counter_list = sol.split(" ")
             counter = 0
             valid = True
+            counter0 = 0
+            counter1 = 0
+            counter2 = 0
+            counter3 = 0
             for a in counter_list:
                 a = a.replace("(", "").replace(")", "")
+                print(a)
                 if a in ["+", "-", "/", "*"]:
                     counter += 1
-                elif a not in [str(numbers[0]), str(numbers[1]), str(numbers[2]), str(numbers[3])]:
+                elif a == str(numbers[0]):
+                    counter0 += 1
+                elif a == str(numbers[1]):
+                    counter1 += 1
+                elif a == str(numbers[2]):
+                    counter2 += 1
+                elif a == str(numbers[3]):
+                    counter3 += 1
+                elif a != "":
                     valid = False
             print(sol)
             print(counter_list)
@@ -2642,7 +2655,7 @@ def math24play():
             print(counter_list.count(str(numbers[3])))
             print(counter_list.count("("))
             print(counter_list.count(")"))
-            if counter == 3 and counter_list.count(str(numbers[0])) == numbers.count(numbers[0]) and counter_list.count(str(numbers[1])) == numbers.count(numbers[1]) and counter_list.count(str(numbers[2])) == numbers.count(numbers[2]) and counter_list.count(str(numbers[3])) == numbers.count(numbers[3]) and counter_list.count("(") == counter_list.count(")") and valid == True:
+            if counter == 3 and counter0 == numbers.count(numbers[0]) and counter1 == numbers.count(numbers[1]) and counter2 == numbers.count(numbers[2]) and counter3 == numbers.count(numbers[3]) and valid == True:
                 try:
                     if round(eval(sol), 12) == 24:
                         print()
