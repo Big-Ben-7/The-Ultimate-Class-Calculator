@@ -2634,7 +2634,6 @@ def math24play():
             counter3 = 0
             for a in counter_list:
                 a = a.replace("(", "").replace(")", "")
-                print(a)
                 if a in ["+", "-", "/", "*"]:
                     counter += 1
                 elif a in [str(numbers[0]), str(numbers[1]), str(numbers[2]), str(numbers[3])]:
