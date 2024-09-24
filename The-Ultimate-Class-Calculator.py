@@ -3029,7 +3029,7 @@ def math24create():
                 print(f"Set {i + 1}: " + res)'''
                 print(solutions[i], end = ", ")
         else:
-            print(f"There are no possible Math 24 sets using {input_use} and {input_ops}")
+            print(f"There are no possible Math 24 sets using the entered numbers and operations")
 
 def math24solve():
     print()
@@ -3064,6 +3064,29 @@ def math24solve():
         if len(numbers) != 4:
             print('Please enter a list of 4 real numbers or expressions, "i" for info, or return to exit')
             continue
+        input_ops = input("Operations to use (i): ")
+        if input_ops in ["", "exit", "exi"]:
+            continue
+        elif input_ops in ["i", "inf", "info"]:
+            print()
+            print("Enter a list of operations (+, -, *, /) separated by commas")
+            print("The order will also generally determine the order of the outputted solutions")
+            print('Eg. "+, *" will output possible Math 24 sets using only addition and/or multiplication, and will prioritize outputting solutions with addition')
+            print('Enter "a" to use all operations')
+            continue
+        elif input_ops == "a" or input_ops == "all":
+            input_ops = "+, -, *, /"
+        input_ops = input_ops.replace(" ", "").split(",")
+        ops = []
+        restart = False
+        for operation in input_ops:
+            if operation not in ["+", "-", "*", "/"]:
+                restart = True
+                break
+            ops.append(" " + operation + " ")
+        if restart == True:
+            print('Please enter a valid input, "i" for info, or return to exit')
+            continue
         sols = input("Number of solutions to find (a for all): ")
         if sols == "" or sols == "exit" or sols == "exi":
             continue
@@ -3078,7 +3101,6 @@ def math24solve():
             except:
                 print('Please enter a positive integer, "a" for all, or return to exit')
                 continue
-        ops = [" + ", " - ", " * ", " / "]
         solutions = []
         previous = []
         solved = False
@@ -3175,7 +3197,7 @@ def math24solve():
                                             pass
         if solutions == []:
             print()
-            print("There are no possible ways to create 24 with the entered numbers")
+            print("There are no possible ways to create 24 with the entered numbers and operations")
         else:
             print()
             for i in range(0, len(solutions)):
@@ -3184,14 +3206,14 @@ def math24solve():
                 print()
                 if len(solutions) == 1:
                     if sols == "a":
-                        print(f"There is 1 way to create 24 with the entered numbers")
+                        print(f"There is 1 way to create 24 with the entered numbers and operations")
                     else:
-                        print(f"There is only 1 way to create 24 with the entered numbers")
+                        print(f"There is only 1 way to create 24 with the entered numbers and operations")
                 else:
                     if sols == "a":
-                        print(f"There are {len(solutions)} ways to create 24 with the entered numbers")
+                        print(f"There are {len(solutions)} ways to create 24 with the entered numbers and operations")
                     else:
-                        print(f"There are only {len(solutions)} ways to create 24 with the entered numbers")'''
+                        print(f"There are only {len(solutions)} ways to create 24 with the entered numbers and operations")'''
 
 def main():
     global ans
