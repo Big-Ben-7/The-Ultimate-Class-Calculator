@@ -2612,6 +2612,89 @@ def math24play():
             print_numbers += str(number) + ", "
         print()
         print(f"Round {runs}: " + print_numbers[:len(print_numbers) - 2])
+        ops = [" + ", " - ", " * ", " / "]
+        solved = False
+        for i in range(0, 11):
+            if solved == True:
+                break
+            for i1 in range(0, len(numbers)):
+                if solved == True:
+                    break
+                for op1 in ops:
+                    if solved == True:
+                        break
+                    numbers2 = numbers
+                    if i1 == len(numbers) - 1:
+                        numbers2 = numbers2[:i1]
+                    elif i1 == 0:
+                        numbers2 = numbers2[1:]
+                    else:
+                        numbers2 = numbers2[:i1] + numbers2[i1 + 1:]
+                    for i2 in range(0, len(numbers2)):
+                        if solved == True:
+                            break
+                        for op2 in ops:
+                            if solved == True:
+                                break
+                            numbers3 = numbers2
+                            if i2 == len(numbers2) - 1:
+                                numbers3 = numbers3[:i2]
+                            elif i2 == 0:
+                                numbers3 = numbers3[1:]
+                            else:
+                                numbers3 = numbers3[:i2] + numbers3[i2 + 1:]
+                            for i3 in range(0, len(numbers3)):
+                                if solved == True:
+                                    break
+                                for op3 in ops:
+                                    numbers4 = numbers3
+                                    if i3 == len(numbers3) - 1:
+                                        numbers4 = numbers4[:i3]
+                                    elif i3 == 0:
+                                        numbers4 = numbers4[1:]
+                                    else:
+                                        numbers4 = numbers4[:i3] + numbers2[i3 + 1:]
+                                    number4 = 0 + eval(str(numbers4[0]))
+                                    number3 = 0 + eval(str(numbers3[i3]))
+                                    number2 = 0 + eval(str(numbers2[i2]))
+                                    number1 = 0 + eval(str(numbers[i1]))
+                                    if i <= 6:
+                                        if i == 0:
+                                            string = str(number1) + op1 + str(number2) + op2 + str(number3) + op3 + str(number4)
+                                        elif i == 1:
+                                            string = "(" + str(number1) + op1 + str(number2) + ")" + op2 + str(number3) + op3 + str(number4)
+                                        elif i == 2:
+                                            string = str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + ")" + op3 + str(number4)
+                                        elif i == 3:
+                                            string = str(number1) + op1 + str(number2) + op2 + "(" + str(number3) + op3 + str(number4) + ")"
+                                        elif i == 4:
+                                            string = "(" + str(number1) + op1 + str(number2) + ")" + op2 + "(" + str(number3) + op3 + str(number4) + ")"
+                                        elif i == 5:
+                                            string = "(" + str(number1) + op1 + str(number2) + op2 + str(number3) + ")" + op3 + str(number4)
+                                        elif i == 6:
+                                            string = str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + op3 + str(number4) + ")"
+                                        string_print = string + " = 24"
+                                    else:
+                                        if i == 7:
+                                            string = "((" + str(number1) + op1 + str(number2) + ")" + op2 + str(number3) + ")" + op3 + str(number4)
+                                            string_print = "[(" + str(number1) + op1 + str(number2) + ")" + op2 + str(number3) + "]" + op3 + str(number4)
+                                        elif i == 8:
+                                            string = str(number1) + op1 + "(" + str(number2) + op2 + "(" + str(number3) + op3 + str(number4) + "))"
+                                            string_print = str(number1) + op1 + "[" + str(number2) + op2 + "(" + str(number3) + op3 + str(number4) + ")]"
+                                        elif i == 9:
+                                            string = str(number1) + op1 + "((" + str(number2) + op2 + str(number3) + ")" + op3 + str(number4) + ")"
+                                            string_print = str(number1) + op1 + "[(" + str(number2) + op2 + str(number3) + ")" + op3 + str(number4) + "]"
+                                        else:
+                                            string = "(" + str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + "))" + op3 + str(number4)
+                                            string_print = "[" + str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + ")]" + op3 + str(number4)
+                                        string_print += " = 24"
+                                    try:
+                                        if round(eval(string), 12) == 24:
+                                            solutions = string_print
+                                            solved = True
+                                            break
+                                    except:
+                                        pass
         while True:
             print()
             input_sol = input("Solution (i, /): ")
@@ -2658,17 +2741,24 @@ def math24play():
                         print()
                         print(sol + f" = {round(eval(sol), 12)}, not 24")
                         print("Try again!")
+                        print()
+                        print(f"Round {runs}: " + print_numbers[:len(print_numbers) - 2])
                         continue
                 except:
                     print("The expression could not be evaluated")
                     print('Please enter a valid solution, "i" for info, or return to exit')
+                    print()
+                    print(f"Round {runs}: " + print_numbers[:len(print_numbers) - 2])
                     continue
             else:
                 print('Please enter a valid solution, "i" for info, or return to exit')
+                print()
+                print(f"Round {runs}: " + print_numbers[:len(print_numbers) - 2])
                 continue
         if input_sol == "" or input_sol == "exi" or input_sol == "exit":
             break
         elif input_sol == "/" or input_sol == "ski" or input_sol == "skip":
+            print("Solution: " + solutions)
             continue
         elif input_sol == "c" or input_sol == "cre" or input_sol == "create":
             math24create()
@@ -2968,50 +3058,41 @@ def math24solve():
                                         print('Please enter a list of 4 real numbers or expressions, "i" for info, or return to exit')
                                         solved = True
                                         break
-                                    if i <= 6:
-                                        if i == 0:
-                                            string = str(number1) + op1 + str(number2) + op2 + str(number3) + op3 + str(number4)
-                                        elif i == 1:
-                                            string = "(" + str(number1) + op1 + str(number2) + ")" + op2 + str(number3) + op3 + str(number4)
-                                        elif i == 2:
-                                            string = str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + ")" + op3 + str(number4)
-                                        elif i == 3:
-                                            string = str(number1) + op1 + str(number2) + op2 + "(" + str(number3) + op3 + str(number4) + ")"
-                                        elif i == 4:
-                                            string = "(" + str(number1) + op1 + str(number2) + ")" + op2 + "(" + str(number3) + op3 + str(number4) + ")"
-                                        elif i == 5:
-                                            string = "(" + str(number1) + op1 + str(number2) + op2 + str(number3) + ")" + op3 + str(number4)
-                                        elif i == 6:
-                                            string = str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + op3 + str(number4) + ")"
-                                        string_print = string + " = 24"
-                                        tag = sorted(string_print.replace("[", "").replace("]", "").replace("(", "").replace(")", ""))
-                                        try:
-                                            if round(eval(string), 12) == 24 and tag not in previous:
-                                                previous.append(tag)
-                                                solutions.append(string_print)
-                                                if sols != "a":
-                                                    if len(solutions) == sols:
-                                                        solved = True
-                                                        break
-                                        except:
-                                            pass
-                                    else:
-                                        if i == 7:
-                                            string = "((" + str(number1) + op1 + str(number2) + ")" + op2 + str(number3) + ")" + op3 + str(number4)
-                                            string_print = "[(" + str(number1) + op1 + str(number2) + ")" + op2 + str(number3) + "]" + op3 + str(number4)
-                                        elif i == 8:
-                                            string = str(number1) + op1 + "(" + str(number2) + op2 + "(" + str(number3) + op3 + str(number4) + "))"
-                                            string_print = str(number1) + op1 + "[" + str(number2) + op2 + "(" + str(number3) + op3 + str(number4) + ")]"
-                                        elif i == 9:
-                                            string = str(number1) + op1 + "((" + str(number2) + op2 + str(number3) + ")" + op3 + str(number4) + ")"
-                                            string_print = str(number1) + op1 + "[(" + str(number2) + op2 + str(number3) + ")" + op3 + str(number4) + "]"
+                                    tag = sorted(str(number1) + op1 + str(number2) + op2 + str(number3) + op3 + str(number4) + " = 24")
+                                    if tag not in previous:
+                                        if i <= 6:
+                                            if i == 0:
+                                                string = str(number1) + op1 + str(number2) + op2 + str(number3) + op3 + str(number4)
+                                            elif i == 1:
+                                                string = "(" + str(number1) + op1 + str(number2) + ")" + op2 + str(number3) + op3 + str(number4)
+                                            elif i == 2:
+                                                string = str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + ")" + op3 + str(number4)
+                                            elif i == 3:
+                                                string = str(number1) + op1 + str(number2) + op2 + "(" + str(number3) + op3 + str(number4) + ")"
+                                            elif i == 4:
+                                                string = "(" + str(number1) + op1 + str(number2) + ")" + op2 + "(" + str(number3) + op3 + str(number4) + ")"
+                                            elif i == 5:
+                                                string = "(" + str(number1) + op1 + str(number2) + op2 + str(number3) + ")" + op3 + str(number4)
+                                            elif i == 6:
+                                                string = str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + op3 + str(number4) + ")"
+                                            string_print = string + " = 24"
                                         else:
-                                            string = "(" + str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + "))" + op3 + str(number4)
-                                            string_print = "[" + str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + ")]" + op3 + str(number4)
-                                        string_print += " = 24"
-                                        tag = sorted(string_print.replace("[", "").replace("]", "").replace("(", "").replace(")", ""))
+                                            if i == 7:
+                                                string = "((" + str(number1) + op1 + str(number2) + ")" + op2 + str(number3) + ")" + op3 + str(number4)
+                                                string_print = "[(" + str(number1) + op1 + str(number2) + ")" + op2 + str(number3) + "]" + op3 + str(number4)
+                                            elif i == 8:
+                                                string = str(number1) + op1 + "(" + str(number2) + op2 + "(" + str(number3) + op3 + str(number4) + "))"
+                                                string_print = str(number1) + op1 + "[" + str(number2) + op2 + "(" + str(number3) + op3 + str(number4) + ")]"
+                                            elif i == 9:
+                                                string = str(number1) + op1 + "((" + str(number2) + op2 + str(number3) + ")" + op3 + str(number4) + ")"
+                                                string_print = str(number1) + op1 + "[(" + str(number2) + op2 + str(number3) + ")" + op3 + str(number4) + "]"
+                                            else:
+                                                string = "(" + str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + "))" + op3 + str(number4)
+                                                string_print = "[" + str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + ")]" + op3 + str(number4)
+                                            string_print += " = 24"
+                                            tag = sorted(string_print.replace("[", "").replace("]", "").replace("(", "").replace(")", ""))
                                         try:
-                                            if round(eval(string), 12) == 24 and tag not in previous:
+                                            if round(eval(string), 12) == 24:
                                                 previous.append(tag)
                                                 solutions.append(string_print)
                                                 if sols != "a":
