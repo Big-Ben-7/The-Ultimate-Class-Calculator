@@ -2774,6 +2774,7 @@ def math24play():
         elif input_sol == "/" or input_sol == "ski" or input_sol == "skip":
             print()
             print("Solution: " + solutions)
+            problems += 1
             continue
         elif input_sol == "c" or input_sol == "cre" or input_sol == "create":
             math24create()
