@@ -2992,7 +2992,7 @@ def math24solve():
             math24create()
             break
         numbers = numbers.replace(" ", "")
-        numbers = numbers("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
+        numbers = numbers.replace("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
         numbers = numbers.split(",")
         if len(numbers) != 4:
             print('Please enter a list of 4 real numbers or expressions, "i" for info, or return to exit')
