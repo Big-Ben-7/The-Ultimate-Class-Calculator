@@ -26,7 +26,7 @@ root2 = 0.0
 global binsum
 binsum = ""
 global problems
-problems = 0
+problems = 1
 global runs
 runs = 0
 global keeps
@@ -2612,7 +2612,6 @@ def math24play():
         random.shuffle(pos)
     while True:
         clear_variables()
-        problems += 1
         random.seed(problems)
         numbers = pos[random.randrange(0, len(pos))]
         print_numbers = ""
@@ -2769,10 +2768,8 @@ def math24play():
         if input_sol == "" or input_sol == "exi" or input_sol == "exit":
             break
         elif input_sol == "l" or input_sol == "las" or input_sol == "last" or input_sol == "last problem":
-            if problems == 1:
+            if problems != 1:
                 problems -= 1
-            else:
-                problems -= 2
             continue
         elif input_sol == "/" or input_sol == "ski" or input_sol == "skip":
             print()
@@ -2790,6 +2787,7 @@ def math24play():
         elif input_sol == "f" or input_sol == "fun" or input_sol == "functions":
             polynomial()
             break
+        problems += 1
             
 def math24create():
     print()
