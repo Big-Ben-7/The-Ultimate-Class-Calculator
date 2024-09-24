@@ -2618,9 +2618,13 @@ def math24play():
             print_numbers += str(number) + ", "
         print()
         if print_problems == len(pos):
-            print(f"You've solved the number of problems in the system! You are the God of Math!")
+            print(f"You've made it to Problem {len(pos)}!")
+            print("This is the number of problems in the system, and also the number of possible Math 24 sets using the numbers 1-25, 36, 48, 72, 96, 120, and 144!")
+            print("Congrats! You are now the God of Math!")
+            print()
         elif print_problems % 10 == 0:
-            print(f"You've made it to problem {print_problems}! Congrats!")
+            print(f"You've made it to Problem {print_problems}! Congrats!")
+            print()
         print(f"Problem {print_problems}: " + print_numbers[:len(print_numbers) - 2])
         ops = [" + ", " - ", " * ", " / "]
         solved = False
