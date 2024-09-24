@@ -2737,7 +2737,7 @@ def math24play():
                     if round(eval(sol), 12) == 24:
                         print()
                         print(sol + " = 24")
-                        print(f"Solved on attempt {attempts}!")
+                        print(f"Solved on Attempt {attempts}!")
                         break
                     else:
                         print()
