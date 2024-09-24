@@ -2917,6 +2917,7 @@ def math24solve():
                 continue
         ops = [" + ", " - ", " * ", " / "]
         solutions = []
+        previous = []
         solved = False
         for i in range(0, 11):
             if solved == True:
@@ -2983,8 +2984,10 @@ def math24solve():
                                         elif i == 6:
                                             string = str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + op3 + str(number4) + ")"
                                         string_print = string + " = 24"
+                                        tag = sorted(string_print.replace("[", "").replace("]", "").replace("(", "").replace(")", ""))
                                         try:
-                                            if round(eval(string), 12) == 24 and string_print not in solutions:
+                                            if round(eval(string), 12) == 24 and tag not in previous:
+                                                previous.append(tag)
                                                 solutions.append(string_print)
                                                 if sols != "a":
                                                     if len(solutions) == sols:
@@ -3006,8 +3009,10 @@ def math24solve():
                                             string = "(" + str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + "))" + op3 + str(number4)
                                             string_print = "[" + str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + ")]" + op3 + str(number4)
                                         string_print += " = 24"
+                                        tag = sorted(string_print.replace("[", "").replace("]", "").replace("(", "").replace(")", ""))
                                         try:
-                                            if round(eval(string), 12) == 24 and string_print not in solutions:
+                                            if round(eval(string), 12) == 24 and tag not in previous:
+                                                previous.append(tag)
                                                 solutions.append(string_print)
                                                 if sols != "a":
                                                     if len(solutions) == sols:
@@ -3024,7 +3029,16 @@ def math24solve():
                 print(f"Solution {i + 1}: " + solutions[i])
             if solved == False:
                 print()
-                print(f"There are {len(solutions)} ways to create 24 with the entered numbers")
+                if len(solutions) == 1:
+                    if sols == "a":
+                        print(f"There is 1 way to create 24 with the entered numbers")
+                    else:
+                        print(f"There is only 1 way to create 24 with the entered numbers")
+                else:
+                    if sols == "a":
+                        print(f"There are {len(solutions)} ways to create 24 with the entered numbers")
+                    else:
+                        print(f"There are only {len(solutions)} ways to create 24 with the entered numbers")
 
 def main():
     global ans
