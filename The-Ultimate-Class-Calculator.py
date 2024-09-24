@@ -2611,7 +2611,7 @@ def math24play():
         for number in numbers:
             print_numbers += str(number) + ", "
         print()
-        print(f"Round {runs}: " + print_numbers[:len(print_numbers) - 2])
+        print(f"Problem {runs}: " + print_numbers[:len(print_numbers) - 2])
         ops = [" + ", " - ", " * ", " / "]
         solved = False
         for i in range(0, 11):
@@ -2695,9 +2695,10 @@ def math24play():
                                             break
                                     except:
                                         pass
+        attempts = 0
         while True:
-            print()
-            input_sol = input("Solution (i, /): ")
+            attempts += 1
+            input_sol = input(f"Attempt {attempts} (i, /): ")
             if input_sol == "" or input_sol == "exi" or input_sol == "exit" or input_sol == "/" or input_sol == "c" or input_sol == "cre" or input_sol == "create" or input_sol == "s" or input_sol == "sol" or input_sol == "solve" or input_sol == "o" or input_sol == "ope" or input_sol == "operations" or input_sol == "f" or input_sol == "fun" or input_sol == "functions":
                 break
             elif input_sol == "i" or input_sol == "inf" or input_sol == "info":
@@ -2706,6 +2707,7 @@ def math24play():
                 print("Enter a solution with each of the 4 numbers used once and any 3 operations, using parenthesis to change order")
                 print('Eg. with the numbers 1, 5, 5, and 5, one solution is "5 * (5 - 1/5)"')
                 print('Enter "c" for create, "s" for solve, "o" for operations (this will direct to real operations) and "f" for functions (this will direct to polynomials)')
+                print()
                 continue
             sol = input_sol.replace(" ", "").replace("+", " + ").replace("-", " - ").replace("/", " / ").replace("*", " * ")
             counter_list = sol.replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")").split(" ")
@@ -2735,25 +2737,25 @@ def math24play():
                     if round(eval(sol), 12) == 24:
                         print()
                         print(sol + " = 24")
-                        print("Solved!")
+                        print(f"Solved on attempt {attempts}!")
                         break
                     else:
                         print()
                         print(sol + f" = {round(eval(sol), 12)}, not 24")
                         print("Try again!")
                         print()
-                        print(f"Round {runs}: " + print_numbers[:len(print_numbers) - 2])
+                        print(f"Problem {runs}: " + print_numbers[:len(print_numbers) - 2])
                         continue
                 except:
                     print("The expression could not be evaluated")
                     print('Please enter a valid solution, "i" for info, or return to exit')
                     print()
-                    print(f"Round {runs}: " + print_numbers[:len(print_numbers) - 2])
+                    print(f"Problem {runs}: " + print_numbers[:len(print_numbers) - 2])
                     continue
             else:
                 print('Please enter a valid solution, "i" for info, or return to exit')
                 print()
-                print(f"Round {runs}: " + print_numbers[:len(print_numbers) - 2])
+                print(f"Problem {runs}: " + print_numbers[:len(print_numbers) - 2])
                 continue
         if input_sol == "" or input_sol == "exi" or input_sol == "exit":
             break
