@@ -223,7 +223,7 @@ def from_polar():
             math24play()
             break
         try:
-            av = av("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
+            av = av.replace("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
             av = 0 + eval(av)
             if round(av, 12) < 0:
                 print('Absolute values cannot be negative')
@@ -235,7 +235,7 @@ def from_polar():
         if inang == "" or inang == "exit" or inang == "exi":
             continue
         try:
-            inang = inang("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
+            inang = inang.replace("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
             inang = 0 + eval(inang)
         except:
             print('Please enter a real number or expression, or return to exit')
@@ -271,7 +271,7 @@ def from_polar():
             if av2 == "" or av2 == "exit" or av2 == "exi":
                 continue
             try:
-                av2 = av2("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
+                av2 = av2.replace("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                 av2 = 0 + eval(av2)
                 if round(av2, 12) < 0:
                     print('Absolute values cannot be negative')
@@ -283,7 +283,7 @@ def from_polar():
             if inang2 == "" or inang2 == "exit" or inang2 == "exi":
                 continue
             try:
-                inang2 = inang2("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
+                inang2 = inang2.replace("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                 inang2 = 0 + eval(inang2)
             except:
                 print('Please enter a real number or expression, or return to exit')
@@ -624,7 +624,7 @@ def from_rectangular():
             math24play()
             break
         try:
-            a = a("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
+            a = a.replace("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
             a = 0 + eval(a)
         except:
             print('Please enter a real number or expression, "i" for info, or return to exit')
@@ -633,7 +633,7 @@ def from_rectangular():
         if b == "" or b == "exit" or b == "exi":
             continue
         try:
-            b = b("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
+            b = b.replace("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
             b = 0 + eval(b)
         except:
             print('Please enter a real number or expression, or return to exit')
@@ -675,7 +675,7 @@ def from_rectangular():
             if c == "" or c == "exit" or c == "exi":
                 continue
             try:
-                c = c("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
+                c = c.replace("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                 c = 0 + eval(c)
             except:
                 print('Please enter a real number or expression, or return to exit')
@@ -684,7 +684,7 @@ def from_rectangular():
             if d == "" or d == "exit" or d == "exi":
                 continue
             try:
-                d = d("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
+                d = d.replace("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                 d = 0 + eval(d)
             except:
                 print('Please enter a real number or expression, or return to exit')
@@ -981,7 +981,7 @@ def real_operation():
             break
         else:
             try:
-                n = n("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
+                n = n.replace("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                 if (eval(n) == True or eval(n) == False) and (n.find("==") != -1 or n.find("<") != -1 or n.find(">") != -1 or n.find("<=") != -1 or n.find(">=") != -1 or n.find("!=") != -1):
                     print()
                     print(eval(n))
@@ -1018,7 +1018,7 @@ def real_operation():
                     if n2 == "" or n2 == "exit" or n2 == "exi":
                         continue
                     try:
-                        n2 = n2("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
+                        n2 = n2.replace("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                         n2 = 0 + eval(n2)
                     except:
                         print('Please enter a real number or expression, or return to exit')
@@ -1028,7 +1028,7 @@ def real_operation():
                     if n2 == "" or n2 == "exit" or n2 == "exi":
                         continue
                     try:
-                        n2 = n2("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
+                        n2 = n2.replace("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                         n2 = 0 + eval(n2)
                         n2 = 0 + integer(n2)
                     except:
@@ -1040,7 +1040,7 @@ def real_operation():
                         if n2 == "" or n2 == "exit" or n2 == "exi":
                             continue
                         try:
-                            n2 = n2("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
+                            n2 = n2.replace("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                             n2 = 0 + eval(n2)
                         except:
                             print('Please enter a real number or expression greater than 0 and not equal to 1, or return to exit')
@@ -1051,7 +1051,7 @@ def real_operation():
                         if n2 == "" or n2 == "exit" or n2 == "exi":
                             continue
                         try:
-                            n2 = n2("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
+                            n2 = n2.replace("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                             n2 = 0 + eval(n2)
                         except:
                             print('Please enter a nonnegative integer or return to exit')
@@ -1062,7 +1062,7 @@ def real_operation():
                         if n2 == "" or n2 == "exit" or n2 == "exi":
                             continue
                         try:
-                            n2 = n2("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
+                            n2 = n2.replace("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                             n2 = 0 + eval(n2)
                         except:
                             print('Please enter a nonnegative integer or return to exit')
@@ -1084,7 +1084,7 @@ def real_operation():
                     if n2 == "" or n2 == "exit" or n2 == "exi":
                         continue
                     try:
-                        n2 = n2("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
+                        n2 = n2.replace("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                         n2 = 0 + eval(n2)
                     except:
                         print('Please enter a real number or expression, or return to exit')
@@ -1351,7 +1351,7 @@ def binomial_expansion():
             print('Enter "r" for real operations, "a" for arithmetic series, "g" for geometric series, "c" for complex operations (this will direct to rectangular form), "m" for matrix operations, "f" for functions (this will direct to polynomials), and "ga" for games (this will direct to play Math 24)')
             continue
         try:
-            a = a("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
+            a = a.replace("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
             a = 0 + eval(a)
         except:
             print('Please enter a nonzero real number or expression, "i" for info, or return to exit')
@@ -1382,7 +1382,7 @@ def binomial_expansion():
         if b == "" or b == "exit" or b == "exi":
             continue
         try:
-            b = b("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
+            b = b.replace("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
             b = 0 + eval(b)
         except:
             print('Please enter a nonzero real number or expression, or return to exit')
@@ -1407,7 +1407,7 @@ def binomial_expansion():
         if c == "" or c == "exit" or c == "exi":
             continue
         try:
-            c = c("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
+            c = c.replace("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
             c = 0 + eval(c)
         except:
             print('Please enter a nonzero real number or expression, or return to exit')
@@ -1443,7 +1443,7 @@ def binomial_expansion():
             if d == "" or d == "exit" or d == "exi":
                 continue
             try:
-                d = d("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
+                d = d.replace("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                 d = 0 + eval(d)
             except:
                 print('Please enter a real number or expression, or return to exit')
@@ -1471,7 +1471,7 @@ def binomial_expansion():
         if n == "" or n == "exit" or n == "exi":
             continue
         try:
-            n = n("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
+            n = n.replace("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
             n = 0 + eval(n)
             n = 0 + integer(n)
             if n < 0:
@@ -1511,7 +1511,7 @@ def binomial_expansion():
             rangelist = unterm.split(":")
             if len(rangelist) == 1:
                 try:
-                    unterm = unterm("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
+                    unterm = unterm.replace("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                     unterm = 0 + eval(unterm)
                     unterm = 0 + integer(unterm)
                 except:
@@ -1524,8 +1524,8 @@ def binomial_expansion():
                     print(f'"{unterm}" is not a positive integer between 1 and |n| + 1 ({abs(n) + 1}), inclusive')
             elif len(rangelist) == 2:
                 try:
-                    rangelist[0] = rangelist[0]("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
-                    rangelist[1] = rangelist[1]("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
+                    rangelist[0] = rangelist[0].replace("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
+                    rangelist[1] = rangelist[1].replace("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                     rangelist[0] = 0 + eval(rangelist[0])
                     rangelist[1] = 0 + eval(rangelist[1])
                     rangelist[0] = 0 + integer(rangelist[0])
@@ -1592,7 +1592,7 @@ def arithmetic():
             if input_sum == "" or input_sum == "exi" or input_sum == "exit" or input_sum == "t" or input_sum == "ter" or input_sum == "terms":
                 continue
             try:
-                input_sum = input_sum("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
+                input_sum = input_sum.replace("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                 input_sum = 0 + eval(input_sum)
             except:
                 print("Please enter a real number or expression, or return to exit")
@@ -1601,7 +1601,7 @@ def arithmetic():
             if sum_number == "" or sum_number == "exi" or sum_number == "exit":
                 continue
             try:
-                sum_number = sum_number("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
+                sum_number = sum_number.replace("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                 sum_number = 0 + eval(sum_number)
                 sum_number = 0 + integer(sum_number)
                 if sum_number <= 0:
@@ -1612,7 +1612,7 @@ def arithmetic():
                 continue
         else:
             try:
-                b = b("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
+                b = b.replace("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                 b = 0 + eval(b)
             except:
                 print('Please enter a real number or expression, "i" for info, or return to exit')
@@ -1621,7 +1621,7 @@ def arithmetic():
             if bn == "" or bn == "exit" or bn == "exi":
                 continue     
             try:
-                bn = bn("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
+                bn = bn.replace("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                 bn = 0 + eval(bn)
                 bn = 0 + integer(bn)
             except:
@@ -1641,7 +1641,7 @@ def arithmetic():
             if c == "" or c == "exit" or c == "exi":
                 continue
             try:
-                c = c("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
+                c = c.replace("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                 c = 0 + eval(c)  
             except:
                 print('Please enter a real number or expression, or return to exit')
@@ -1650,7 +1650,7 @@ def arithmetic():
             if cn == "" or cn == "exit" or cn == "exi":
                 continue     
             try:
-                cn = cn("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
+                cn = cn.replace("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                 cn = 0 + eval(cn)
                 cn = 0 + integer(cn)
             except:
@@ -1664,7 +1664,7 @@ def arithmetic():
             a = b - comdif * (bn - 1)
         else:
             try:
-                comdif = comdif("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
+                comdif = comdif.replace("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                 comdif = 0 + eval(comdif)
             except:
                 print('Please enter a real number or expression, or return to exit')
@@ -1710,10 +1710,10 @@ def arithmetic():
                 if l == "" or l == "exit" or l == "exi" or l == "n" or l == "num" or l == "number" or l == "number of terms":
                     continue
                 l = l.replace(" ", "")
-                l = l("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
+                l = l.replace("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                 l = l.split(",")
             else:
-                n = n("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
+                n = n.replace("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
         while True:
             un = input('Indexes of terms to find (i, /): ')
             if un == "i" or un == "info" or un == "inf":
@@ -1814,7 +1814,7 @@ def arithmetic():
                     print(f'"{number}" is not a range in the form x:y, where y > x')
         if un != "/" and un != "skip" and un != "ski":
             un = un.replace(" ", "")
-            un = un("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
+            un = un.replace("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
             un = un.split(",")
             for unterm in un:
                 rangelist = unterm.split(":")
@@ -1860,7 +1860,7 @@ def arithmetic():
                     print(f'"{unterm}" is not a range in the form x:y, where y > x')
         if round(comdif, 12) != 0 and iun != "/" and iun != "skip" and iun != "ski":
             iun = iun.replace(" ", "")
-            iun = iun("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
+            iun = iun.replace("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
             iun = iun.split(",")
             for iunterm in iun:
                 try:
@@ -1920,7 +1920,7 @@ def geometric():
             if input_sum == "" or input_sum == "exi" or input_sum == "exit" or input_sum == "t" or input_sum == "ter" or input_sum == "terms":
                 continue
             try:
-                input_sum = input_sum("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
+                input_sum = input_sum.replace("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                 input_sum = 0 + eval(input_sum)
                 if round(input_sum, 12) == 0:
                     print("Please enter a nonzero real number or expression, or return to exit")
@@ -1933,7 +1933,7 @@ def geometric():
                 continue
             elif sum_number != "i" and sum_number != "inf" and sum_number != "infinity":
                 try:
-                    sum_number = sum_number("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
+                    sum_number = sum_number.replace("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                     sum_number = 0 + eval(sum_number)
                     sum_number = 0 + integer(sum_number)
                     if sum_number <= 0:
@@ -1944,7 +1944,7 @@ def geometric():
                     continue
         else:
             try:
-                b = b("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
+                b = b.replace("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                 b = 0 + eval(b)
                 if round(b, 12) == 0:
                     print('Please enter a nonzero real number or expression, "i" for info, or return to exit')
@@ -1956,7 +1956,7 @@ def geometric():
             if bn == "" or bn == "exit" or bn == "exi":
                 continue
             try:
-                bn = bn("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
+                bn = bn.replace("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                 bn = 0 + eval(bn)
                 bn = 0 + integer(bn)
             except:
@@ -1976,7 +1976,7 @@ def geometric():
             if c == "" or c == "exit" or c == "exi":
                 continue
             try:
-                c = c("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
+                c = c.replace("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                 c = 0 + eval(c)  
             except:
                 print('Please enter a nonzero real number or expression, or return to exit')
@@ -1988,7 +1988,7 @@ def geometric():
             if cn == "" or cn == "exit" or cn == "exi":
                 continue
             try:
-                cn = cn("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
+                cn = cn.replace("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                 cn = 0 + eval(cn)
                 cn = 0 + integer(cn)
             except:
@@ -2008,7 +2008,7 @@ def geometric():
                 continue
         else:
             try:
-                comrat = comrat("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
+                comrat = comrat.replace("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                 comrat = 0 + eval(comrat)
             except:
                 print('Please enter a nonzero real number or expression, or return to exit')
@@ -2081,10 +2081,10 @@ def geometric():
                 if l == "" or l == "exit" or l == "exi" or l == "n" or l == "num" or l == "number" or l == "number of terms":
                     continue
                 l = l.replace(" ", "")
-                l = l("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
+                l = l.replace("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                 l = l.split(",")
             else:
-                n = n("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
+                n = n.replace("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
         while True:
             un = input('Indexes of terms to find (i, /): ')
             if un == "i" or un == "info" or un == "inf":
@@ -2217,7 +2217,7 @@ def geometric():
                     print(f'"{number}" is not a range in the form x:y, where y > x')
         if un != "/" and un != "skip" and un != "ski":
             un = un.replace(" ", "")
-            un = un("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
+            un = un.replace("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
             un = un.split(",")
             for unterm in un:
                 rangelist = unterm.split(":")
@@ -2263,7 +2263,7 @@ def geometric():
                     print(f'"{unterm}" is not a range in the form x:y, where y > x')
         if round(abs(comrat), 12) != 1 and iun != "/" and iun != "skip" and iun != "ski":
             iun = iun.replace(" ", "")
-            iun = iun("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
+            iun = iun.replace("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
             iun = iun.split(",")
             for iunterm in iun:
                 try:
@@ -2323,7 +2323,7 @@ def polynomial():
             print('Enter "sys" for system of equations, "c" for conic sections, "s" for symmetry, "o" for operations (this will direct to real operation), and "g" for games (this will direct to play Math 24)')
             continue
         try:
-            a = a("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
+            a = a.replace("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
             a = 0 + eval(a)
         except:
             print('Please enter a real number or expression, "i" for info, or return to exit')
@@ -2332,7 +2332,7 @@ def polynomial():
         if b == "" or b == "exit" or b == "exi":
             continue
         try:
-            b = b("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
+            b = b.replace("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
             b = 0 + eval(b)
         except:
             print('Please enter a real number or expression, or return to exit')
@@ -2341,7 +2341,7 @@ def polynomial():
         if c == "" or c == "exit" or c == "exi":
             continue
         try:
-            c = c("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
+            c = c.replace("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
             c = 0 + eval(c)
         except:
             print('Please enter a real number or expression, or return to exit')
@@ -2429,7 +2429,7 @@ def symmetry():
             m = "0"
         if m != "v" and m != "ver" and m != "vertical" and m != "p" and m != "points" and m != "poi":
             try:
-                m = m("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
+                m = m.replace("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                 m = 0 + eval(m)
             except:
                 print('Please enter a real number or expression, "i" for info, or return to exit')
@@ -2438,7 +2438,7 @@ def symmetry():
             if b == "" or b == "exit" or b == "exi":
                 continue
             try:
-                b = b("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
+                b = b.replace("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                 b = 0 + eval(b)
             except:
                 print('Please enter a real number or expression, or return to exit')
@@ -2463,7 +2463,7 @@ def symmetry():
             if p1 == "" or p1 == "exit" or p1 == "exi" or p1 == "s" or p1 == "slo" or p1 == "slope":
                 continue
             p1 = p1.replace(" ", "")
-            p1 = p1("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
+            p1 = p1.replace("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
             if p1[0] == "(":
                 p1 = p1[1:]
             if p1[len(p1) - 1] == ")":
@@ -2479,7 +2479,7 @@ def symmetry():
             if p2 == "" or p2 == "exit" or p2 == "exi":
                 continue
             p2 = p2.replace(" ", "")
-            p2 = p2("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")            
+            p2 = p2.replace("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")            
             if p2[0] == "(":
                 p2 = p2[1:]
             if p2[len(p2) - 1] == ")":
@@ -2524,7 +2524,7 @@ def symmetry():
             if xint == "" or xint == "exit" or xint == "exi":
                 continue
             try:
-                xint = xint("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
+                xint = xint.replace("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
                 xint = 0 + eval(xint)
             except:
                 print('Please enter a real number or expression, or return to exit')
@@ -2543,7 +2543,7 @@ def symmetry():
             print()
             continue
         reflect = reflect.replace(" ", "")
-        reflect = reflect("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
+        reflect = reflect.replace("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")")
         reflect = reflect.split(";")
         for i in range(0, len(reflect)):
             print()
@@ -2818,7 +2818,7 @@ def math24create():
         elif input_use == "f" or input_use == "fun" or input_use == "functions":
             polynomial()
             break
-        use = input_use("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")").replace(" ", "").split(",")
+        use = input_use.replace("^", "**").replace(")(", ")*(").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")").replace(" ", "").split(",")
         fuse = []
         back = False
         for item in use:
@@ -2964,11 +2964,12 @@ def math24create():
         if len(solutions) != 0:
             print(f"Possible Math 24 sets:")
             for i in range(0, len(solutions)):
-                res = ""
+                '''res = ""
                 for b in solutions[i]:
                     res += str(b) + ", "
                 res = res[:len(res) - 2]
-                print(f"Set {i + 1}: " + res)
+                print(f"Set {i + 1}: " + res)'''
+                print(solutions[i], end = ", ")
         else:
             print(f"There are no possible Math 24 sets using {input_use}")
 
