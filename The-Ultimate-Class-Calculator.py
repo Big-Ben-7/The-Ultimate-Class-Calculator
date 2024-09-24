@@ -3130,6 +3130,7 @@ def main():
         clear_variables()
         print()
         cat = input('Calculation category (i): ')
+        cat = cat.replace(" ", "")
         if cat.lower() == "exit" or cat.lower() == "" or cat.lower() == "exi":
             break
         elif cat.lower() == "info" or cat.lower() == "inf" or cat.lower() == "i":
@@ -3143,6 +3144,7 @@ def main():
         elif cat.lower() == "f" or cat.lower() == "fun" or cat.lower() == "functions":
             while True:
                 funtype = input("Function type (i): ")
+                funtype = funtype.replace(" ", "")
                 if funtype.lower() == "" or funtype.lower() == "exit" or funtype.lower() == "exi":
                     break
                 elif funtype.lower() == "i" or funtype.lower() == "info" or funtype.lower() == "inf":
@@ -3167,6 +3169,7 @@ def main():
         elif cat.lower() == "operations" or cat.lower() == "ope" or cat.lower() == "o":
             while True:
                 opetype = input('Operation type (i): ')
+                opetype = opetype.replace(" ", "")
                 if opetype.lower() == "" or opetype.lower() == "exit" or opetype.lower() == "exi":
                     break
                 elif opetype.lower() == "i" or opetype.lower() == "inf" or opetype.lower() == "info":
@@ -3179,6 +3182,7 @@ def main():
                 elif opetype.lower() == "c" or opetype.lower() == "complex" or opetype.lower() == "com" or opetype.lower() == "complex operations":
                     while True:
                         ctype = input("From (r)ectangular or (p)olar form: ")
+                        ctype = ctype.replace(" ", "")
                         if ctype.lower() == "rectangular" or ctype.lower() == "r" or ctype.lower() == "rect" or ctype.lower() == "rectangular form":
                             from_rectangular()
                             print()
@@ -3197,6 +3201,7 @@ def main():
                 elif opetype.lower() == "summations" or opetype.lower() == "sum" or opetype.lower() == "s":
                     while True:
                         sumtype = input('Summation type (i): ')
+                        sumtype = sumtype.replace(" ", "")
                         if sumtype.lower() == "" or sumtype.lower() == "exit" or sumtype.lower() == "exi":
                             print()
                             break
@@ -3219,9 +3224,10 @@ def main():
                 else:
                     print('Please enter either an operation type, "i" for info, or return to exit')
                     print()
-        elif cat.lower() == "g" or cat.lower() == "gam" or cat.lower() == "games":
-            while True:
+        elif cat.lower() == "g" or cat.lower() == "gam" or cat.lower() == "games" or cat.lower() == "mat" or cat.lower() == "m" or cat.lower() == "24" or cat.lower() == "math 24":
+            '''while True:
                 game = input("Game (i): ")
+                game = game.replace(" ", "")
                 if game.lower() == "" or game.lower() == "exit" or game.lower() == "exi":
                     break
                 elif game.lower() == "i" or game.lower() == "inf" or game.lower() == "info":
@@ -3249,7 +3255,25 @@ def main():
                             continue
                 else:
                     print('Please enter a game, "i" for info, or return to exit')
+                    print()'''
+            while True:
+                mode = input("(P)lay, (c)reate, or (s)olve? ")
+                if mode.lower() == "" or mode.lower() == "exit" or mode.lower() == "exi":
                     print()
+                    break
+                elif mode.lower() == "p" or mode.lower() == "play" or mode.lower() == "pla":
+                    math24play()
+                    print()
+                elif mode.lower() == "c" or mode.lower() == "cre" or mode.lower() == "create":
+                    math24create()
+                    print()
+                elif mode.lower() == "s" or mode.lower() == "sol" or mode.lower() == "solve":
+                    math24solve()
+                    print()
+                else:
+                    print('Please enter either "p" for play, "c" for create, "s" for solve, or return to exit')
+                    print()
+                    continue
         else:
             print('Please enter a calculation category, "i" for info, or return to exit)')
 
