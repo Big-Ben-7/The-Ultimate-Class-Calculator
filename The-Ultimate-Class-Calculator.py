@@ -2702,13 +2702,14 @@ def math24play():
         while True:
             attempts += 1
             input_sol = input(f"Attempt {attempts} (i, /): ")
-            if input_sol == "" or input_sol == "exi" or input_sol == "exit" or input_sol == "/" or input_sol == "c" or input_sol == "cre" or input_sol == "create" or input_sol == "s" or input_sol == "sol" or input_sol == "solve" or input_sol == "o" or input_sol == "ope" or input_sol == "operations" or input_sol == "f" or input_sol == "fun" or input_sol == "functions":
+            if input_sol == "" or input_sol == "exi" or input_sol == "exit" or input_sol == "l" or input_sol == "las" or input_sol == "last" or input_sol == "last problem" or input_sol == "/" or input_sol == "skip" or input_sol == "ski" or input_sol == "c" or input_sol == "cre" or input_sol == "create" or input_sol == "s" or input_sol == "sol" or input_sol == "solve" or input_sol == "o" or input_sol == "ope" or input_sol == "operations" or input_sol == "f" or input_sol == "fun" or input_sol == "functions":
                 break
             elif input_sol == "i" or input_sol == "inf" or input_sol == "info":
                 print()
                 print("Math 24 is a game where players try to create the number 24 using 4 numbers and the 4 operations (+, -, *, /)")
                 print("Enter a solution with each of the 4 numbers used once and any 3 operations, using parenthesis to change order")
                 print('Eg. with the numbers 1, 5, 5, and 5, one solution is "5 * (5 - 1/5)"')
+                print('Enter "l" to see the last problem')
                 print('Enter "c" for create, "s" for solve, "o" for operations (this will direct to real operations) and "f" for functions (this will direct to polynomials)')
                 print()
                 continue
@@ -2762,6 +2763,13 @@ def math24play():
                 continue
         if input_sol == "" or input_sol == "exi" or input_sol == "exit":
             break
+        elif input_sol == "l" or input_sol == "las" or input_sol == "last" or input_sol == "last problem":
+            if runs == 1:
+                print()
+                print("This is the first problem")
+            else:
+                runs -= 2
+            continue
         elif input_sol == "/" or input_sol == "ski" or input_sol == "skip":
             print()
             print("Solution: " + solutions)
