@@ -3259,7 +3259,7 @@ def main():
             while True:
                 mode = input("(P)lay, (c)reate, or (s)olve? ")
                 if mode.lower() == "" or mode.lower() == "exit" or mode.lower() == "exi":
-                    print()
+                    #print()
                     break
                 elif mode.lower() == "p" or mode.lower() == "play" or mode.lower() == "pla":
                     math24play()
