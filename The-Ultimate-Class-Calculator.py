@@ -2634,47 +2634,32 @@ def math24play():
         for i in range(0, 11):
             if solved == True:
                 break
-            for i1 in range(0, len(numbers)):
+            for inumber1 in numbers:
                 if solved == True:
                     break
                 for op1 in ops:
                     if solved == True:
                         break
-                    numbers2 = numbers
-                    if i1 == len(numbers) - 1:
-                        numbers2 = numbers2[:i1]
-                    elif i1 == 0:
-                        numbers2 = numbers2[1:]
-                    else:
-                        numbers2 = numbers2[:i1] + numbers2[i1 + 1:]
-                    for i2 in range(0, len(numbers2)):
+                    numbers2 = numbers[:]
+                    numbers2.remove(inumber1)
+                    for inumber2 in numbers2:
                         if solved == True:
                             break
                         for op2 in ops:
                             if solved == True:
                                 break
-                            numbers3 = numbers2
-                            if i2 == len(numbers2) - 1:
-                                numbers3 = numbers3[:i2]
-                            elif i2 == 0:
-                                numbers3 = numbers3[1:]
-                            else:
-                                numbers3 = numbers3[:i2] + numbers3[i2 + 1:]
-                            for i3 in range(0, len(numbers3)):
+                            numbers3 = numbers2[:]
+                            numbers3.remove(inumber2)
+                            for inumber3 in numbers3:
                                 if solved == True:
                                     break
                                 for op3 in ops:
-                                    numbers4 = numbers3
-                                    if i3 == len(numbers3) - 1:
-                                        numbers4 = numbers4[:i3]
-                                    elif i3 == 0:
-                                        numbers4 = numbers4[1:]
-                                    else:
-                                        numbers4 = numbers4[:i3] + numbers2[i3 + 1:]
+                                    numbers4 = numbers3[:]
+                                    numbers4.remove(inumber3)
                                     number4 = 0 + eval(str(numbers4[0]))
-                                    number3 = 0 + eval(str(numbers3[i3]))
-                                    number2 = 0 + eval(str(numbers2[i2]))
-                                    number1 = 0 + eval(str(numbers[i1]))
+                                    number3 = 0 + eval(str(inumber3))
+                                    number2 = 0 + eval(str(inumber2))
+                                    number1 = 0 + eval(str(inumber1))
                                     if i <= 6:
                                         if i == 0:
                                             string = str(number1) + op1 + str(number2) + op2 + str(number3) + op3 + str(number4)
