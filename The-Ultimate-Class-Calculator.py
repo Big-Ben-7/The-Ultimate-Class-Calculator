@@ -2626,7 +2626,7 @@ def math24play():
             print("Congrats! You are now the God of Math!")
             print()
         elif print_problems % 10 == 0:
-            print(f"You've made it to Problem {print_problems}! Congrats!")
+            print(f"You've made it to Problem {print_problems}!")
             print()
         print(f"Problem {print_problems}: " + print_numbers[:len(print_numbers) - 2])
         ops = [" + ", " - ", " * ", " / "]
