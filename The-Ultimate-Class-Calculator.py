@@ -2,6 +2,7 @@ from math import *
 import random
 import cmath
 import types
+import time
 
 global ans
 ans = 0.0
@@ -2909,6 +2910,8 @@ def math24create():
                 print('Please enter a positive integer or return to exit')
                 continue
         out = False
+        timestamp = time.time()
+        tried = 0
         for n1 in fuse:
             if out == True:
                 break
@@ -2962,12 +2965,20 @@ def math24create():
                                         else:
                                             string = "(" + str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + "))" + op3 + str(number4)
                                         try:
+                                            tried += 1
                                             if round(eval(string), 12) == 24:
                                                 solutions.append(sorted([number1, number2, number3, number4]))
                                                 solved = True
                                                 break
                                         except:
+                                            tried += 1
                                             pass
+                                        if tried % 100000 == 0:
+                                            newtime = time.time()
+                                            print("Tried", tried/1000000, "in", newtime - timestamp, "seconds")
+                                            timestamp = newtime
+                                            print("Found", len(solutions), "(including repeats)")
+                                            print()
         print()
         if len(solutions) != 0:
             print(f"Possible Math 24 sets:")
