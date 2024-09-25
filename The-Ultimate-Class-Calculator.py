@@ -3072,33 +3072,33 @@ def math24solve():
         for i in range(0, 11):
             if solved == True:
                 break
-            for number1 in numbers:
+            for inumber1 in numbers:
                 if solved == True:
                     break
                 for op1 in ops:
                     if solved == True:
                         break
                     numbers2 = numbers[:]
-                    numbers2.remove(number1)
-                    for number2 in numbers2:
+                    numbers2.remove(inumber1)
+                    for inumber2 in numbers2:
                         if solved == True:
                             break
                         for op2 in ops:
                             if solved == True:
                                 break
                             numbers3 = numbers2[:]
-                            numbers3.remove(number2)
-                            for number3 in numbers3:
+                            numbers3.remove(inumber2)
+                            for inumber3 in numbers3:
                                 if solved == True:
                                     break
                                 for op3 in ops:
                                     numbers4 = numbers3[:]
-                                    numbers4.remove(number3)
+                                    numbers4.remove(inumber3)
                                     try:
                                         number4 = 0 + eval(numbers4[0])
-                                        number3 = 0 + eval(number3)
-                                        number2 = 0 + eval(number2)
-                                        number1 = 0 + eval(number1)
+                                        number3 = 0 + eval(inumber3)
+                                        number2 = 0 + eval(inumber2)
+                                        number1 = 0 + eval(inumber1)
                                     except:
                                         print('Please enter a list of 4 real numbers or expressions, "i" for info, or return to exit')
                                         solved = True
