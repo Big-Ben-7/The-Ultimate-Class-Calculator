@@ -2808,7 +2808,6 @@ def math24create():
     while True:
         clear_variables()
         print()
-        tried = []
         solutions = []
         input_use = input("Numbers to use (i): ")
         if input_use == "" or input_use == "exit" or input_use == "exi":
@@ -2940,84 +2939,50 @@ def math24create():
                                 out == True
                                 break
                         numbers = [n1, n2, n3, n4]
-                        if sorted(numbers) in tried:
-                            continue
                         solved = False
-                        for i1 in range(0, len(numbers)):
+                        for op1 in ops:
                             if solved == True:
                                 break
-                            for op1 in ops:
+                            for op2 in ops:
                                 if solved == True:
                                     break
-                                numbers2 = numbers
-                                if i1 == len(numbers) - 1:
-                                    numbers2 = numbers2[:i1]
-                                elif i1 == 0:
-                                    numbers2 = numbers2[1:]
-                                else:
-                                    numbers2 = numbers2[:i1] + numbers2[i1 + 1:]
-                                for i2 in range(0, len(numbers2)):
+                                for op3 in ops:
                                     if solved == True:
                                         break
-                                    for op2 in ops:
-                                        if solved == True:
-                                            break
-                                        numbers3 = numbers2
-                                        if i2 == len(numbers2) - 1:
-                                            numbers3 = numbers3[:i2]
-                                        elif i2 == 0:
-                                            numbers3 = numbers3[1:]
+                                    number4 = numbers[3]
+                                    number3 = numbers[2]
+                                    number2 = numbers[1]
+                                    number1 = numbers[0]
+                                    for i in range(0, 11):
+                                        if i == 0:
+                                            string = str(number1) + op1 + str(number2) + op2 + str(number3) + op3 + str(number4)
+                                        elif i == 1:
+                                            string = "(" + str(number1) + op1 + str(number2) + ")" + op2 + str(number3) + op3 + str(number4)
+                                        elif i == 2:
+                                            string = str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + ")" + op3 + str(number4)
+                                        elif i == 3:
+                                            string = str(number1) + op1 + str(number2) + op2 + "(" + str(number3) + op3 + str(number4) + ")"
+                                        elif i == 4:
+                                            string = "(" + str(number1) + op1 + str(number2) + ")" + op2 + "(" + str(number3) + op3 + str(number4) + ")"
+                                        elif i == 5:
+                                            string = "(" + str(number1) + op1 + str(number2) + op2 + str(number3) + ")" + op3 + str(number4)
+                                        elif i == 6:
+                                            string = str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + op3 + str(number4) + ")"
+                                        elif i == 7:
+                                            string = "((" + str(number1) + op1 + str(number2) + ")" + op2 + str(number3) + ")" + op3 + str(number4)
+                                        elif i == 8:
+                                            string = str(number1) + op1 + "(" + str(number2) + op2 + "(" + str(number3) + op3 + str(number4) + "))"
+                                        elif i == 9:
+                                            string = str(number1) + op1 + "((" + str(number2) + op2 + str(number3) + ")" + op3 + str(number4) + ")"
                                         else:
-                                            numbers3 = numbers3[:i2] + numbers3[i2 + 1:]
-                                        for i3 in range(0, len(numbers3)):
-                                            if solved == True:
+                                            string = "(" + str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + "))" + op3 + str(number4)
+                                        try:
+                                            if round(eval(string), 12) == 24:
+                                                solutions.append(sorted([number1, number2, number3, number4]))
+                                                solved = True
                                                 break
-                                            for op3 in ops:
-                                                if solved == True:
-                                                    break
-                                                numbers4 = numbers3
-                                                if i3 == len(numbers3) - 1:
-                                                    numbers4 = numbers4[:i3]
-                                                elif i3 == 0:
-                                                    numbers4 = numbers4[1:]
-                                                else:
-                                                    numbers4 = numbers4[:i3] + numbers2[i3 + 1:]
-                                                number4 = numbers4[0]
-                                                number3 = numbers3[i3]
-                                                number2 = numbers2[i2]
-                                                number1 = numbers[i1]
-                                                for i in range(0, 11):
-                                                    if i == 0:
-                                                        string = str(number1) + op1 + str(number2) + op2 + str(number3) + op3 + str(number4)
-                                                    elif i == 1:
-                                                        string = "(" + str(number1) + op1 + str(number2) + ")" + op2 + str(number3) + op3 + str(number4)
-                                                    elif i == 2:
-                                                        string = str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + ")" + op3 + str(number4)
-                                                    elif i == 3:
-                                                        string = str(number1) + op1 + str(number2) + op2 + "(" + str(number3) + op3 + str(number4) + ")"
-                                                    elif i == 4:
-                                                        string = "(" + str(number1) + op1 + str(number2) + ")" + op2 + "(" + str(number3) + op3 + str(number4) + ")"
-                                                    elif i == 5:
-                                                        string = "(" + str(number1) + op1 + str(number2) + op2 + str(number3) + ")" + op3 + str(number4)
-                                                    elif i == 6:
-                                                        string = str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + op3 + str(number4) + ")"
-                                                    elif i == 7:
-                                                        string = "((" + str(number1) + op1 + str(number2) + ")" + op2 + str(number3) + ")" + op3 + str(number4)
-                                                    elif i == 8:
-                                                        string = str(number1) + op1 + "(" + str(number2) + op2 + "(" + str(number3) + op3 + str(number4) + "))"
-                                                    elif i == 9:
-                                                        string = str(number1) + op1 + "((" + str(number2) + op2 + str(number3) + ")" + op3 + str(number4) + ")"
-                                                    else:
-                                                        string = "(" + str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + "))" + op3 + str(number4)
-                                                    try:
-                                                        if round(eval(string), 12) == 24:
-                                                            tried.append(sorted([number1, number2, number3, number4]))
-                                                            solutions.append(sorted([number1, number2, number3, number4]))
-                                                            solved = True
-                                                            break
-                                                    except:
-                                                        pass
-                                                tried.append(sorted([number1, number2, number3, number4]))
+                                        except:
+                                            pass
         print()
         if len(solutions) != 0:
             print(f"Possible Math 24 sets:")
