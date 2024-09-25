@@ -2972,12 +2972,16 @@ def math24create():
         if len(solutions) != 0:
             print(f"Possible Math 24 sets:")
             for i in range(0, len(solutions)):
-                '''res = ""
-                for b in solutions[i]:
-                    res += str(b) + ", "
-                res = res[:len(res) - 2]
-                print(f"Set {i + 1}: " + res)'''
-                print(solutions[i], end = ", ")
+                if solutions.count(solutions[i]) > 1:
+                    solutions[i] = "noprint"
+                else:
+                    '''res = ""
+                    for b in solutions[i]:
+                        res += str(b) + ", "
+                    res = res[:len(res) - 2]
+                    print(f"Set {i + 1}: " + res)'''
+                    print(solutions[i], end = ", ")
+                    print()
         else:
             print(f"There are no possible Math 24 sets using the entered numbers and operations")
 
