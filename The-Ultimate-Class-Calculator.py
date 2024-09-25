@@ -2980,8 +2980,8 @@ def math24create():
                         res += str(b) + ", "
                     res = res[:len(res) - 2]
                     print(f"Set {i + 1}: " + res)'''
-                    print(solutions[i], end = ", ")
-                    print()
+                    print(solutions[i], end = ",")
+            print()
         else:
             print(f"There are no possible Math 24 sets using the entered numbers and operations")
 
