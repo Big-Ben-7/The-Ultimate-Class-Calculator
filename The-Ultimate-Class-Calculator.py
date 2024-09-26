@@ -197,7 +197,9 @@ def from_polar():
     while True:
         clear_variables()
         print()
+        ops = ["=", "+", "-", "*", "/", "^", "[]"]
         av = input("Term 1 modulus/absolute value (i): ")
+        av = av.replace(" ", "")
         if av == "" or av == "exit" or av == "exi":
             break
         elif av == "i" or av == "info" or av == "inf":
@@ -205,10 +207,11 @@ def from_polar():
             print('Real numbers and expressions, such as "3 * sin(pi / 3)", can be entered as terms')
             print("The following non-parenthesized operators and functions can be entered as part of an expression:")
             print("Operators: + (add), - (subtract), * (multiply), / (divide), // (integer divide), % (remainder), ^ (exponent)")
-            print("Functions: eg. abs(x), sqrt(x), cbrt(x), pow(x, y), log(x, base), factorial(x), comb(x, y), perm(x, y), sin(x), cos(x), tan(x), asin(x), acos(x), atan(x), degrees(x), radians(x), sum([x, y, z,...]), int(x), round(x), etc")
+            print("Functions: eg. abs(x), sqrt(x), cbrt(x), pow(x, y), log(x, base), factorial(x), comb(x, y), perm(x, y), sin(x), cos(x), tan(x), asin(x), acos(x), atan(x), degrees(x), radians(x), sum([x, y, z,...]), int(x), round(x), floor(x), ceil(x), etc.")
             print('Real constants such as "pi", "e", and "tau" can be entered')
             print('Real variables can also be entered, for example: "ans" (previous real answer), "rl" (real part of previous complex result), "im" (imaginary part of previous complex result), "rt" (1st real solution of previous quadratic), "rt2" (2nd real solution of previous quadratic), "im2" (imaginary part of 2nd previous quadratic complex solution) "sum" (previous series summation), "rat" (previous geometric series common ratio), "dif" (previous arithmetic series common difference), "term1" (1st term of previous series), "cf1" (1st coefficient of previous binomial expansion), and stored variables')
             print("The above operators and functions can only be entered as part of an expression, not as an operation")
+            print('Enter a single operation symbol to use the previous polar form answer as the first term and input the next term')
             print('Enter "rec" for rectangular form, "r" for real operations, "m" for matrix operations, "s" for summations (this will direct to binomial expansion), "f" for functions (this will direct to polynomials), and "g" for games (this will direct to play Math 24)')
             continue
         elif av == "rec" or av == "rectangular" or av == "rectangular form":
@@ -229,24 +232,30 @@ def from_polar():
         elif av == "g" or av == "gam" or av == "games":
             math24play()
             break
-        try:
-            av = av.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")").replace(")(", ")*(")
-            av = 0 + eval(av)
-            if round(av, 12) < 0:
-                print('Absolute values cannot be negative')
+        elif av in ops:
+            op = av
+            av = mod
+            inang = ang
+            print("Operation: " + op)
+        else:
+            try:
+                av = av.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")").replace(")(", ")*(")
+                av = 0 + eval(av)
+                if round(av, 12) < 0:
+                    print('Absolute values cannot be negative')
+                    continue
+            except:
+                print('Please enter a real nonnegative number or expression, "i" for info, or return to exit')
                 continue
-        except:
-            print('Please enter a real nonnegative number or expression, "i" for info, or return to exit')
-            continue
-        inang = input("Term 1 angle/argument: ")
-        if inang == "" or inang == "exit" or inang == "exi":
-            continue
-        try:
-            inang = inang.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")").replace(")(", ")*(")
-            inang = 0 + eval(inang)
-        except:
-            print('Please enter a real number or expression, or return to exit')
-            continue
+            inang = input("Term 1 angle/argument: ")
+            if inang == "" or inang == "exit" or inang == "exi":
+                continue
+            try:
+                inang = inang.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")").replace(")(", ")*(")
+                inang = 0 + eval(inang)
+            except:
+                print('Please enter a real number or expression, or return to exit')
+                continue
         while True:
             angmode = input("Inputted in (r)adians or (d)egrees? ")
             if angmode.lower() == "radians" or angmode.lower() == "rad" or angmode.lower() == "r":
@@ -264,16 +273,16 @@ def from_polar():
         while True:
             print()
             op = input("Operation (i): ")
-            if op.lower() == "info" or op.lower() == "i" or op.lower() == "inf":
+            if op == "info" or op == "i" or op == "inf":
                 print()
                 print('The following operations can be entered: equals (=), add (+), subtract (-), multiply (*), divide (/), exponent (^), rectangular ([])')
                 print("The above operations can only be entered as an operation, not as part of an expression")
             else:
                 break
-        if op.lower() == "" or op.lower() == "exit" or op.lower() == "exi":
+        if op == "" or op == "exit" or op == "exi":
             continue
         print()
-        if not(op.lower() == "=" or op.lower() == "equals" or op.lower() == "equ" or op.lower() == "rectangular" or op.lower() == "rec" or op.lower() == "rectangular form"):
+        if not(op == "=" or op == "equals" or op == "equ" or op == "rectangular" or op == "rec" or op == "rectangular form"):
             av2 = input("Term 2 modulus/absolute value: ")
             if av2 == "" or av2 == "exit" or av2 == "exi":
                 continue
@@ -311,7 +320,7 @@ def from_polar():
             print("Second term: " + cterm2)
             print()
         try:
-            if op.lower() == "=" or op.lower() == "equals" or op.lower() == "equ":
+            if op == "=" or op == "equals" or op == "equ":
                 res = cmath.polar(complex(a, b))
                 ares = res[1]
                 while True:
@@ -351,7 +360,7 @@ def from_polar():
                     print(f"ang (angle/argument) = {round(ang, 12)} (radians)")
                 else:
                     print(f"ang (angle/argument) = {round(ang, 12)} (degrees)")
-            elif op.lower() == "+" or op.lower() == "add":
+            elif op == "+" or op == "add":
                 res = cmath.polar(complex(a, b) + complex(c, d))
                 ares = res[1]
                 while True:
@@ -391,7 +400,7 @@ def from_polar():
                     print(f"ang (angle/argument) = {round(ang, 12)} (radians)")
                 else:
                     print(f"ang (angle/argument) = {round(ang, 12)} (degrees)")
-            elif op.lower() == "-" or op.lower() == "subtract" or op.lower() == "sub":
+            elif op == "-" or op == "subtract" or op == "sub":
                 res = cmath.polar(complex(a, b) - complex(c, d))
                 ares = res[1]
                 while True:
@@ -431,7 +440,7 @@ def from_polar():
                     print(f"ang (angle/argument) = {round(ang, 12)} (radians)")
                 else:
                     print(f"ang (angle/argument) = {round(ang, 12)} (degrees)")
-            elif op.lower() == "*" or op.lower() == "multiply" or op.lower() == "mul":
+            elif op == "*" or op == "multiply" or op == "mul":
                 res = cmath.polar(complex(a, b) * complex(c, d))
                 ares = res[1]
                 while True:
@@ -471,7 +480,7 @@ def from_polar():
                     print(f"ang (angle/argument) = {round(ang, 12)} (radians)")
                 else:
                     print(f"ang (angle/argument) = {round(ang, 12)} (degrees)")
-            elif op.lower() == "/" or op.lower() == "divide" or op.lower() == "div":
+            elif op == "/" or op == "divide" or op == "div":
                 res = cmath.polar(complex(a, b) / complex(c, d))
                 ares = res[1]
                 while True:
@@ -511,7 +520,7 @@ def from_polar():
                     print(f"ang (angle/argument) = {round(ang, 12)} (radians)")
                 else:
                     print(f"ang (angle/argument) = {round(ang, 12)} (degrees)")
-            elif op.lower() == "^" or op.lower() == "exponent" or op.lower() == "exp" or op.lower() == "**":
+            elif op == "^" or op == "exponent" or op == "exp" or op == "**":
                 res = cmath.polar(complex(a, b) ** complex(c, d))
                 ares = res[1]
                 while True:
@@ -551,7 +560,7 @@ def from_polar():
                     print(f"ang (angle/argument) = {round(ang, 12)} (radians)")
                 else:
                     print(f"ang (angle/argument) = {round(ang, 12)} (degrees)")
-            elif op.lower() == "rectangular" or op.lower() == "rec" or op.lower() == "rectangular form" or op.lower() == "rec for" or op.lower() == "[]":
+            elif op == "rectangular" or op == "rec" or op == "rectangular form" or op == "rec for" or op == "[]":
                 res = cmath.rect(av, ang)
                 if round(res.imag, 12) > 0 and round(res.real, 12) != 0:
                     if round(res.imag, 12) != 1:
@@ -598,7 +607,9 @@ def from_rectangular():
     while True:
         clear_variables()
         print()
+        ops = ["=", "+", "-", "*", "/", "^", "||", "<", "|<"]
         a = input("a (i): ")
+        a = a.replace(" ", "")
         if a == "" or a == "exit" or a == "exi":
             break
         elif a == "i" or a == "info" or a == "inf":
@@ -606,10 +617,11 @@ def from_rectangular():
             print('Real numbers and expressions, such as "3 * sin(pi / 3)", can be entered as values')
             print("The following non-parenthesized operators and functions can be entered as part of an expression:")
             print("Operators: + (add), - (subtract), * (multiply), / (divide), // (integer divide), % (remainder), ^ (exponent)")
-            print("Functions: eg. abs(x), sqrt(x), cbrt(x), pow(x, y), log(x, base), factorial(x), comb(x, y), perm(x, y), sin(x), cos(x), tan(x), asin(x), acos(x), atan(x), degrees(x), radians(x), sum([x, y, z,...]), int(x), round(x), etc")
+            print("Functions: eg. abs(x), sqrt(x), cbrt(x), pow(x, y), log(x, base), factorial(x), comb(x, y), perm(x, y), sin(x), cos(x), tan(x), asin(x), acos(x), atan(x), degrees(x), radians(x), sum([x, y, z,...]), int(x), round(x), floor(x), ceil(x), etc.")
             print('Real constants such as "pi", "e", and "tau" can be entered')
             print('Real variables can also be entered, for example: "ans" (previous real answer), "rl" (real part of previous complex result), "im" (imaginary part of previous complex result), "rt" (1st real solution of previous quadratic), "rt2" (2nd real solution of previous quadratic), "im2" (imaginary part of 2nd previous quadratic complex solution) "sum" (previous series summation), "rat" (previous geometric series common ratio), "dif" (previous arithmetic series common difference), "term1" (1st term of previous series), "cf1" (1st coefficient of previous binomial expansion), and stored variables')
             print("The above operators and functions can only be entered as part of an expression, not as an operation")
+            print("Enter a single operation symbol to use the previous rectangular form answer as the first term and input the next term")
             print('Enter "p" for polar form, "r" for real operations, "m" for matrix operations, "s" for summations (this will direct to binomial expansion), "f" for functions (this will direct to polynomials), and "g" for games (this will direct to play Math 24)')
             continue
         elif a == "p" or a == "polar" or a == "pol" or a == "polar form":
@@ -630,53 +642,59 @@ def from_rectangular():
         elif a == "g" or a == "gam" or a == "games":
             math24play()
             break
-        try:
-            a = a.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")").replace(")(", ")*(")
-            a = 0 + eval(a)
-        except:
-            print('Please enter a real number or expression, "i" for info, or return to exit')
-            continue
-        b = input("b: ")
-        if b == "" or b == "exit" or b == "exi":
-            continue
-        try:
-            b = b.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")").replace(")(", ")*(")
-            b = 0 + eval(b)
-        except:
-            print('Please enter a real number or expression, or return to exit')
-            continue
-        if round(a, 12) != 0 and round(b, 12) > 0:
-            if round(b, 12) != 1:
-                cterm1 = f"{round(a, 12)} + {round(b, 12)}i"
-            else:
-                cterm1 = f"{a} + i"
-        elif round(a, 12) != 0 and round(b, 12) < 0:
-            if round(b, 12) != -1:
-                cterm1 = f"{round(a, 12)} - {round(b * -1, 12)}i"
-            else:
-                cterm1 = f"{round(a, 12)} - i"
-        elif round(a, 12) == 0 and round(b, 12) != 0:
-            if round(b, 12) != -1 and round(b, 12) != 1:
-                cterm1 = f"{round(b, 12)}i"
-            elif round(b, 12) == 1:
-                cterm1 = "i"
-            else:
-                cterm1 = "-i"
-        elif round(b, 12) == 0:
-            cterm1 = f"{round(a, 12)}"
-        print("First term: " + cterm1)
-        while True:
-            print()
-            op = input("Operation (i): ")
-            if op.lower() == "info" or op.lower() == "i" or op.lower() == "inf":
+        elif a in ops:
+            op = a
+            a = rl
+            b = im
+            print("Operation: " + op)
+        else:
+            try:
+                a = a.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")").replace(")(", ")*(")
+                a = 0 + eval(a)
+            except:
+                print('Please enter a real number or expression, "i" for info, or return to exit')
+                continue
+            b = input("b: ")
+            if b == "" or b == "exit" or b == "exi":
+                continue
+            try:
+                b = b.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")").replace(")(", ")*(")
+                b = 0 + eval(b)
+            except:
+                print('Please enter a real number or expression, or return to exit')
+                continue
+            if round(a, 12) != 0 and round(b, 12) > 0:
+                if round(b, 12) != 1:
+                    cterm1 = f"{round(a, 12)} + {round(b, 12)}i"
+                else:
+                    cterm1 = f"{a} + i"
+            elif round(a, 12) != 0 and round(b, 12) < 0:
+                if round(b, 12) != -1:
+                    cterm1 = f"{round(a, 12)} - {round(b * -1, 12)}i"
+                else:
+                    cterm1 = f"{round(a, 12)} - i"
+            elif round(a, 12) == 0 and round(b, 12) != 0:
+                if round(b, 12) != -1 and round(b, 12) != 1:
+                    cterm1 = f"{round(b, 12)}i"
+                elif round(b, 12) == 1:
+                    cterm1 = "i"
+                else:
+                    cterm1 = "-i"
+            elif round(b, 12) == 0:
+                cterm1 = f"{round(a, 12)}"
+            print("First term: " + cterm1)
+            while True:
                 print()
-                print('The following operations can be entered: equals (=), add (+), subtract (-), multiply (*), divide (/), exponent (^), absolute value or modulus (||), angle or argument (<), polar (|<)')
-                print("The above operations can only be entered as an operation, not as part of an expression")
-            else:
-                break
-        if op.lower() == "" or op.lower() == "exit" or op.lower() == "exi":
-            continue
-        if not(op.lower() == "=" or op.lower() == "equals" or op.lower() == "equ" or op.lower() == "argument" or op.lower() == "arg" or op.lower() == "angle" or op.lower() == "ang" or op.lower() == "phase" or op.lower() == "pha" or op.lower() == "polar" or op.lower() == "pol" or op.lower() == "abs" or op.lower() == "absolute value" or op.lower() == "magnitude" or op.lower() == "mag" or op.lower() == "||" or op.lower() == "modulus" or op.lower() == "mod"):
+                op = input("Operation (i): ")
+                if op == "info" or op == "i" or op == "inf":
+                    print()
+                    print('The following operations can be entered: equals (=), add (+), subtract (-), multiply (*), divide (/), exponent (^), absolute value or modulus (||), angle or argument (<), polar (|<)')
+                    print("The above operations can only be entered as an operation, not as part of an expression")
+                else:
+                    break
+            if op == "" or op == "exit" or op == "exi":
+                continue
+        if not(op == "=" or op == "equals" or op == "equ" or op == "argument" or op == "arg" or op == "<" or op == "angle" or op == "ang" or op == "phase" or op == "pha" or op == "polar" or op == "pol" or op == "|<" or op == "abs" or op == "absolute value" or op == "magnitude" or op == "mag" or op == "||" or op == "modulus" or op == "mod"):
             print()
             c = input("c: ")
             if c == "" or c == "exit" or c == "exi":
@@ -717,7 +735,7 @@ def from_rectangular():
                 cterm2 = f"{round(c, 12)}"
             print("Second term: " + cterm2)
         try:
-            if op.lower() == "=" or op.lower() == "equals" or op.lower() == "equ":
+            if op == "=" or op == "equals" or op == "equ":
                 res = complex(a, b)
                 print()
                 print(f"Result: {cterm1}")
@@ -725,7 +743,7 @@ def from_rectangular():
                 print(f"rl (real part) = {round(rl, 12)}")
                 im = res.imag
                 print(f"im (imaginary part) = {round(im, 12)}")
-            elif op.lower() == "+" or op.lower() == "add":
+            elif op == "+" or op == "add":
                 res = complex(a, b) + complex(c, d)
                 print()
                 if round(res.imag, 12) > 0 and round(res.real, 12) != 0:
@@ -751,7 +769,7 @@ def from_rectangular():
                 print(f"rl (real part) = {round(rl, 12)}")
                 im = res.imag
                 print(f"im (imaginary part) = {round(im, 12)}")
-            elif op.lower() == "-" or op.lower() == "subtract" or op.lower() == "sub":
+            elif op == "-" or op == "subtract" or op == "sub":
                 res = complex(a, b) - complex(c, d)
                 print()
                 if round(res.imag, 12) > 0 and round(res.real, 12) != 0:
@@ -777,7 +795,7 @@ def from_rectangular():
                 print(f"rl (real part) = {round(rl, 12)}")
                 im = res.imag
                 print(f"im (imaginary part) = {round(im, 12)}")
-            elif op.lower() == "*" or op.lower() == "multiply" or op.lower() == "mul":
+            elif op == "*" or op == "multiply" or op == "mul":
                 res = complex(a, b) * complex(c, d)
                 print()
                 if round(res.imag, 12) > 0 and round(res.real, 12) != 0:
@@ -803,7 +821,7 @@ def from_rectangular():
                 print(f"rl (real part) = {round(rl, 12)}")
                 im = res.imag
                 print(f"im (imaginary part) = {round(im, 12)}")
-            elif op.lower() == "/" or op.lower() == "divide" or op.lower() == "div":
+            elif op == "/" or op == "divide" or op == "div":
                 res = complex(a, b) / complex(c, d)
                 print()
                 if round(res.imag, 12) > 0 and round(res.real, 12) != 0:
@@ -829,7 +847,7 @@ def from_rectangular():
                 print(f"rl (real part) = {round(rl, 12)}")
                 im = res.imag
                 print(f"im (imaginary part) = {round(im, 12)}")
-            elif op.lower() == "^" or op.lower() == "exponent" or op.lower() == "exp" or op.lower() == "**":
+            elif op == "^" or op == "exponent" or op == "exp" or op == "**":
                 res = complex(a, b) ** complex(c, d)
                 print()
                 if round(res.imag, 12) > 0 and round(res.real, 12) != 0:
@@ -855,11 +873,11 @@ def from_rectangular():
                 print(f"rl (real part) = {round(rl, 12)}")
                 im = res.imag
                 print(f"im (imaginary part) = {round(im, 12)}")
-            elif op.lower() == "abs" or op.lower() == "absolute value" or op.lower() == "magnitude" or op.lower() == "mag" or op.lower() == "||" or op.lower() == "modulus" or op.lower() == "mod":
+            elif op == "abs" or op == "absolute value" or op == "magnitude" or op == "mag" or op == "||" or op == "modulus" or op == "mod":
                 mod = abs(complex(a, b))
                 print()
                 print(f"mod (modulus/absolute value) = {round(mod, 12)}")
-            elif op.lower() == "<" or op.lower() == "angle" or op.lower() == "ang" or op.lower() == "phase" or op.lower() == "pha" or op.lower() == "argument" or op.lower() == "arg":
+            elif op == "<" or op == "angle" or op == "ang" or op == "phase" or op == "pha" or op == "argument" or op == "arg":
                 res = cmath.phase(a, b)
                 while True:
                     unit = input("Output in (r)adians or (d)egrees? ")
@@ -895,7 +913,7 @@ def from_rectangular():
                     print(f"ang (angle/argument) = {round(ang, 12)} (radians)")
                 else:
                     print(f"ang (angle/argument) = {round(ang, 12)} (degrees)") 
-            elif op.lower() == "|<" or op.lower() == "polar" or op.lower() == "pol" or op.lower() == "polar form":
+            elif op == "|<" or op == "polar" or op == "pol" or op == "polar form":
                 res = cmath.polar(complex(a, b))
                 ares = res[1]
                 while True:
@@ -955,7 +973,9 @@ def real_operation():
     while True:
         clear_variables()
         print()
+        ops = ["+", "-", "*", "/", "//", "%", "||", "^", "**", "log", "sqrt", "cbrt", "sin", "cos", "tan", "asin", "acos", "atan", "deg", "rad", "!", "cho", "per", "==", "!=", "<", "<=", ">", ">=", "=", "sto", "~", "int", "flo", "cei"]
         n = input('First term (i): ')
+        n = n.replace(" ", "")
         if n == "exit" or n == "" or n == "exi":
             break
         elif n == "i" or n == "inf" or n == "info":
@@ -965,10 +985,11 @@ def real_operation():
             print("Arithmetic operators: + (add), - (subtract), * (multiply), / (divide), // (integer divide), % (remainder), ^ (exponent)")
             print("Comparison operators: == (equal to), != (not equal to), < (less than), <=, (less than or equal to), > (greater than), >= (greater than or equal to)")
             print("Logic operators: and (true if both are true), or (true if either is true), not() (inverts truth value)")
-            print("Functions: eg. abs(x), sqrt(x), cbrt(x), pow(x, y), log(x, base), factorial(x), comb(x, y), perm(x, y), sin(x), cos(x), tan(x), asin(x), acos(x), atan(x), degrees(x), radians(x), sum([x, y, z,...]), int(x), round(x), etc")
+            print("Functions: eg. abs(x), sqrt(x), cbrt(x), pow(x, y), log(x, base), factorial(x), comb(x, y), perm(x, y), sin(x), cos(x), tan(x), asin(x), acos(x), atan(x), degrees(x), radians(x), sum([x, y, z,...]), int(x), round(x), floor(x), ceil(x), etc.")
             print('Real constants such as "pi", "e", and "tau" can be entered')
             print('Real variables can also be entered, for example: "ans" (previous real answer), "rl" (real part of previous complex result), "im" (imaginary part of previous complex result), "rt" (1st real solution of previous quadratic), "rt2" (2nd real solution of previous quadratic), "im2" (imaginary part of 2nd previous quadratic complex solution) "sum" (previous series summation), "rat" (previous geometric series common ratio), "dif" (previous arithmetic series common difference), "term1" (1st term of previous series), "cf1" (1st coefficient of previous binomial expansion), and stored variables')
             print("The above operators and functions can only be entered as part of an expression, not as an operation")
+            print('Enter a single operation symbol to use ans as the first term and input the next term')
             print('Enter "c" for complex operations (this will direct to rectangular form), "m" for matrix operations, "s" for summations (this will direct to binomial expansion), "f" for functions (this will direct to polynomials), and "g" for games (this will direct to play Math 24)')
             continue
         elif n == "c" or n == "com" or n == "complex" or n == "complex operations":
@@ -986,6 +1007,10 @@ def real_operation():
         elif n == "g" or n == "gam" or n == "games":
             math24play()
             break
+        elif n in ops:
+            op = n
+            n = ans
+            print("Operation: " + op)
         else:
             try:
                 n = n.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")").replace(")(", ")*(")
@@ -1005,22 +1030,23 @@ def real_operation():
                 continue
             while True:
                 op = input('Operation (i): ')
-                if op.lower() == "info" or op.lower() == "i" or op.lower() == "inf":
+                op = op.lower()
+                if op == "info" or op == "i" or op == "inf":
                     print()
                     print("The following operations can be entered:")
-                    print('Basic: add (+), subtract (-), multiply (*), divide (/), integer divide or floor divide (//), remainder or modulo (r or %), absolute value or magnitude (||)')
-                    print('Power: exponent (^), logarithm (log), square rt (sqrt), cube rt (cbrt)')
+                    print('Basic: add (+), subtract (-), multiply (*), divide (/), integer divide or floor divide (//), remainder or modulo (%), absolute value or magnitude (||)')
+                    print('Power: exponent (^), logarithm (log), square root (sqrt), cube root (cbrt)')
                     print('Trigonometry: sine (sin), cosine (cos), tangent (tan), arcsine (asin), arccosine (acos), arctangent (atan), degrees (deg), radians (rad)')
                     print("Combinatorics: factorial (!), choose (cho), permute (per)")
                     print("Comparison: == (equal to), != (not equal to), < (less than), <= (less than or equal to), > (greater than), >= (greater than or equal to)")
-                    print("Other: equals (=), store (sto), round (~), integer (int)")
+                    print("Other: equals (=), store (sto), round (~), integer (int), floor (flo), ceiling (cei)")
                     print()
                 else:
                     break
-            if op.lower() == "exit" or op.lower() == "":
+            if op == "exit" or op == "":
                 continue
-            elif not(op.lower() == "store" or op.lower() == "sto" or op.lower() == "equals" or op.lower() == "=" or op.lower() == "equ" or op.lower() == "factorial" or op.lower() == "fac" or op.lower() == "!" or op.lower() == "sqrt" or op.lower() == "square rt" or op.lower() == "squ" or op.lower() == "cbrt" or op.lower() == "cube rt" or op.lower() == "cub" or op.lower() == "absolute value" or op.lower() == "||" or op.lower() == "abs" or op.lower() == "magnitude" or op.lower() == "mag" or op.lower() == "asin" or op.lower() == "arcsine" or op.lower() == "inverse sine" or op.lower() == "inv sin" or op.lower() == "acos" or op.lower() == "arccosine" or op.lower() == "inverse cosine" or op.lower() == "inv cos" or op.lower() == "atan" or op.lower() == "arctangent" or op.lower() == "inverse tangent" or op.lower() == "inv tan" or op.lower() == "asi" or op.lower() == "aco" or op.lower() == "ata" or op.lower() == "sin" or op.lower() == "sine" or op.lower() == "cos" or op.lower() == "cosine" or op.lower() == "tangent" or op.lower() == "tan" or op.lower() == "int" or op.lower() == "integer" or op.lower() == "radians" or op.lower() == "rad" or op.lower() == "degrees" or op.lower() == "deg"):
-                if op.lower() == "exponent" or op.lower() == "^" or op.lower() == "exp" or op.lower() == "**":
+            elif not(op == "flo" or op == "floor" or op == "ceiling" or op == "cei" or op == "store" or op == "sto" or op == "equals" or op == "=" or op == "equ" or op == "factorial" or op == "fac" or op == "!" or op == "sqrt" or op == "square root" or op == "squ" or op == "cbrt" or op == "cube root" or op == "cub" or op == "absolute value" or op == "||" or op == "abs" or op == "magnitude" or op == "mag" or op == "asin" or op == "arcsine" or op == "inverse sine" or op == "inv sin" or op == "acos" or op == "arccosine" or op == "inverse cosine" or op == "inv cos" or op == "atan" or op == "arctangent" or op == "inverse tangent" or op == "inv tan" or op == "asi" or op == "aco" or op == "ata" or op == "sin" or op == "sine" or op == "cos" or op == "cosine" or op == "tangent" or op == "tan" or op == "int" or op == "integer" or op == "radians" or op == "rad" or op == "degrees" or op == "deg"):
+                if op == "exponent" or op == "^" or op == "exp" or op == "**":
                     n2 = input('Exponent: ')
                     if n2 == "" or n2 == "exit" or n2 == "exi":
                         continue
@@ -1030,7 +1056,7 @@ def real_operation():
                     except:
                         print('Please enter a real number or expression, or return to exit')
                         continue
-                elif op.lower() == "round" or op.lower() == "~" or op.lower() == "rou":
+                elif op == "round" or op == "~" or op == "rou":
                     n2 = input('Decimals to round (0-12): ')
                     if n2 == "" or n2 == "exit" or n2 == "exi":
                         continue
@@ -1041,7 +1067,7 @@ def real_operation():
                     except:
                         print('Please enter an integer from 0 to 12 or return to exit')
                         continue
-                elif op.lower() == "log" or op.lower() == "logarithm":
+                elif op == "log" or op == "logarithm":
                     if n > 0:
                         n2 = input('Base: ')
                         if n2 == "" or n2 == "exit" or n2 == "exi":
@@ -1052,7 +1078,7 @@ def real_operation():
                         except:
                             print('Please enter a real number or expression greater than 0 and not equal to 1, or return to exit')
                             continue                                
-                elif op.lower() == "choose" or op.lower() == "cho" or op.lower() == "comb":
+                elif op == "choose" or op == "cho" or op == "comb":
                     if round(n, 12) == round(n) and n >= 0:
                         n2 = input(f'From {round(n)} choose: ')
                         if n2 == "" or n2 == "exit" or n2 == "exi":
@@ -1063,7 +1089,7 @@ def real_operation():
                         except:
                             print('Please enter a nonnegative integer or return to exit')
                             continue                                    
-                elif op.lower() == "perm" or op.lower() == "permute" or op.lower() == "per":
+                elif op == "perm" or op == "permute" or op == "per":
                     if round(n, 12) == round(n) and n >= 0:
                         n2 = input(f'From {round(n)} permute: ')
                         if n2 == "" or n2 == "exit" or n2 == "exi":
@@ -1075,17 +1101,17 @@ def real_operation():
                             print('Please enter a nonnegative integer or return to exit')
                             continue  
                 else:
-                    if op.lower() == "equal to" or op.lower() == "is":
+                    if op == "equal to" or op == "is":
                         op = "=="
-                    elif op.lower() == "less than" or op.lower() == "less":
+                    elif op == "less than" or op == "less":
                         op = "<"
-                    elif op.lower() == "greater than" or op.lower() == "greater":
+                    elif op == "greater than" or op == "greater":
                         op = ">"
-                    elif op.lower() == "less than or equal to":
+                    elif op == "less than or equal to":
                         op = "<="
-                    elif op.lower() == "greater than or equal to":
+                    elif op == "greater than or equal to":
                         op = ">="
-                    elif op.lower() == "not equal to" or op.lower() == "not":
+                    elif op == "not equal to" or op == "not":
                         op = "!="
                     n2 = input('Next term: ')
                     if n2 == "" or n2 == "exit" or n2 == "exi":
@@ -1097,40 +1123,40 @@ def real_operation():
                         print('Please enter a real number or expression, or return to exit')
                         continue
         try:
-            if op.lower() == "equals" or op.lower() == "=" or op.lower() == "equ":
+            if op == "equals" or op == "=" or op == "equ":
                 print()
                 print(f"ans (answer) = {round(n, 12)}")
-            elif op.lower() == "add" or op.lower() == "+":
+            elif op == "add" or op == "+":
                 n += n2
                 print()
                 print(f"ans (answer) = {round(n, 12)}")
-            elif op.lower() == "subtract" or op.lower() == "-" or op.lower() == "sub":
+            elif op == "subtract" or op == "-" or op == "sub":
                 n -= n2
                 print()
                 print(f"ans (answer) = {round(n, 12)}")
-            elif op.lower() == "multiply" or op.lower() == "*" or op.lower() == "mul" or op.lower() == "x":
+            elif op == "multiply" or op == "*" or op == "mul" or op == "x":
                 n *= n2
                 print()
                 print(f"ans (answer) = {round(n, 12)}")
-            elif op.lower() == "divide" or op.lower() == "/" or op.lower() == "div":
+            elif op == "divide" or op == "/" or op == "div":
                 n /= n2
                 if n == 0:
                     n = 0.0
                 print()
                 print(f"ans (answer) = {round(n, 12)}")
-            elif op.lower() == "remainder" or op.lower() == "r" or op.lower() == "%" or op.lower() == "modulo" or op.lower() == "rem" or op.lower() == "mod":
+            elif op == "remainder" or op == "r" or op == "%" or op == "modulo" or op == "rem" or op == "mod":
                 n %= n2
                 print()
                 print(f"ans (answer) = {round(n, 12)}")
-            elif op.lower() == "exponent" or op.lower() == "^" or op.lower() == "exp" or op.lower() == "**":
+            elif op == "exponent" or op == "^" or op == "exp" or op == "**":
                 n **= n2
                 print()
                 print(f"ans (answer) = {round(n, 12)}")
-            elif op.lower() == "<" or op.lower() == ">" or op.lower() == ">=" or op.lower() == "<=" or op.lower() == "==" or op.lower() == "!=":
+            elif op == "<" or op == ">" or op == ">=" or op == "<=" or op == "==" or op == "!=":
                 print()
                 print(eval(f"{n}" + op  + f"{n2}"))
                 continue
-            elif op.lower() == "store" or op.lower() == "sto":
+            elif op == "store" or op == "sto":
                 while True:
                     vname = input("Variable name (i): ")
                     if vname == "" or vname == "exit" or vname == "exi":
@@ -1150,7 +1176,7 @@ def real_operation():
                 print()
                 print(vname + f" = {round(n, 12)}")
                 keeps.append(vname)
-            elif op.lower() == "round" or op.lower() == "~" or op.lower() == "rou":
+            elif op == "round" or op == "~" or op == "rou":
                 if n2 > 12:
                     n2 = 12
                 if n2 == 0:
@@ -1159,53 +1185,61 @@ def real_operation():
                     n = round(n, n2)
                 print()
                 print(f"ans (answer) = {round(n, 12)}")
-            elif op.lower() == "factorial" or op.lower() == "!" or op.lower() == "fac":
+            elif op == "floor" or op == "flo":
+                n = floor(n)
+                print()
+                print(f"ans (answer) = {round(n, 12)}")
+            elif op == "ceiling" or op == "cei":
+                n = ceil(n)
+                print()
+                print(f"ans (answer) = {round(n, 12)}")
+            elif op == "factorial" or op == "!" or op == "fac":
                 n = factorial(round(n))
                 print()
                 print(f"ans (answer) = {round(n, 12)}")
-            elif op.lower() == "sqrt" or op.lower() == "square rt" or op.lower() == "squ":
+            elif op == "sqrt" or op == "square root" or op == "squ":
                 n = sqrt(n)
                 print()
                 print(f"ans (answer) = {round(n, 12)}")
-            elif op.lower() == "cbrt" or op.lower() == "cube rt" or op.lower() == "cub":
+            elif op == "cbrt" or op == "cube root" or op == "cub":
                 n = cbrt(n)
                 print()
                 print(f"ans (answer) = {round(n, 12)}")
-            elif op.lower() == "log" or op.lower() == "logarithm":
+            elif op == "log" or op == "logarithm":
                 n = log(n, n2)
                 print()
                 print(f"ans (answer) = {round(n, 12)}")
-            elif op.lower() == "integer divide" or op.lower() == "int div" or op.lower() == "floor divide" or op.lower() == "flo div" or op.lower() == "//":
+            elif op == "integer divide" or op == "int div" or op == "floor divide" or op == "flo div" or op == "//":
                 n //= n2
                 print()
                 if n == 0:
                     n = 0.0
                 print(f"ans (answer) = {round(n, 12)}")
-            elif op.lower() == "integer" or op.lower() == "int":
+            elif op == "integer" or op == "int":
                 n = 0 + integer(n)
                 print()
                 print(f"ans (answer) = {round(n, 12)}")
-            elif op.lower() == "choose" or op.lower() == "cho" or op.lower() == "comb":
+            elif op == "choose" or op == "cho" or op == "comb":
                 n = comb(round(n), round(n2))
                 print()
                 print(f"ans (answer) = {round(n, 12)}")
-            elif op.lower() == "perm" or op.lower() == "permute" or op.lower() == "per":
+            elif op == "perm" or op == "permute" or op == "per":
                 n = perm(round(n), round(n2))
                 print()
                 print(f"ans (answer) = {round(n, 12)}")
-            elif op.lower() == "absolute value" or op.lower() == "||" or op.lower() == "abs" or op.lower() == "magnitude" or op.lower() == "mag":
+            elif op == "absolute value" or op == "||" or op == "abs" or op == "magnitude" or op == "mag":
                 n = abs(n)
                 print()
                 print(f"ans (answer) = {round(n, 12)}")
-            elif op.lower() == "radians" or op.lower() == "rad":
+            elif op == "radians" or op == "rad":
                 n = radians(n)
                 print()
                 print(f"ans (answer) = {round(n, 12)}")
-            elif op.lower() == "degrees" or op.lower() == "deg":
+            elif op == "degrees" or op == "deg":
                 n = degrees(n)
                 print()
                 print(f"ans (answer) = {round(n, 12)}")             
-            elif op.lower() == "sin" or op.lower() == "sine" or op.lower() == "cos" or op.lower() == "cosine" or op.lower() == "tangent" or op.lower() == "tan":
+            elif op == "sin" or op == "sine" or op == "cos" or op == "cosine" or op == "tangent" or op == "tan":
                 angle = input("Inputted in (r)adians or (d)egrees? ")
                 if angle.lower() == "radians" or angle.lower() == "rad" or angle.lower() == "r":
                     n = n
@@ -1217,23 +1251,23 @@ def real_operation():
                     print('Please enter either "r" for radians or "d" for degrees')
                     go = False
                 if go == True:
-                    if op.lower() == "sin" or op.lower() == "sine":
+                    if op == "sin" or op == "sine":
                         n = sin(n)
                         print()
                         print(f"ans (answer) = {round(n, 12)}")
-                    elif op.lower() == "cos" or op.lower() == "cosine":
+                    elif op == "cos" or op == "cosine":
                         n = cos(n)
                         print()
                         print(f"ans (answer) = {round(n, 12)}")
-                    elif op.lower() == "tan" or op.lower() == "tangent":
+                    elif op == "tan" or op == "tangent":
                         n = tan()
                         print()
                         print(f"ans (answer) = {round(n, 12)}")
-            elif op.lower() == "asin" or op.lower() == "arcsine" or op.lower() == "inverse sine" or op.lower() == "inv sin" or op.lower() == "acos" or op.lower() == "arccosine" or op.lower() == "inverse cosine" or op.lower() == "inv cos" or op.lower() == "atan" or op.lower() == "arctangent" or op.lower() == "inverse tangent" or op.lower() == "inv tan" or op.lower() == "asi" or op.lower() == "aco" or op.lower() == "ata":
+            elif op == "asin" or op == "arcsine" or op == "inverse sine" or op == "inv sin" or op == "acos" or op == "arccosine" or op == "inverse cosine" or op == "inv cos" or op == "atan" or op == "arctangent" or op == "inverse tangent" or op == "inv tan" or op == "asi" or op == "aco" or op == "ata":
                 unit = input("Output in (r)adians or (d)egrees? ")
                 quad = input("Output in default quadrant (yes/no)? ")
                 go = True
-                if op.lower() == "asin" or op.lower() == "asi" or op.lower() == "arcsine" or op.lower() == "inverse sine" or op.lower() == "inv sin":
+                if op == "asin" or op == "asi" or op == "arcsine" or op == "inverse sine" or op == "inv sin":
                     if quad == "yes" or quad == "y":
                         if unit.lower() == "radians" or unit.lower() == "rad" or unit.lower() == "r":
                             n = asin(n)
@@ -1244,7 +1278,7 @@ def real_operation():
                             n = pi - asin(n)
                         elif unit.lower() == "degrees" or unit.lower() == "deg" or unit.lower() == "d":
                             n = 180 - degrees(asin(n))                           
-                elif op.lower() == "acos" or op.lower() == "arccosine" or op.lower() == "aco" or op.lower() == "inverse cosine" or op.lower() == "inv cos":
+                elif op == "acos" or op == "arccosine" or op == "aco" or op == "inverse cosine" or op == "inv cos":
                     if quad == "yes" or quad == "y":
                         if unit.lower() == "radians" or unit.lower() == "rad" or unit.lower() == "r":
                             n = acos(n)
@@ -1255,7 +1289,7 @@ def real_operation():
                             n = -acos(n)
                         elif unit.lower() == "degrees" or unit.lower() == "deg" or unit.lower() == "d":
                             n = -degrees(acos(n))
-                elif op.lower() == "atan" or op.lower() == "arctangent" or op.lower() == "ata" or op.lower() == "inverse tangent" or op.lower() == "inv tan":
+                elif op == "atan" or op == "arctangent" or op == "ata" or op == "inverse tangent" or op == "inv tan":
                     if quad == "yes" or quad == "y":
                         if unit.lower() == "radians" or unit.lower() == "rad" or unit.lower() == "r":
                             n = atan(n)
@@ -2618,18 +2652,6 @@ def math24play():
         random.seed(problems)
         numbers = pos[random.randrange(0, len(pos))]
         print_numbers = ""
-        for number in numbers:
-            print_numbers += str(number) + ", "
-        print()
-        if print_problems == len(pos):
-            print(f"You've made it to Problem {len(pos)}!")
-            print("This is the number of problems in the system, and also the number of possible Math 24 sets using the numbers 1-25, 36, 48, 72, 96, 120, and 144!")
-            print("Congrats! You are now the God of Math!")
-            print()
-        elif print_problems % 10 == 0:
-            print(f"You've made it to Problem {print_problems}!")
-            print()
-        print(f"Problem {print_problems}: " + print_numbers[:len(print_numbers) - 2])
         ops = [" + ", " - ", " * ", " / "]
         solved = False
         for i in range(0, 11):
@@ -2698,6 +2720,22 @@ def math24play():
                                             break
                                     except:
                                         pass
+        difficulty = "norm"
+        for number in numbers:
+            if 1 <= number <= 12:
+                difficulty = "beg"
+            elif number < -24 or number >= 60:
+                difficulty = "adv"
+            print_numbers += str(number) + ", "
+        print()
+        if print_problems == len(pos):
+            print(f"You've made it to Problem {len(pos)}, the number of Math 24 problems in the system!")
+            print("You are now the God of Math!")
+            print()
+        elif print_problems % 10 == 0:
+            print(f"You've made it to Problem {print_problems}!")
+            print()
+        print(f"Problem {print_problems} ({difficulty}): " + print_numbers[:len(print_numbers) - 2])
         while True:
             attempts += 1
             input_sol = input(f"Attempt {attempts} (i, /): ")
@@ -2708,6 +2746,7 @@ def math24play():
                 print("Math 24 is a game where players try to create the number 24 using 4 numbers and the 4 operations (+, -, *, /)")
                 print("Enter a solution with each of the 4 numbers used once and any 3 operations, using parenthesis to change order")
                 print('Eg. with the numbers 1, 5, 5, and 5, one solution is "5 * (5 - 1/5)"')
+                print('Sets with numbers from 1 to 12 inclusive are considered beginner difficulty, other sets with numbers to -24 or 48 are normal, and all other sets are advanced')
                 print('Enter "l" to see the last problem')
                 print('Enter "c" for create, "s" for solve, "o" for operations (this will direct to real operations) and "f" for functions (this will direct to polynomials)')
                 print()
@@ -2748,18 +2787,18 @@ def math24play():
                         print(sol + f" = {round(eval(evalsol), 12)}, not 24")
                         print("Try again!")
                         print()
-                        print(f"Problem {print_problems}: " + print_numbers[:len(print_numbers) - 2])
+                        print(f"Problem {print_problems} ({difficulty}): " + print_numbers[:len(print_numbers) - 2])
                         continue
                 except:
                     print("The expression could not be evaluated")
                     print('Please enter a valid solution, "i" for info, or return to exit')
                     print()
-                    print(f"Problem {print_problems}: " + print_numbers[:len(print_numbers) - 2])
+                    print(f"Problem {print_problems} ({difficulty}): " + print_numbers[:len(print_numbers) - 2])
                     continue
             else:
                 print('Please enter a valid solution, "i" for info, or return to exit')
                 print()
-                print(f"Problem {print_problems}: " + print_numbers[:len(print_numbers) - 2])
+                print(f"Problem {print_problems} ({difficulty}): " + print_numbers[:len(print_numbers) - 2])
                 continue
         if input_sol == "" or input_sol == "exi" or input_sol == "exit":
             break
@@ -2980,19 +3019,25 @@ def math24create():
                                             print("Found", len(solutions), "(including repeats)")
                                             print()
         print()
+        solutions.sort()
+        writesols = ""
         if len(solutions) != 0:
             print(f"Possible Math 24 sets:")
             for i in range(0, len(solutions)):
-                if solutions.count(solutions[i]) > 1:
-                    solutions[i] = "noprint"
-                else:
-                    '''res = ""
-                    for b in solutions[i]:
-                        res += str(b) + ", "
-                    res = res[:len(res) - 2]
-                    print(f"Set {i + 1}: " + res)'''
-                    print(solutions[i], end = ",")
-            print()
+                if i == len(solutions) - 1:
+                    #print(solutions[i])
+                    continue
+                if solutions[i] == solutions[i+1]:
+                    continue
+                '''res = ""
+                for b in solutions[i]:
+                    res += str(b) + ", "
+                res = res[:len(res) - 2]
+                print(f"Set {i + 1}: " + res)'''
+                writesols += f"{solutions[i]}, "
+            writesols = writesols[:-2]
+            with open('math24list', "w") as file1:
+                file1.write(writesols)
         else:
             print(f"There are no possible Math 24 sets using the entered numbers and operations")
 
