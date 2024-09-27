@@ -387,11 +387,15 @@ def from_polar():
                 ares = res[1]
                 while True:
                     unit = input("Output in (r)adians or (d)egrees? ")
+                    if unit.lower() in ["", "exit", "exi"]:
+                        break
                     if not(unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad" or unit.lower() == "d" or unit.lower() == "degrees" or unit.lower() == "deg"):
                         print('Please enter either "r" for radians or "d" for degrees')
                         continue
                     while True:
                         angle = input("Output (p)ositive or (n)egative angle? ")
+                        if angle in ["", "exit", "exi"]:
+                            break
                         if not(angle.lower() == "positive" or angle.lower() == "p" or angle.lower() == "+" or angle.lower() == "pos" or angle.lower() == "-" or angle.lower() == "negative" or angle.lower() == "n" or angle.lower() == "neg"):
                             print('Please enter either "p" for positive or "n" for negative')
                         else:
@@ -413,6 +417,8 @@ def from_polar():
                             if round(ares, 12) > 0:
                                 ares -= 360
                         break
+                if angle in ["", "exit", "exi"] or unit.lower() in ["", "exit", "exi"]:
+                    continue
                 print()
                 print(f"Result: {round(res[0], 12)} cos({round(ares, 12)}) + {round(res[0], 12)} sin({round(ares, 12)})i")
                 mod = res[0]
@@ -427,11 +433,15 @@ def from_polar():
                 ares = res[1]
                 while True:
                     unit = input("Output in (r)adians or (d)egrees? ")
+                    if unit.lower() in ["", "exit", "exi"]:
+                        break
                     if not(unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad" or unit.lower() == "d" or unit.lower() == "degrees" or unit.lower() == "deg"):
                         print('Please enter either "r" for radians or "d" for degrees')
                         continue
                     while True:
                         angle = input("Output (p)ositive or (n)egative angle? ")
+                        if angle in ["", "exit", "exi"]:
+                            break
                         if not(angle.lower() == "positive" or angle.lower() == "p" or angle.lower() == "+" or angle.lower() == "pos" or angle.lower() == "-" or angle.lower() == "negative" or angle.lower() == "n" or angle.lower() == "neg"):
                             print('Please enter either "p" for positive or "n" for negative')
                         else:
@@ -453,6 +463,8 @@ def from_polar():
                             if round(ares, 12) > 0:
                                 ares -= 360
                         break
+                if angle in ["", "exit", "exi"] or unit.lower() in ["", "exit", "exi"]:
+                    continue
                 print()
                 print(f"Result: {round(res[0], 12)} cos({round(ares, 12)}) + {round(res[0], 12)} sin({round(ares, 12)})i")
                 mod = res[0]
@@ -467,11 +479,15 @@ def from_polar():
                 ares = res[1]
                 while True:
                     unit = input("Output in (r)adians or (d)egrees? ")
+                    if unit.lower() in ["", "exit", "exi"]:
+                        break
                     if not(unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad" or unit.lower() == "d" or unit.lower() == "degrees" or unit.lower() == "deg"):
                         print('Please enter either "r" for radians or "d" for degrees')
                         continue
                     while True:
                         angle = input("Output (p)ositive or (n)egative angle? ")
+                        if angle in ["", "exit", "exi"]:
+                            break
                         if not(angle.lower() == "positive" or angle.lower() == "p" or angle.lower() == "+" or angle.lower() == "pos" or angle.lower() == "-" or angle.lower() == "negative" or angle.lower() == "n" or angle.lower() == "neg"):
                             print('Please enter either "p" for positive or "n" for negative')
                         else:
@@ -493,6 +509,8 @@ def from_polar():
                             if round(ares, 12) > 0:
                                 ares -= 360
                         break
+                if angle in ["", "exit", "exi"] or unit.lower() in ["", "exit", "exi"]:
+                    continue
                 print()
                 print(f"Result: {round(res[0], 12)} cos({round(ares, 12)}) + {round(res[0], 12)} sin({round(ares, 12)})i")
                 mod = res[0]
@@ -507,11 +525,15 @@ def from_polar():
                 ares = res[1]
                 while True:
                     unit = input("Output in (r)adians or (d)egrees? ")
+                    if unit.lower() in ["", "exit", "exi"]:
+                        break
                     if not(unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad" or unit.lower() == "d" or unit.lower() == "degrees" or unit.lower() == "deg"):
                         print('Please enter either "r" for radians or "d" for degrees')
                         continue
                     while True:
                         angle = input("Output (p)ositive or (n)egative angle? ")
+                        if angle in ["", "exit", "exi"]:
+                            break
                         if not(angle.lower() == "positive" or angle.lower() == "p" or angle.lower() == "+" or angle.lower() == "pos" or angle.lower() == "-" or angle.lower() == "negative" or angle.lower() == "n" or angle.lower() == "neg"):
                             print('Please enter either "p" for positive or "n" for negative')
                         else:
@@ -533,6 +555,8 @@ def from_polar():
                             if round(ares, 12) > 0:
                                 ares -= 360
                         break
+                if angle in ["", "exit", "exi"] or unit.lower() in ["", "exit", "exi"]:
+                    continue
                 print()
                 print(f"Result: {round(res[0], 12)} cos({round(ares, 12)}) + {round(res[0], 12)} sin({round(ares, 12)})i")
                 mod = res[0]
@@ -547,11 +571,15 @@ def from_polar():
                 ares = res[1]
                 while True:
                     unit = input("Output in (r)adians or (d)egrees? ")
+                    if unit.lower() in ["", "exit", "exi"]:
+                        break
                     if not(unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad" or unit.lower() == "d" or unit.lower() == "degrees" or unit.lower() == "deg"):
                         print('Please enter either "r" for radians or "d" for degrees')
                         continue
                     while True:
                         angle = input("Output (p)ositive or (n)egative angle? ")
+                        if angle in ["", "exit", "exi"]:
+                            break
                         if not(angle.lower() == "positive" or angle.lower() == "p" or angle.lower() == "+" or angle.lower() == "pos" or angle.lower() == "-" or angle.lower() == "negative" or angle.lower() == "n" or angle.lower() == "neg"):
                             print('Please enter either "p" for positive or "n" for negative')
                         else:
@@ -573,6 +601,8 @@ def from_polar():
                             if round(ares, 12) > 0:
                                 ares -= 360
                         break
+                if angle in ["", "exit", "exi"] or unit.lower() in ["", "exit", "exi"]:
+                    continue
                 print()
                 print(f"Result: {round(res[0], 12)} cos({round(ares, 12)}) + {round(res[0], 12)} sin({round(ares, 12)})i")
                 mod = res[0]
