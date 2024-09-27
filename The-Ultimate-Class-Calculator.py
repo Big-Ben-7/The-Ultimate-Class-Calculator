@@ -194,6 +194,7 @@ def from_polar():
     print()
     print("Welcome to complex operations in polar form!")
     print("Please enter the modulus/absolute value and angle/argument of the terms")
+    unit = "d"
     while True:
         clear_variables()
         print()
@@ -235,8 +236,12 @@ def from_polar():
         elif av in ops:
             op = av
             av = mod
-            inang = ang
+            cterm1 = f"{round(av, 12)} cos({round(ang, 12)}) + {round(av, 12)} sin({round(ang, 12)})i"
+            print("First term: " + cterm1)
+            print()
             print("Operation: " + op)
+            if unit.lower() == "d" or unit.lower() == "degrees" or unit.lower() == "deg":
+                ang = radians(ang)
         else:
             try:
                 av = av.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")").replace(")(", ")*(")
@@ -256,31 +261,35 @@ def from_polar():
             except:
                 print('Please enter a real number or expression, or return to exit')
                 continue
-        while True:
-            angmode = input("Inputted in (r)adians or (d)egrees? ")
-            if angmode.lower() == "radians" or angmode.lower() == "rad" or angmode.lower() == "r":
-                ang = inang
-                break
-            elif angmode.lower() == "degrees" or angmode.lower() == "deg" or angmode.lower() == "d":
-                ang = radians(inang)
-                break
-            else:
-                print('Please enter either "r" for radians or "d" for degrees')
+            while True:
+                angmode = input("Inputted in (r)adians or (d)egrees? ")
+                if angmode in ["", "exit", "exi"]:
+                    break
+                elif angmode.lower() == "radians" or angmode.lower() == "rad" or angmode.lower() == "r":
+                    ang = inang
+                    break
+                elif angmode.lower() == "degrees" or angmode.lower() == "deg" or angmode.lower() == "d":
+                    ang = radians(inang)
+                    break
+                else:
+                    print('Please enter either "r" for radians or "d" for degrees')
+            if angmode in ["", "exit", "exi"]:
+                continue
+            cterm1 = f"{round(av, 12)} cos({round(inang, 12)}) + {round(av, 12)} sin({round(inang, 12)})i"
+            print("First term: " + cterm1)
+            while True:
+                print()
+                op = input("Operation (i): ")
+                if op == "info" or op == "i" or op == "inf":
+                    print()
+                    print('The following operations can be entered: equals (=), add (+), subtract (-), multiply (*), divide (/), exponent (^), rectangular ([])')
+                    print("The above operations can only be entered as an operation, not as part of an expression")
+                else:
+                    break
+            if op == "" or op == "exit" or op == "exi":
+                continue
         a = av * cos(ang)
         b = av * sin(ang)
-        cterm1 = f"{round(av, 12)} cos({round(inang, 12)}) + {round(av, 12)} sin({round(inang, 12)})i"
-        print("First term: " + cterm1)
-        while True:
-            print()
-            op = input("Operation (i): ")
-            if op == "info" or op == "i" or op == "inf":
-                print()
-                print('The following operations can be entered: equals (=), add (+), subtract (-), multiply (*), divide (/), exponent (^), rectangular ([])')
-                print("The above operations can only be entered as an operation, not as part of an expression")
-            else:
-                break
-        if op == "" or op == "exit" or op == "exi":
-            continue
         print()
         if not(op == "=" or op == "equals" or op == "equ" or op == "rectangular" or op == "rec" or op == "rectangular form"):
             av2 = input("Term 2 modulus/absolute value: ")
@@ -306,7 +315,9 @@ def from_polar():
                 continue
             while True:
                 angmode2 = input("Inputted in (r)adians or (d)egrees? ")
-                if angmode2.lower() == "radians" or angmode2.lower() == "rad" or angmode2.lower() == "r":
+                if angmode2.lower() in ["", "exi", "exit"]:
+                    break
+                elif angmode2.lower() == "radians" or angmode2.lower() == "rad" or angmode2.lower() == "r":
                     ang2 = inang2
                     break
                 elif angmode2.lower() == "degrees" or angmode2.lower() == "deg" or angmode2.lower() == "d":
@@ -314,6 +325,8 @@ def from_polar():
                     break
                 else:
                     print('Please enter either "r" for radians or "d" for degrees')
+            if angmode2.lower() in ["", "exi", "exit"]:
+                continue
             c = av2 * cos(ang2)
             d = av2 * sin(ang2)
             cterm2 = f"{round(av2, 12)} cos({round(inang2, 12)}) + {round(av2, 12)} sin({round(inang2, 12)})i"
@@ -325,15 +338,22 @@ def from_polar():
                 ares = res[1]
                 while True:
                     unit = input("Output in (r)adians or (d)egrees? ")
+                    if unit.lower() in ["", "exit", "exi"]:
+                        break
                     if not(unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad" or unit.lower() == "d" or unit.lower() == "degrees" or unit.lower() == "deg"):
                         print('Please enter either "r" for radians or "d" for degrees')
                         continue
                     while True:
                         angle = input("Output (p)ositive or (n)egative angle? ")
+                        if angle.lower() in ["", "exit", "exi"]:
+                            break
                         if not(angle.lower() == "positive" or angle.lower() == "p" or angle.lower() == "+" or angle.lower() == "pos" or angle.lower() == "-" or angle.lower() == "negative" or angle.lower() == "n" or angle.lower() == "neg"):
                             print('Please enter either "p" for positive or "n" for negative')
+                            print()
                         else:
                             break
+                    if angle in ["", "exit", "exi"]:
+                        break
                     if unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad":
                         if angle.lower() == "positive" or angle.lower() == "p" or angle.lower() == "pos" or angle.lower() == "+":
                             if round(ares, 12) < 0:
@@ -351,6 +371,8 @@ def from_polar():
                             if round(ares, 12) > 0:
                                 ares -= 360
                         break
+                if angle in ["", "exit", "exi"] or unit.lower() in ["", "exit", "exi"]:
+                    continue
                 print()
                 print(f"Result: {round(res[0], 12)} cos({round(ares, 12)}) + {round(res[0], 12)} sin({round(ares, 12)})i")
                 mod = res[0]
@@ -646,6 +668,8 @@ def from_rectangular():
             op = a
             a = rl
             b = im
+            print(f"First term: {a} + {b}i")
+            print()
             print("Operation: " + op)
         else:
             try:
@@ -919,6 +943,8 @@ def from_rectangular():
                 while True:
                     print()
                     unit = input("Output in (r)adians or (d)egrees? ")
+                    if unit.lower() in ["", "exit", "exi"]:
+                        break
                     if not(unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad" or unit.lower() == "d" or unit.lower() == "degrees" or unit.lower() == "deg"):
                         print('Please enter either "r" for radians or "d" for degrees')
                         continue
@@ -946,6 +972,8 @@ def from_rectangular():
                             if round(ares, 12) > 0:
                                 ares -= 360
                         break
+                if unit.lower() in ["", "exit", "exi"]:
+                    continue
                 print()
                 print(f"Result: {round(res[0], 12)} cos({round(ares, 12)}) + {round(res[0], 12)} sin({round(ares, 12)})i")
                 mod = res[0]
@@ -1043,85 +1071,85 @@ def real_operation():
                     print()
                 else:
                     break
-            if op == "exit" or op == "":
-                continue
-            elif not(op == "flo" or op == "floor" or op == "ceiling" or op == "cei" or op == "store" or op == "sto" or op == "equals" or op == "=" or op == "equ" or op == "factorial" or op == "fac" or op == "!" or op == "sqrt" or op == "square root" or op == "squ" or op == "cbrt" or op == "cube root" or op == "cub" or op == "absolute value" or op == "||" or op == "abs" or op == "magnitude" or op == "mag" or op == "asin" or op == "arcsine" or op == "inverse sine" or op == "inv sin" or op == "acos" or op == "arccosine" or op == "inverse cosine" or op == "inv cos" or op == "atan" or op == "arctangent" or op == "inverse tangent" or op == "inv tan" or op == "asi" or op == "aco" or op == "ata" or op == "sin" or op == "sine" or op == "cos" or op == "cosine" or op == "tangent" or op == "tan" or op == "int" or op == "integer" or op == "radians" or op == "rad" or op == "degrees" or op == "deg"):
-                if op == "exponent" or op == "^" or op == "exp" or op == "**":
-                    n2 = input('Exponent: ')
+        if op == "exit" or op == "":
+            continue
+        elif not(op == "flo" or op == "floor" or op == "ceiling" or op == "cei" or op == "store" or op == "sto" or op == "equals" or op == "=" or op == "equ" or op == "factorial" or op == "fac" or op == "!" or op == "sqrt" or op == "square root" or op == "squ" or op == "cbrt" or op == "cube root" or op == "cub" or op == "absolute value" or op == "||" or op == "abs" or op == "magnitude" or op == "mag" or op == "asin" or op == "arcsine" or op == "inverse sine" or op == "inv sin" or op == "acos" or op == "arccosine" or op == "inverse cosine" or op == "inv cos" or op == "atan" or op == "arctangent" or op == "inverse tangent" or op == "inv tan" or op == "asi" or op == "aco" or op == "ata" or op == "sin" or op == "sine" or op == "cos" or op == "cosine" or op == "tangent" or op == "tan" or op == "int" or op == "integer" or op == "radians" or op == "rad" or op == "degrees" or op == "deg"):
+            if op == "exponent" or op == "^" or op == "exp" or op == "**":
+                n2 = input('Exponent: ')
+                if n2 == "" or n2 == "exit" or n2 == "exi":
+                    continue
+                try:
+                    n2 = n2.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")").replace(")(", ")*(")
+                    n2 = 0 + eval(n2)
+                except:
+                    print('Please enter a real number or expression, or return to exit')
+                    continue
+            elif op == "round" or op == "~" or op == "rou":
+                n2 = input('Decimals to round (0-12): ')
+                if n2 == "" or n2 == "exit" or n2 == "exi":
+                    continue
+                try:
+                    n2 = n2.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")").replace(")(", ")*(")
+                    n2 = 0 + eval(n2)
+                    n2 = 0 + integer(n2)
+                except:
+                    print('Please enter an integer from 0 to 12 or return to exit')
+                    continue
+            elif op == "log" or op == "logarithm":
+                if n > 0:
+                    n2 = input('Base: ')
                     if n2 == "" or n2 == "exit" or n2 == "exi":
                         continue
                     try:
                         n2 = n2.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")").replace(")(", ")*(")
                         n2 = 0 + eval(n2)
                     except:
-                        print('Please enter a real number or expression, or return to exit')
-                        continue
-                elif op == "round" or op == "~" or op == "rou":
-                    n2 = input('Decimals to round (0-12): ')
-                    if n2 == "" or n2 == "exit" or n2 == "exi":
-                        continue
-                    try:
-                        n2 = n2.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")").replace(")(", ")*(")
-                        n2 = 0 + eval(n2)
-                        n2 = 0 + integer(n2)
-                    except:
-                        print('Please enter an integer from 0 to 12 or return to exit')
-                        continue
-                elif op == "log" or op == "logarithm":
-                    if n > 0:
-                        n2 = input('Base: ')
-                        if n2 == "" or n2 == "exit" or n2 == "exi":
-                            continue
-                        try:
-                            n2 = n2.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")").replace(")(", ")*(")
-                            n2 = 0 + eval(n2)
-                        except:
-                            print('Please enter a real number or expression greater than 0 and not equal to 1, or return to exit')
-                            continue                                
-                elif op == "choose" or op == "cho" or op == "comb":
-                    if round(n, 12) == round(n) and n >= 0:
-                        n2 = input(f'From {round(n)} choose: ')
-                        if n2 == "" or n2 == "exit" or n2 == "exi":
-                            continue
-                        try:
-                            n2 = n2.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")").replace(")(", ")*(")
-                            n2 = 0 + eval(n2)
-                        except:
-                            print('Please enter a nonnegative integer or return to exit')
-                            continue                                    
-                elif op == "perm" or op == "permute" or op == "per":
-                    if round(n, 12) == round(n) and n >= 0:
-                        n2 = input(f'From {round(n)} permute: ')
-                        if n2 == "" or n2 == "exit" or n2 == "exi":
-                            continue
-                        try:
-                            n2 = n2.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")").replace(")(", ")*(")
-                            n2 = 0 + eval(n2)
-                        except:
-                            print('Please enter a nonnegative integer or return to exit')
-                            continue  
-                else:
-                    if op == "equal to" or op == "is":
-                        op = "=="
-                    elif op == "less than" or op == "less":
-                        op = "<"
-                    elif op == "greater than" or op == "greater":
-                        op = ">"
-                    elif op == "less than or equal to":
-                        op = "<="
-                    elif op == "greater than or equal to":
-                        op = ">="
-                    elif op == "not equal to" or op == "not":
-                        op = "!="
-                    n2 = input('Next term: ')
+                        print('Please enter a real number or expression greater than 0 and not equal to 1, or return to exit')
+                        continue                                
+            elif op == "choose" or op == "cho" or op == "comb":
+                if round(n, 12) == round(n) and n >= 0:
+                    n2 = input(f'From {round(n)} choose: ')
                     if n2 == "" or n2 == "exit" or n2 == "exi":
                         continue
                     try:
                         n2 = n2.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")").replace(")(", ")*(")
                         n2 = 0 + eval(n2)
                     except:
-                        print('Please enter a real number or expression, or return to exit')
+                        print('Please enter a nonnegative integer or return to exit')
+                        continue                                    
+            elif op == "perm" or op == "permute" or op == "per":
+                if round(n, 12) == round(n) and n >= 0:
+                    n2 = input(f'From {round(n)} permute: ')
+                    if n2 == "" or n2 == "exit" or n2 == "exi":
                         continue
+                    try:
+                        n2 = n2.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")").replace(")(", ")*(")
+                        n2 = 0 + eval(n2)
+                    except:
+                        print('Please enter a nonnegative integer or return to exit')
+                        continue  
+            else:
+                if op == "equal to" or op == "is":
+                    op = "=="
+                elif op == "less than" or op == "less":
+                    op = "<"
+                elif op == "greater than" or op == "greater":
+                    op = ">"
+                elif op == "less than or equal to":
+                    op = "<="
+                elif op == "greater than or equal to":
+                    op = ">="
+                elif op == "not equal to" or op == "not":
+                    op = "!="
+                n2 = input('Next term: ')
+                if n2 == "" or n2 == "exit" or n2 == "exi":
+                    continue
+                try:
+                    n2 = n2.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")").replace(")(", ")*(")
+                    n2 = 0 + eval(n2)
+                except:
+                    print('Please enter a real number or expression, or return to exit')
+                    continue
         try:
             if op == "equals" or op == "=" or op == "equ":
                 print()
@@ -1241,7 +1269,9 @@ def real_operation():
                 print(f"ans (answer) = {round(n, 12)}")             
             elif op == "sin" or op == "sine" or op == "cos" or op == "cosine" or op == "tangent" or op == "tan":
                 angle = input("Inputted in (r)adians or (d)egrees? ")
-                if angle.lower() == "radians" or angle.lower() == "rad" or angle.lower() == "r":
+                if angle.lower() in ["", "exit", "exi"]:
+                    continue
+                elif angle.lower() == "radians" or angle.lower() == "rad" or angle.lower() == "r":
                     n = n
                     go = True
                 elif angle.lower() == "degrees" or angle.lower() == "deg" or angle.lower() == "d":
@@ -1265,7 +1295,11 @@ def real_operation():
                         print(f"ans (answer) = {round(n, 12)}")
             elif op == "asin" or op == "arcsine" or op == "inverse sine" or op == "inv sin" or op == "acos" or op == "arccosine" or op == "inverse cosine" or op == "inv cos" or op == "atan" or op == "arctangent" or op == "inverse tangent" or op == "inv tan" or op == "asi" or op == "aco" or op == "ata":
                 unit = input("Output in (r)adians or (d)egrees? ")
+                if unit.lower() in ["", "exit", "exi"]:
+                    continue
                 quad = input("Output in default quadrant (yes/no)? ")
+                if quad in ["", "exit", "exi"]:
+                    continue
                 go = True
                 if op == "asin" or op == "asi" or op == "arcsine" or op == "inverse sine" or op == "inv sin":
                     if quad == "yes" or quad == "y":
@@ -1301,7 +1335,9 @@ def real_operation():
                         elif unit.lower() == "degrees" or unit.lower() == "deg" or unit.lower() == "d":                            
                             n = 180 - degrees(atan(n))
                 angle = input("Output (p)ositive or (n)egative angle? ")
-                if angle.lower() == "positive" or angle.lower() == "pos" or angle.lower() == "+" or angle.lower() == "p":
+                if angle in ["", "exit", "exi"]:
+                    continue
+                elif angle.lower() == "positive" or angle.lower() == "pos" or angle.lower() == "+" or angle.lower() == "p":
                     if unit.lower() == "radians" or unit.lower() == "rad" or unit.lower() == "r":
                         if round(n, 12) < 0:
                             n += 2 * pi
