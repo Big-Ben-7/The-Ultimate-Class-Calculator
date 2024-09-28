@@ -5,25 +5,25 @@ import types
 import time
 
 global ans
-ans = 0.0
+ans = 0
 global rl
-rl = 0.0
+rl = 0
 global im
-im = 0.0
+im = 0
 global im2
-im2 = 0.0
+im2 = 0
 global mod
-mod = 0.0
+mod = 0
 global ang
-ang = 0.0
+ang = 0
 global rat
-rat = 0.0
+rat = 0
 global dif
-dif = 0.0
+dif = 0
 global rt
-rt = 0.0
+rt = 0
 global rt2
-rt2 = 0.0
+rt2 = 0
 global binsum
 binsum = ""
 global attempts
@@ -433,6 +433,8 @@ def from_polar():
             elif op == "-" or op == "subtract" or op == "sub":
                 res = cmath.polar(complex(a, b) - complex(c, d))
                 ares = res[1]
+                if round(res[0], 12) == 0:
+                    ares = 0
                 while True:
                     unit = input("Output in (r)adians or (d)egrees? ")
                     if unit.lower() in ["", "exit", "exi"]:
@@ -1207,7 +1209,7 @@ def real_operation():
             elif op == "divide" or op == "/" or op == "div":
                 n /= n2
                 if n == 0:
-                    n = 0.0
+                    n = 0
                 print()
                 print(f"ans (answer) = {round(n, 12)}")
             elif op == "remainder" or op == "r" or op == "%" or op == "modulo" or op == "rem" or op == "mod":
@@ -1279,7 +1281,7 @@ def real_operation():
                 n //= n2
                 print()
                 if n == 0:
-                    n = 0.0
+                    n = 0
                 print(f"ans (answer) = {round(n, 12)}")
             elif op == "integer" or op == "int":
                 n = 0 + integer(n)
@@ -1865,7 +1867,7 @@ def arithmetic():
                 sum = f"sum{ncalc}"
                 sumcalc = (2 * a + (comdif * (ncalc - 1))) * ncalc / 2
                 if round(sumcalc, 12) == 0:
-                    sumcalc = 0.0
+                    sumcalc = 0
                 globals()[sum] = sumcalc
                 keeps.append(sum)
                 print(sum + f" (sum through {round(term, 12)} (term {ncalc})) = {round(sumcalc, 12)}")
@@ -1891,7 +1893,7 @@ def arithmetic():
                     sum = f"sum{number}"
                     sumcalc = (2 * a + comdif * (number - 1)) * number / 2
                     if round(sumcalc, 12) == 0:
-                        sumcalc = 0.0
+                        sumcalc = 0
                     globals()[sum] = sumcalc
                     keeps.append(sum)
                     print(sum + f" (sum through term {number}) = {round(sumcalc, 12)}")
@@ -1910,7 +1912,7 @@ def arithmetic():
                             sum = f"sum{item}"
                             sumcalc = (2 * a + comdif * (item - 1)) * item / 2
                             if round(sumcalc, 12) == 0:
-                                sumcalc = 0.0
+                                sumcalc = 0
                             globals()[sum] = sumcalc
                             keeps.append(sum)
                             print(sum + f" (sum of through term {item}) = {round(sumcalc, 12)}")
@@ -2246,7 +2248,7 @@ def geometric():
                     sum = f"sum{ncalc}"
                     sumcalc = a * (1 - comrat ** ncalc) / (1 - comrat)
                     if round(sumcalc, 12) == 0:
-                        sumcalc = 0.0
+                        sumcalc = 0
                     print(sum + f" (sum through {round(term, 12)} (term {ncalc})) = {round(sumcalc, 12)}")
                 else:
                     sum = "suminf"
@@ -2288,7 +2290,7 @@ def geometric():
                     else:
                         sumcalc = b * number
                     if round(sumcalc, 12) == 0:
-                        sumcalc = 0.0
+                        sumcalc = 0
                     globals()[sum] = sumcalc
                     keeps.append(sum)
                     if number != "inf" and number != "infinity":
@@ -2313,7 +2315,7 @@ def geometric():
                             else:
                                 sumcalc = b * item
                             if round(sumcalc, 12) == 0:
-                                sumcalc = 0.0
+                                sumcalc = 0
                             globals()[sum] = sumcalc
                             keeps.append(sum)
                             print(sum + f" (sum through term {item}) = {round(sumcalc, 12)}")
@@ -2683,9 +2685,9 @@ def symmetry():
                 x = -x_input + 2 * xint
                 y = y_input
             if x == 0:
-                x = 0.0
+                x = 0
             if y == 0:
-                y = 0.0
+                y = 0
             xco = f"x{i + 1}"
             yco = f"y{i + 1}"
             globals()[xco] = x
