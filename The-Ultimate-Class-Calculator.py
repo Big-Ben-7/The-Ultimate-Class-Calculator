@@ -1334,12 +1334,17 @@ def real_operation():
                         print(f"ans (answer) = {round(n, 12)}")
             elif op == "asin" or op == "arcsine" or op == "inverse sine" or op == "inv sin" or op == "acos" or op == "arccosine" or op == "inverse cosine" or op == "inv cos" or op == "atan" or op == "arctangent" or op == "inverse tangent" or op == "inv tan" or op == "asi" or op == "aco" or op == "ata":
                 unit = input("Output in (r)adians or (d)egrees? ")
+                if unit != "radians" and unit != "rad" and unit != "r" and unit != "d" and unit != "degrees" and unit != "deg":
+                    print('Please enter either "r" for radians or "d" for degrees')
+                    continue
                 if unit.lower() in ["", "exit", "exi"]:
                     continue
                 quad = input("Output in default quadrant (yes/no)? ")
                 if quad in ["", "exit", "exi"]:
                     continue
-                go = True
+                if quad != "yes" and quad != "y" and quad != "no" and quad != "n":
+                    print('Please enter either "yes" (y) or "no" (n)')
+                    continue
                 if op == "asin" or op == "asi" or op == "arcsine" or op == "inverse sine" or op == "inv sin":
                     if quad == "yes" or quad == "y":
                         if unit.lower() == "radians" or unit.lower() == "rad" or unit.lower() == "r":
@@ -1370,11 +1375,14 @@ def real_operation():
                             n = degrees(atan(n))
                     elif quad == "no" or quad == "n":
                         if unit.lower() == "radians" or unit.lower() == "rad" or unit.lower() == "r":
-                            n = pi - atan(n)
+                            n = atan(n) + pi
                         elif unit.lower() == "degrees" or unit.lower() == "deg" or unit.lower() == "d":                            
-                            n = 180 - degrees(atan(n))
+                            n = degrees(atan(n)) + 180
                 angle = input("Output (p)ositive or (n)egative angle? ")
                 if angle in ["", "exit", "exi"]:
+                    continue
+                if angle != "p" and angle != "n" and angle != "positive" and angle != "negative" and angle != "pos" and angle != "+" and angle != "-" and angle != "neg":
+                    print('Please enter either "p" for positive or "n" for negative')
                     continue
                 elif angle.lower() == "positive" or angle.lower() == "pos" or angle.lower() == "+" or angle.lower() == "p":
                     if unit.lower() == "radians" or unit.lower() == "rad" or unit.lower() == "r":
@@ -1383,34 +1391,18 @@ def real_operation():
                     elif unit.lower() == "degrees" or unit.lower() == "deg" or unit.lower() == "d":
                         if round(n, 12) < 0:
                             n += 360
-                    else:
-                        go = False
                 elif angle.lower() == "negative" or angle.lower() == "neg" or angle.lower() == "-" or angle.lower() == "n":
                     if unit.lower() == "radians" or unit.lower() == "rad" or unit.lower() == "r":
                         if round(n, 12) > 0:
                             n -= 2 * pi
                     elif unit.lower() == "degrees" or unit.lower() == "deg" or unit.lower() == "d":
                         if round(n, 12) > 0:
-                            n -= 360
-                    else:
-                        go = False
-                if unit != "radians" and unit != "rad" and unit != "r" and unit != "d" and unit != "degrees" and unit != "deg":
-                    print()
-                    print('Please enter either "r" for radians or "d" for degrees')
-                    go = False
-                if quad != "yes" and quad != "y" and quad != "no" and quad != "n":
-                    print('Please enter either "yes" (y) or "no" (n)')
-                    go = False       
-                if angle != "p" and angle != "n" and angle != "positive" and angle != "negative" and angle != "pos" and angle != "+" and angle != "-" and angle != "neg":
-                    print('Please enter either "p" for positive or "n" for negative')
-                    print()
-                    go = False
-                if go == True:
-                    print()
-                    if unit.lower() == "radians" or unit.lower() == "rad" or unit.lower() == "r":
-                        print(f"ans (answer) = {round(n, 12)} radians")
-                    else:
-                        print(f"ans (answer) = {round(n, 12)} degrees")
+                            n -= 360      
+                print()
+                if unit.lower() == "radians" or unit.lower() == "rad" or unit.lower() == "r":
+                    print(f"ans (answer) = {round(n, 12)} radians")
+                else:
+                    print(f"ans (answer) = {round(n, 12)} degrees")
             else:
                 print('Please enter a valid operation ("i" for info and return to exit)')
                 print()
