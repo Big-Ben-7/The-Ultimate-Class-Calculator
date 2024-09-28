@@ -271,6 +271,7 @@ def from_polar():
                     break
                 else:
                     print('Please enter either "r" for radians or "d" for degrees')
+                    print()
             if angmode in ["", "exit", "exi"]:
                 continue
             cterm1 = f"{round(av, 12)} cos({round(inang, 12)}) + {round(av, 12)} sin({round(inang, 12)})i"
@@ -323,6 +324,7 @@ def from_polar():
                     break
                 else:
                     print('Please enter either "r" for radians or "d" for degrees')
+                    print()
             if angmode2.lower() in ["", "exi", "exit"]:
                 continue
             c = av2 * cos(ang2)
@@ -340,6 +342,7 @@ def from_polar():
                         break
                     if not(unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad" or unit.lower() == "d" or unit.lower() == "degrees" or unit.lower() == "deg"):
                         print('Please enter either "r" for radians or "d" for degrees')
+                        print()
                         continue
                     while True:
                         angle = input("Output (p)ositive or (n)egative angle? ")
@@ -389,6 +392,7 @@ def from_polar():
                         break
                     if not(unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad" or unit.lower() == "d" or unit.lower() == "degrees" or unit.lower() == "deg"):
                         print('Please enter either "r" for radians or "d" for degrees')
+                        print()
                         continue
                     while True:
                         angle = input("Output (p)ositive or (n)egative angle? ")
@@ -435,6 +439,7 @@ def from_polar():
                         break
                     if not(unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad" or unit.lower() == "d" or unit.lower() == "degrees" or unit.lower() == "deg"):
                         print('Please enter either "r" for radians or "d" for degrees')
+                        print()
                         continue
                     while True:
                         angle = input("Output (p)ositive or (n)egative angle? ")
@@ -481,6 +486,7 @@ def from_polar():
                         break
                     if not(unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad" or unit.lower() == "d" or unit.lower() == "degrees" or unit.lower() == "deg"):
                         print('Please enter either "r" for radians or "d" for degrees')
+                        print()
                         continue
                     while True:
                         angle = input("Output (p)ositive or (n)egative angle? ")
@@ -527,6 +533,7 @@ def from_polar():
                         break
                     if not(unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad" or unit.lower() == "d" or unit.lower() == "degrees" or unit.lower() == "deg"):
                         print('Please enter either "r" for radians or "d" for degrees')
+                        print()
                         continue
                     while True:
                         angle = input("Output (p)ositive or (n)egative angle? ")
@@ -573,6 +580,7 @@ def from_polar():
                         break
                     if not(unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad" or unit.lower() == "d" or unit.lower() == "degrees" or unit.lower() == "deg"):
                         print('Please enter either "r" for radians or "d" for degrees')
+                        print()
                         continue
                     while True:
                         angle = input("Output (p)ositive or (n)egative angle? ")
@@ -935,6 +943,7 @@ def from_rectangular():
                     unit = input("Output in (r)adians or (d)egrees? ")
                     if not(unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad" or unit.lower() == "d" or unit.lower() == "degrees" or unit.lower() == "deg"):
                         print('Please enter either "r" for radians or "d" for degrees')
+                        print()
                         continue
                     while True:
                         angle = input("Output (p)ositive or (n)egative angle? ")
@@ -975,6 +984,7 @@ def from_rectangular():
                         break
                     if not(unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad" or unit.lower() == "d" or unit.lower() == "degrees" or unit.lower() == "deg"):
                         print('Please enter either "r" for radians or "d" for degrees')
+                        print()
                         continue
                     while True:
                         angle = input("Output (p)ositive or (n)egative angle? ")
@@ -1307,6 +1317,7 @@ def real_operation():
                     go = True
                 else:
                     print('Please enter either "r" for radians or "d" for degrees')
+                    print()
                     go = False
                 if go == True:
                     if op == "sin" or op == "sine":
