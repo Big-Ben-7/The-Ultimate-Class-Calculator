@@ -3186,6 +3186,7 @@ def math24create():
         solutions.sort()
         writesols = ""
         if len(solutions) != 0:
+            setcounter = 1
             print(f"Possible Math 24 sets:")
             for i in range(len(solutions)):
                 if i != len(solutions) - 1:
@@ -3195,7 +3196,8 @@ def math24create():
                 for b in solutions[i]:
                     res += str(b) + ", "
                 res = res[:len(res) - 2]
-                print(f"Set {i + 1}: " + res)
+                print(f"Set {setcounter}: " + res)
+                setcounter += 1
         else:
             print(f"There are no possible Math 24 sets using the entered numbers and operations")
 
