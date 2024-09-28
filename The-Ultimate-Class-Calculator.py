@@ -33,7 +33,7 @@ problems = 0
 global print_problems
 print_problems = 1
 global keeps
-keeps = ["ans", "pi", "e", "tau", "inf", "nan", "infj", "nanj", "keeps", "rl", "im", "im2", "mod", "ang", "rat", "rt", "rt2", "binsum", "dif", "problems", "print_problems", "attempts"]
+keeps = ["ans", "pi", "e", "tau", "inf", "nan", "infj", "nanj", "keeps", "rl", "im", "im2", "mod", "ang", "rat", "rt", "rt2", "binsum", "dif", "problems", "print_problems", "attempts", "pos"]
 
 def clear_variables():
     for var in list(globals()):
@@ -1600,7 +1600,7 @@ def binomial_expansion():
                     print("If n is negative (it's not!), only the denominator of each term will be outputted (the sum will still be complete)")
                 else:
                     print("If n is negative (it is!), only the denominator of each term will be outputted (the sum will still be complete)")
-                print(f"All indexes must be positive integers between 1 and |n| + 1 ({abs(n) + 1}), inclusive, and the second index of a range must be greater than the first index of the range")
+                print(f"All indexes must be positive integers between 1 and |n| + 1 ({abs(n) + 1}) inclusive, and the second index of a range must be greater than the first index of the range")
                 print(f'Enter "all" (1-{abs(n)+1}) to find/sum all terms')
                 print()
             else:
@@ -1620,13 +1620,13 @@ def binomial_expansion():
                     unterm = 0 + eval(unterm)
                     unterm = 0 + integer(unterm)
                 except:
-                    print(f'"{unterm}" is not a positive integer between 1 and |n| + 1 ({abs(n) + 1}), inclusive')
+                    print(f'"{unterm}" is not a positive integer between 1 and |n| + 1 ({abs(n) + 1}) inclusive')
                     continue
                 if 0 < unterm <= abs(n) + 1:
                     k = unterm - 1
                     print_binomial(a, b, c, d, n, k, unterm, x, y)
                 else:
-                    print(f'"{unterm}" is not a positive integer between 1 and |n| + 1 ({abs(n) + 1}), inclusive')
+                    print(f'"{unterm}" is not a positive integer between 1 and |n| + 1 ({abs(n) + 1}) inclusive')
             elif len(rangelist) == 2:
                 try:
                     rangelist[0] = rangelist[0].replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")").replace(")(", ")*(")
@@ -1636,7 +1636,7 @@ def binomial_expansion():
                     rangelist[0] = 0 + integer(rangelist[0])
                     rangelist[1] = 0 + integer(rangelist[1])
                 except:
-                    print(f'"{unterm}" is not a positive integer between 1 and |n| + 1 ({abs(n) + 1}), inclusive')
+                    print(f'"{unterm}" is not a positive integer between 1 and |n| + 1 ({abs(n) + 1}) inclusive')
                     continue
                 if rangelist[0] > 0 and rangelist[1] > rangelist[0] and rangelist[1] <= abs(n) + 1:
                     rangelist = list(range(rangelist[0], rangelist[1] + 1))
@@ -1646,9 +1646,9 @@ def binomial_expansion():
                 elif rangelist[1] <= rangelist[0]:
                     print(f'the second index of the range "{unterm}" must be greater than the first index')
                 else:    
-                    print(f'"{unterm}" is not a positive integer between 1 and |n| + 1 ({abs(n) + 1}), inclusive')
+                    print(f'"{unterm}" is not a positive integer between 1 and |n| + 1 ({abs(n) + 1}) inclusive')
             else:
-                print(f'"{unterm}" is not a range in the form x:y, where x and y are both positive integers between 1 and |n| + 1 ({abs(n) + 1}), inclusive, and y is greater than x')
+                print(f'"{unterm}" is not a range in the form x:y, where x and y are both positive integers between 1 and |n| + 1 ({abs(n) + 1}) inclusive, and y is greater than x')
         binsum = binsum[:len(binsum) - 3]
         if n < 0:
             binsum += ")"
@@ -2705,7 +2705,10 @@ def system():
     print()
     print("Welcome to system of equations!")
 
-def Math24Levels():
+def math24levels():
+    with open("math24list") as allfile:
+        file = allfile.read().split("; ")
+    random.shuffle(file)
     tempruns = 0
     efound = 0
     afound = 0
@@ -2715,7 +2718,7 @@ def Math24Levels():
     adv = open("adv24", "w")
     basic = open("basic24", "w")
     norm = open("norm24", "w")
-    for item in pos:
+    for item in file:
         tempruns += 1
         setlist = item.split(",")
         expcount = 0
@@ -2738,7 +2741,7 @@ def Math24Levels():
         if expcount >= 2 or expcount + advcount == 4:
             expert.write(item + "; ")
             efound += 1
-        elif expcount == 1 or norcount + advcount == 4:
+        elif expcount == 1 or advcount >= 2:
             adv.write(item + "; ")
             afound += 1
         elif bascount == 4:
@@ -2763,194 +2766,230 @@ def math24play():
     global problems
     global print_problems
     global attempts
+    global pos
     print()
     print("Welcome to Play Math 24!")
+    level = "filler"
     if problems == 0:
-        global pos
-        with open("math24list") as allfile:
-            pos = allfile.read().split("; ")
-        random.shuffle(pos)
-        problems = 1
-    while True:
-        clear_variables()
-        random.seed(problems)
-        numbers = pos[random.randrange(len(pos))].split(", ")
-        for i in range(len(numbers)):
-            try:
-                numbers[i] = int(numbers[i])
-            except:
-                numbers[i] = eval(numbers[i])
-        print_numbers = ""
-        ops = [" + ", " - ", " * ", " / "]
-        solved = False
-        for i in range(11):
-            if solved == True:
+        while True:
+            clear_variables()
+            print()
+            level = input("Difficulty (i): ").lower()
+            if level in ["", "exit", "exi"]:
                 break
-            for inumber1 in numbers:
+            elif level in ["i", "info", "inf"]:
+                print()
+                print("Math 24 is a game where players try to create the number 24 using 4 randomly generated numbers and the 4 operations (+, -, *, /)")
+                print("Enter one of the following difficulty levels: ")
+                print("(B)asic: only includes numbers 1 through 12")
+                print("(N)ormal: includes numbers 1 through 24 and at most 1 number greater than 24")
+                print("(A)dvanced: includes numbers 1 through 25 and multiples of 12 through 144, and at most 1 fractional or negative number")
+                print("(E)xpert: includes numbers with absolute values of 0.25, 0.5, 1 through 25, and multiples of 12 through 144")
+                print("(R)andom: solve random Math 24 sets")
+                continue
+            if level in ["r", "ran", "random"]:
+                with open("math24list") as allfile:
+                    pos = allfile.read().split("; ")
+            elif level in ["b", "bas", "basic"]:
+                with open("basic24") as basic:
+                    pos = basic.read().split("; ")
+            elif level in ["n", "nor", "normal"]:
+                with open("norm24") as norm:
+                    pos = norm.read().split("; ")
+            elif level in ["a", "adv", "advanced"]:
+                with open("adv24") as adv:
+                    pos = adv.read().split("; ")
+            elif level in ["e", "exp", "expert"]:
+                with open("expert24") as expert:
+                    pos = expert.read().split("; ")  
+            else:
+                print('Please enter a valid difficulty level, "i" for info, or return to exit')
+                continue
+            random.shuffle(pos)
+            problems = 1
+            break
+    if level not in ["", "exit", "exi"]:
+        while True:
+            clear_variables()
+            random.seed(problems)
+            numbers = pos[random.randrange(len(pos))].split(", ")
+            print_numbers = ""
+            for i in range(len(numbers)):
+                print_numbers += numbers[i] + ", "
+                try:
+                    numbers[i] = int(numbers[i])
+                except:
+                    numbers[i] = eval(numbers[i])
+            ops = [" + ", " - ", " * ", " / "]
+            solved = False
+            for i in range(11):
                 if solved == True:
                     break
-                for op1 in ops:
+                for inumber1 in numbers:
                     if solved == True:
                         break
-                    numbers2 = numbers[:]
-                    numbers2.remove(inumber1)
-                    for inumber2 in numbers2:
+                    for op1 in ops:
                         if solved == True:
                             break
-                        for op2 in ops:
+                        numbers2 = numbers[:]
+                        numbers2.remove(inumber1)
+                        for inumber2 in numbers2:
                             if solved == True:
                                 break
-                            numbers3 = numbers2[:]
-                            numbers3.remove(inumber2)
-                            for inumber3 in numbers3:
+                            for op2 in ops:
                                 if solved == True:
                                     break
-                                for op3 in ops:
-                                    numbers4 = numbers3[:]
-                                    numbers4.remove(inumber3)
-                                    number4 = 0 + eval(str(numbers4[0]))
-                                    number3 = 0 + eval(str(inumber3))
-                                    number2 = 0 + eval(str(inumber2))
-                                    number1 = 0 + eval(str(inumber1))
-                                    if i <= 6:
-                                        if i == 0:
-                                            string = str(number1) + op1 + str(number2) + op2 + str(number3) + op3 + str(number4)
-                                        elif i == 1:
-                                            string = "(" + str(number1) + op1 + str(number2) + ")" + op2 + str(number3) + op3 + str(number4)
-                                        elif i == 2:
-                                            string = str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + ")" + op3 + str(number4)
-                                        elif i == 3:
-                                            string = str(number1) + op1 + str(number2) + op2 + "(" + str(number3) + op3 + str(number4) + ")"
-                                        elif i == 4:
-                                            string = "(" + str(number1) + op1 + str(number2) + ")" + op2 + "(" + str(number3) + op3 + str(number4) + ")"
-                                        elif i == 5:
-                                            string = "(" + str(number1) + op1 + str(number2) + op2 + str(number3) + ")" + op3 + str(number4)
-                                        elif i == 6:
-                                            string = str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + op3 + str(number4) + ")"
-                                        string_print = string + " = 24"
-                                    else:
-                                        if i == 7:
-                                            string = "((" + str(number1) + op1 + str(number2) + ")" + op2 + str(number3) + ")" + op3 + str(number4)
-                                            string_print = "[(" + str(number1) + op1 + str(number2) + ")" + op2 + str(number3) + "]" + op3 + str(number4)
-                                        elif i == 8:
-                                            string = str(number1) + op1 + "(" + str(number2) + op2 + "(" + str(number3) + op3 + str(number4) + "))"
-                                            string_print = str(number1) + op1 + "[" + str(number2) + op2 + "(" + str(number3) + op3 + str(number4) + ")]"
-                                        elif i == 9:
-                                            string = str(number1) + op1 + "((" + str(number2) + op2 + str(number3) + ")" + op3 + str(number4) + ")"
-                                            string_print = str(number1) + op1 + "[(" + str(number2) + op2 + str(number3) + ")" + op3 + str(number4) + "]"
+                                numbers3 = numbers2[:]
+                                numbers3.remove(inumber2)
+                                for inumber3 in numbers3:
+                                    if solved == True:
+                                        break
+                                    for op3 in ops:
+                                        numbers4 = numbers3[:]
+                                        numbers4.remove(inumber3)
+                                        number4 = 0 + eval(str(numbers4[0]))
+                                        number3 = 0 + eval(str(inumber3))
+                                        number2 = 0 + eval(str(inumber2))
+                                        number1 = 0 + eval(str(inumber1))
+                                        if i <= 6:
+                                            if i == 0:
+                                                string = str(number1) + op1 + str(number2) + op2 + str(number3) + op3 + str(number4)
+                                            elif i == 1:
+                                                string = "(" + str(number1) + op1 + str(number2) + ")" + op2 + str(number3) + op3 + str(number4)
+                                            elif i == 2:
+                                                string = str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + ")" + op3 + str(number4)
+                                            elif i == 3:
+                                                string = str(number1) + op1 + str(number2) + op2 + "(" + str(number3) + op3 + str(number4) + ")"
+                                            elif i == 4:
+                                                string = "(" + str(number1) + op1 + str(number2) + ")" + op2 + "(" + str(number3) + op3 + str(number4) + ")"
+                                            elif i == 5:
+                                                string = "(" + str(number1) + op1 + str(number2) + op2 + str(number3) + ")" + op3 + str(number4)
+                                            elif i == 6:
+                                                string = str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + op3 + str(number4) + ")"
+                                            string_print = string + " = 24"
                                         else:
-                                            string = "(" + str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + "))" + op3 + str(number4)
-                                            string_print = "[" + str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + ")]" + op3 + str(number4)
-                                        string_print += " = 24"
-                                    try:
-                                        if round(eval(string), 12) == 24:
-                                            solutions = string_print
-                                            solved = True
-                                            break
-                                    except:
-                                        pass
-        print()
-        if print_problems == len(pos):
-            print(f"You've made it to Problem {len(pos)}, the number of Math 24 problems in the system!")
-            print("You are now the God of Math!")
+                                            if i == 7:
+                                                string = "((" + str(number1) + op1 + str(number2) + ")" + op2 + str(number3) + ")" + op3 + str(number4)
+                                                string_print = "[(" + str(number1) + op1 + str(number2) + ")" + op2 + str(number3) + "]" + op3 + str(number4)
+                                            elif i == 8:
+                                                string = str(number1) + op1 + "(" + str(number2) + op2 + "(" + str(number3) + op3 + str(number4) + "))"
+                                                string_print = str(number1) + op1 + "[" + str(number2) + op2 + "(" + str(number3) + op3 + str(number4) + ")]"
+                                            elif i == 9:
+                                                string = str(number1) + op1 + "((" + str(number2) + op2 + str(number3) + ")" + op3 + str(number4) + ")"
+                                                string_print = str(number1) + op1 + "[(" + str(number2) + op2 + str(number3) + ")" + op3 + str(number4) + "]"
+                                            else:
+                                                string = "(" + str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + "))" + op3 + str(number4)
+                                                string_print = "[" + str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + ")]" + op3 + str(number4)
+                                            string_print += " = 24"
+                                        try:
+                                            if round(eval(string), 12) == 24:
+                                                solutions = string_print
+                                                solved = True
+                                                break
+                                        except:
+                                            pass
             print()
-        elif print_problems % 10 == 0:
-            print(f"You've made it to Problem {print_problems}!")
-            print()
-        print(f"Problem {print_problems}: " + print_numbers[:len(print_numbers) - 2])
-        while True:
-            attempts += 1
-            input_sol = input(f"Attempt {attempts} (i, /): ")
-            if input_sol == "" or input_sol == "exi" or input_sol == "exit" or input_sol == "l" or input_sol == "las" or input_sol == "last" or input_sol == "last problem" or input_sol == "/" or input_sol == "skip" or input_sol == "ski" or input_sol == "c" or input_sol == "cre" or input_sol == "create" or input_sol == "s" or input_sol == "sol" or input_sol == "solve" or input_sol == "o" or input_sol == "ope" or input_sol == "operations" or input_sol == "f" or input_sol == "fun" or input_sol == "functions":
-                break
-            elif input_sol == "i" or input_sol == "inf" or input_sol == "info":
+            if print_problems == len(pos):
+                print(f"You've made it to Problem {len(pos)}, the number of Math 24 problems in the system!")
+                print("You are now the God of Math!")
                 print()
-                print("Math 24 is a game where players try to create the number 24 using 4 numbers and the 4 operations (+, -, *, /)")
-                print("Enter a solution with each of the 4 numbers used once and any 3 operations, using parenthesis to change order")
-                print('Eg. with the numbers 1, 5, 5, and 5, one solution is "5 * (5 - 1/5)"')
-                print('Sets with numbers from 1 to 12 inclusive are considered beginner difficulty, sets with larger numbers are normal, and sets with fractions or negative numbers are advanced')
-                print('Enter "l" to see the last problem')
-                print('Enter "c" for create, "s" for solve, "o" for operations (this will direct to real operations) and "f" for functions (this will direct to polynomials)')
+            elif print_problems % 10 == 0:
+                print(f"You've made it to Problem {print_problems}!")
                 print()
-                continue
-            sol = input_sol.replace(" ", "").replace("+", " + ").replace("-", " - ").replace("/", " / ").replace("*", " * ").replace("=24", "").replace(")(", ") (").replace(" -  - ", " - -").replace(" +  - ", " + -").replace(" *  - ", " * -").replace(" /  - ", " / -").replace("[ - ", "[-").replace("{ - ", "{-").replace("( - ", "(-")
-            if sol[0] + sol[1] + sol[2] == " - ":
-                sol = sol.replace(" - ", "-", 1)
-            evalsol = sol.replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")").replace(") (", ") * (")
-            counter_list = evalsol.split(" ")
-            counter = 0
-            valid = True
-            counter0 = 0
-            counter1 = 0
-            counter2 = 0
-            counter3 = 0
-            for i in range(len(counter_list)):
-                a = counter_list[i]
-                a = a.replace("(", "").replace(")", "")
-                if a in ["+", "-", "/", "*"]:
-                    counter += 1
-                elif a in [str(numbers[0]), str(numbers[1]), str(numbers[2]), str(numbers[3])]:
-                    if a == str(numbers[0]):
-                        counter0 += 1
-                    if a == str(numbers[1]):
-                        counter1 += 1
-                    if a == str(numbers[2]):
-                        counter2 += 1
-                    if a == str(numbers[3]):
-                        counter3 += 1
-                elif a != "":
-                    valid = False
-            if counter == 3 and counter0 == numbers.count(numbers[0]) and counter1 == numbers.count(numbers[1]) and counter2 == numbers.count(numbers[2]) and counter3 == numbers.count(numbers[3]) and valid == True:
-                try:
-                    if round(eval(evalsol), 12) == 24:
-                        print()
-                        print(f"Solved on Attempt {attempts}!")
-                        attempts = 0
-                        break
-                    else:
-                        print()
-                        print(sol + f" = {round(eval(evalsol), 12)}, not 24")
-                        print("Try again!")
+            print(f"Problem {print_problems}: " + print_numbers[:len(print_numbers) - 2])
+            while True:
+                attempts += 1
+                input_sol = input(f"Attempt {attempts} (i, /): ")
+                if input_sol == "" or input_sol == "exi" or input_sol == "exit" or input_sol == "l" or input_sol == "las" or input_sol == "last" or input_sol == "last problem" or input_sol == "/" or input_sol == "skip" or input_sol == "ski" or input_sol == "c" or input_sol == "cre" or input_sol == "create" or input_sol == "s" or input_sol == "sol" or input_sol == "solve" or input_sol == "o" or input_sol == "ope" or input_sol == "operations" or input_sol == "f" or input_sol == "fun" or input_sol == "functions":
+                    break
+                elif input_sol == "i" or input_sol == "inf" or input_sol == "info":
+                    print()
+                    print("Enter a solution with each of the 4 numbers used once and any 3 operations, using parenthesis to change order")
+                    print('Eg. with the numbers 1, 5, 5, and 5, one solution is "5 * (5 - 1/5)"')
+                    print('Sets with numbers from 1 to 12 inclusive are considered beginner difficulty, sets with larger numbers are normal, and sets with fractions or negative numbers are advanced')
+                    print('Enter "l" to see the last problem')
+                    print('Enter "c" for create, "s" for solve, "o" for operations (this will direct to real operations) and "f" for functions (this will direct to polynomials)')
+                    print()
+                    continue
+                sol = input_sol.replace(" ", "").replace("+", " + ").replace("-", " - ").replace("/", " / ").replace("*", " * ").replace("=24", "").replace(")(", ") (").replace(" -  - ", " - -").replace(" +  - ", " + -").replace(" *  - ", " * -").replace(" /  - ", " / -").replace("[ - ", "[-").replace("{ - ", "{-").replace("( - ", "(-")
+                if sol[0] + sol[1] + sol[2] == " - ":
+                    sol = sol.replace(" - ", "-", 1)
+                evalsol = sol.replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")").replace(") (", ") * (")
+                counter_list = evalsol.split(" ")
+                counter = 0
+                valid = True
+                counter0 = 0
+                counter1 = 0
+                counter2 = 0
+                counter3 = 0
+                for i in range(len(counter_list)):
+                    a = counter_list[i]
+                    a = a.replace("(", "").replace(")", "")
+                    if a in ["+", "-", "/", "*"]:
+                        counter += 1
+                    elif a in [str(numbers[0]), str(numbers[1]), str(numbers[2]), str(numbers[3])]:
+                        if a == str(numbers[0]):
+                            counter0 += 1
+                        if a == str(numbers[1]):
+                            counter1 += 1
+                        if a == str(numbers[2]):
+                            counter2 += 1
+                        if a == str(numbers[3]):
+                            counter3 += 1
+                    elif a != "":
+                        valid = False
+                if counter == 3 and counter0 == numbers.count(numbers[0]) and counter1 == numbers.count(numbers[1]) and counter2 == numbers.count(numbers[2]) and counter3 == numbers.count(numbers[3]) and valid == True:
+                    try:
+                        if round(eval(evalsol), 12) == 24:
+                            print()
+                            print(f"Solved on Attempt {attempts}!")
+                            attempts = 0
+                            break
+                        else:
+                            print()
+                            print(sol + f" = {round(eval(evalsol), 12)}, not 24")
+                            print("Try again!")
+                            print()
+                            print(f"Problem {print_problems}: " + print_numbers[:len(print_numbers) - 2])
+                            continue
+                    except:
+                        print("The expression could not be evaluated")
+                        print('Please enter a valid solution, "i" for info, or return to exit')
                         print()
                         print(f"Problem {print_problems}: " + print_numbers[:len(print_numbers) - 2])
                         continue
-                except:
-                    print("The expression could not be evaluated")
+                else:
                     print('Please enter a valid solution, "i" for info, or return to exit')
                     print()
                     print(f"Problem {print_problems}: " + print_numbers[:len(print_numbers) - 2])
                     continue
-            else:
-                print('Please enter a valid solution, "i" for info, or return to exit')
-                print()
-                print(f"Problem {print_problems}: " + print_numbers[:len(print_numbers) - 2])
+            if input_sol == "" or input_sol == "exi" or input_sol == "exit":
+                break
+            elif input_sol == "l" or input_sol == "las" or input_sol == "last" or input_sol == "last problem":
+                if problems != 1:
+                    print_problems -= 1
+                    problems -= 1
                 continue
-        if input_sol == "" or input_sol == "exi" or input_sol == "exit":
-            break
-        elif input_sol == "l" or input_sol == "las" or input_sol == "last" or input_sol == "last problem":
-            if problems != 1:
-                print_problems -= 1
-                problems -= 1
-            continue
-        elif input_sol == "/" or input_sol == "ski" or input_sol == "skip":
-            print()
-            print("Solution: " + solutions)
+            elif input_sol == "/" or input_sol == "ski" or input_sol == "skip":
+                print()
+                print("Solution: " + solutions)
+                attempts = 0
+                problems += 1
+                continue
+            elif input_sol == "c" or input_sol == "cre" or input_sol == "create":
+                math24create()
+                break
+            elif input_sol == "s" or input_sol == "sol" or input_sol == "solve":
+                math24solve()
+                break
+            elif input_sol == "o" or input_sol == "ope" or input_sol == "operations":
+                real_operation()
+                break
+            elif input_sol == "f" or input_sol == "fun" or input_sol == "functions":
+                polynomial()
+                break
+            print_problems += 1
             problems += 1
-            continue
-        elif input_sol == "c" or input_sol == "cre" or input_sol == "create":
-            math24create()
-            break
-        elif input_sol == "s" or input_sol == "sol" or input_sol == "solve":
-            math24solve()
-            break
-        elif input_sol == "o" or input_sol == "ope" or input_sol == "operations":
-            real_operation()
-            break
-        elif input_sol == "f" or input_sol == "fun" or input_sol == "functions":
-            polynomial()
-            break
-        print_problems += 1
-        problems += 1
             
 def math24create():
     print()
@@ -3483,7 +3522,7 @@ def main():
         else:
             print('Please enter a calculation category, "i" for info, or return to exit)')
 
-#main()
+main()
 
 # %% [markdown]
 # 
