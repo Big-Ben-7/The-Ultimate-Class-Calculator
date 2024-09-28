@@ -29,15 +29,12 @@ binsum = ""
 global attempts
 attempts = 0
 global problems
-problems = 1
+problems = 0
 global print_problems
 print_problems = 1
-global pos
-with open("math24list", "r") as file1:
-    pos = file1.read().split("; ")
-random.shuffle(pos)
 global keeps
-keeps = ["ans", "pi", "e", "tau", "inf", "nan", "infj", "nanj", "keeps", "rl", "im", "im2", "mod", "ang", "rat", "rt", "rt2", "binsum", "dif", "problems", "print_problems", "pos", "attempts"]
+keeps = ["ans", "pi", "e", "tau", "inf", "nan", "infj", "nanj", "keeps", "rl", "im", "im2", "mod", "ang", "rat", "rt", "rt2", "binsum", "dif", "problems", "print_problems", "attempts"]
+
 def clear_variables():
     for var in list(globals()):
         if var not in keeps and not isinstance(globals()[var], (types.ModuleType, types.FunctionType, types.BuiltinFunctionType, type)):
@@ -2708,12 +2705,72 @@ def system():
     print()
     print("Welcome to system of equations!")
 
+def Math24Levels():
+    tempruns = 0
+    efound = 0
+    afound = 0
+    bfound = 0
+    nfound = 0
+    expert = open("expert24", "w")
+    adv = open("adv24", "w")
+    basic = open("basic24", "w")
+    norm = open("norm24", "w")
+    for item in pos:
+        tempruns += 1
+        setlist = item.split(",")
+        expcount = 0
+        bascount = 0
+        norcount = 0
+        advcount = 0
+        for n in setlist:
+            try:
+                n = int(n)
+            except:
+                n = eval(n)
+            if n < 1:
+                expcount += 1
+            elif n <= 12:
+                bascount += 1
+            elif n <= 24:
+                norcount += 1
+            else:
+                advcount += 1
+        if expcount >= 2 or expcount + advcount == 4:
+            expert.write(item + "; ")
+            efound += 1
+        elif expcount == 1 or norcount + advcount == 4:
+            adv.write(item + "; ")
+            afound += 1
+        elif bascount == 4:
+            basic.write(item + "; ")
+            bfound += 1
+        else:
+            norm.write(item + "; ")
+            nfound += 1
+        if tempruns % 100000 == 0:
+            print()
+            print("Tried", tempruns / 1000, "thousand")
+            print("Found", bfound / 1000, "thousand basic")
+            print("Found", nfound / 1000, "thousand normal")
+            print("Found", afound / 1000, "thousand advanced")
+            print("Found", efound / 1000, "thousand expert")
+    expert.close()
+    adv.close()
+    norm.close()
+    basic.close()
+
 def math24play():
     global problems
     global print_problems
     global attempts
     print()
     print("Welcome to Play Math 24!")
+    if problems == 0:
+        global pos
+        with open("math24list") as allfile:
+            pos = allfile.read().split("; ")
+        random.shuffle(pos)
+        problems = 1
     while True:
         clear_variables()
         random.seed(problems)
@@ -2792,13 +2849,6 @@ def math24play():
                                             break
                                     except:
                                         pass
-        difficulty = "nor"
-        if numbers[0] in list(range(1, 13)) and numbers[1] in list(range(1, 13)) and numbers[2] in list(range(1, 13)) and numbers[3] in list(range(1, 13)):
-            difficulty = "beg"
-        elif numbers[0] < 1 or numbers[1] < 1 or numbers[2] < 1 or numbers[3] < 1:
-            difficulty = "adv"
-        for number in numbers:
-            print_numbers += str(number) + ", "
         print()
         if print_problems == len(pos):
             print(f"You've made it to Problem {len(pos)}, the number of Math 24 problems in the system!")
@@ -2807,7 +2857,7 @@ def math24play():
         elif print_problems % 10 == 0:
             print(f"You've made it to Problem {print_problems}!")
             print()
-        print(f"Problem {print_problems} ({difficulty}): " + print_numbers[:len(print_numbers) - 2])
+        print(f"Problem {print_problems}: " + print_numbers[:len(print_numbers) - 2])
         while True:
             attempts += 1
             input_sol = input(f"Attempt {attempts} (i, /): ")
@@ -2862,18 +2912,18 @@ def math24play():
                         print(sol + f" = {round(eval(evalsol), 12)}, not 24")
                         print("Try again!")
                         print()
-                        print(f"Problem {print_problems} ({difficulty}): " + print_numbers[:len(print_numbers) - 2])
+                        print(f"Problem {print_problems}: " + print_numbers[:len(print_numbers) - 2])
                         continue
                 except:
                     print("The expression could not be evaluated")
                     print('Please enter a valid solution, "i" for info, or return to exit')
                     print()
-                    print(f"Problem {print_problems} ({difficulty}): " + print_numbers[:len(print_numbers) - 2])
+                    print(f"Problem {print_problems}: " + print_numbers[:len(print_numbers) - 2])
                     continue
             else:
                 print('Please enter a valid solution, "i" for info, or return to exit')
                 print()
-                print(f"Problem {print_problems} ({difficulty}): " + print_numbers[:len(print_numbers) - 2])
+                print(f"Problem {print_problems}: " + print_numbers[:len(print_numbers) - 2])
                 continue
         if input_sol == "" or input_sol == "exi" or input_sol == "exit":
             break
@@ -3433,7 +3483,8 @@ def main():
         else:
             print('Please enter a calculation category, "i" for info, or return to exit)')
 
-main()
+#main()
+
 # %% [markdown]
 # 
 
