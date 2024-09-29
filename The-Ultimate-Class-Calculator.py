@@ -2916,8 +2916,10 @@ def math24play():
                                 custom_list.append(b)
                 pos = custom_list
                 levelname = input("Custom name (\\): ")
+                if levelname.lower() in ["", "exit", "exi"]:
+                    continue
                 if levelname.lower() not in ["\\", "skip", "ski"]:
-                    if levelname.lower() in name_list + ["beginner", "b", "beg", "mod", "m", "adv", "a", "e", "exp", "r", "ran", "random", "o", "ope", "operations", "f", "fun", "functions", "c", "cre", "create", "s", "sol", "solve", "moderate", "advanced", "expert", "info", "exit", "exi", "", "inf", "i"]:
+                    if levelname.lower() in name_list + ["beginner", "b", "beg", "mod", "m", "adv", "a", "e", "exp", "r", "ran", "random", "o", "ope", "operations", "f", "fun", "functions", "c", "cre", "create", "s", "sol", "solve", "moderate", "advanced", "expert", "info", "inf", "i"]:
                         print('Please enter a name that is not similar to any existing possible inputs for difficulty')
                         continue
                     name_list.append(levelname)
