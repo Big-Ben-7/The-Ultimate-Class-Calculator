@@ -2418,10 +2418,10 @@ def polynomial():
         elif a == "c" or a == "con" or a == "conic" or a == "conic sections":
             conic_section()
             break
-        elif a == "sys" or a == "system" or a == "system of equations":
+        elif a == "s" or a == "sys" or a == "system" or a == "system of equations":
             system()
             break
-        elif a == "s" or a == "sym" or a == "symmetry":
+        elif a == "sym" or a == "symmetry":
             symmetry()
             break
         elif a == "g" or a == "gam" or a == "games":
@@ -2430,7 +2430,7 @@ def polynomial():
         elif a == "info" or a == "inf" or a == "i":
             print()
             print("Please enter a real number or expression as the x^2 coefficient")
-            print('Enter "sys" for system of equations, "c" for conic sections, "s" for symmetry, "o" for operations (this will direct to real operation), and "g" for games (this will direct to play Math 24)')
+            print('Enter "s" for system of equations, "c" for conic sections, "sym" for symmetry, "o" for operations (this will direct to real operation), and "g" for games (this will direct to play Math 24)')
             continue
         try:
             a = a.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")").replace(")(", ")*(")
@@ -2781,6 +2781,7 @@ def math24play():
             print()
             level = input("Difficulty (i): ").lower()
             if level in ["", "exit", "exi"]:
+                changedif = False
                 break
             elif level in ["i", "info", "inf"]:
                 print()
@@ -2790,10 +2791,13 @@ def math24play():
                 print("(M)oderate: includes numbers 1 through 24 and at most 1 number greater than 24")
                 print("(A)dvanced: includes numbers 1 through 25 and multiples of 12 through 144, and at most 1 fractional or negative number")
                 print("(E)xpert: includes numbers with absolute values of 0.25, 0.5, 1 through 25, and multiples of 12 through 144")
-                print("(R)andom: solve random Math 24 sets of any difficulty")
-                print('Enter "c" for create, "s" for solve, "o" for operations (this will direct to real operations) and "f" for functions (this will direct to polynomials)')
+                print("(C)ustom: includes an inputted subset of the numbers in expert difficulty")
+                print("(R)andom: solve random Math 24 sets with an inputted random generation percent for each difficulty level")
+                print('Enter "cr" for create, "s" for solve, "o" for operations (this will direct to real operations) and "f" for functions (this will direct to polynomials)')
                 continue
-            elif level in ["c", "cre", "create"]:
+            elif level in ["c", "cus", "custom"]:
+                print("In development!")
+            elif level in ["cr", "cre", "create"]:
                 math24create()
                 break
             elif level in ["s", "sol", "solve"]:
@@ -2806,6 +2810,69 @@ def math24play():
                 polynomial()
                 break
             elif level in ["r", "ran", "random"]:
+                bpercent = input("Basic percent: ")
+                if bpercent in ["", "exit", "exi"]:
+                    continue
+                try:
+                    bpercent = eval(bpercent)
+                except:
+                    print("Please enter a real number or expression from 0 to 100 inclusive, or return to exit")
+                    continue
+                if not(0 <= bpercent <= 100):
+                    print("Please enter a real number or expression from 0 to 100 inclusive, or return to exit")
+                    continue
+                mpercent = input("Moderate percent: ")
+                if mpercent in ["", "exit", "exi"]:
+                    continue
+                try:
+                    mpercent = eval(mpercent)
+                except:
+                    print("Please enter a real number or expression from 0 to 100 inclusive, or return to exit")
+                    continue
+                if not(0 <= mpercent <= 100):
+                    print("Please enter a real number or expression from 0 to 100 inclusive, or return to exit")
+                    continue
+                apercent = input("Advanced percent: ")
+                if apercent in ["", "exit", "exi"]:
+                    continue
+                try:
+                    apercent = eval(apercent)
+                except:
+                    print("Please enter a real number or expression from 0 to 100 inclusive, or return to exit")
+                    continue
+                if not(0 <= apercent <= 100):
+                    print("Please enter a real number or expression from 0 to 100 inclusive, or return to exit")
+                    continue
+                epercent = input("Expert percent: ")
+                if epercent in ["", "exit", "exi"]:
+                    continue
+                try:
+                    epercent = eval(epercent)
+                except:
+                    print("Please enter a real number or expression from 0 to 100 inclusive, or return to exit")
+                    continue
+                if not(0 <= epercent <= 100):
+                    print("Please enter a real number or expression from 0 to 100 inclusive, or return to exit")
+                    continue
+                if bpercent + mpercent + apercent + epercent != 100:
+                    print("Please enter 4 percentages that add up to 100")
+                    continue
+                bfile = open("basic24")
+                mfile = open("norm24")
+                afile = open("adv24")
+                efile = open("expert24")
+                blist = bfile.read().split(";")
+                mlist = mfile.read().split(";")
+                alist = afile.read().split(";")
+                elist = efile.read().split(";")
+                if bpercent != 0:
+                    blength = len(blist)
+                    mlist.shuffle()
+                    alist.shuffle()
+                    elist.shuffle()
+                    mlist = mlist[0:blength * (mpercent / bpercent)]
+                    alist = mlist[0:blength * (apercent / bpercent)]
+
                 with open("math24list") as allfile:
                     pos = allfile.read().split("; ")
             elif level in ["b", "beg", "beginner"]:
@@ -2840,6 +2907,14 @@ def math24play():
                 numbers[i] = eval(numbers[i])
         ops = [" + ", " - ", " * ", " / "]
         solved = False
+        if print_problems == len(pos):
+            print(f"You've made it to Problem {len(pos)}, the number of Math 24 problems in the system!")
+            print("You are now the God of Math!")
+            print()
+        elif print_problems % 10 == 0:
+            print(f"You've made it to Problem {print_problems}!")
+            print()
+        print(f"Problem {print_problems}: " + print_numbers[:len(print_numbers) - 2])
         for i in range(11):
             if solved == True:
                 break
@@ -2906,56 +2981,48 @@ def math24play():
                                             break
                                     except:
                                         pass
-        if print_problems == len(pos):
-            print(f"You've made it to Problem {len(pos)}, the number of Math 24 problems in the system!")
-            print("You are now the God of Math!")
-            print()
-        elif print_problems % 10 == 0:
-            print(f"You've made it to Problem {print_problems}!")
-            print()
-        print(f"Problem {print_problems}: " + print_numbers[:len(print_numbers) - 2])
         while True:
             attempts += 1
             input_sol = input(f"Attempt {attempts} (i, \\): ")
-            if input_sol == "" or input_sol == "exi" or input_sol == "exit" or input_sol == "l" or input_sol == "las" or input_sol == "last" or input_sol == "last problem" or input_sol == "\\" or input_sol == "skip" or input_sol == "ski" or input_sol == "c" or input_sol == "cre" or input_sol == "create" or input_sol == "s" or input_sol == "sol" or input_sol == "solve" or input_sol == "o" or input_sol == "ope" or input_sol == "operations" or input_sol == "f" or input_sol == "fun" or input_sol == "functions":
+            if input_sol == "" or input_sol == "exi" or input_sol == "exit" '''or input_sol == "l" or input_sol == "las" or input_sol == "last" or input_sol == "last problem"''' or input_sol == "\\" or input_sol == "skip" or input_sol == "ski" or input_sol == "c" or input_sol == "cre" or input_sol == "create" or input_sol == "s" or input_sol == "sol" or input_sol == "solve" or input_sol == "o" or input_sol == "ope" or input_sol == "operations" or input_sol == "f" or input_sol == "fun" or input_sol == "functions":
                 break
             elif input_sol == "i" or input_sol == "inf" or input_sol == "info":
                 print()
                 print("Enter a solution with each of the 4 numbers used once and any 3 operations, using parenthesis to change order")
                 print('Eg. with the numbers 1, 5, 5, and 5, one solution is "5 * (5 - 1/5)"')
-                print('Enter "l" to see the last problem')
+                #print('Enter "l" to see the last problem')
                 print('Enter "c" for create, "s" for solve, "o" for operations (this will direct to real operations) and "f" for functions (this will direct to polynomials)')
                 print()
                 continue
-            sol = input_sol.replace(" ", "").replace("+", " + ").replace("-", " - ").replace("/", " / ").replace("*", " * ").replace("=24", "").replace(")(", ") (").replace(" -  - ", " - -").replace(" +  - ", " + -").replace(" *  - ", " * -").replace(" /  - ", " / -").replace("[ - ", "[-").replace("{ - ", "{-").replace("( - ", "(-")
-            if sol[0] + sol[1] + sol[2] == " - ":
-                sol = sol.replace(" - ", "-", 1)
-            evalsol = sol.replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")").replace(") (", ") * (")
-            counter_list = evalsol.split(" ")
-            counter = 0
-            valid = True
-            counter0 = 0
-            counter1 = 0
-            counter2 = 0
-            counter3 = 0
-            for i in range(len(counter_list)):
-                a = counter_list[i]
-                a = a.replace("(", "").replace(")", "")
-                if a in ["+", "-", "/", "*"]:
-                    counter += 1
-                elif a in [str(numbers[0]), str(numbers[1]), str(numbers[2]), str(numbers[3])]:
-                    if a == str(numbers[0]):
-                        counter0 += 1
-                    if a == str(numbers[1]):
-                        counter1 += 1
-                    if a == str(numbers[2]):
-                        counter2 += 1
-                    if a == str(numbers[3]):
-                        counter3 += 1
-                elif a != "":
-                    valid = False
-            if counter == 3 and counter0 == numbers.count(numbers[0]) and counter1 == numbers.count(numbers[1]) and counter2 == numbers.count(numbers[2]) and counter3 == numbers.count(numbers[3]) and valid == True:
-                try:
+            try:
+                sol = input_sol.replace(" ", "").replace("+", " + ").replace("-", " - ").replace("/", " / ").replace("*", " * ").replace("=24", "").replace(")(", ") (").replace(" -  - ", " - -").replace(" +  - ", " + -").replace(" *  - ", " * -").replace(" /  - ", " / -").replace("[ - ", "[-").replace("{ - ", "{-").replace("( - ", "(-")
+                if sol[0] + sol[1] + sol[2] == " - ":
+                    sol = sol.replace(" - ", "-", 1)
+                evalsol = sol.replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")").replace(") (", ") * (")
+                counter_list = evalsol.split(" ")
+                counter = 0
+                valid = True
+                counter0 = 0
+                counter1 = 0
+                counter2 = 0
+                counter3 = 0
+                for i in range(len(counter_list)):
+                    a = counter_list[i]
+                    a = a.replace("(", "").replace(")", "")
+                    if a in ["+", "-", "/", "*"]:
+                        counter += 1
+                    elif a in [str(numbers[0]), str(numbers[1]), str(numbers[2]), str(numbers[3])]:
+                        if a == str(numbers[0]):
+                            counter0 += 1
+                        if a == str(numbers[1]):
+                            counter1 += 1
+                        if a == str(numbers[2]):
+                            counter2 += 1
+                        if a == str(numbers[3]):
+                            counter3 += 1
+                    elif a != "":
+                        valid = False
+                if counter == 3 and counter0 == numbers.count(numbers[0]) and counter1 == numbers.count(numbers[1]) and counter2 == numbers.count(numbers[2]) and counter3 == numbers.count(numbers[3]) and valid == True:
                     solvalue = eval(evalsol)
                     if round(solvalue, 12) == 24:
                         print()
@@ -2970,13 +3037,13 @@ def math24play():
                         print()
                         print(f"Problem {print_problems}: " + print_numbers[:len(print_numbers) - 2])
                         continue
-                except:
-                    print("The expression could not be evaluated")
+                else:
                     print('Please enter a valid solution, "i" for info, or return to exit')
                     print()
                     print(f"Problem {print_problems}: " + print_numbers[:len(print_numbers) - 2])
                     continue
-            else:
+            except:
+                print("The expression could not be evaluated")
                 print('Please enter a valid solution, "i" for info, or return to exit')
                 print()
                 print(f"Problem {print_problems}: " + print_numbers[:len(print_numbers) - 2])
@@ -2984,11 +3051,11 @@ def math24play():
         if input_sol == "" or input_sol == "exi" or input_sol == "exit":
             changedif = True
             continue
-        elif input_sol == "l" or input_sol == "las" or input_sol == "last" or input_sol == "last problem":
-            if problems != 1:
-                print_problems -= 1
-                problems -= 1
-            continue
+        #elif input_sol == "l" or input_sol == "las" or input_sol == "last" or input_sol == "last problem":
+            #if problems != 1:
+                #print_problems -= 1
+                #problems -= 1
+            #continue
         elif input_sol == "\\" or input_sol == "ski" or input_sol == "skip":
             print()
             print("Solution: " + solutions)
@@ -3404,7 +3471,7 @@ def main():
             print('Enter either "o" for operations, "f" for functions, "g" for games, or "s" for settings')
             print("Operations include: real operations, complex operations, matrix operations, and summations (binomial expansion, arithmetic series, and geometric series)")
             print("Functions include: polynomials, system of equations, conic sections, and symmetry")
-            print("Games include: Math 24")
+            print("Games will direct to Math 24")
         elif cat.lower() == "s" or cat.lower() == "set" or cat.lower() == "settings":
             settings()
         elif cat.lower() == "f" or cat.lower() == "fun" or cat.lower() == "functions":
@@ -3420,10 +3487,10 @@ def main():
                 elif funtype.lower() == "polynomials" or funtype.lower() == "p" or funtype.lower() == "pol":
                     polynomial()
                     print()
-                elif funtype.lower() == "s" or funtype.lower() == "sym" or funtype.lower() == "symmetry":
+                elif funtype.lower() == "sym" or funtype.lower() == "symmetry":
                     symmetry()
                     print()
-                elif funtype.lower() == "se" or funtype.lower() == "system of equations" or funtype.lower() == "sys" or funtype.lower() == "system":
+                elif funtype.lower() == "s" or funtype.lower() == "system of equations" or funtype.lower() == "sys" or funtype.lower() == "system":
                     system()
                     print()
                 elif funtype.lower() == "con" or funtype.lower() == "conic" or funtype.lower() == "conic sections" or funtype.lower() == "c":
@@ -3543,7 +3610,7 @@ def main():
         else:
             print('Please enter a calculation category, "i" for info, or return to exit)')
 
-main()
+#main()
 
 # %% [markdown]
 # 
