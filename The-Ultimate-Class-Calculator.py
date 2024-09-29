@@ -2790,7 +2790,7 @@ def math24play():
         if problems == 0 or changedif == True:
             clear_variables()
             print()
-            level = input("Difficulty (i): ").lower()
+            level = input("Difficulty (i): ")
             if level in ["", "exit", "exi"]:
                 changedif = False
                 break
@@ -2798,14 +2798,15 @@ def math24play():
                 print()
                 print("Math 24 is a game where players try to create the number 24 using 4 randomly generated numbers and the 4 operations (+, -, *, /)")
                 print("Enter one of the following difficulty levels: ")
-                print("(B)eginner: includes numbers 1 through 12")
-                print("(M)oderate: includes numbers 1 through 24 and at most 1 number greater than 24")
-                print("(A)dvanced: includes numbers 1 through 25 and multiples of 12 through 144, and at most 1 fractional or negative number")
-                print("(E)xpert: includes numbers with absolute values of 0.25, 0.5, 1 through 25, and multiples of 12 through 144")
-                print("(C)ustom: includes an inputted subset of the numbers in expert difficulty")
-                print("(R)andom: solve random Math 24 sets with an inputted random generation percent for each difficulty level")
+                print("(b)eginner: includes numbers 1 through 12")
+                print("(m)oderate: includes numbers 1 through 24 and at most 1 number greater than 24")
+                print("(a)dvanced: includes numbers 1 through 25 and multiples of 12 through 144, and at most 1 fractional or negative number")
+                print("(e)xpert: includes numbers with absolute values of 0.25, 0.5, 1 through 25, and multiples of 12 through 144")
+                print("(c)ustom: includes an inputted subset of the numbers in expert difficulty")
+                print("(r)andom: solve random Math 24 sets with an inputted random generation percent for each difficulty level")
                 for name in name_dict:
-                    print(name + " (custom): " + name_dict[name])
+                    if "input" not in name:
+                        print(name + " (custom): includes numbers " + name_dict[name + "input"])
                 print('Enter "cr" for create, "s" for solve, "o" for operations (this will direct to real operations) and "f" for functions (this will direct to polynomials)')
                 continue
             elif level in ["c", "cus", "custom"]:
@@ -2922,7 +2923,8 @@ def math24play():
                     if levelname in name_dict or levelname.lower() in ["beginner", "b", "beg", "mod", "m", "adv", "a", "e", "exp", "r", "ran", "random", "o", "ope", "operations", "f", "fun", "functions", "c", "cre", "create", "s", "sol", "solve", "moderate", "advanced", "expert", "info", "inf", "i"]:
                         print('Please enter a name that is not similar to any existing possible inputs for difficulty')
                         continue
-                    name_dict[levelname] = input_use.replace(" ", "").replace(",", ", ")
+                    name_dict[levelname] = custom_list
+                    name_dict[levelname + "input"] = input_use.replace(" ", "").replace(",", ", ").replace(":", " through ")
             elif level in ["cr", "cre", "create"]:
                 math24create()
                 break
@@ -3012,7 +3014,7 @@ def math24play():
                 continue
             if problems == 0:
                 problems = 1
-            if level not in ["r", "ran", "random"]:
+            if level not in ["r", "ran", "random"] and (level not in name_dict or problems == 0):
                 random.shuffle(pos)
             changedif = False
             attempts = 0
