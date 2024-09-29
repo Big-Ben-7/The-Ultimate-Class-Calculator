@@ -2881,7 +2881,7 @@ def math24play():
                         pos_list = [0.25, 0.5]
                         pos_list.extend(range(1, 26))
                         pos_list.extend(range(36, 146, 12))
-                        if item not in pos_list:
+                        if abs(item) not in pos_list:
                             print(f'Error: "{item}" does not have an absolute value of 0.25, 0.5, 1 through 25, or multiples of 12 through 144')
                             print()
                             continue
