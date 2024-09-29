@@ -32,10 +32,10 @@ global problems
 problems = 0
 global print_problems
 print_problems = 1
-global name_list
-name_list = []
+global name_dict
+name_dict = {}
 global keeps
-keeps = ["ans", "pi", "e", "tau", "inf", "nan", "infj", "nanj", "keeps", "rl", "im", "im2", "mod", "ang", "rat", "rt", "rt2", "binsum", "dif", "problems", "print_problems", "attempts", "pos", "bpos", "mpos", "apos", "epos", "level", "bpercent", "mpercent", "apercent", "epercent", "name_list"]
+keeps = ["ans", "pi", "e", "tau", "inf", "nan", "infj", "nanj", "keeps", "rl", "im", "im2", "mod", "ang", "rat", "rt", "rt2", "binsum", "dif", "problems", "print_problems", "attempts", "pos", "bpos", "mpos", "apos", "epos", "level", "bpercent", "mpercent", "apercent", "epercent", "name_dict"]
 
 def clear_variables():
     for var in list(globals()):
@@ -2804,8 +2804,8 @@ def math24play():
                 print("(E)xpert: includes numbers with absolute values of 0.25, 0.5, 1 through 25, and multiples of 12 through 144")
                 print("(C)ustom: includes an inputted subset of the numbers in expert difficulty")
                 print("(R)andom: solve random Math 24 sets with an inputted random generation percent for each difficulty level")
-                for name in name_list:
-                    print(name + " (custom)")
+                for name in name_dict:
+                    print(name + " (custom): " + name_dict[name])
                 print('Enter "cr" for create, "s" for solve, "o" for operations (this will direct to real operations) and "f" for functions (this will direct to polynomials)')
                 continue
             elif level in ["c", "cus", "custom"]:
@@ -2919,10 +2919,10 @@ def math24play():
                 if levelname.lower() in ["", "exit", "exi"]:
                     continue
                 if levelname.lower() not in ["\\", "skip", "ski"]:
-                    if levelname.lower() in name_list + ["beginner", "b", "beg", "mod", "m", "adv", "a", "e", "exp", "r", "ran", "random", "o", "ope", "operations", "f", "fun", "functions", "c", "cre", "create", "s", "sol", "solve", "moderate", "advanced", "expert", "info", "inf", "i"]:
+                    if levelname in name_dict or levelname.lower() in ["beginner", "b", "beg", "mod", "m", "adv", "a", "e", "exp", "r", "ran", "random", "o", "ope", "operations", "f", "fun", "functions", "c", "cre", "create", "s", "sol", "solve", "moderate", "advanced", "expert", "info", "inf", "i"]:
                         print('Please enter a name that is not similar to any existing possible inputs for difficulty')
                         continue
-                    name_list.append(levelname)
+                    name_dict[levelname] = input_use.replace(" ", "").replace(",", ", ")
             elif level in ["cr", "cre", "create"]:
                 math24create()
                 break
@@ -3005,6 +3005,8 @@ def math24play():
             elif level in ["e", "exp", "expert"]:
                 with open("24list") as file:
                     pos = file.read().split(" | ")[3].split("; ")
+            elif level in name_dict:
+                pos = name_dict[level]
             else:
                 print('Please enter a difficulty level, "i" for info, or return to exit')
                 continue
