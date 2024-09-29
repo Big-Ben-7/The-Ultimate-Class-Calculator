@@ -2826,6 +2826,7 @@ def math24play():
             random.shuffle(pos)
             if problems == 0:
                 problems = 1
+            changedif = False
             attempts = 0
         print()
         random.seed(problems)
