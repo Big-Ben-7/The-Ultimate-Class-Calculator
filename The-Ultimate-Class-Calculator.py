@@ -32,9 +32,8 @@ global problems
 problems = 0
 global print_problems
 print_problems = 1
-global pos
 global keeps
-keeps = ["ans", "pi", "e", "tau", "inf", "nan", "infj", "nanj", "keeps", "rl", "im", "im2", "mod", "ang", "rat", "rt", "rt2", "binsum", "dif", "problems", "print_problems", "attempts", "pos", "level", "bpercent", "mpercent", "apercent", "epercent"]
+keeps = ["ans", "pi", "e", "tau", "inf", "nan", "infj", "nanj", "keeps", "rl", "im", "im2", "mod", "ang", "rat", "rt", "rt2", "binsum", "dif", "problems", "print_problems", "attempts", "pos", "bpos", "mpos", "apos", "epos", "level", "bpercent", "mpercent", "apercent", "epercent"]
 
 def clear_variables():
     for var in list(globals()):
@@ -2773,6 +2772,10 @@ def math24play():
     global print_problems
     global attempts
     global pos
+    global bpos
+    global mpos
+    global apos
+    global epos
     global level
     global bpercent
     global mpercent
@@ -2863,6 +2866,16 @@ def math24play():
                 if bpercent + mpercent + apercent + epercent != 100:
                     print("Please enter 4 percentages that add up to 100")
                     continue
+                with open("24list") as file:
+                    pos = file.read().split(";; ")
+                    bpos = pos[0].split("; ")
+                    mpos = pos[1].split("; ")
+                    apos = pos[2].split("; ")
+                    epos = pos[3].split("; ")
+                    random.shuffle(bpos)
+                    random.shuffle(mpos)
+                    random.shuffle(apos)
+                    random.shuffle(epos)
             elif level in ["b", "beg", "beginner"]:
                 with open("24list") as file:
                     pos = file.read().split(";; ")[0].split("; ")
@@ -2878,30 +2891,24 @@ def math24play():
             else:
                 print('Please enter a difficulty level, "i" for info, or return to exit')
                 continue
-            try:
-                random.shuffle(pos)
-            except:
-                pass
             if problems == 0:
                 problems = 1
+            if level not in ["r", "ran", "random"]:
+                random.shuffle(pos)
             changedif = False
             attempts = 0
         print()
         if level in ["r", "ran", "random"]:
+            random.seed(problems)
             rdif = random.random()
-            if rdif < bpercent:
-                with open("24list") as file:
-                    pos = file.read().split(";; ")[0].split("; ")
-            elif rdif < bpercent + mpercent:
-                with open("24list") as file:
-                    pos = file.read().split(";; ")[1].split("; ")
-            elif rdif < bpercent + mpercent + apercent:
-                with open("24list") as file:
-                    pos = file.read().split(";; ")[2].split("; ")
+            if rdif < bpercent / 100:
+                pos = bpos
+            elif rdif < (bpercent + mpercent) / 100:
+                pos = mpos
+            elif rdif < (bpercent + mpercent + apercent) / 100:
+                pos = apos
             else:
-                with open("24list") as file:
-                    pos = file.read().split(";; ")[3].split("; ")
-            random.shuffle(pos)
+                pos = epos
         random.seed(problems)
         numbers = pos[random.randrange(len(pos))].split(", ")
         print_numbers = ""
