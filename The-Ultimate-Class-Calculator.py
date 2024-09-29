@@ -32,8 +32,9 @@ global problems
 problems = 0
 global print_problems
 print_problems = 1
+global pos
 global keeps
-keeps = ["ans", "pi", "e", "tau", "inf", "nan", "infj", "nanj", "keeps", "rl", "im", "im2", "mod", "ang", "rat", "rt", "rt2", "binsum", "dif", "problems", "print_problems", "attempts", "pos"]
+keeps = ["ans", "pi", "e", "tau", "inf", "nan", "infj", "nanj", "keeps", "rl", "im", "im2", "mod", "ang", "rat", "rt", "rt2", "binsum", "dif", "problems", "print_problems", "attempts", "pos", "level", "bpercent", "mpercent", "apercent", "epercent"]
 
 def clear_variables():
     for var in list(globals()):
@@ -2772,6 +2773,11 @@ def math24play():
     global print_problems
     global attempts
     global pos
+    global level
+    global bpercent
+    global mpercent
+    global apercent
+    global epercent
     print()
     print("Welcome to Play Math 24!")
     changedif = False
@@ -2857,45 +2863,45 @@ def math24play():
                 if bpercent + mpercent + apercent + epercent != 100:
                     print("Please enter 4 percentages that add up to 100")
                     continue
-                bfile = open("basic24")
-                mfile = open("norm24")
-                afile = open("adv24")
-                efile = open("expert24")
-                blist = bfile.read().split(";")
-                mlist = mfile.read().split(";")
-                alist = afile.read().split(";")
-                elist = efile.read().split(";")
-                if bpercent != 0:
-                    blength = len(blist)
-                    mlist.shuffle()
-                    alist.shuffle()
-                    elist.shuffle()
-                    mlist = mlist[0:blength * (mpercent / bpercent)]
-                    alist = mlist[0:blength * (apercent / bpercent)]
-
-                with open("math24list") as allfile:
-                    pos = allfile.read().split("; ")
             elif level in ["b", "beg", "beginner"]:
-                with open("basic24") as basic:
-                    pos = basic.read().split("; ")
+                with open("24list") as file:
+                    pos = file.read().split(";; ")[0].split("; ")
             elif level in ["m", "mod", "moderate"]:
-                with open("norm24") as norm:
-                    pos = norm.read().split("; ")
+                with open("24list") as file:
+                    pos = file.read().split(";; ")[1].split("; ")
             elif level in ["a", "adv", "advanced"]:
-                with open("adv24") as adv:
-                    pos = adv.read().split("; ")
+                with open("24list") as file:
+                    pos = file.read().split(";; ")[2].split("; ")
             elif level in ["e", "exp", "expert"]:
-                with open("expert24") as expert:
-                    pos = expert.read().split("; ")  
+                with open("24list") as file:
+                    pos = file.read().split(";; ")[3].split("; ")
             else:
                 print('Please enter a difficulty level, "i" for info, or return to exit')
                 continue
-            random.shuffle(pos)
+            try:
+                random.shuffle(pos)
+            except:
+                pass
             if problems == 0:
                 problems = 1
             changedif = False
             attempts = 0
         print()
+        if level in ["r", "ran", "random"]:
+            rdif = random.random()
+            if rdif < bpercent:
+                with open("24list") as file:
+                    pos = file.read().split(";; ")[0].split("; ")
+            elif rdif < bpercent + mpercent:
+                with open("24list") as file:
+                    pos = file.read().split(";; ")[1].split("; ")
+            elif rdif < bpercent + mpercent + apercent:
+                with open("24list") as file:
+                    pos = file.read().split(";; ")[2].split("; ")
+            else:
+                with open("24list") as file:
+                    pos = file.read().split(";; ")[3].split("; ")
+            random.shuffle(pos)
         random.seed(problems)
         numbers = pos[random.randrange(len(pos))].split(", ")
         print_numbers = ""
@@ -3610,7 +3616,7 @@ def main():
         else:
             print('Please enter a calculation category, "i" for info, or return to exit)')
 
-#main()
+main()
 
 # %% [markdown]
 # 
