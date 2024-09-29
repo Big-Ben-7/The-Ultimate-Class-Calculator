@@ -32,8 +32,10 @@ global problems
 problems = 0
 global print_problems
 print_problems = 1
+global name_list
+name_list = []
 global keeps
-keeps = ["ans", "pi", "e", "tau", "inf", "nan", "infj", "nanj", "keeps", "rl", "im", "im2", "mod", "ang", "rat", "rt", "rt2", "binsum", "dif", "problems", "print_problems", "attempts", "pos", "bpos", "mpos", "apos", "epos", "level", "bpercent", "mpercent", "apercent", "epercent"]
+keeps = ["ans", "pi", "e", "tau", "inf", "nan", "infj", "nanj", "keeps", "rl", "im", "im2", "mod", "ang", "rat", "rt", "rt2", "binsum", "dif", "problems", "print_problems", "attempts", "pos", "bpos", "mpos", "apos", "epos", "level", "bpercent", "mpercent", "apercent", "epercent", "name_list"]
 
 def clear_variables():
     for var in list(globals()):
@@ -2802,10 +2804,123 @@ def math24play():
                 print("(E)xpert: includes numbers with absolute values of 0.25, 0.5, 1 through 25, and multiples of 12 through 144")
                 print("(C)ustom: includes an inputted subset of the numbers in expert difficulty")
                 print("(R)andom: solve random Math 24 sets with an inputted random generation percent for each difficulty level")
+                for name in name_list:
+                    print(name + " (custom)")
                 print('Enter "cr" for create, "s" for solve, "o" for operations (this will direct to real operations) and "f" for functions (this will direct to polynomials)')
                 continue
             elif level in ["c", "cus", "custom"]:
-                print("In development!")
+                while True:
+                    input_use = input("Numbers to use (i): ")
+                    if input_use in ["", "exit", "exi"]:
+                        break
+                    elif input_use in ["i", "inf", "info"]:
+                        print()
+                        print('Enter a list of numbers separated by commas (,) and using colons (:) to indicate ranges and increments')
+                        print('Eg. "1, 2:6:2, 8:9" will output possible Math 24 sets using only the numbers 1, 2, 4, 6, 8, and/or 9')
+                        print("Note that the more numbers used (or the smaller the increments), the longer the calculation will take")
+                        print("The numbers must have absolute values of 0.25, 0.5, 1 through 25, or multiples of 12 through 144")
+                        print()
+                        continue
+                    use = input_use.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")").replace(")(", ")*(").replace(" ", "").split(",")
+                    fuse = []
+                    back = False
+                    for item in use:
+                        rangelist = item.split(":")
+                        if len(rangelist) == 1:
+                            try:
+                                fuse.append(0 + eval(item))
+                            except:
+                                print(f'Error: "{item}" is not a real number or expression')
+                                back = True
+                                break
+                        elif len(rangelist) == 2:
+                            try:
+                                rangelist[0] = 0 + eval(rangelist[0])
+                                rangelist[1] = 0 + eval(rangelist[1])
+                            except:
+                                print(f'Error: "{item}" is not a real number or expression')
+                                back = True
+                                break
+                            if rangelist[1] <= rangelist[0]:
+                                print(f'Error: "{item}" is not a range in the form x:y, where y > x')
+                                back = True
+                                break
+                            for addend in range(rangelist[0], rangelist[1] + 1):
+                                fuse.append(addend)
+                        elif len(rangelist) == 3:
+                            try:
+                                rangelist[0] = 0 + eval(rangelist[0])
+                                rangelist[1] = 0 + eval(rangelist[1])
+                                rangelist[2] = 0 + eval(rangelist[2])
+                            except:
+                                print(f'Error: "{item}" is not a real number or expression')
+                                back = True
+                                break
+                            if rangelist[2] == 0:
+                                print(f'Error: "{item}" is not a range in the form x:y:z, where z is nonzero')
+                                back = True
+                                break
+                            elif rangelist[2] > abs(rangelist[1] - rangelist[0]):
+                                print(f'Error: "{item}" is not a range in the form x:y:z, where z <= |y-x|')
+                                back = True
+                                break
+                            if rangelist[1] >= rangelist[0]:
+                                rangelist[2] = abs(rangelist[2])
+                            elif rangelist[1] < rangelist[0]:
+                                rangelist[2] = -1 * abs(rangelist[2])
+                            for addend in range(rangelist[0], rangelist[1] + 1, rangelist[2]):
+                                fuse.append(addend)
+                        else:
+                            print(f'Error: "{item}" is not a range in the form x:y or x:y:z')
+                            back = True
+                            break
+                    if back == True:
+                        print()
+                        continue
+                    for item in fuse:
+                        pos_list = [0.25, 0.5]
+                        pos_list.extend(range(1, 26))
+                        pos_list.extend(range(36, 146, 12))
+                        if item not in pos_list:
+                            print(f'Error: "{item}" does not have an absolute value of 0.25, 0.5, 1 through 25, or multiples of 12 through 144')
+                            print()
+                            continue
+                        if fuse.count(item) > 1:
+                            fuse.remove(item)
+                    fuse.sort()
+                    break
+                if input_use in ["", "exit", "exi"]:
+                    continue
+                custom_list = []
+                with open("24list") as file:
+                    for a in file.read().split(" | "):
+                        for b in a.split("; "):
+                            posset = b.split(", ")
+                            try:
+                                n1 = int(posset[0])
+                            except:
+                                n1 = eval(posset[0])
+                            try:
+                                n2 = int(posset[1])
+                            except:
+                                n2 = eval(posset[1])
+                            try:
+                                n3 = int(posset[2])
+                            except:
+                                n3 = eval(posset[2])
+                            try:
+                                n4 = int(posset[3])
+                            except:
+                                n4 = eval(posset[3])
+                            if n1 in fuse and n2 in fuse and n3 in fuse and n4 in fuse:
+                                custom_list.append(b)
+                pos = custom_list
+                levelname = input("Custom name (\\): ")
+                if levelname.lower() not in ["\\", "skip", "ski"]:
+                    if levelname.lower() in name_list + ["beginner", "b", "beg", "mod", "m", "adv", "a", "e", "exp", "r", "ran", "random", "o", "ope", "operations", "f", "fun", "functions", "c", "cre", "create", "s", "sol", "solve", "moderate", "advanced", "expert", "info", "exit", "exi", "", "inf", "i"]:
+                        print('Please enter a name that is not similar to any existing possible inputs for difficulty')
+                        continue
+                    name_list.append(levelname)
             elif level in ["cr", "cre", "create"]:
                 math24create()
                 break
@@ -2867,7 +2982,7 @@ def math24play():
                     print("Please enter 4 percentages that add up to 100")
                     continue
                 with open("24list") as file:
-                    pos = file.read().split(";; ")
+                    pos = file.read().split(" | ")
                     bpos = pos[0].split("; ")
                     mpos = pos[1].split("; ")
                     apos = pos[2].split("; ")
@@ -2878,16 +2993,16 @@ def math24play():
                     random.shuffle(epos)
             elif level in ["b", "beg", "beginner"]:
                 with open("24list") as file:
-                    pos = file.read().split(";; ")[0].split("; ")
+                    pos = file.read().split(" | ")[0].split("; ")
             elif level in ["m", "mod", "moderate"]:
                 with open("24list") as file:
-                    pos = file.read().split(";; ")[1].split("; ")
+                    pos = file.read().split(" | ")[1].split("; ")
             elif level in ["a", "adv", "advanced"]:
                 with open("24list") as file:
-                    pos = file.read().split(";; ")[2].split("; ")
+                    pos = file.read().split(" | ")[2].split("; ")
             elif level in ["e", "exp", "expert"]:
                 with open("24list") as file:
-                    pos = file.read().split(";; ")[3].split("; ")
+                    pos = file.read().split(" | ")[3].split("; ")
             else:
                 print('Please enter a difficulty level, "i" for info, or return to exit')
                 continue
