@@ -2707,6 +2707,27 @@ def conic_section():
 def matrix_operation():
     print()
     print("Welcome to matrix operations!")
+    while True:
+        clear_variables()
+        print()
+        input_m1 = input(f"First term (i): ")
+        if input_m1 in ["", "exit", "exi"]:
+            break
+        elif input_m1 in ["i", "inf", "info"]:
+            print()
+            print("Enter a list of numbers in the matrix separated by commas (,), using colons (;) to seperate rows")
+            print('Eg. "1, 2, 3; 4, 5, 6" represents a 2 by 3 matrix with row 1 as 1, 2, 3 and row 2 as 4, 5, 6')
+            print("All entered rows must have the same number of columns")
+            print('Enter a single number or expression to enter a scalar')
+            continue
+        m1 = []
+        input_m1 = input_m1.replace(" ", "").replace("^", "**").replace("{", "(").replace("}", ")").replace("[", "(").replace("]", ")").split(";")
+        for item in input_m1.split(","):
+            try:
+                item = 0 + eval(item)
+            except:
+                print(f"Error: {item} is not a real number or expression")
+
 
 def system():
     print()
