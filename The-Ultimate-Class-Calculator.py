@@ -5,25 +5,25 @@ import types
 import time
 
 global ans
-ans = 0.0
+ans = 0
 global rl
-rl = 0.0
+rl = 0
 global im
-im = 0.0
+im = 0
 global im2
-im2 = 0.0
+im2 = 0
 global mod
-mod = 0.0
+mod = 0
 global ang
-ang = 0.0
+ang = 0
 global rat
-rat = 0.0
+rat = 0
 global dif
-dif = 0.0
+dif = 0
 global rt
-rt = 0.0
+rt = 0
 global rt2
-rt2 = 0.0
+rt2 = 0
 global binsum
 binsum = ""
 global attempts
@@ -32,8 +32,10 @@ global problems
 problems = 0
 global print_problems
 print_problems = 1
+global name_dict
+name_dict = {}
 global keeps
-keeps = ["ans", "pi", "e", "tau", "inf", "nan", "infj", "nanj", "keeps", "rl", "im", "im2", "mod", "ang", "rat", "rt", "rt2", "binsum", "dif", "problems", "print_problems", "attempts", "pos"]
+keeps = ["ans", "pi", "e", "tau", "inf", "nan", "infj", "nanj", "keeps", "rl", "im", "im2", "mod", "ang", "rat", "rt", "rt2", "binsum", "dif", "problems", "print_problems", "attempts", "pos", "bpos", "mpos", "apos", "epos", "level", "bpercent", "mpercent", "apercent", "epercent", "name_dict"]
 
 def clear_variables():
     for var in list(globals()):
@@ -271,6 +273,7 @@ def from_polar():
                     break
                 else:
                     print('Please enter either "r" for radians or "d" for degrees')
+                    print()
             if angmode in ["", "exit", "exi"]:
                 continue
             cterm1 = f"{round(av, 12)} cos({round(inang, 12)}) + {round(av, 12)} sin({round(inang, 12)})i"
@@ -323,6 +326,7 @@ def from_polar():
                     break
                 else:
                     print('Please enter either "r" for radians or "d" for degrees')
+                    print()
             if angmode2.lower() in ["", "exi", "exit"]:
                 continue
             c = av2 * cos(ang2)
@@ -340,6 +344,7 @@ def from_polar():
                         break
                     if not(unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad" or unit.lower() == "d" or unit.lower() == "degrees" or unit.lower() == "deg"):
                         print('Please enter either "r" for radians or "d" for degrees')
+                        print()
                         continue
                     while True:
                         angle = input("Output (p)ositive or (n)egative angle? ")
@@ -389,6 +394,7 @@ def from_polar():
                         break
                     if not(unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad" or unit.lower() == "d" or unit.lower() == "degrees" or unit.lower() == "deg"):
                         print('Please enter either "r" for radians or "d" for degrees')
+                        print()
                         continue
                     while True:
                         angle = input("Output (p)ositive or (n)egative angle? ")
@@ -429,12 +435,15 @@ def from_polar():
             elif op == "-" or op == "subtract" or op == "sub":
                 res = cmath.polar(complex(a, b) - complex(c, d))
                 ares = res[1]
+                if round(res[0], 12) == 0:
+                    ares = 0
                 while True:
                     unit = input("Output in (r)adians or (d)egrees? ")
                     if unit.lower() in ["", "exit", "exi"]:
                         break
                     if not(unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad" or unit.lower() == "d" or unit.lower() == "degrees" or unit.lower() == "deg"):
                         print('Please enter either "r" for radians or "d" for degrees')
+                        print()
                         continue
                     while True:
                         angle = input("Output (p)ositive or (n)egative angle? ")
@@ -481,6 +490,7 @@ def from_polar():
                         break
                     if not(unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad" or unit.lower() == "d" or unit.lower() == "degrees" or unit.lower() == "deg"):
                         print('Please enter either "r" for radians or "d" for degrees')
+                        print()
                         continue
                     while True:
                         angle = input("Output (p)ositive or (n)egative angle? ")
@@ -527,6 +537,7 @@ def from_polar():
                         break
                     if not(unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad" or unit.lower() == "d" or unit.lower() == "degrees" or unit.lower() == "deg"):
                         print('Please enter either "r" for radians or "d" for degrees')
+                        print()
                         continue
                     while True:
                         angle = input("Output (p)ositive or (n)egative angle? ")
@@ -573,6 +584,7 @@ def from_polar():
                         break
                     if not(unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad" or unit.lower() == "d" or unit.lower() == "degrees" or unit.lower() == "deg"):
                         print('Please enter either "r" for radians or "d" for degrees')
+                        print()
                         continue
                     while True:
                         angle = input("Output (p)ositive or (n)egative angle? ")
@@ -935,6 +947,7 @@ def from_rectangular():
                     unit = input("Output in (r)adians or (d)egrees? ")
                     if not(unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad" or unit.lower() == "d" or unit.lower() == "degrees" or unit.lower() == "deg"):
                         print('Please enter either "r" for radians or "d" for degrees')
+                        print()
                         continue
                     while True:
                         angle = input("Output (p)ositive or (n)egative angle? ")
@@ -975,6 +988,7 @@ def from_rectangular():
                         break
                     if not(unit.lower() == "r" or unit.lower() == "radians" or unit.lower() == "rad" or unit.lower() == "d" or unit.lower() == "degrees" or unit.lower() == "deg"):
                         print('Please enter either "r" for radians or "d" for degrees')
+                        print()
                         continue
                     while True:
                         angle = input("Output (p)ositive or (n)egative angle? ")
@@ -1197,7 +1211,7 @@ def real_operation():
             elif op == "divide" or op == "/" or op == "div":
                 n /= n2
                 if n == 0:
-                    n = 0.0
+                    n = 0
                 print()
                 print(f"ans (answer) = {round(n, 12)}")
             elif op == "remainder" or op == "r" or op == "%" or op == "modulo" or op == "rem" or op == "mod":
@@ -1269,7 +1283,7 @@ def real_operation():
                 n //= n2
                 print()
                 if n == 0:
-                    n = 0.0
+                    n = 0
                 print(f"ans (answer) = {round(n, 12)}")
             elif op == "integer" or op == "int":
                 n = 0 + integer(n)
@@ -1307,6 +1321,7 @@ def real_operation():
                     go = True
                 else:
                     print('Please enter either "r" for radians or "d" for degrees')
+                    print()
                     go = False
                 if go == True:
                     if op == "sin" or op == "sine":
@@ -1323,12 +1338,17 @@ def real_operation():
                         print(f"ans (answer) = {round(n, 12)}")
             elif op == "asin" or op == "arcsine" or op == "inverse sine" or op == "inv sin" or op == "acos" or op == "arccosine" or op == "inverse cosine" or op == "inv cos" or op == "atan" or op == "arctangent" or op == "inverse tangent" or op == "inv tan" or op == "asi" or op == "aco" or op == "ata":
                 unit = input("Output in (r)adians or (d)egrees? ")
+                if unit != "radians" and unit != "rad" and unit != "r" and unit != "d" and unit != "degrees" and unit != "deg":
+                    print('Please enter either "r" for radians or "d" for degrees')
+                    continue
                 if unit.lower() in ["", "exit", "exi"]:
                     continue
                 quad = input("Output in default quadrant (yes/no)? ")
                 if quad in ["", "exit", "exi"]:
                     continue
-                go = True
+                if quad != "yes" and quad != "y" and quad != "no" and quad != "n":
+                    print('Please enter either "yes" (y) or "no" (n)')
+                    continue
                 if op == "asin" or op == "asi" or op == "arcsine" or op == "inverse sine" or op == "inv sin":
                     if quad == "yes" or quad == "y":
                         if unit.lower() == "radians" or unit.lower() == "rad" or unit.lower() == "r":
@@ -1359,11 +1379,14 @@ def real_operation():
                             n = degrees(atan(n))
                     elif quad == "no" or quad == "n":
                         if unit.lower() == "radians" or unit.lower() == "rad" or unit.lower() == "r":
-                            n = pi - atan(n)
+                            n = atan(n) + pi
                         elif unit.lower() == "degrees" or unit.lower() == "deg" or unit.lower() == "d":                            
-                            n = 180 - degrees(atan(n))
+                            n = degrees(atan(n)) + 180
                 angle = input("Output (p)ositive or (n)egative angle? ")
                 if angle in ["", "exit", "exi"]:
+                    continue
+                if angle != "p" and angle != "n" and angle != "positive" and angle != "negative" and angle != "pos" and angle != "+" and angle != "-" and angle != "neg":
+                    print('Please enter either "p" for positive or "n" for negative')
                     continue
                 elif angle.lower() == "positive" or angle.lower() == "pos" or angle.lower() == "+" or angle.lower() == "p":
                     if unit.lower() == "radians" or unit.lower() == "rad" or unit.lower() == "r":
@@ -1372,34 +1395,18 @@ def real_operation():
                     elif unit.lower() == "degrees" or unit.lower() == "deg" or unit.lower() == "d":
                         if round(n, 12) < 0:
                             n += 360
-                    else:
-                        go = False
                 elif angle.lower() == "negative" or angle.lower() == "neg" or angle.lower() == "-" or angle.lower() == "n":
                     if unit.lower() == "radians" or unit.lower() == "rad" or unit.lower() == "r":
                         if round(n, 12) > 0:
                             n -= 2 * pi
                     elif unit.lower() == "degrees" or unit.lower() == "deg" or unit.lower() == "d":
                         if round(n, 12) > 0:
-                            n -= 360
-                    else:
-                        go = False
-                if unit != "radians" and unit != "rad" and unit != "r" and unit != "d" and unit != "degrees" and unit != "deg":
-                    print()
-                    print('Please enter either "r" for radians or "d" for degrees')
-                    go = False
-                if quad != "yes" and quad != "y" and quad != "no" and quad != "n":
-                    print('Please enter either "yes" (y) or "no" (n)')
-                    go = False       
-                if angle != "p" and angle != "n" and angle != "positive" and angle != "negative" and angle != "pos" and angle != "+" and angle != "-" and angle != "neg":
-                    print('Please enter either "p" for positive or "n" for negative')
-                    print()
-                    go = False
-                if go == True:
-                    print()
-                    if unit.lower() == "radians" or unit.lower() == "rad" or unit.lower() == "r":
-                        print(f"ans (answer) = {round(n, 12)} radians")
-                    else:
-                        print(f"ans (answer) = {round(n, 12)} degrees")
+                            n -= 360      
+                print()
+                if unit.lower() == "radians" or unit.lower() == "rad" or unit.lower() == "r":
+                    print(f"ans (answer) = {round(n, 12)} radians")
+                else:
+                    print(f"ans (answer) = {round(n, 12)} degrees")
             else:
                 print('Please enter a valid operation ("i" for info and return to exit)')
                 print()
@@ -1521,7 +1528,7 @@ def binomial_expansion():
             print('Please enter a nonzero real number or expression, or return to exit')
             continue
         while True:
-            y = input("y (i, /): ")
+            y = input("y (i, \\): ")
             if y == "exit" or y == "exi" or y == "":
                 break
             try:
@@ -1531,7 +1538,7 @@ def binomial_expansion():
                     print("The variable will not store any value, it is just the name that will be printed in the result")
                     print("Skipping will set the variable's exponent to 0")
                     print()
-                elif y == "skip" or y == "/" or y == "ski":
+                elif y == "skip" or y == "\\" or y == "ski":
                     break
                 elif y.find(" ") != -1 or y[0].isalpha() == False:
                     print('For clarity, please enter a non-numeric variable name without spaces, "i" for info, or return to exit')
@@ -1543,7 +1550,7 @@ def binomial_expansion():
                 print()
         if y == "exit" or y == "exi" or y == "":
             continue
-        if y != "skip" and y != "ski" and y != "/":
+        if y != "skip" and y != "ski" and y != "\\":
             d = input("d: ")
             if d == "" or d == "exit" or d == "exi":
                 continue
@@ -1591,7 +1598,7 @@ def binomial_expansion():
             print("(" + term1 + " - " + term2 + ")" + " ^ " + f"{n}")
         while True:
             print()
-            un = input(f"Indexes of terms to find (1-{abs(n)+1}, i): ")
+            un = input(f"Indexes of terms to find (1:{abs(n)+1}, i): ")
             if un == "i" or un == "info" or un == "inf":
                 print()
                 print("Enter a list of indexes seperated by commas (,) and using colons (:) to indicate ranges")
@@ -1786,7 +1793,7 @@ def arithmetic():
                 cn = bn + 1
         print()
         while True:
-            n = input("Numbers of terms to sum (i, /): ")
+            n = input("Numbers of terms to sum (i, \\): ")
             if n == "i" or n == "inf" or n == "info":
                 print()
                 print("Enter a list of positive integers separated by commas (,) and using colons (:) to indicate ranges")
@@ -1795,7 +1802,7 @@ def arithmetic():
                 print()
             else:
                 break
-        if n != "/" and n != "skip" and n != "ski":
+        if n != "\\" and n != "skip" and n != "ski":
             if n == "" or n == "exit" or n == "exi":
                 continue
             elif n == "l" or n == "las" or n == "las ter" or n == "last terms" or n == "last":
@@ -1820,7 +1827,7 @@ def arithmetic():
             else:
                 n = n.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")").replace(")(", ")*(")
         while True:
-            un = input('Indexes of terms to find (i, /): ')
+            un = input('Indexes of terms to find (i, \\): ')
             if un == "i" or un == "info" or un == "inf":
                 print()
                 print("Enter a list of indexes seperated by commas (,) and using colons (:) to indicate ranges")
@@ -1834,7 +1841,7 @@ def arithmetic():
             continue
         if round(comdif, 12) != 0:
             while True:
-                iun = input('Terms of indexes to find (i, /): ')
+                iun = input('Terms of indexes to find (i, \\): ')
                 if iun == "i" or iun == "info" or iun == "inf":
                     print()
                     print("Enter a list of terms seperated by commas (,)")
@@ -1845,7 +1852,7 @@ def arithmetic():
                     break
             if iun == "" or iun == "exit" or iun == "exi":
                 continue
-        if (n != "/" and n != "skip" and n != "ski") or (un != "/" and un != "skip" and un != "ski") or (round(comdif, 12) != 0 and iun != "/" and iun != "skip" and iun != "ski"):
+        if (n != "\\" and n != "skip" and n != "ski") or (un != "\\" and un != "skip" and un != "ski") or (round(comdif, 12) != 0 and iun != "\\" and iun != "skip" and iun != "ski"):
             print()
         if n == "l" or n == "las" or n == "las ter" or n == "last terms" or n == "last":
             for term in l:
@@ -1862,11 +1869,11 @@ def arithmetic():
                 sum = f"sum{ncalc}"
                 sumcalc = (2 * a + (comdif * (ncalc - 1))) * ncalc / 2
                 if round(sumcalc, 12) == 0:
-                    sumcalc = 0.0
+                    sumcalc = 0
                 globals()[sum] = sumcalc
                 keeps.append(sum)
                 print(sum + f" (sum through {round(term, 12)} (term {ncalc})) = {round(sumcalc, 12)}")
-        elif n != "/" and n != "skip" and n != "ski":
+        elif n != "\\" and n != "skip" and n != "ski":
             n = n.replace(" ", "")
             if n[0] == ",":
                 n = n[1:]
@@ -1888,7 +1895,7 @@ def arithmetic():
                     sum = f"sum{number}"
                     sumcalc = (2 * a + comdif * (number - 1)) * number / 2
                     if round(sumcalc, 12) == 0:
-                        sumcalc = 0.0
+                        sumcalc = 0
                     globals()[sum] = sumcalc
                     keeps.append(sum)
                     print(sum + f" (sum through term {number}) = {round(sumcalc, 12)}")
@@ -1907,7 +1914,7 @@ def arithmetic():
                             sum = f"sum{item}"
                             sumcalc = (2 * a + comdif * (item - 1)) * item / 2
                             if round(sumcalc, 12) == 0:
-                                sumcalc = 0.0
+                                sumcalc = 0
                             globals()[sum] = sumcalc
                             keeps.append(sum)
                             print(sum + f" (sum of through term {item}) = {round(sumcalc, 12)}")
@@ -1917,7 +1924,7 @@ def arithmetic():
                         print(f'"{number}" is not a positive integer')
                 else:
                     print(f'"{number}" is not a range in the form x:y, where y > x')
-        if un != "/" and un != "skip" and un != "ski":
+        if un != "\\" and un != "skip" and un != "ski":
             un = un.replace(" ", "")
             un = un.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")").replace(")(", ")*(")
             un = un.split(",")
@@ -1963,7 +1970,7 @@ def arithmetic():
                         print(f'"{unterm}" is not a positive integer')
                 else:
                     print(f'"{unterm}" is not a range in the form x:y, where y > x')
-        if round(comdif, 12) != 0 and iun != "/" and iun != "skip" and iun != "ski":
+        if round(comdif, 12) != 0 and iun != "\\" and iun != "skip" and iun != "ski":
             iun = iun.replace(" ", "")
             iun = iun.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")").replace(")(", ")*(")
             iun = iun.split(",")
@@ -2155,7 +2162,7 @@ def geometric():
                 a = b / comrat ** (bn - 1)
         print()
         while True:
-            n = input("Numbers of terms to sum (i, /): ")
+            n = input("Numbers of terms to sum (i, \\): ")
             if n == "i" or n == "info":
                 print()
                 print("Enter a list of positive integers separated by commas (,) and using colons (:) to indicate ranges")
@@ -2165,7 +2172,7 @@ def geometric():
                 print()
             else:
                 break
-        if n != "/" and n != "skip" and n != "ski":
+        if n != "\\" and n != "skip" and n != "ski":
             if n == "" or n == "exit" or n == "exi":
                 continue
             elif n == "l" or n == "last terms" or n == "las" or n == "las ter" or n == "last":
@@ -2191,7 +2198,7 @@ def geometric():
             else:
                 n = n.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")").replace(")(", ")*(")
         while True:
-            un = input('Indexes of terms to find (i, /): ')
+            un = input('Indexes of terms to find (i, \\): ')
             if un == "i" or un == "info" or un == "inf":
                 print()
                 print("Enter a list of indexes seperated by commas (,) and using colons (:) to indicate ranges")
@@ -2205,7 +2212,7 @@ def geometric():
             continue
         if round(abs(comrat), 12) != 1:
             while True:
-                iun = input('Terms of indexes to find (i, /): ')
+                iun = input('Terms of indexes to find (i, \\): ')
                 if iun == "i" or iun == "info" or iun == "inf":
                     print()
                     print("Enter a list of terms seperated by commas (,)")
@@ -2216,7 +2223,7 @@ def geometric():
                     break
             if iun == "" or iun == "exit" or iun == "exi":
                 continue
-        if (n != "/" and n != "skip" and n != "ski") or (un != "/" and un != "skip" and un != "ski") or (round(abs(comrat), 12) != 1 and iun != "/" and iun != "skip" and iun != "ski"):
+        if (n != "\\" and n != "skip" and n != "ski") or (un != "\\" and un != "skip" and un != "ski") or (round(abs(comrat), 12) != 1 and iun != "\\" and iun != "skip" and iun != "ski"):
             print()
         if n == "l" or n == "las" or n == "las ter" or n == "last terms" or n == "last":
             for term in l:
@@ -2243,7 +2250,7 @@ def geometric():
                     sum = f"sum{ncalc}"
                     sumcalc = a * (1 - comrat ** ncalc) / (1 - comrat)
                     if round(sumcalc, 12) == 0:
-                        sumcalc = 0.0
+                        sumcalc = 0
                     print(sum + f" (sum through {round(term, 12)} (term {ncalc})) = {round(sumcalc, 12)}")
                 else:
                     sum = "suminf"
@@ -2251,7 +2258,7 @@ def geometric():
                     print(sum + f" (sum through infinity) = {round(sumcalc, 12)}")
                 globals()[sum] = sumcalc
                 keeps.append(sum)
-        elif n != "/" and n != "skip" and n != "ski":
+        elif n != "\\" and n != "skip" and n != "ski":
             n = n.replace(" ", "")
             if n[0] == ",":
                 n = n[1:]
@@ -2285,7 +2292,7 @@ def geometric():
                     else:
                         sumcalc = b * number
                     if round(sumcalc, 12) == 0:
-                        sumcalc = 0.0
+                        sumcalc = 0
                     globals()[sum] = sumcalc
                     keeps.append(sum)
                     if number != "inf" and number != "infinity":
@@ -2310,7 +2317,7 @@ def geometric():
                             else:
                                 sumcalc = b * item
                             if round(sumcalc, 12) == 0:
-                                sumcalc = 0.0
+                                sumcalc = 0
                             globals()[sum] = sumcalc
                             keeps.append(sum)
                             print(sum + f" (sum through term {item}) = {round(sumcalc, 12)}")
@@ -2320,7 +2327,7 @@ def geometric():
                         print(f'"{number}" is not a positive integer')
                 else:
                     print(f'"{number}" is not a range in the form x:y, where y > x')
-        if un != "/" and un != "skip" and un != "ski":
+        if un != "\\" and un != "skip" and un != "ski":
             un = un.replace(" ", "")
             un = un.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")").replace(")(", ")*(")
             un = un.split(",")
@@ -2366,7 +2373,7 @@ def geometric():
                         print(f'"{unterm}" is not a positive integer')
                 else:
                     print(f'"{unterm}" is not a range in the form x:y, where y > x')
-        if round(abs(comrat), 12) != 1 and iun != "/" and iun != "skip" and iun != "ski":
+        if round(abs(comrat), 12) != 1 and iun != "\\" and iun != "skip" and iun != "ski":
             iun = iun.replace(" ", "")
             iun = iun.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")").replace(")(", ")*(")
             iun = iun.split(",")
@@ -2413,10 +2420,10 @@ def polynomial():
         elif a == "c" or a == "con" or a == "conic" or a == "conic sections":
             conic_section()
             break
-        elif a == "sys" or a == "system" or a == "system of equations":
+        elif a == "s" or a == "sys" or a == "system" or a == "system of equations":
             system()
             break
-        elif a == "s" or a == "sym" or a == "symmetry":
+        elif a == "sym" or a == "symmetry":
             symmetry()
             break
         elif a == "g" or a == "gam" or a == "games":
@@ -2425,7 +2432,7 @@ def polynomial():
         elif a == "info" or a == "inf" or a == "i":
             print()
             print("Please enter a real number or expression as the x^2 coefficient")
-            print('Enter "sys" for system of equations, "c" for conic sections, "s" for symmetry, "o" for operations (this will direct to real operation), and "g" for games (this will direct to play Math 24)')
+            print('Enter "s" for system of equations, "c" for conic sections, "sym" for symmetry, "o" for operations (this will direct to real operation), and "g" for games (this will direct to play Math 24)')
             continue
         try:
             a = a.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")").replace(")(", ")*(")
@@ -2680,9 +2687,9 @@ def symmetry():
                 x = -x_input + 2 * xint
                 y = y_input
             if x == 0:
-                x = 0.0
+                x = 0
             if y == 0:
-                y = 0.0
+                y = 0
             xco = f"x{i + 1}"
             yco = f"y{i + 1}"
             globals()[xco] = x
@@ -2700,6 +2707,27 @@ def conic_section():
 def matrix_operation():
     print()
     print("Welcome to matrix operations!")
+    while True:
+        clear_variables()
+        print()
+        input_m1 = input(f"First term (i): ")
+        if input_m1 in ["", "exit", "exi"]:
+            break
+        elif input_m1 in ["i", "inf", "info"]:
+            print()
+            print("Enter a list of numbers in the matrix separated by commas (,), using colons (;) to seperate rows")
+            print('Eg. "1, 2, 3; 4, 5, 6" represents a 2 by 3 matrix with row 1 as 1, 2, 3 and row 2 as 4, 5, 6')
+            print("All entered rows must have the same number of columns")
+            print('Enter a single number or expression to enter a scalar')
+            continue
+        m1 = []
+        input_m1 = input_m1.replace(" ", "").replace("^", "**").replace("{", "(").replace("}", ")").replace("[", "(").replace("]", ")").split(";")
+        for item in input_m1.split(","):
+            try:
+                item = 0 + eval(item)
+            except:
+                print(f"Error: {item} is not a real number or expression")
+
 
 def system():
     print()
@@ -2767,150 +2795,361 @@ def math24play():
     global print_problems
     global attempts
     global pos
+    global bpos
+    global mpos
+    global apos
+    global epos
+    global level
+    global bpercent
+    global mpercent
+    global apercent
+    global epercent
     print()
     print("Welcome to Play Math 24!")
-    level = "filler"
-    if problems == 0:
-        while True:
+    changedif = False
+    while True:
+        if problems == 0 or changedif == True:
             clear_variables()
             print()
-            level = input("Difficulty (i): ").lower()
+            level = input("Difficulty (i): ")
             if level in ["", "exit", "exi"]:
+                changedif = False
                 break
             elif level in ["i", "info", "inf"]:
                 print()
                 print("Math 24 is a game where players try to create the number 24 using 4 randomly generated numbers and the 4 operations (+, -, *, /)")
                 print("Enter one of the following difficulty levels: ")
-                print("(B)asic: only includes numbers 1 through 12")
-                print("(N)ormal: includes numbers 1 through 24 and at most 1 number greater than 24")
-                print("(A)dvanced: includes numbers 1 through 25 and multiples of 12 through 144, and at most 1 fractional or negative number")
-                print("(E)xpert: includes numbers with absolute values of 0.25, 0.5, 1 through 25, and multiples of 12 through 144")
-                print("(R)andom: solve random Math 24 sets")
+                print("(b)eginner: includes numbers 1 through 12")
+                print("(m)oderate: includes numbers 1 through 24 and at most 1 number greater than 24")
+                print("(a)dvanced: includes numbers 1 through 25 and multiples of 12 through 144, and at most 1 fractional or negative number")
+                print("(e)xpert: includes numbers with absolute values of 0.25, 0.5, 1 through 25, and multiples of 12 through 144")
+                print("(c)ustom: includes an inputted subset of the numbers in expert difficulty")
+                print("(r)andom: solve random Math 24 sets with an inputted random generation percent for each difficulty level")
+                for name in name_dict:
+                    if "input" not in name:
+                        print(name + " (custom): includes numbers " + name_dict[name + "input"])
+                print('Enter "cr" for create, "s" for solve, "o" for operations (this will direct to real operations) and "f" for functions (this will direct to polynomials)')
                 continue
-            if level in ["r", "ran", "random"]:
-                with open("math24list") as allfile:
-                    pos = allfile.read().split("; ")
-            elif level in ["b", "bas", "basic"]:
-                with open("basic24") as basic:
-                    pos = basic.read().split("; ")
-            elif level in ["n", "nor", "normal"]:
-                with open("norm24") as norm:
-                    pos = norm.read().split("; ")
-            elif level in ["a", "adv", "advanced"]:
-                with open("adv24") as adv:
-                    pos = adv.read().split("; ")
-            elif level in ["e", "exp", "expert"]:
-                with open("expert24") as expert:
-                    pos = expert.read().split("; ")  
-            else:
-                print('Please enter a valid difficulty level, "i" for info, or return to exit')
-                continue
-            random.shuffle(pos)
-            problems = 1
-            break
-    if level not in ["", "exit", "exi"]:
-        while True:
-            clear_variables()
-            random.seed(problems)
-            numbers = pos[random.randrange(len(pos))].split(", ")
-            print_numbers = ""
-            for i in range(len(numbers)):
-                print_numbers += numbers[i] + ", "
+            elif level in ["c", "cus", "custom"]:
+                while True:
+                    input_use = input("Numbers to use (i): ")
+                    if input_use in ["", "exit", "exi"]:
+                        break
+                    elif input_use in ["i", "inf", "info"]:
+                        print()
+                        print('Enter a list of numbers separated by commas (,) and using colons (:) to indicate ranges and increments')
+                        print('Eg. "1, 2:6:2, 8:9" will output possible Math 24 sets using only the numbers 1, 2, 4, 6, 8, and/or 9')
+                        print("Note that the more numbers used (or the smaller the increments), the longer the calculation will take")
+                        print("The numbers must have absolute values of 0.25, 0.5, 1 through 25, or multiples of 12 through 144")
+                        print()
+                        continue
+                    use = input_use.replace("^", "**").replace("[", "(").replace("]", ")").replace("{", "(").replace("}", ")").replace(")(", ")*(").replace(" ", "").split(",")
+                    fuse = []
+                    back = False
+                    for item in use:
+                        rangelist = item.split(":")
+                        if len(rangelist) == 1:
+                            try:
+                                fuse.append(0 + eval(item))
+                            except:
+                                print(f'Error: "{item}" is not a real number or expression')
+                                back = True
+                                break
+                        elif len(rangelist) == 2:
+                            try:
+                                rangelist[0] = 0 + eval(rangelist[0])
+                                rangelist[1] = 0 + eval(rangelist[1])
+                            except:
+                                print(f'Error: "{item}" is not a real number or expression')
+                                back = True
+                                break
+                            if rangelist[1] <= rangelist[0]:
+                                print(f'Error: "{item}" is not a range in the form x:y, where y > x')
+                                back = True
+                                break
+                            for addend in range(rangelist[0], rangelist[1] + 1):
+                                fuse.append(addend)
+                        elif len(rangelist) == 3:
+                            try:
+                                rangelist[0] = 0 + eval(rangelist[0])
+                                rangelist[1] = 0 + eval(rangelist[1])
+                                rangelist[2] = 0 + eval(rangelist[2])
+                            except:
+                                print(f'Error: "{item}" is not a real number or expression')
+                                back = True
+                                break
+                            if rangelist[2] == 0:
+                                print(f'Error: "{item}" is not a range in the form x:y:z, where z is nonzero')
+                                back = True
+                                break
+                            elif rangelist[2] > abs(rangelist[1] - rangelist[0]):
+                                print(f'Error: "{item}" is not a range in the form x:y:z, where z <= |y-x|')
+                                back = True
+                                break
+                            if rangelist[1] >= rangelist[0]:
+                                rangelist[2] = abs(rangelist[2])
+                            elif rangelist[1] < rangelist[0]:
+                                rangelist[2] = -1 * abs(rangelist[2])
+                            for addend in range(rangelist[0], rangelist[1] + 1, rangelist[2]):
+                                fuse.append(addend)
+                        else:
+                            print(f'Error: "{item}" is not a range in the form x:y or x:y:z')
+                            back = True
+                            break
+                    if back == True:
+                        print()
+                        continue
+                    for item in fuse:
+                        pos_list = [0.25, 0.5]
+                        pos_list.extend(range(1, 26))
+                        pos_list.extend(range(36, 146, 12))
+                        if abs(item) not in pos_list:
+                            print(f'Error: "{item}" does not have an absolute value of 0.25, 0.5, 1 through 25, or multiples of 12 through 144')
+                            print()
+                            continue
+                        if fuse.count(item) > 1:
+                            fuse.remove(item)
+                    fuse.sort()
+                    break
+                if input_use in ["", "exit", "exi"]:
+                    continue
+                custom_list = []
+                with open("24list") as file:
+                    for a in file.read().split(" | "):
+                        for b in a.split("; "):
+                            posset = b.split(", ")
+                            try:
+                                n1 = int(posset[0])
+                            except:
+                                n1 = eval(posset[0])
+                            try:
+                                n2 = int(posset[1])
+                            except:
+                                n2 = eval(posset[1])
+                            try:
+                                n3 = int(posset[2])
+                            except:
+                                n3 = eval(posset[2])
+                            try:
+                                n4 = int(posset[3])
+                            except:
+                                n4 = eval(posset[3])
+                            if n1 in fuse and n2 in fuse and n3 in fuse and n4 in fuse:
+                                custom_list.append(b)
+                pos = custom_list
+                levelname = input("Custom name (\\): ")
+                if levelname.lower() in ["", "exit", "exi"]:
+                    continue
+                if levelname.lower() not in ["\\", "skip", "ski"]:
+                    if levelname in name_dict or levelname.lower() in ["beginner", "b", "beg", "mod", "m", "adv", "a", "e", "exp", "r", "ran", "random", "o", "ope", "operations", "f", "fun", "functions", "c", "cre", "create", "s", "sol", "solve", "moderate", "advanced", "expert", "info", "inf", "i"]:
+                        print('Please enter a name that is not similar to any existing possible inputs for difficulty')
+                        continue
+                    name_dict[levelname] = custom_list
+                    name_dict[levelname + "input"] = input_use.replace(" ", "").replace(",", ", ").replace(":", " through ")
+            elif level in ["cr", "cre", "create"]:
+                math24create()
+                break
+            elif level in ["s", "sol", "solve"]:
+                math24solve()
+                break
+            elif level in ["o", "ope", "operations"]:
+                real_operation()
+                break
+            elif level in ["f", "fun", "functions"]:
+                polynomial()
+                break
+            elif level in ["r", "ran", "random"]:
+                bpercent = input("Basic percent: ")
+                if bpercent in ["", "exit", "exi"]:
+                    continue
                 try:
-                    numbers[i] = int(numbers[i])
+                    bpercent = eval(bpercent)
                 except:
-                    numbers[i] = eval(numbers[i])
-            ops = [" + ", " - ", " * ", " / "]
-            solved = False
-            for i in range(11):
+                    print("Please enter a real number or expression from 0 to 100 inclusive, or return to exit")
+                    continue
+                if not(0 <= bpercent <= 100):
+                    print("Please enter a real number or expression from 0 to 100 inclusive, or return to exit")
+                    continue
+                mpercent = input("Moderate percent: ")
+                if mpercent in ["", "exit", "exi"]:
+                    continue
+                try:
+                    mpercent = eval(mpercent)
+                except:
+                    print("Please enter a real number or expression from 0 to 100 inclusive, or return to exit")
+                    continue
+                if not(0 <= mpercent <= 100):
+                    print("Please enter a real number or expression from 0 to 100 inclusive, or return to exit")
+                    continue
+                apercent = input("Advanced percent: ")
+                if apercent in ["", "exit", "exi"]:
+                    continue
+                try:
+                    apercent = eval(apercent)
+                except:
+                    print("Please enter a real number or expression from 0 to 100 inclusive, or return to exit")
+                    continue
+                if not(0 <= apercent <= 100):
+                    print("Please enter a real number or expression from 0 to 100 inclusive, or return to exit")
+                    continue
+                epercent = input("Expert percent: ")
+                if epercent in ["", "exit", "exi"]:
+                    continue
+                try:
+                    epercent = eval(epercent)
+                except:
+                    print("Please enter a real number or expression from 0 to 100 inclusive, or return to exit")
+                    continue
+                if not(0 <= epercent <= 100):
+                    print("Please enter a real number or expression from 0 to 100 inclusive, or return to exit")
+                    continue
+                if bpercent + mpercent + apercent + epercent != 100:
+                    print("Please enter 4 percentages that add up to 100")
+                    continue
+                with open("24list") as file:
+                    pos = file.read().split(" | ")
+                    bpos = pos[0].split("; ")
+                    mpos = pos[1].split("; ")
+                    apos = pos[2].split("; ")
+                    epos = pos[3].split("; ")
+                    random.shuffle(bpos)
+                    random.shuffle(mpos)
+                    random.shuffle(apos)
+                    random.shuffle(epos)
+            elif level in ["b", "beg", "beginner"]:
+                with open("24list") as file:
+                    pos = file.read().split(" | ")[0].split("; ")
+            elif level in ["m", "mod", "moderate"]:
+                with open("24list") as file:
+                    pos = file.read().split(" | ")[1].split("; ")
+            elif level in ["a", "adv", "advanced"]:
+                with open("24list") as file:
+                    pos = file.read().split(" | ")[2].split("; ")
+            elif level in ["e", "exp", "expert"]:
+                with open("24list") as file:
+                    pos = file.read().split(" | ")[3].split("; ")
+            elif level in name_dict:
+                pos = name_dict[level]
+            else:
+                print('Please enter a difficulty level, "i" for info, or return to exit')
+                continue
+            if problems == 0:
+                problems = 1
+            if level not in ["r", "ran", "random"] and (level not in name_dict or problems == 0):
+                random.shuffle(pos)
+            changedif = False
+            attempts = 0
+        print()
+        if level in ["r", "ran", "random"]:
+            random.seed(problems)
+            rdif = random.random()
+            if rdif < bpercent / 100:
+                pos = bpos
+            elif rdif < (bpercent + mpercent) / 100:
+                pos = mpos
+            elif rdif < (bpercent + mpercent + apercent) / 100:
+                pos = apos
+            else:
+                pos = epos
+        random.seed(problems)
+        numbers = pos[random.randrange(len(pos))].split(", ")
+        print_numbers = ""
+        for i in range(len(numbers)):
+            print_numbers += numbers[i] + ", "
+            try:
+                numbers[i] = int(numbers[i])
+            except:
+                numbers[i] = eval(numbers[i])
+        ops = [" + ", " - ", " * ", " / "]
+        solved = False
+        if print_problems == len(pos):
+            print(f"You've made it to Problem {len(pos)}, the number of Math 24 problems in the system!")
+            print("You are now the God of Math!")
+            print()
+        elif print_problems % 10 == 0:
+            print(f"You've made it to Problem {print_problems}!")
+            print()
+        print(f"Problem {print_problems}: " + print_numbers[:len(print_numbers) - 2])
+        for i in range(11):
+            if solved == True:
+                break
+            for inumber1 in numbers:
                 if solved == True:
                     break
-                for inumber1 in numbers:
+                for op1 in ops:
                     if solved == True:
                         break
-                    for op1 in ops:
+                    numbers2 = numbers[:]
+                    numbers2.remove(inumber1)
+                    for inumber2 in numbers2:
                         if solved == True:
                             break
-                        numbers2 = numbers[:]
-                        numbers2.remove(inumber1)
-                        for inumber2 in numbers2:
+                        for op2 in ops:
                             if solved == True:
                                 break
-                            for op2 in ops:
+                            numbers3 = numbers2[:]
+                            numbers3.remove(inumber2)
+                            for inumber3 in numbers3:
                                 if solved == True:
                                     break
-                                numbers3 = numbers2[:]
-                                numbers3.remove(inumber2)
-                                for inumber3 in numbers3:
-                                    if solved == True:
-                                        break
-                                    for op3 in ops:
-                                        numbers4 = numbers3[:]
-                                        numbers4.remove(inumber3)
-                                        number4 = 0 + eval(str(numbers4[0]))
-                                        number3 = 0 + eval(str(inumber3))
-                                        number2 = 0 + eval(str(inumber2))
-                                        number1 = 0 + eval(str(inumber1))
-                                        if i <= 6:
-                                            if i == 0:
-                                                string = str(number1) + op1 + str(number2) + op2 + str(number3) + op3 + str(number4)
-                                            elif i == 1:
-                                                string = "(" + str(number1) + op1 + str(number2) + ")" + op2 + str(number3) + op3 + str(number4)
-                                            elif i == 2:
-                                                string = str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + ")" + op3 + str(number4)
-                                            elif i == 3:
-                                                string = str(number1) + op1 + str(number2) + op2 + "(" + str(number3) + op3 + str(number4) + ")"
-                                            elif i == 4:
-                                                string = "(" + str(number1) + op1 + str(number2) + ")" + op2 + "(" + str(number3) + op3 + str(number4) + ")"
-                                            elif i == 5:
-                                                string = "(" + str(number1) + op1 + str(number2) + op2 + str(number3) + ")" + op3 + str(number4)
-                                            elif i == 6:
-                                                string = str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + op3 + str(number4) + ")"
-                                            string_print = string + " = 24"
+                                for op3 in ops:
+                                    numbers4 = numbers3[:]
+                                    numbers4.remove(inumber3)
+                                    number4 = 0 + eval(str(numbers4[0]))
+                                    number3 = 0 + eval(str(inumber3))
+                                    number2 = 0 + eval(str(inumber2))
+                                    number1 = 0 + eval(str(inumber1))
+                                    if i <= 6:
+                                        if i == 0:
+                                            string = str(number1) + op1 + str(number2) + op2 + str(number3) + op3 + str(number4)
+                                        elif i == 1:
+                                            string = "(" + str(number1) + op1 + str(number2) + ")" + op2 + str(number3) + op3 + str(number4)
+                                        elif i == 2:
+                                            string = str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + ")" + op3 + str(number4)
+                                        elif i == 3:
+                                            string = str(number1) + op1 + str(number2) + op2 + "(" + str(number3) + op3 + str(number4) + ")"
+                                        elif i == 4:
+                                            string = "(" + str(number1) + op1 + str(number2) + ")" + op2 + "(" + str(number3) + op3 + str(number4) + ")"
+                                        elif i == 5:
+                                            string = "(" + str(number1) + op1 + str(number2) + op2 + str(number3) + ")" + op3 + str(number4)
+                                        elif i == 6:
+                                            string = str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + op3 + str(number4) + ")"
+                                        string_print = string + " = 24"
+                                    else:
+                                        if i == 7:
+                                            string = "((" + str(number1) + op1 + str(number2) + ")" + op2 + str(number3) + ")" + op3 + str(number4)
+                                            string_print = "[(" + str(number1) + op1 + str(number2) + ")" + op2 + str(number3) + "]" + op3 + str(number4)
+                                        elif i == 8:
+                                            string = str(number1) + op1 + "(" + str(number2) + op2 + "(" + str(number3) + op3 + str(number4) + "))"
+                                            string_print = str(number1) + op1 + "[" + str(number2) + op2 + "(" + str(number3) + op3 + str(number4) + ")]"
+                                        elif i == 9:
+                                            string = str(number1) + op1 + "((" + str(number2) + op2 + str(number3) + ")" + op3 + str(number4) + ")"
+                                            string_print = str(number1) + op1 + "[(" + str(number2) + op2 + str(number3) + ")" + op3 + str(number4) + "]"
                                         else:
-                                            if i == 7:
-                                                string = "((" + str(number1) + op1 + str(number2) + ")" + op2 + str(number3) + ")" + op3 + str(number4)
-                                                string_print = "[(" + str(number1) + op1 + str(number2) + ")" + op2 + str(number3) + "]" + op3 + str(number4)
-                                            elif i == 8:
-                                                string = str(number1) + op1 + "(" + str(number2) + op2 + "(" + str(number3) + op3 + str(number4) + "))"
-                                                string_print = str(number1) + op1 + "[" + str(number2) + op2 + "(" + str(number3) + op3 + str(number4) + ")]"
-                                            elif i == 9:
-                                                string = str(number1) + op1 + "((" + str(number2) + op2 + str(number3) + ")" + op3 + str(number4) + ")"
-                                                string_print = str(number1) + op1 + "[(" + str(number2) + op2 + str(number3) + ")" + op3 + str(number4) + "]"
-                                            else:
-                                                string = "(" + str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + "))" + op3 + str(number4)
-                                                string_print = "[" + str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + ")]" + op3 + str(number4)
-                                            string_print += " = 24"
-                                        try:
-                                            if round(eval(string), 12) == 24:
-                                                solutions = string_print
-                                                solved = True
-                                                break
-                                        except:
-                                            pass
-            print()
-            if print_problems == len(pos):
-                print(f"You've made it to Problem {len(pos)}, the number of Math 24 problems in the system!")
-                print("You are now the God of Math!")
+                                            string = "(" + str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + "))" + op3 + str(number4)
+                                            string_print = "[" + str(number1) + op1 + "(" + str(number2) + op2 + str(number3) + ")]" + op3 + str(number4)
+                                        string_print += " = 24"
+                                    try:
+                                        if round(eval(string), 12) == 24:
+                                            solutions = string_print
+                                            solved = True
+                                            break
+                                    except:
+                                        pass
+        while True:
+            attempts += 1
+            input_sol = input(f"Attempt {attempts} (i, \\): ")
+            if input_sol == "" or input_sol == "exi" or input_sol == "exit" '''or input_sol == "l" or input_sol == "las" or input_sol == "last" or input_sol == "last problem"''' or input_sol == "\\" or input_sol == "skip" or input_sol == "ski" or input_sol == "c" or input_sol == "cre" or input_sol == "create" or input_sol == "s" or input_sol == "sol" or input_sol == "solve" or input_sol == "o" or input_sol == "ope" or input_sol == "operations" or input_sol == "f" or input_sol == "fun" or input_sol == "functions":
+                break
+            elif input_sol == "i" or input_sol == "inf" or input_sol == "info":
                 print()
-            elif print_problems % 10 == 0:
-                print(f"You've made it to Problem {print_problems}!")
+                print("Enter a solution with each of the 4 numbers used once and any 3 operations, using parenthesis to change order")
+                print('Eg. with the numbers 1, 5, 5, and 5, one solution is "5 * (5 - 1/5)"')
+                #print('Enter "l" to see the last problem')
+                print('Enter "c" for create, "s" for solve, "o" for operations (this will direct to real operations) and "f" for functions (this will direct to polynomials)')
                 print()
-            print(f"Problem {print_problems}: " + print_numbers[:len(print_numbers) - 2])
-            while True:
-                attempts += 1
-                input_sol = input(f"Attempt {attempts} (i, /): ")
-                if input_sol == "" or input_sol == "exi" or input_sol == "exit" or input_sol == "l" or input_sol == "las" or input_sol == "last" or input_sol == "last problem" or input_sol == "/" or input_sol == "skip" or input_sol == "ski" or input_sol == "c" or input_sol == "cre" or input_sol == "create" or input_sol == "s" or input_sol == "sol" or input_sol == "solve" or input_sol == "o" or input_sol == "ope" or input_sol == "operations" or input_sol == "f" or input_sol == "fun" or input_sol == "functions":
-                    break
-                elif input_sol == "i" or input_sol == "inf" or input_sol == "info":
-                    print()
-                    print("Enter a solution with each of the 4 numbers used once and any 3 operations, using parenthesis to change order")
-                    print('Eg. with the numbers 1, 5, 5, and 5, one solution is "5 * (5 - 1/5)"')
-                    print('Sets with numbers from 1 to 12 inclusive are considered beginner difficulty, sets with larger numbers are normal, and sets with fractions or negative numbers are advanced')
-                    print('Enter "l" to see the last problem')
-                    print('Enter "c" for create, "s" for solve, "o" for operations (this will direct to real operations) and "f" for functions (this will direct to polynomials)')
-                    print()
-                    continue
+                continue
+            try:
                 sol = input_sol.replace(" ", "").replace("+", " + ").replace("-", " - ").replace("/", " / ").replace("*", " * ").replace("=24", "").replace(")(", ") (").replace(" -  - ", " - -").replace(" +  - ", " + -").replace(" *  - ", " * -").replace(" /  - ", " / -").replace("[ - ", "[-").replace("{ - ", "{-").replace("( - ", "(-")
                 if sol[0] + sol[1] + sol[2] == " - ":
                     sol = sol.replace(" - ", "-", 1)
@@ -2939,22 +3178,17 @@ def math24play():
                     elif a != "":
                         valid = False
                 if counter == 3 and counter0 == numbers.count(numbers[0]) and counter1 == numbers.count(numbers[1]) and counter2 == numbers.count(numbers[2]) and counter3 == numbers.count(numbers[3]) and valid == True:
-                    try:
-                        if round(eval(evalsol), 12) == 24:
-                            print()
-                            print(f"Solved on Attempt {attempts}!")
-                            attempts = 0
-                            break
-                        else:
-                            print()
-                            print(sol + f" = {round(eval(evalsol), 12)}, not 24")
-                            print("Try again!")
-                            print()
-                            print(f"Problem {print_problems}: " + print_numbers[:len(print_numbers) - 2])
-                            continue
-                    except:
-                        print("The expression could not be evaluated")
-                        print('Please enter a valid solution, "i" for info, or return to exit')
+                    solvalue = eval(evalsol)
+                    if round(solvalue, 12) == 24:
+                        print()
+                        print(sol + f" = 24")
+                        print(f"Solved on Attempt {attempts}!")
+                        attempts = 0
+                        break
+                    else:
+                        print()
+                        print(sol + f" = {round(solvalue, 12)}, not 24")
+                        print("Try again!")
                         print()
                         print(f"Problem {print_problems}: " + print_numbers[:len(print_numbers) - 2])
                         continue
@@ -2963,33 +3197,40 @@ def math24play():
                     print()
                     print(f"Problem {print_problems}: " + print_numbers[:len(print_numbers) - 2])
                     continue
-            if input_sol == "" or input_sol == "exi" or input_sol == "exit":
-                break
-            elif input_sol == "l" or input_sol == "las" or input_sol == "last" or input_sol == "last problem":
-                if problems != 1:
-                    print_problems -= 1
-                    problems -= 1
-                continue
-            elif input_sol == "/" or input_sol == "ski" or input_sol == "skip":
+            except:
+                print("The expression could not be evaluated")
+                print('Please enter a valid solution, "i" for info, or return to exit')
                 print()
-                print("Solution: " + solutions)
-                attempts = 0
-                problems += 1
+                print(f"Problem {print_problems}: " + print_numbers[:len(print_numbers) - 2])
                 continue
-            elif input_sol == "c" or input_sol == "cre" or input_sol == "create":
-                math24create()
-                break
-            elif input_sol == "s" or input_sol == "sol" or input_sol == "solve":
-                math24solve()
-                break
-            elif input_sol == "o" or input_sol == "ope" or input_sol == "operations":
-                real_operation()
-                break
-            elif input_sol == "f" or input_sol == "fun" or input_sol == "functions":
-                polynomial()
-                break
-            print_problems += 1
+        if input_sol == "" or input_sol == "exi" or input_sol == "exit":
+            changedif = True
+            continue
+        #elif input_sol == "l" or input_sol == "las" or input_sol == "last" or input_sol == "last problem":
+            #if problems != 1:
+                #print_problems -= 1
+                #problems -= 1
+            #continue
+        elif input_sol == "\\" or input_sol == "ski" or input_sol == "skip":
+            print()
+            print("Solution: " + solutions)
+            attempts = 0
             problems += 1
+            continue
+        elif input_sol == "c" or input_sol == "cre" or input_sol == "create":
+            math24create()
+            break
+        elif input_sol == "s" or input_sol == "sol" or input_sol == "solve":
+            math24solve()
+            break
+        elif input_sol == "o" or input_sol == "ope" or input_sol == "operations":
+            real_operation()
+            break
+        elif input_sol == "f" or input_sol == "fun" or input_sol == "functions":
+            polynomial()
+            break
+        print_problems += 1
+        problems += 1
             
 def math24create():
     print()
@@ -3385,7 +3626,7 @@ def main():
             print('Enter either "o" for operations, "f" for functions, "g" for games, or "s" for settings')
             print("Operations include: real operations, complex operations, matrix operations, and summations (binomial expansion, arithmetic series, and geometric series)")
             print("Functions include: polynomials, system of equations, conic sections, and symmetry")
-            print("Games include: Math 24")
+            print("Games will direct to Math 24")
         elif cat.lower() == "s" or cat.lower() == "set" or cat.lower() == "settings":
             settings()
         elif cat.lower() == "f" or cat.lower() == "fun" or cat.lower() == "functions":
@@ -3401,10 +3642,10 @@ def main():
                 elif funtype.lower() == "polynomials" or funtype.lower() == "p" or funtype.lower() == "pol":
                     polynomial()
                     print()
-                elif funtype.lower() == "s" or funtype.lower() == "sym" or funtype.lower() == "symmetry":
+                elif funtype.lower() == "sym" or funtype.lower() == "symmetry":
                     symmetry()
                     print()
-                elif funtype.lower() == "se" or funtype.lower() == "system of equations" or funtype.lower() == "sys" or funtype.lower() == "system":
+                elif funtype.lower() == "s" or funtype.lower() == "system of equations" or funtype.lower() == "sys" or funtype.lower() == "system":
                     system()
                     print()
                 elif funtype.lower() == "con" or funtype.lower() == "conic" or funtype.lower() == "conic sections" or funtype.lower() == "c":
