@@ -2462,7 +2462,7 @@ def polynomial():
         if round(a, 12) == 0 and round(b, 12) == 0 and round(c, 12) == 0:
             print("Roots: all numbers")
         elif round(a, 12) == 0 and round(b, 12) == 0:
-            print("No rts")
+            print("No roots")
         elif round(a, 12) == 0:
             rt = -c / b
             print(f"Root: x = {round(rt, 12)}")
